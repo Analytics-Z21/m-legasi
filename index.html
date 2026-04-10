@@ -1,0 +1,2189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M Legasi Semenyih — Redesigned Landing Page</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green-deep: #1B3D2F;
+  --green-mid: #2A5E47;
+  --green-light: #3D7A5F;
+  --cream: #F5F0E8;
+  --cream-dark: #EDE6D8;
+  --coral: #E07B5E;
+  --coral-hover: #C96A4F;
+  --gold: #B8935A;
+  --gold-light: #D4B07A;
+  --text-dark: #1A1A18;
+  --text-mid: #4A4A45;
+  --text-light: #7A7A72;
+  --white: #FFFFFF;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; width: 100%; max-width: 100%; overflow-x: hidden; }
+body { font-family: var(--font-body); color: var(--text-dark); background: var(--cream); overflow-x: hidden; width: 100%; max-width: 100%; position: relative; }
+img { max-width: 100%; display: block; height: auto; }
+svg { max-width: 100%; height: auto; }
+
+section, nav, footer, div {
+  max-width: 100%;
+}
+
+/* ============ ANNOUNCEMENT BAR ============ */
+.announce-bar {
+  background: var(--coral);
+  color: var(--white);
+  padding: 10px 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.announce-track {
+  display: flex;
+  width: fit-content;
+  min-width: 200%;
+  animation: announce-scroll 22s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+.announce-group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+.announce-item {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.announce-item::after {
+  content: '•';
+  opacity: 0.65;
+  margin: 0 18px;
+}
+.announce-group .announce-item:last-child::after {
+  margin-right: 18px;
+}
+.announce-bar,
+.nav,
+.hero,
+.hero-bg,
+.mobile-sticky,
+.footer {
+  width: 100%;
+  max-width: 100%;
+}
+@keyframes announce-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (max-width: 640px) {
+  .announce-bar {
+    padding: 10px 0;
+    font-size: 12px;
+  }
+  .announce-item::after {
+    margin: 0 14px;
+  }
+}
+
+/* ============ NAV ============ */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 48px;
+  background: var(--white);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--green-deep);
+  line-height: 1;
+}
+.nav-logo small {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+.nav-logo img {
+  height: 32px;
+}
+
+@media (min-width: 1024px) {
+  .nav-logo img {
+    height: 40px;
+  }
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-mid);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--green-deep); }
+.nav-cta {
+  background: var(--green-deep);
+  color: var(--white) !important;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-size: 13px !important;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--green-mid) !important; }
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mah-sing-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-left: 1px solid rgba(0,0,0,0.1);
+  padding-left: 16px;
+}
+
+.mah-sing-badge img {
+  height: 32px;
+}
+.mah-sing-badge strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--coral);
+  font-weight: 600;
+}
+
+/* ============ HERO ============ */
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, var(--cream) 0%, var(--cream-dark) 100%);
+  overflow: hidden;
+}
+.hero-bg {
+  width: 100%;
+  height: 600px;
+  background-image: url('https://m-legasi.com.my/wp-content/uploads/M-Legasi_Pocket-Garden-optimized-1920x1258.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(12,24,18,0.12) 0%, rgba(12,24,18,0.28) 100%),
+    linear-gradient(90deg, rgba(245,240,232,0.08) 0%, rgba(245,240,232,0) 45%);
+}
+.hero-content {
+  position: absolute;
+  z-index: 2;
+  padding: 24px 20px 40px;
+  max-width: 620px;
+  bottom:0px;
+}
+.hero-content-inner {
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(255,255,255,0.65);
+  box-shadow: 0 18px 48px rgba(27,61,47,0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 22px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--green-deep);
+  color: var(--white);
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.hero-badge .dot {
+  width: 7px;
+  height: 7px;
+  background: #5EE07B;
+  border-radius: 50%;
+  animation: blink 1.5s ease-in-out infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.12;
+  color: var(--green-deep);
+  margin-bottom: 8px;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--coral);
+}
+.hero-sub {
+  font-size: 14px;
+  color: var(--text-mid);
+  margin-bottom: 20px;
+  line-height: 1.55;
+}
+.hero-price-block {
+  background: rgba(255,255,255,0.96);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(0,0,0,0.06);
+  margin-bottom: 20px;
+}
+.hero-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+.hero-price-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-light);
+}
+.hero-price {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--green-deep);
+}
+.hero-instalment {
+  font-size: 14px;
+  color: var(--coral);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.hero-specs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.hero-spec {
+  font-size: 12px;
+  color: var(--text-mid);
+  background: var(--cream);
+  padding: 5px 12px;
+  border-radius: 16px;
+  font-weight: 500;
+}
+.hero-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+@media (min-width: 768px) {
+  .hero h1 { font-size: 44px; }
+  .hero-ctas { flex-direction: row; flex-wrap: wrap; }
+}
+@media (min-width: 1024px) {
+  .hero {
+    display: flex;
+    align-items: center;
+    min-height: 85vh;
+  }
+  .hero-bg {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    opacity: 0.35;
+  }
+  .hero-content {
+    padding: 80px 48px;
+    max-width: 640px;
+    margin-top: 0;
+  }
+  .hero-content-inner {
+    padding: 30px 32px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(245,240,232,0.88) 100%);
+    box-shadow: 0 24px 70px rgba(16,35,27,0.16);
+  }
+  .hero h1 { font-size: 54px; }
+  .hero-sub {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 28px;
+  }
+  .hero-price-block {
+    padding: 24px 28px;
+    margin-bottom: 28px;
+  }
+  .hero-price {
+    font-size: 42px;
+  }
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--coral);
+  color: var(--white);
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-primary:hover { background: var(--coral-hover); transform: translateY(-1px); }
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--green-deep);
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1.5px solid var(--green-deep);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-secondary:hover { background: var(--green-deep); color: var(--white); }
+
+.hero-proof {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--text-light);
+}
+.hero-proof-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: inherit;
+  color: inherit;
+}
+.hero-proof-item .check { color: var(--green-light); font-weight: 700; }
+
+/* ============ TRUST BAR ============ */
+.trust-bar {
+  background: var(--green-deep);
+  padding: 28px 48px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  text-align: center;
+}
+.trust-item {
+  color: var(--white);
+}
+.trust-num {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--gold-light);
+}
+.trust-label {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 2px;
+  letter-spacing: 0.3px;
+}
+
+/* ============ STATS + INTRO ============ */
+.intro-section {
+  padding: 80px 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.intro-text h2 {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 500;
+  color: var(--green-deep);
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.intro-text p {
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.stat-card {
+  background: var(--white);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 12px;
+  padding: 20px 24px;
+  transition: transform 0.2s;
+}
+.stat-card:hover { transform: translateY(-2px); }
+.stat-card.highlight {
+  background: var(--green-deep);
+  border-color: var(--green-deep);
+}
+.stat-card.highlight .stat-value,
+.stat-card.highlight .stat-desc { color: var(--white); }
+.stat-card.highlight .stat-label { color: var(--gold-light); }
+.stat-label {
+  font-size: 12px;
+  color: var(--coral);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--green-deep);
+}
+.stat-desc {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+/* ============ AERIAL ============ */
+.aerial {
+  position: relative;
+  height: 700px;
+  background: linear-gradient(180deg, #7a9e6d 0%, #5c8050 50%, #3d5e38 100%);
+  background-image: url(https://m-legasi.com.my/wp-content/uploads/Masterplan_FA-Extend-optimzied-1418x1920.jpg);
+  background-size: cover;
+  background-position: bottom center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+.aerial::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+}
+.aerial-content {
+  position: relative;
+  z-index: 2;
+  color: var(--white);
+}
+.aerial h2 {
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 400;
+  font-style: italic;
+  margin-bottom: 24px;
+  max-width: 600px;
+  padding: 20px;
+}
+.aerial-ctas {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--white);
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.4);
+  transition: all 0.2s;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.7); }
+
+/* ============ UNITS ============ */
+.units-section {
+  padding: 80px 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.section-header .eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--coral);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+.section-header h2 {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 500;
+  color: var(--green-deep);
+}
+.section-header p {
+  font-size: 15px;
+  color: var(--text-light);
+  margin-top: 8px;
+}
+.unit-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(1, 1fr);
+}
+@media (min-width: 768px) {
+  .unit-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1200px) {
+  .unit-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.unit-card {
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: all 0.3s;
+}
+.unit-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+.unit-card.featured { border: 2px solid var(--coral); }
+.unit-img {
+  height: 220px;
+  background: linear-gradient(135deg, #c4d4bc, #9ab890);
+  position: relative;
+}
+.unit-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--coral);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.unit-badge.popular {
+  background: var(--green-deep);
+}
+.unit-floor-plan {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(0,0,0,0.6);
+  color: var(--white);
+  font-size: 11px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+.unit-body { padding: 20px 24px; }
+.unit-name {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--green-deep);
+  margin-bottom: 4px;
+}
+.unit-lot {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 12px;
+}
+.unit-specs {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.unit-spec {
+  font-size: 13px;
+  color: var(--text-mid);
+}
+.unit-spec strong { font-weight: 600; }
+.unit-price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.unit-price {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--green-deep);
+}
+.unit-monthly {
+  font-size: 13px;
+  color: var(--coral);
+  font-weight: 600;
+}
+.unit-cta {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: var(--green-deep);
+  color: var(--white);
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.unit-cta:hover { background: var(--green-mid); }
+
+/* ============ WHY SECTION ============ */
+.why-section {
+  padding: 80px 48px;
+  background: var(--white);
+}
+.why-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.why-card {
+  padding: 28px 24px;
+  border-radius: 12px;
+  background: var(--cream);
+  transition: transform 0.2s;
+}
+.why-card:hover { transform: translateY(-2px); }
+.why-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: var(--white);
+  font-size: 18px;
+}
+.why-icon img {
+  width: 40px;
+  height: 40px;
+  display: block;
+  object-fit: contain;
+}
+.why-card h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--green-deep);
+  margin-bottom: 6px;
+}
+.why-card p {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+.why-card .detail {
+  font-size: 12px;
+  color: var(--coral);
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+/* ============ FACILITIES ============ */
+.facilities-section {
+  padding: 80px 48px;
+  background: var(--green-deep);
+  color: var(--white);
+}
+.facilities-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.facilities-section .eyebrow { color: var(--gold-light); }
+.facilities-section h2 { color: var(--white); }
+.facilities-section .section-header p { color: rgba(255,255,255,0.6); }
+.facilities-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+.facility-card {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  height: 280px;
+  background: linear-gradient(135deg, rgba(61,122,95,0.6), rgba(27,61,47,0.8));
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.facility-card:hover { transform: scale(1.02); }
+.facility-card-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.6));
+}
+.facility-card h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.facility-card p {
+  font-size: 12px;
+  opacity: 0.8;
+}
+.facilities-extra {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.facility-tag {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+}
+
+/* ============ INVESTMENT / ROI ============ */
+.roi-section {
+  padding: 80px 48px;
+  background: var(--cream);
+}
+.roi-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.roi-left h2 {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--green-deep);
+  margin-bottom: 16px;
+}
+.roi-left > p {
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.compare-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-weight: 600;
+  color: var(--text-light);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--green-deep);
+}
+.compare-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  color: var(--text-mid);
+}
+.compare-table tr.highlight-row td {
+  background: rgba(224,123,94,0.08);
+  font-weight: 600;
+  color: var(--green-deep);
+}
+.roi-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 32px;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.roi-card h3 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--green-deep);
+  margin-bottom: 8px;
+}
+.roi-card > p {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 24px;
+}
+
+/* ============ CALCULATOR ============ */
+.calc-group {
+  margin-bottom: 20px;
+}
+.calc-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text-mid);
+  margin-bottom: 8px;
+}
+.calc-label strong {
+  color: var(--green-deep);
+  font-weight: 600;
+}
+.calc-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--cream);
+  outline: none;
+}
+.calc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--coral);
+  cursor: pointer;
+  border: 3px solid var(--white);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.calc-result {
+  background: var(--green-deep);
+  border-radius: 10px;
+  padding: 24px;
+  text-align: center;
+  margin-top: 24px;
+}
+.calc-result-label {
+  font-size: 13px;
+  color: var(--gold-light);
+  margin-bottom: 4px;
+}
+.calc-result-value {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--white);
+}
+.calc-result-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+}
+
+/* ============ LOCATION ============ */
+.location-section {
+  padding: 80px 48px;
+  background: var(--white);
+}
+.location-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-top: 48px;
+}
+.location-map {
+  background: var(--cream);
+  border-radius: 12px;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-light);
+  font-size: 14px;
+  border: 1px solid rgba(0,0,0,0.06);
+  text-align: center;
+  padding: 40px;
+  line-height: 1.7;
+}
+.location-details {}
+.highway-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.highway-tag {
+  background: var(--green-deep);
+  color: var(--white);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.amenity-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.amenity-tab {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1.5px solid var(--green-deep);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--green-deep);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.amenity-tab.active {
+  background: var(--green-deep);
+  color: var(--white);
+}
+.amenity-list {}
+.amenity-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  font-size: 14px;
+  color: var(--text-mid);
+}
+.amenity-dist {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.amenity-km { font-weight: 600; color: var(--green-deep); }
+.amenity-min { font-size: 11px; color: var(--text-light); }
+
+/* ============ FORM ============ */
+.form-section {
+  padding: 80px 48px;
+  background: var(--green-deep);
+}
+.form-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.form-left {}
+.form-left h2 {
+  font-family: var(--font-display);
+  font-size: 36px;
+  color: var(--white);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.form-left > p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 32px;
+}
+.form-step-indicator {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.step-dot {
+  width: 32px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.2);
+}
+.step-dot.active { background: var(--coral); }
+
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group label {
+  display: block;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="email"] {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.08);
+  color: var(--white);
+  font-size: 15px;
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-group input:focus { border-color: var(--coral); }
+.form-group input::placeholder { color: rgba(255,255,255,0.3); }
+
+.form-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.form-option {
+  padding: 10px 20px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  transition: all 0.2s;
+  background: transparent;
+  font-family: var(--font-body);
+}
+.form-option:hover, .form-option.active {
+  border-color: var(--coral);
+  color: var(--white);
+  background: rgba(224,123,94,0.15);
+}
+.wa-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+}
+.wa-checkbox input {
+  width: 18px; height: 18px;
+  accent-color: var(--coral);
+}
+.form-submit {
+  width: 100%;
+  background: var(--coral);
+  color: var(--white);
+  padding: 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: background 0.2s;
+  margin-top: 8px;
+}
+.form-submit:hover { background: var(--coral-hover); }
+.form-trust {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* Form right */
+.form-right {}
+.receive-card {
+  background: rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 28px;
+  border: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 24px;
+}
+.receive-card h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.receive-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.receive-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+}
+.receive-item .icon {
+  width: 24px;
+  height: 24px;
+  background: rgba(224,123,94,0.2);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--coral);
+}
+.social-proof-card {
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.social-proof-card .source {
+  font-size: 11px;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.social-proof-card .quote {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-style: italic;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.social-proof-card .date {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* ============ FAQ ============ */
+.faq-section {
+  padding: 80px 48px;
+  background: var(--cream);
+}
+.faq-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.faq-item {
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--green-deep);
+}
+.faq-q:hover { color: var(--coral); }
+.faq-toggle {
+  font-size: 20px;
+  color: var(--text-light);
+  transition: transform 0.3s;
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.7;
+}
+.faq-item.open .faq-a {
+  max-height: 200px;
+  padding-bottom: 20px;
+}
+.faq-item.open .faq-toggle { transform: rotate(45deg); }
+
+.faq-cta {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* ============ DEVELOPER TRUST ============ */
+.dev-trust {
+  padding: 48px;
+  background: var(--white);
+  border-top: 1px solid rgba(0,0,0,0.06);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.dev-trust-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+.dev-trust-text h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--green-deep);
+  margin-bottom: 4px;
+}
+.dev-trust-text p {
+  font-size: 13px;
+  color: var(--text-light);
+}
+.dev-trust-stats {
+  display: flex;
+  gap: 40px;
+}
+.dev-stat {
+  text-align: center;
+}
+.dev-stat-num {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--green-deep);
+}
+.dev-stat-label {
+  font-size: 11px;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ============ WHATSAPP FAB ============ */
+.wa-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #25D366;
+  color: var(--white);
+  padding: 14px 24px;
+  border-radius: 28px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+  transition: all 0.2s;
+  animation: fab-in 0.6s ease-out;
+}
+.wa-fab:hover { transform: scale(1.05); box-shadow: 0 6px 24px rgba(37,211,102,0.45); }
+@keyframes fab-in { from { opacity: 0; transform: translateY(20px) scale(0.9); } }
+.wa-fab svg { flex-shrink: 0; }
+
+/* ============ MOBILE STICKY ============ */
+.mobile-sticky {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 998;
+  background: var(--white);
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding: 10px 16px;
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  background: var(--green-deep);
+  color: rgba(255,255,255,0.5);
+  padding: 40px 48px;
+  text-align: center;
+  font-size: 13px;
+}
+.footer a { color: var(--gold-light); text-decoration: none; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  .nav { padding: 12px 20px; }
+  .nav-links { display: none; }
+  .mah-sing-badge { display: none; }
+  .hero-bg { height: 737px; clip-path: none; }
+  .hero-content { padding: 24px 20px 40px; margin-top: -28px; top:20px; }
+  .hero-content-inner { padding: 20px; border-radius: 18px; background: transparent !important; box-shadow: none !important; box-shadow: none !important; -webkit-backdrop-filter: none !important; border: none !important; border: none !important; backdrop-filter: none !important;}
+  .hero-price-block { background: none !important; border-radius: none !important; padding: none !important; border: none !important; margin-bottom: none !important; padding: 0px 0px !important;}
+  .hero-price-row { flex-wrap: wrap; font-weight: 600;}
+  .hero-ctas {margin-top: 300px;}
+  .hero-sub {margin: 0 !important;font-weight: 600;}
+  .hero-ctas > a { width: 100%; justify-content: center; }
+  .trust-bar { grid-template-columns: repeat(3, 1fr); padding: 20px; }
+  .intro-section, .roi-inner, .form-inner {
+    grid-template-columns: 1fr;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .location-grid { grid-template-columns: 1fr; }
+  .location-section { padding: 64px 20px; }
+  .location-grid { gap: 28px; margin-top: 32px; }
+  .location-map {
+    width: 100%;
+    height: 360px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+  .highway-tags,
+  .amenity-tabs {
+    justify-content: center;
+  }
+  .stat-grid, .unit-grid, .why-grid, .facilities-grid, .receive-items { grid-template-columns: 1fr 1fr; }
+  .unit-grid { grid-template-columns: 1fr; }
+  .wa-fab {
+    bottom: 72px;
+    right: 16px;
+    left: auto;
+    max-width: calc(100vw - 32px);
+  }
+  .mobile-sticky {
+    display: grid;
+    width: 100%;
+    max-width: 100%;
+  }
+  .section-header h2 { font-size: 30px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce-bar" aria-label="Project highlights">
+  <div class="announce-track">
+    <div class="announce-group" aria-hidden="false">
+      <div class="announce-item">Phase 3 Now Open</div>
+      <div class="announce-item">Show Unit Ready</div>
+      <div class="announce-item">Phase 1A: 90% Taken Up</div>
+      <div class="announce-item">Limited Lots Remaining</div>
+    </div>
+    <div class="announce-group" aria-hidden="true">
+      <div class="announce-item">Phase 3 Now Open</div>
+      <div class="announce-item">Show Unit Ready</div>
+      <div class="announce-item">Phase 1A: 90% Taken Up</div>
+      <div class="announce-item">Limited Lots Remaining</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">
+    <img src="https://m-legasi.com.my/wp-content/uploads/M-Legasi-logo-Green.svg" alt="M Legasi Logo">
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#units">Units</a></li>
+    <li><a href="#facilities">Facilities</a></li>
+    <li><a href="#location">Location</a></li>
+    <li><a href="#invest">Investment</a></li>
+    <li><a href="#register" class="nav-cta">Register Interest →</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="mah-sing-badge">
+      <img src="https://m-legasi.com.my/wp-content/uploads/Mah-Sing-Logo-2-1536x515.png" alt="Mah Sing">
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-content-inner">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Phase 3 Now Open
+    </div>
+    <h1>Your <em>Legacy</em><br>Starts Here</h1>
+    <p class="hero-sub">Freehold 2-storey terrace homes in Semenyih, nestled in 500 acres of greenery with Broga Hill on the horizon.</p>
+
+    <div class="hero-price-block">
+      <div class="hero-price-row">
+        <span class="hero-price-label">From</span>
+        <span class="hero-price">RM635,000</span>
+      </div>
+      <div class="hero-instalment">≈ RM1,950/month* · Affordable homeownership</div>
+      <div class="hero-specs">
+        <span class="hero-spec">4 Bed</span>
+        <span class="hero-spec">3 Bath</span>
+        <span class="hero-spec">Freehold</span>
+        <span class="hero-spec">20'×60' — 20'×70'</span>
+      </div>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="#register" class="btn-primary">Get Price List →</a>
+      
+    </div>
+
+    <div class="hero-proof">
+      <span class="hero-proof-item"><span class="check">✓</span> GreenRE Certified</span>
+      <span class="hero-proof-item"><span class="check">✓</span> 35km from KLCC</span>
+      <span class="hero-proof-item"><span class="check">✓</span> EV Ready</span>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR (Developer Credibility) -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <div class="trust-num">90%</div>
+    <div class="trust-label">Phase 1A Taken Up</div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-num">500</div>
+    <div class="trust-label">Freehold Acres</div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-num">30+</div>
+    <div class="trust-label">Years Mah Sing</div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-num">60+</div>
+    <div class="trust-label">Projects Nationwide</div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-num">RM3.3B</div>
+    <div class="trust-label">Total GDV</div>
+  </div>
+</div>
+
+<!-- STATS + INTRO -->
+<section class="intro-section">
+  <div class="intro-text">
+    <h2>New Double-Storey Terrace Homes in Semenyih</h2>
+    <p>M Legasi is a freehold landed community surrounded by greenery, with easy access to schools, highways, and nearby amenities. Designed as a walkable 15-minute city, life here flows effortlessly between home, nature, retail, and recreation.</p>
+    <a href="#register" class="btn-primary">Register & Get Price List →</a>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-card highlight">
+      <div class="stat-label">Market demand</div>
+      <div class="stat-value">90%</div>
+      <div class="stat-desc">Phase 1A sold on launch weekend</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Starting from</div>
+      <div class="stat-value">RM635k</div>
+      <div class="stat-desc">4 Bed · 3 Bath · Freehold</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Monthly instalment</div>
+      <div class="stat-value">~RM1,950</div>
+      <div class="stat-desc">Based on 90% financing*</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Connectivity</div>
+      <div class="stat-value">35km</div>
+      <div class="stat-desc">Distance to KLCC</div>
+    </div>
+  </div>
+</section>
+
+<!-- FACILITIES (Malay audience focus) -->
+<section class="facilities-section" id="facilities">
+  <div class="facilities-inner">
+    <div class="section-header">
+      <div class="eyebrow">Life at M Legasi</div>
+      <h2>Your Everyday Resort</h2>
+      <p>13-acre Central Park, sports courts, nature trails, and a full lifestyle hub — all within a stroll.</p>
+    </div>
+    <div class="facilities-grid">
+      <div class="facility-card">
+        <div class="facility-card-body">
+          <h3>13-Acre Central Park</h3>
+          <p>Lakes, green corridors connecting every precinct</p>
+        </div>
+      </div>
+      <div class="facility-card">
+        <div class="facility-card-body">
+          <h3>Multipurpose Courts</h3>
+          <p>Pickleball, badminton, and futsal under one roof</p>
+        </div>
+      </div>
+      <div class="facility-card">
+        <div class="facility-card-body">
+          <h3>Legacy Walk</h3>
+          <p>Shops, dining, community — your neighbourhood retail hub</p>
+        </div>
+      </div>
+      <div class="facility-card">
+        <div class="facility-card-body">
+          <h3>Nature Trails</h3>
+          <p>Cycling, jogging, and garden links throughout the township</p>
+        </div>
+      </div>
+    </div>
+    <div class="facilities-extra">
+      <span class="facility-tag">Outdoor Gym</span>
+      <span class="facility-tag">Breezy-torium</span>
+      <span class="facility-tag">Play Lawn</span>
+      <span class="facility-tag">Garden Links</span>
+      <span class="facility-tag">Jogging Track</span>
+      <span class="facility-tag">Pavilion</span>
+      <span class="facility-tag">BBQ Area</span>
+      <span class="facility-tag">15-Min City Design</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHY M LEGASI -->
+<section class="why-section">
+  <div class="why-inner">
+    <div class="section-header">
+      <div class="eyebrow">Why M Legasi</div>
+      <h2>Built for Families. Designed for Life.</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon"><img src="https://m-legasi.com.my/wp-content/uploads/Freehold.svg" alt="Freehold"></div>
+        <h3>Freehold</h3>
+        <p>Permanent ownership — no renewal needed. Your legacy, forever.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><img src="https://m-legasi.com.my/wp-content/uploads/Near-Schools-Universities-Hospitals.svg" alt="Schools Nearby"></div>
+        <h3>Schools Nearby</h3>
+        <p>University of Nottingham 4km, Tenby International 5km, 3 national schools within 5km.</p>
+        <div class="detail">Strong rental demand zone →</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><img src="https://m-legasi.com.my/wp-content/uploads/Resort-like-Wide-Driveway-Leading-into-M-Legasi.svg" alt="Wide Driveway"></div>
+        <h3>Wide Driveway</h3>
+        <p>Resort-style entrance that fits 2 cars. Spacious, welcoming, practical.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><img src="https://m-legasi.com.my/wp-content/uploads/North-South-Orientated-Homes-for-Living-Comfort.svg" alt="North-South Facing"></div>
+        <h3>North-South Facing</h3>
+        <p>Save on air-con — naturally cooler with less direct sunlight throughout the day.</p>
+        <div class="detail">Lower utility bills →</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><img src="https://m-legasi.com.my/wp-content/uploads/Guarded-Community-Security-Patrol.svg" alt="Guarded 24/7"></div>
+        <h3>Guarded 24/7</h3>
+        <p>Round-the-clock security patrol with controlled access for total peace of mind.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><img src="https://m-legasi.com.my/wp-content/uploads/GreenRE-Certified.svg" alt="GreenRE Certified"></div>
+        <h3>GreenRE Certified</h3>
+        <p>Eco-certified, energy-efficient design that reduces your carbon footprint.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><img src="https://m-legasi.com.my/wp-content/uploads/EV-Charging-Stations.svg" alt="EV Charging Ready"></div>
+        <h3>EV Charging Ready</h3>
+        <p>Future-proof your home with dedicated EV charging points provided.</p>
+      </div>
+      <div class="why-card" style="background:var(--green-deep);cursor:pointer;" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">
+        <div class="why-icon" style="background:var(--coral);">→</div>
+        <h3 style="color:var(--white);">Get the Full Brochure</h3>
+        <p style="color:rgba(255,255,255,0.6);">Register now to receive the complete price list, floor plans, and early-bird offers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- UNITS -->
+<section class="units-section" id="units">
+  <div class="section-header">
+    <div class="eyebrow">Impira Collection</div>
+    <h2>Select Your Home</h2>
+    <p>Three distinct layouts designed for families at every stage</p>
+  </div>
+
+  <div class="unit-grid">
+    <!-- UNIT 1 -->
+    <div class="unit-card">
+      <div class="unit-img">
+        <div class="unit-badge">Open for Sale</div>
+        <div class="unit-floor-plan">View Floor Plan</div>
+      </div>
+      <div class="unit-body">
+        <div class="unit-name">Astradia</div>
+        <div class="unit-lot">Lot size: 20' × 60' & 20'x 65'</div>
+        <div class="unit-specs">
+          <span class="unit-spec"><strong>1,555</strong> sq.ft</span>
+          <span class="unit-spec"><strong>4</strong> Bed</span>
+          <span class="unit-spec"><strong>3</strong> Bath</span>
+        </div>
+        <div class="unit-price-row">
+          <span class="unit-price">RM635k</span>
+          <span class="unit-monthly">~RM1,950/mo</span>
+        </div>
+        <button class="unit-cta">Get Price List →</button>
+      </div>
+    </div>
+
+    <!-- UNIT 2 -->
+    <div class="unit-card featured">
+      <div class="unit-img">
+        <div class="unit-badge popular">Most Popular</div>
+        <div class="unit-floor-plan">View Floor Plan</div>
+      </div>
+      <div class="unit-body">
+        <div class="unit-name">Harmonia</div>
+        <div class="unit-lot">Lot size: 20' × 70'</div>
+        <div class="unit-specs">
+          <span class="unit-spec"><strong>1,686</strong> sq.ft</span>
+          <span class="unit-spec"><strong>4</strong> Bed</span>
+          <span class="unit-spec"><strong>3</strong> Bath</span>
+        </div>
+        <div class="unit-price-row">
+          <span class="unit-price">RM695k</span>
+          <span class="unit-monthly">~RM2,140/mo</span>
+        </div>
+        <button class="unit-cta">Get Price List →</button>
+      </div>
+    </div>
+
+    <!-- UNIT 3 -->
+    <div class="unit-card">
+      <div class="unit-img">
+        <div class="unit-badge">Open for Sale</div>
+        <div class="unit-floor-plan">View Floor Plan</div>
+      </div>
+      <div class="unit-body">
+        <div class="unit-name">Auroria</div>
+        <div class="unit-lot">Lot size: 20' × 70' & 20'x 65'</div>
+        <div class="unit-specs">
+          <span class="unit-spec"><strong>1,555</strong> sq.ft</span>
+          <span class="unit-spec"><strong>4</strong> Bed</span>
+          <span class="unit-spec"><strong>3</strong> Bath</span>
+        </div>
+        <div class="unit-price-row">
+          <span class="unit-price">RM758k</span>
+          <span class="unit-monthly">~RM2,330/mo</span>
+        </div>
+        <button class="unit-cta">Get Price List →</button>
+      </div>
+    </div>
+    <!-- UNIT 4 -->
+    <div class="unit-card">
+      <div class="unit-img">
+        <div class="unit-badge">Open for Sale</div>
+        <div class="unit-floor-plan">View Floor Plan</div>
+      </div>
+      <div class="unit-body">
+        <div class="unit-name">Zendia</div>
+        <div class="unit-lot">Lot size: 20' × 70'</div>
+        <div class="unit-specs">
+          <span class="unit-spec"><strong>1,686</strong> sq.ft</span>
+          <span class="unit-spec"><strong>4</strong> Bed</span>
+          <span class="unit-spec"><strong>3</strong> Bath</span>
+        </div>
+        <div class="unit-price-row">
+          <span class="unit-price">RM758k</span>
+          <span class="unit-monthly">~RM2,330/mo</span>
+        </div>
+        <button class="unit-cta">Get Price List →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AERIAL -->
+<section class="aerial">
+  <div class="aerial-content">
+    <h2>Nestled in 500 acres where Broga Hill graces the horizon</h2>
+    <div class="aerial-ctas">
+      <a href="#" class="btn-primary">View 360° Walkthrough →</a>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTMENT / ROI (Chinese audience focus) -->
+<section class="roi-section" id="invest">
+  <div class="roi-inner">
+    <div class="roi-left">
+      <div class="eyebrow" style="font-size:12px;font-weight:600;color:var(--coral);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;">Investment Potential</div>
+      <h2>Semenyih: The Next Growth Corridor</h2>
+      <p>With University of Nottingham just 4km away and freehold status, M Legasi offers strong rental yield and capital appreciation potential.</p>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>M Legasi<br>(Semenyih)</th>
+            <th>Kajang 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-row">
+            <td>Median PSF</td>
+            <td>RM331</td>
+            <td>RM607</td>
+          </tr>
+          <tr>
+            <td>Median price</td>
+            <td>RM635k</td>
+            <td>RM866k</td>
+          </tr>
+          <tr>
+            <td>Tenure</td>
+            <td style="color:var(--green-light);font-weight:600;">Freehold</td>
+            <td>Mixed</td>
+          </tr>
+          <tr>
+            <td>Land size (max)</td>
+            <td>20' × 70'</td>
+            <td>20' × 65'</td>
+          </tr>
+          <tr>
+            <td>Price advantage</td>
+            <td colspan="2" style="color:var(--coral);font-weight:600;text-align:center;">Up to 42% more affordable</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:11px;color:var(--text-light);margin-top:8px;">Source: iProperty.com, Feb 2024 – Mar 2025 data</p>
+    </div>
+
+    <div class="roi-card">
+      <h3>Monthly Instalment Calculator</h3>
+      <p>Estimate your monthly repayment based on your preferred unit.</p>
+
+      <div class="calc-group">
+        <div class="calc-label">
+          <span>Property price</span>
+          <strong id="calc-price-label">RM 700,000</strong>
+        </div>
+        <input type="range" class="calc-slider" id="calc-price" min="635000" max="900000" step="5000" value="700000">
+      </div>
+
+      <div class="calc-group">
+        <div class="calc-label">
+          <span>Down payment</span>
+          <strong id="calc-dp-label">10%</strong>
+        </div>
+        <input type="range" class="calc-slider" id="calc-dp" min="5" max="30" step="1" value="10">
+      </div>
+
+      <div class="calc-group">
+        <div class="calc-label">
+          <span>Loan tenure</span>
+          <strong id="calc-tenure-label">35 years</strong>
+        </div>
+        <input type="range" class="calc-slider" id="calc-tenure" min="20" max="35" step="1" value="35">
+      </div>
+
+      <div class="calc-result">
+        <div class="calc-result-label">Estimated monthly instalment</div>
+        <div class="calc-result-value" id="calc-result">RM 2,156</div>
+        <div class="calc-result-sub">Based on 4.5% interest rate*</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location-section" id="location">
+  <div class="location-inner">
+    <div class="section-header">
+      <div class="eyebrow">Strategic Location</div>
+      <h2>35km from KLCC · Freehold Landed</h2>
+      <p>Connected via 5 major highways. 7km from Semenyih Town.</p>
+    </div>
+
+    <div class="location-grid">
+      <div class="location-map">
+        <div>
+          <strong style="font-size:18px;color:var(--green-deep);display:block;margin-bottom:8px;">Interactive Map Area</strong>
+          Illustrated highway map or embedded Google Map showing M Legasi's position relative to KLCC, Kajang, Putrajaya, and major highway interchanges.
+          <br><br>
+          <em style="font-size:12px;">Replace with actual map asset in production</em>
+        </div>
+      </div>
+      <div class="location-details">
+        <div class="highway-tags">
+          <span class="highway-tag">LEKAS</span>
+          <span class="highway-tag">SILK</span>
+          <span class="highway-tag">SUKE</span>
+          <span class="highway-tag">EKVE</span>
+          <span class="highway-tag">PLUS</span>
+        </div>
+
+        <div class="amenity-tabs">
+          <button class="amenity-tab active" onclick="showTab(this,'schools')">Schools</button>
+          <button class="amenity-tab" onclick="showTab(this,'shopping')">Shopping</button>
+          <button class="amenity-tab" onclick="showTab(this,'health')">Health</button>
+          <button class="amenity-tab" onclick="showTab(this,'parks')">Parks</button>
+        </div>
+
+        <div class="amenity-list" id="tab-schools">
+          <div class="amenity-item">
+            <span>Univ. of Nottingham Malaysia</span>
+            <div class="amenity-dist"><span class="amenity-km">4.0km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Tenby International School</span>
+            <div class="amenity-dist"><span class="amenity-km">5.0km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>SK Semenyih</span>
+            <div class="amenity-dist"><span class="amenity-km">4.0km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>SJK(C) Ton Fah Eco Majestic</span>
+            <div class="amenity-dist"><span class="amenity-km">3.0km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>SMK Bandar Rinching</span>
+            <div class="amenity-dist"><span class="amenity-km">3.0km</span></div>
+          </div>
+        </div>
+        <div class="amenity-list" id="tab-shopping" style="display:none;">
+          <div class="amenity-item">
+            <span>Lotus's Semenyih</span>
+            <div class="amenity-dist"><span class="amenity-km">5.0km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>EcoHill Walk</span>
+            <div class="amenity-dist"><span class="amenity-km">3.0km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>AEON Bangi</span>
+            <div class="amenity-dist"><span class="amenity-km">12.0km</span></div>
+          </div>
+        </div>
+        <div class="amenity-list" id="tab-health" style="display:none;">
+          <div class="amenity-item">
+            <span>Kajang Hospital</span>
+            <div class="amenity-dist"><span class="amenity-km">15.0km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>KPJ Kajang</span>
+            <div class="amenity-dist"><span class="amenity-km">14.0km</span></div>
+          </div>
+        </div>
+        <div class="amenity-list" id="tab-parks" style="display:none;">
+          <div class="amenity-item">
+            <span>Setia Ecohill Park</span>
+            <div class="amenity-dist"><span class="amenity-km">6.0km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Broga Hill</span>
+            <div class="amenity-dist"><span class="amenity-km">8.0km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>South Creek</span>
+            <div class="amenity-dist"><span class="amenity-km">8.0km</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTRATION FORM -->
+<section class="form-section" id="register">
+  <div class="form-inner">
+    <div class="form-left">
+      <h2>Register & Get Your Price List</h2>
+      <p>Fill in your details below — we'll send you everything you need to make a decision.</p>
+
+      <div class="form-step-indicator">
+        <div class="step-dot active"></div>
+        <div class="step-dot active"></div>
+        <div class="step-dot"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="Your full name">
+      </div>
+      <div class="form-group">
+        <label>Mobile Number</label>
+        <input type="tel" placeholder="e.g. 012-345 6789">
+      </div>
+
+      <div class="form-group">
+        <label>I'm buying for:</label>
+        <div class="form-options">
+          <button class="form-option active" onclick="selectOption(this)">Own-Stay</button>
+          <button class="form-option" onclick="selectOption(this)">Investment</button>
+          <button class="form-option" onclick="selectOption(this)">Both</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Preferred unit size:</label>
+        <div class="form-options">
+          <button class="form-option active" onclick="selectOption(this)">20' × 60'</button>
+          <button class="form-option" onclick="selectOption(this)">20' × 65'</button>
+          <button class="form-option" onclick="selectOption(this)">20' × 70'</button>
+          <button class="form-option" onclick="selectOption(this)">Not sure yet</button>
+        </div>
+      </div>
+
+      <label class="wa-checkbox">
+        <input type="checkbox" checked>
+        Send me updates via WhatsApp (recommended)
+      </label>
+
+      <button class="form-submit">Get My Price List Now →</button>
+
+      <div class="form-trust">
+        <span>🔒 No spam</span>
+        <span>·</span>
+        <span>Instant WhatsApp reply</span>
+        <span>·</span>
+        <span>Unsubscribe anytime</span>
+      </div>
+    </div>
+
+    <div class="form-right">
+      <div class="receive-card">
+        <h3>You'll Receive:</h3>
+        <div class="receive-items">
+          <div class="receive-item"><span class="icon">📋</span> Full Price List</div>
+          <div class="receive-item"><span class="icon">📐</span> Floor Plans</div>
+          <div class="receive-item"><span class="icon">📊</span> RTS Brief</div>
+          <div class="receive-item"><span class="icon">🎁</span> Early-Bird Offers</div>
+          <div class="receive-item"><span class="icon">🗺️</span> Site Plan</div>
+          <div class="receive-item"><span class="icon">📈</span> Payment Schedule</div>
+        </div>
+      </div>
+
+      <div class="social-proof-card">
+        <div class="source">The Star · 15 April 2025</div>
+        <div class="quote">"More than 90% take-up for first phase of Mah Sing's M Legasi freehold township"</div>
+        <div class="date">Phase 1A — 102 units sold on launch weekend</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="section-header">
+      <div class="eyebrow">Got Questions?</div>
+      <h2>FAQs About M Legasi</h2>
+    </div>
+
+    <div class="faq-item open">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        What is the monthly instalment for M Legasi?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        Based on 90% financing at 4.5% interest over 35 years, the estimated monthly instalment starts from approximately RM1,950 for the 20'×60' unit (RM635,000). Actual instalment depends on your bank's interest rate and loan tenure.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Is Semenyih too far from KL for daily commuting?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        M Legasi is 35km from KLCC, accessible via 5 major highways (LEKAS, SILK, SUKE, EKVE, PLUS). With the LEKAS toll exit just minutes away, typical drive time to KL is 40-50 minutes outside peak hours — comparable to many KL suburbs.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        What's the rental potential near University of Nottingham?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        University of Nottingham Malaysia is just 4km from M Legasi, creating consistent rental demand from students, faculty, and staff. Freehold landed properties in university catchment areas historically command strong rental yields of 4-5%.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        What is the difference between freehold and leasehold?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        Freehold means permanent ownership with no expiry — the land title belongs to you and your descendants forever. Leasehold typically runs for 99 years and may require costly renewal. M Legasi is fully freehold.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Does M Legasi have EV charging facilities?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        Yes. M Legasi is future-ready with dedicated EV charging points provided for homeowners, ensuring you're prepared for the shift to electric vehicles.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Can I get financing if I only have 10% down payment?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        Yes, most Malaysian banks offer up to 90% financing for freehold properties. Our sales team can connect you with preferred banking partners who offer competitive rates. Register above to learn more about available financing packages.
+      </div>
+    </div>
+
+    <div class="faq-cta">
+      <a href="#register" class="btn-secondary" style="border-color:var(--green-deep);">Still Have Questions? Register →</a>
+    </div>
+  </div>
+</section>
+
+<!-- DEVELOPER TRUST -->
+<section class="dev-trust">
+  <div class="dev-trust-inner">
+    <div class="dev-trust-text">
+      <h3>A Development by Mah Sing Group Berhad</h3>
+      <p>Bursa Malaysia listed. Trusted by over 100,000 homeowners across Malaysia.</p>
+    </div>
+    <div class="dev-trust-stats">
+      <div class="dev-stat">
+        <div class="dev-stat-num">30+</div>
+        <div class="dev-stat-label">Years</div>
+      </div>
+      <div class="dev-stat">
+        <div class="dev-stat-num">63</div>
+        <div class="dev-stat-label">Projects</div>
+      </div>
+      <div class="dev-stat">
+        <div class="dev-stat-num">5</div>
+        <div class="dev-stat-label">States</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>M Legasi Semenyih — A development by <a href="#">Mah Sing Group Berhad</a></p>
+  <p style="margin-top:8px;font-size:11px;">*Monthly instalment based on 90% financing, 4.5% p.a., 35-year tenure. Actual rate subject to bank approval. Prices subject to change.</p>
+  <p style="margin-top:4px;font-size:11px;">Sales Gallery: 23-1, Jalan Eco Majestic 10/1a, Eco Majestic, 43500 Semenyih · T: +603 9212 3355</p>
+</footer>
+
+
+<!-- MOBILE STICKY BAR -->
+<div class="mobile-sticky">
+  <a href="#register" class="btn-primary" style="justify-content:center;padding:12px;font-size:14px;">Register Now</a>
+  <a href="https://wa.me/60392123355" class="btn-secondary" style="justify-content:center;padding:12px;font-size:14px;border-color:var(--green-deep);">WhatsApp Us</a>
+</div>
+
+<script>
+// Calculator
+const priceSlider = document.getElementById('calc-price');
+const dpSlider = document.getElementById('calc-dp');
+const tenureSlider = document.getElementById('calc-tenure');
+
+function updateCalc() {
+  const price = parseInt(priceSlider.value);
+  const dp = parseInt(dpSlider.value);
+  const years = parseInt(tenureSlider.value);
+  const rate = 0.045;
+  const loan = price * (1 - dp/100);
+  const months = years * 12;
+  const monthlyRate = rate / 12;
+  const payment = loan * (monthlyRate * Math.pow(1+monthlyRate, months)) / (Math.pow(1+monthlyRate, months) - 1);
+
+  document.getElementById('calc-price-label').textContent = 'RM ' + price.toLocaleString();
+  document.getElementById('calc-dp-label').textContent = dp + '%';
+  document.getElementById('calc-tenure-label').textContent = years + ' years';
+  document.getElementById('calc-result').textContent = 'RM ' + Math.round(payment).toLocaleString();
+}
+
+priceSlider.addEventListener('input', updateCalc);
+dpSlider.addEventListener('input', updateCalc);
+tenureSlider.addEventListener('input', updateCalc);
+updateCalc();
+
+// Amenity tabs
+function showTab(btn, tabId) {
+  document.querySelectorAll('.amenity-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.amenity-list').forEach(l => l.style.display = 'none');
+  document.getElementById('tab-' + tabId).style.display = 'block';
+}
+
+// FAQ accordion
+function toggleFaq(el) {
+  const item = el.closest('.faq-item');
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// Form option toggle
+function selectOption(btn) {
+  const group = btn.parentElement;
+  group.querySelectorAll('.form-option').forEach(o => o.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.stat-card, .unit-card, .why-card, .facility-card, .faq-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+
+
+</body>
+</html>
