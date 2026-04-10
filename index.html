@@ -1139,6 +1139,10 @@ section, nav, footer, div {
   margin-top: 8px;
 }
 .form-submit:hover { background: var(--coral-hover); }
+.term-condition {
+  margin-top: 16px;
+}
+.term-condition a {color: #52AE32 ;}
 .form-trust {
   display: flex;
   align-items: center;
@@ -1933,7 +1937,37 @@ section, nav, footer, div {
 <!-- REGISTRATION FORM -->
 <section class="form-section" id="register">
   <div class="form-inner">
-    <div class="form-left">
+  
+    <form class="form-left" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" method="POST" class="registration-form">
+
+      <input type="hidden" name="oid" value="00D0o0000015t7i">
+      <input type="hidden" name="retURL" value="m-legasi.com.my/thank-you">
+
+      <!--  ----------------------------------------------------------------------  -->
+      <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+      <!--  these lines if you wish to test in debug mode.                          -->
+      <!--  <input type="hidden" name="debug" value=1>                              -->
+      <!--  <input type="hidden" name="debugEmail"                                  -->
+      <!--  value="sofea.roslee@mahsing.com.my">                                    -->
+      <!--  ----------------------------------------------------------------------  -->
+
+
+
+      <input type="hidden" id="00N2j000000e0hv" maxlength="255" name="00N2j000000e0hv" size="20" value="M Legasi Microsite">
+
+      <input type="hidden" id="00N2j000000e0hw" maxlength="255" name="00N2j000000e0hw" size="20" value="M Legasi">
+
+      <input type="hidden" id="00N2j000000e0ho" name="00N2j000000e0ho" title="Source" value="M Legasi Website">
+
+      <input type="hidden" id="00N2j000000e0hp" name="00N2j000000e0hp" title="Super Category" value="Website">
+
+      <input type="hidden" id="00N2j000000e0hR" name="00N2j000000e0hR" value="1" checked="checked">
+        
+      
+
+      
+
+    
       <h2>Register & Get Your Price List</h2>
       <p>Fill in your details below — we'll send you everything you need to make a decision.</p>
 
@@ -1945,20 +1979,22 @@ section, nav, footer, div {
 
       <div class="form-group">
         <label>Full Name</label>
-        <input type="text" placeholder="Your full name">
+        <input id="last_name" maxlength="80" name="last_name" size="20" type="text" placeholder="Your Full Name" required="">
       </div>
       <div class="form-group">
         <label>Email</label>
-        <input type="email" placeholder="Email">
+        <input id="email" maxlength="80" name="email" size="20" type="text" placeholder="Email" required="">
       </div>
       <div class="form-group">
         <label>Mobile Number</label>
-        <input type="tel" placeholder="Contact Number">
+        <input id="mobile" maxlength="40" name="mobile" size="20" type="text" placeholder="Contact Number" required="">
       </div>
 
 
 
       <button class="form-submit">Get My Price List Now →</button>
+      
+      <p class="term-condition">I have read and agreed to the <a href="#">Terms &amp; Conditions</a> and <a href="#">PDPA Notice</a>.</p>
 
       <div class="form-trust">
         <span>No spam</span>
@@ -1967,7 +2003,7 @@ section, nav, footer, div {
         <span>·</span>
         <span>Unsubscribe anytime</span>
       </div>
-    </div>
+    </form>  
 
     <div class="form-right">
       <div class="receive-card">
