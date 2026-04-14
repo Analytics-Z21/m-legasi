@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>M Legasi Semenyih — Redesigned Landing Page</title>
+<title>Semenyih House for Sale | New Landed Double Storey Property</title>
+<link rel="icon" type="image/svg+xml" href="https://analytics-z21.github.io/m-legasi/assets/M-Legasi-logo-Green.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://m-legasi.com.my/wp-content/uploads/cropped-M-Legasi-icon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://m-legasi.com.my/wp-content/uploads/cropped-M-Legasi-icon-192x192.png">
+<link rel="apple-touch-icon" href="https://m-legasi.com.my/wp-content/uploads/cropped-M-Legasi-icon-180x180.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 
@@ -515,9 +519,9 @@ section, nav, footer, div {
 /* ============ AERIAL ============ */
 .aerial {
   position: relative;
-  height: 700px;
+  height: 800px;
   background: linear-gradient(180deg, #7a9e6d 0%, #5c8050 50%, #3d5e38 100%);
-  background-image: url(https://m-legasi.com.my/wp-content/uploads/Masterplan_FA-Extend-optimzied-1418x1920.jpg);
+  background-image: url(https://analytics-z21.github.io/m-legasi/assets/Masterplan_FA-Extend-optimzied-1418x1920.jpg);
   background-size: cover;
   background-position: bottom center;
   display: flex;
@@ -1380,6 +1384,37 @@ section, nav, footer, div {
   object-fit: cover;
   display: block;
 }
+.location-map-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.waze-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 28px;
+  background: var(--green-deep);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 24px;
+  border: 1.5px solid var(--green-deep);
+  text-decoration: none;
+  transition: all 0.2s;
+  align-self: center;
+}
+.waze-cta:hover {
+  background: var(--green-mid);
+  border-color: var(--green-mid);
+}
+.waze-cta .waze-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
+}
 .location-details {}
 .highway-tags {
   display: flex;
@@ -1399,7 +1434,13 @@ section, nav, footer, div {
   display: flex;
   gap: 8px;
   margin-bottom: 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 4px;
 }
+.amenity-tabs::-webkit-scrollbar { display: none; }
 .amenity-tab {
   padding: 8px 18px;
   border-radius: 20px;
@@ -1410,6 +1451,8 @@ section, nav, footer, div {
   background: transparent;
   cursor: pointer;
   transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .amenity-tab.active {
   background: var(--green-deep);
@@ -1561,6 +1604,92 @@ section, nav, footer, div {
   margin-top: 8px;
 }
 .form-submit:hover { background: var(--coral-hover); }
+
+/* Thank You Modal */
+.thankyou-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  background: rgba(10,20,15,0.7);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.thankyou-overlay.open { display: flex; }
+.thankyou-modal {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 48px 40px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  animation: ty-pop 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+@keyframes ty-pop {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.thankyou-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(82,174,50,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+.thankyou-icon svg { width: 32px; height: 32px; color: #52AE32; }
+.thankyou-modal h3 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--green-deep);
+  margin-bottom: 10px;
+}
+.thankyou-modal p {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.6;
+  margin-bottom: 6px;
+}
+.thankyou-modal .ty-highlight {
+  font-weight: 600;
+  color: var(--green-deep);
+}
+.thankyou-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 24px;
+}
+.thankyou-actions a,
+.thankyou-actions button {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+.ty-btn-primary {
+  background: #25D366;
+  color: var(--white) !important;
+}
+.ty-btn-primary:hover { background: #1fb855; }
+.ty-btn-secondary {
+  background: transparent;
+  color: var(--green-deep) !important;
+  border: 1.5px solid rgba(0,0,0,0.1) !important;
+}
+.ty-btn-secondary:hover { border-color: var(--green-deep) !important; }
 .term-condition {
   margin-top: 16px;
 }
@@ -1590,22 +1719,23 @@ section, nav, footer, div {
   margin-bottom: 16px;
 }
 .receive-items {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 .receive-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: rgba(255,255,255,0.8);
+  gap: 10px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.85);
 }
-.receive-item .icon {
-  width: 24px;
-  height: 24px;
-  background: rgba(224,123,94,0.2);
-  border-radius: 6px;
+.receive-item .bullet {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(82,174,50,0.2);
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1685,6 +1815,87 @@ section, nav, footer, div {
 .faq-cta {
   text-align: center;
   margin-top: 40px;
+}
+
+/* ============ SEO CONTENT ============ */
+.seo-section {
+  padding: 80px 48px;
+  background: var(--white);
+}
+.seo-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.seo-inner h2 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--green-deep);
+  margin: 36px 0 14px;
+  line-height: 1.3;
+}
+.seo-inner h2:first-child { margin-top: 0; }
+.seo-inner h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--green-deep);
+  margin: 28px 0 10px;
+  line-height: 1.3;
+}
+.seo-inner p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-mid);
+  margin-bottom: 16px;
+}
+.seo-inner ul {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+.seo-inner ul li {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-mid);
+}
+.seo-inner a {
+  color: var(--green-deep);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.seo-inner a:hover { color: var(--coral); }
+.seo-hidden {
+  display: none;
+}
+.seo-hidden.visible {
+  display: block;
+}
+.seo-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 28px;
+  border-radius: 24px;
+  border: 1.5px solid var(--green-deep);
+  background: transparent;
+  color: var(--green-deep);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+.seo-toggle-btn:hover {
+  background: var(--green-deep);
+  color: var(--white);
+}
+.seo-citation {
+  font-size: 12px !important;
+  color: var(--text-light) !important;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  padding-top: 16px;
+  margin-top: 24px;
 }
 
 /* ============ DEVELOPER TRUST ============ */
@@ -1775,11 +1986,73 @@ section, nav, footer, div {
 .footer {
   background: var(--green-deep);
   color: rgba(255,255,255,0.5);
-  padding: 40px 48px;
-  text-align: center;
+  padding: 48px 48px 32px;
   font-size: 13px;
 }
 .footer a { color: var(--gold-light); text-decoration: none; }
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto 32px;
+  flex-wrap: wrap;
+}
+.footer-logo img {
+  height: 44px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  margin-bottom: 8px;
+}
+.footer-contact {
+  font-size: 13px;
+  line-height: 1.8;
+}
+.footer-contact a {
+  display: block;
+  color: rgba(255,255,255,0.7);
+  transition: color 0.2s;
+}
+.footer-contact a:hover { color: var(--gold-light); }
+.footer-contact p {
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 4px;
+}
+.footer-socials {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.footer-socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  transition: background 0.2s;
+}
+.footer-socials a:hover {
+  background: rgba(255,255,255,0.2);
+}
+.footer-socials img {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+}
+.footer-disclaimer {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 11px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+}
+.footer-disclaimer p + p { margin-top: 8px; }
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 900px) {
@@ -1836,9 +2109,26 @@ section, nav, footer, div {
     width: 100%;
     margin: 0 auto;
   }
-  .highway-tags,
-  .amenity-tabs {
+  .highway-tags {
     justify-content: center;
+  }
+  .amenity-tabs {
+    justify-content: flex-start;
+  }
+  .location-details {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .amenity-item {
+    font-size: 13px;
+    padding-right: 4px;
+  }
+  .amenity-km {
+    white-space: nowrap;
+  }
+  .amenity-subhead {
+    font-size: 11px;
   }
   .stat-grid { grid-template-columns: 1fr 1fr; gap: 12px; max-width: 100%; overflow: hidden; }
   .stat-card { padding: 16px; }
@@ -1899,10 +2189,21 @@ section, nav, footer, div {
 
   /* FAQ */
   .faq-section { padding: 64px 20px; }
+  .seo-section { padding: 64px 20px; }
+  .seo-inner h2 { font-size: 22px; }
+  .seo-inner h3 { font-size: 18px; }
   .faq-q { font-size: 15px; }
 
   /* Footer */
   .footer { padding: 32px 20px; }
+  .footer-top {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+  }
+  .footer-contact { text-align: center; }
+  .footer-socials { justify-content: center; }
 }
 </style>
 <!-- ANNOUNCEMENT BAR -->
@@ -1920,7 +2221,7 @@ section, nav, footer, div {
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-logo">
-    <img src="https://m-legasi.com.my/wp-content/uploads/M-Legasi-logo-Green.svg" alt="M Legasi Logo">
+    <img src="https://analytics-z21.github.io/m-legasi/assets/M-Legasi-logo-Green.svg" alt="M Legasi Logo">
   </div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
@@ -1932,7 +2233,7 @@ section, nav, footer, div {
   </ul>
   <div class="nav-right">
     <div class="mah-sing-badge">
-      <img src="https://m-legasi.com.my/wp-content/uploads/Mah-Sing-Logo-2-1536x515.png" alt="Mah Sing">
+      <img src="https://analytics-z21.github.io/m-legasi/assets/Mah-Sing-Logo-2-1536x515.png" alt="Mah Sing">
     </div>
   </div>
 </nav>
@@ -2091,39 +2392,39 @@ section, nav, footer, div {
     </div>
     <div class="why-grid">
       <div class="why-card">
-        <div class="why-icon"><img src="https://m-legasi.com.my/wp-content/uploads/Freehold.svg" alt="Freehold"></div>
+        <div class="why-icon"><img src="https://analytics-z21.github.io/m-legasi/assets/Freehold.svg" alt="Freehold"></div>
         <h3>Freehold</h3>
         <p>Permanent ownership — no renewal needed. Your legacy, forever.</p>
       </div>
       <div class="why-card">
-        <div class="why-icon"><img src="https://m-legasi.com.my/wp-content/uploads/Near-Schools-Universities-Hospitals.svg" alt="Schools Nearby"></div>
+        <div class="why-icon"><img src="https://analytics-z21.github.io/m-legasi/assets/Near-Schools-Universities-Hospitals.svg" alt="Schools Nearby"></div>
         <h3>Schools Nearby</h3>
         <p>University of Nottingham 4km, Tenby International 5km, 3 national schools within 5km.</p>
         <div class="detail">Strong rental demand zone →</div>
       </div>
       <div class="why-card">
-        <div class="why-icon"><img src="https://m-legasi.com.my/wp-content/uploads/Resort-like-Wide-Driveway-Leading-into-M-Legasi.svg" alt="Wide Driveway"></div>
+        <div class="why-icon"><img src="https://analytics-z21.github.io/m-legasi/assets/Resort-like-Wide-Driveway-Leading-into-M-Legasi.svg" alt="Wide Driveway"></div>
         <h3>Wide Driveway</h3>
         <p>Resort-style entrance that fits 2 cars. Spacious, welcoming, practical.</p>
       </div>
       <div class="why-card">
-        <div class="why-icon"><img src="https://m-legasi.com.my/wp-content/uploads/North-South-Orientated-Homes-for-Living-Comfort.svg" alt="North-South Facing"></div>
+        <div class="why-icon"><img src="https://analytics-z21.github.io/m-legasi/assets/North-South-Orientated-Homes-for-Living-Comfort.svg" alt="North-South Facing"></div>
         <h3>North-South Facing</h3>
         <p>Save on air-con — naturally cooler with less direct sunlight throughout the day.</p>
         <div class="detail">Lower utility bills →</div>
       </div>
       <div class="why-card">
-        <div class="why-icon"><img src="https://m-legasi.com.my/wp-content/uploads/Guarded-Community-Security-Patrol.svg" alt="Guarded 24/7"></div>
+        <div class="why-icon"><img src="https://analytics-z21.github.io/m-legasi/assets/Guarded-Community-Security-Patrol.svg" alt="Guarded 24/7"></div>
         <h3>Guarded 24/7</h3>
         <p>Round-the-clock security patrol with controlled access for total peace of mind.</p>
       </div>
       <div class="why-card">
-        <div class="why-icon"><img src="https://m-legasi.com.my/wp-content/uploads/GreenRE-Certified.svg" alt="GreenRE Certified"></div>
+        <div class="why-icon"><img src="https://analytics-z21.github.io/m-legasi/assets/GreenRE-Certified.svg" alt="GreenRE Certified"></div>
         <h3>GreenRE Certified</h3>
         <p>Eco-certified, energy-efficient design that reduces your carbon footprint.</p>
       </div>
       <div class="why-card">
-        <div class="why-icon"><img src="https://m-legasi.com.my/wp-content/uploads/EV-Charging-Stations.svg" alt="EV Charging Ready"></div>
+        <div class="why-icon"><img src="https://analytics-z21.github.io/m-legasi/assets/EV-Charging-Stations.svg" alt="EV Charging Ready"></div>
         <h3>EV Charging Ready</h3>
         <p>Future-proof your home with dedicated EV charging points provided.</p>
       </div>
@@ -2512,8 +2813,14 @@ section, nav, footer, div {
     </div>
 
     <div class="location-grid">
-      <div class="location-map" onclick="openFloorPlan('M Legasi','Location Map','https://analytics-z21.github.io/m-legasi/assets/Homepage-Map-5.27.2025.png')" style="cursor:pointer;" title="Click to zoom">
-        <img src="https://analytics-z21.github.io/m-legasi/assets/Homepage-Map-5.27.2025.png" alt="M Legasi location map showing nearby highways and landmarks" loading="lazy">
+      <div class="location-map-wrap">
+        <div class="location-map" onclick="openFloorPlan('M Legasi','Location Map','https://analytics-z21.github.io/m-legasi/assets/Homepage-Map-5.27.2025.png')" style="cursor:pointer;" title="Click to zoom">
+          <img src="https://analytics-z21.github.io/m-legasi/assets/Homepage-Map-5.27.2025.png" alt="M Legasi location map showing nearby highways and landmarks" loading="lazy">
+        </div>
+        <a href="https://waze.com/ul/hw282w3cd8" target="_blank" rel="noopener" class="waze-cta">
+          <img src="https://analytics-z21.github.io/m-legasi/assets/waze-icon.svg" alt="Waze" class="waze-icon">
+          Navigate with Waze
+        </a>
       </div>
       <div class="location-details">
         <div style="margin-bottom:20px;">
@@ -2740,7 +3047,7 @@ section, nav, footer, div {
 <section class="form-section" id="register">
   <div class="form-inner">
   
-    <form class="form-left" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" method="POST" class="registration-form">
+    <form class="form-left" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" method="POST" target="sf-hidden-frame" onsubmit="return handleFormSubmit(this)">
 
       <input type="hidden" name="oid" value="00D0o0000015t7i">
       <input type="hidden" name="retURL" value="m-legasi.com.my/thank-you">
@@ -2811,12 +3118,10 @@ section, nav, footer, div {
       <div class="receive-card">
         <h3>You'll Receive:</h3>
         <div class="receive-items">
-          <div class="receive-item"><span class="icon">📋</span> Full Price List</div>
-          <div class="receive-item"><span class="icon">📐</span> Floor Plans</div>
-          <div class="receive-item"><span class="icon">📊</span> RTS Brief</div>
-          <div class="receive-item"><span class="icon">🎁</span> Early-Bird Offers</div>
-          <div class="receive-item"><span class="icon">🗺️</span> Site Plan</div>
-          <div class="receive-item"><span class="icon">📈</span> Payment Schedule</div>
+          <div class="receive-item"><span class="bullet"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#52AE32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Layout Plan</div>
+          <div class="receive-item"><span class="bullet"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#52AE32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Pricing</div>
+          <div class="receive-item"><span class="bullet"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#52AE32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Loan Assistant</div>
+          <div class="receive-item"><span class="bullet"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#52AE32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Partial Furnish Once Confirm Signing SPA</div>
         </div>
       </div>
 
@@ -2834,66 +3139,150 @@ section, nav, footer, div {
   <div class="faq-inner">
     <div class="section-header">
       <div class="eyebrow">Got Questions?</div>
-      <h2>FAQs About M Legasi</h2>
+      <h2>FAQs About Landed House in Semenyih</h2>
     </div>
 
     <div class="faq-item open">
       <div class="faq-q" onclick="toggleFaq(this)">
-        What is the monthly instalment for M Legasi?
+        What is the starting price for a new double storey house for sale in Semenyih?
         <span class="faq-toggle">+</span>
       </div>
       <div class="faq-a">
-        Based on 90% financing at 4.5% interest over 35 years, the estimated monthly instalment starts from approximately RM1,950 for the 20'×60' unit (RM635,000). Actual instalment depends on your bank's interest rate and loan tenure.
+        The starting price for a new double-storey house at M Legasi in Semenyih is RM635,000.
       </div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">
-        Is Semenyih too far from KL for daily commuting?
+        Are there new landed properties for sale in Semenyih?
         <span class="faq-toggle">+</span>
       </div>
       <div class="faq-a">
-        M Legasi is 35km from KLCC, accessible via 5 major highways (LEKAS, SILK, SUKE, EKVE, PLUS). With the LEKAS toll exit just minutes away, typical drive time to KL is 40-50 minutes outside peak hours — comparable to many KL suburbs.
+        Yes, there are new landed properties for sale in Semenyih, including terrace and double-storey homes. M Legasi is a modern freehold double-storey terrace property project.
       </div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">
-        What's the rental potential near University of Nottingham?
+        What is the difference between freehold and leasehold landed houses in Semenyih?
         <span class="faq-toggle">+</span>
       </div>
       <div class="faq-a">
-        University of Nottingham Malaysia is just 4km from M Legasi, creating consistent rental demand from students, faculty, and staff. Freehold landed properties in university catchment areas historically command strong rental yields of 4-5%.
+        Freehold means permanent ownership. Leasehold typically lasts 99 years and may require renewal before it expires.
       </div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">
-        What is the difference between freehold and leasehold?
+        What does GreenRE Certified mean for a new house in Semenyih?
         <span class="faq-toggle">+</span>
       </div>
       <div class="faq-a">
-        Freehold means permanent ownership with no expiry — the land title belongs to you and your descendants forever. Leasehold typically runs for 99 years and may require costly renewal. M Legasi is fully freehold.
+        GreenRE Certification indicates the house meets sustainable and eco-friendly building standards.
       </div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">
-        Does M Legasi have EV charging facilities?
+        Are there terrace houses available in Semenyih?
         <span class="faq-toggle">+</span>
       </div>
       <div class="faq-a">
-        Yes. M Legasi is future-ready with dedicated EV charging points provided for homeowners, ensuring you're prepared for the shift to electric vehicles.
+        Yes. Options range from basic units to modern terrace houses like those in M Legasi, with contemporary layouts and guarded security.
       </div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">
-        Can I get financing if I only have 10% down payment?
+        Are EV charging stations available in new terrace house communities in Semenyih?
         <span class="faq-toggle">+</span>
       </div>
       <div class="faq-a">
-        Yes, most Malaysian banks offer up to 90% financing for freehold properties. Our sales team can connect you with preferred banking partners who offer competitive rates. Register above to learn more about available financing packages.
+        Yes, some new housing developments in Semenyih provide EV charging stations for electric vehicles.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        How far is Semenyih from Kuala Lumpur city centre?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        Semenyih is approximately 35km from Kuala Lumpur city centre and about 7km from Semenyih town.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        What recreational and outdoor facilities are available in new double-storey terrace house developments in Semenyih?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        Residents often have access to central parks, jogging and cycling tracks, nature walks, and garden links. Popular outdoor destinations like Broga Hill and local golf courses are also nearby, offering a range of leisure activities.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        How do new housing projects in Semenyih support sustainable and eco-friendly living?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        Many new projects are certified for green building standards, feature energy-efficient designs, and provide amenities such as EV charging stations. Green corridors and communal gardens are common, helping to reduce the overall environmental impact.
       </div>
     </div>
 
     <div class="faq-cta">
       <a href="#register" class="btn-secondary" style="border-color:var(--green-deep);">Still Have Questions? Register →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SEO CONTENT -->
+<section class="seo-section">
+  <div class="seo-inner">
+    <h2>New House for Sale in Semenyih: Discover M Legasi Double-Storey Terrace House</h2>
+    <p>Looking for a new house in Semenyih? M Legasi offers a collection of freehold, double-storey terrace houses for sale in Semenyih, designed for modern families who value space, security, and convenience.</p>
+    <p>With prices starting from RM635,000, these new terrace houses in Semenyih combine contemporary living with a tranquil environment, making them an ideal choice for those seeking a landed property in this growing township.</p>
+
+    <button class="seo-toggle-btn" id="seoReadMore" onclick="toggleSeo()">Read More</button>
+
+    <div class="seo-hidden" id="seoContent">
+      <h2>Modern Double-Storey Terrace with Complete Amenities</h2>
+      <p>Owning a home in Semenyih offers the advantage of proximity to essential amenities. M Legasi's double-storey terrace houses are located near top schools, shopping centres, and healthcare facilities, ensuring that daily needs are always within reach. Designed as a walkable enclave inspired by the <a href="https://m-legasi.com.my/#concept">15-minute city principle</a>, life here flows effortlessly between home, nature, retail, and more — creating a harmonious environment where convenience and community thrive.</p>
+      <p>For families, having schools nearby means less time commuting and more time for learning and activities. Shopping centres offer easy access to groceries, dining, and entertainment, while nearby healthcare facilities provide peace of mind for medical emergencies and routine care.</p>
+      <p>M Legasi residents benefit from all these advantages, making it one of the most attractive options for a new house for sale in Semenyih.</p>
+
+      <h2>Landed Houses Surrounded by Greenery and Tranquility in Semenyih</h2>
+      <p>One of the standout features of M Legasi's new terrace houses in Semenyih is the abundance of green spaces. The development is thoughtfully designed with lush gardens, nature walks, and garden links, creating a resort-like atmosphere and eco-friendly lifestyle.</p>
+      <p>Residents can unwind with leisurely strolls along nature trails, enjoy the sights and sounds of local flora and fauna, or simply relax in the gardens. This tranquil setting not only enhances the aesthetic appeal of M Legasi, but offers a refreshing escape from the bustle of city life, supporting both physical and mental wellness.</p>
+      <p>It's the perfect blend of modern living and natural beauty, ideal for those seeking a Semenyih terrace house for sale that prioritises a healthy lifestyle.</p>
+
+      <h2>Enjoy Peace Of Mind In This Guarded Semenyih Landed House</h2>
+      <p>When it comes to choosing a home for a family, safety and security are always top priorities. At M Legasi, these values are embedded in the very foundation of the community.</p>
+      <p>With round-the-clock guarded access and 24/7 security patrols, residents enjoy complete peace of mind knowing their homes and loved ones are protected at all times. This added layer of protection makes M Legasi an ideal choice for families who value a safe, secure environment.</p>
+      <p>Parents can rest assured that children are free to explore the outdoors and enjoy community facilities in safety. This thoughtful approach to security nurtures a warm, family-friendly atmosphere, one where well-being and comfort always come first.</p>
+
+      <h2>New Double-Storey Terrace House in Semenyih: Freehold Property with Flexible Layouts</h2>
+      <p>M Legasi offers a selection of double-storey houses, designed with spacious layouts that cater to diverse preferences and lifestyles. The layout options available at M Legasi include:</p>
+      <ul>
+        <li>20'x60'</li>
+        <li>20'x65'</li>
+        <li>20'x70'</li>
+      </ul>
+      <p>Each unit features 4 bedrooms and 3 bathrooms, which provides ample space for family members, guests, and even a dedicated home office or study area.</p>
+      <p>As a freehold landed house in Semenyih, M Legasi guarantees long-term ownership and <a href="https://m-legasi.com.my/semenyih-property/">investment value</a>. Flexible layouts allow homeowners to personalize their living spaces, making these new terrace houses in Semenyih a smart choice for both growing families and investors.</p>
+
+      <h2>An Ideal Landed Property in Semenyih for All Family's Needs</h2>
+      <p>A landed property offers more privacy, greater independence, and the flexibility to design and adapt your home to perfectly suit your family's unique lifestyle. The spacious layout options at M Legasi provide opportunities to create a personalised living environment.</p>
+      <p>With more room to move around and less reliance on shared spaces, a landed house at M Legasi ensures a sense of individuality and comfort.</p>
+
+      <h3>Transform Your House to Suit Your Preferences</h3>
+      <p>With a landed property, you can enjoy the flexibility to design your new home according to your family's specific needs. This freedom allows you to create a home that reflects your taste and lifestyle. It ensures that every corner feels just right for you and your loved ones.</p>
+
+      <h3>Accessible Amenities and Connectivity</h3>
+      <p>M Legasi is <a href="https://m-legasi.com.my/location/">strategically located</a> with easy access to major highways like LEKAS and SILK, SKVE and PLUS. This ensures seamless connectivity to the city and surrounding areas and makes daily commuting simple and convenient. It's an ideal setting for those who value a balanced lifestyle with easy access to essential amenities.</p>
+
+      <h2>Explore M Legasi, A New Double-Storey House for Sale in Semenyih Now!</h2>
+      <p>M Legasi is a stunning new development in Semenyih offering double-storey houses set on a 500-acre freehold land. With the famed Broga Hill nearby and expansive green spaces throughout the community, residents enjoy a lifestyle where nature and modern convenience meet. The freehold status ensures lasting value, making these homes attractive for both families and investors.</p>
+      <p>As <a href="https://www.thestar.com.my/news/nation/2025/04/15/more-than-90-take-up-for-first-phase-of-mah-sings-m-legasi-freehold-township" target="_blank" rel="noopener"><em>The Star</em></a> reported on 15 April 2025, Phase 1A achieved over 90% take-up during its launch weekend. This result is a clear reflection of the development's strong appeal. With new phases now open for booking, acting early secures the best locations, layouts, and pricing before the remaining units are sold.</p>
+      <p>Ready to explore your dream home? Check out M Legasi today and find the ideal double-storey house that perfectly suits your family's needs and lifestyle.</p>
+
+      <p class="seo-citation">Citations and References:<br>The Star. More than 90% Take-Up for First Phase of Mah Sing's M Legasi Freehold Township. 15 April 2025. Available at: <a href="https://www.thestar.com.my/news/nation/2025/04/15/more-than-90-take-up-for-first-phase-of-mah-sings-m-legasi-freehold-township" target="_blank" rel="noopener">thestar.com.my</a></p>
+
+      <button class="seo-toggle-btn" onclick="toggleSeo()">Read Less</button>
     </div>
   </div>
 </section>
@@ -2924,16 +3313,62 @@ section, nav, footer, div {
 
 <!-- FOOTER -->
 <footer class="footer">
-  <p>M Legasi Semenyih — A development by <a href="#">Mah Sing Group Berhad</a></p>
-  <p style="margin-top:8px;font-size:11px;">*Monthly instalment based on 90% financing, 4.5% p.a., 35-year tenure. Actual rate subject to bank approval. Prices subject to change.</p>
-  <p style="margin-top:4px;font-size:11px;">Sales Gallery: 23-1, Jalan Eco Majestic 10/1a, Eco Majestic, 43500 Semenyih · T: +603 9212 3355</p>
+  <div class="footer-top">
+    <div class="footer-logo">
+      <a href="https://www.mahsing.com.my/" target="_blank" rel="noopener">
+        <img src="https://analytics-z21.github.io/m-legasi/assets/mahsing_logo.png" alt="Mah Sing Group">
+      </a>
+    </div>
+    <div class="footer-contact">
+      <p>For further enquiries, please contact:</p>
+      <a href="tel:0392123355">03 9212 3355</a>
+      <a href="mailto:m-legasi@mahsing.com.my">Email: m-legasi@mahsing.com.my</a>
+    </div>
+    <div class="footer-socials">
+      <a href="https://web.facebook.com/mahsing" target="_blank" rel="noopener" aria-label="Facebook">
+        <img src="https://analytics-z21.github.io/m-legasi/assets/facebook_icon-2.png" alt="Facebook">
+      </a>
+      <a href="https://www.instagram.com/mahsinggroup/" target="_blank" rel="noopener" aria-label="Instagram">
+        <img src="https://analytics-z21.github.io/m-legasi/assets/instagram_icon.png" alt="Instagram">
+      </a>
+      <a href="https://www.youtube.com/user/MahSingGroup" target="_blank" rel="noopener" aria-label="YouTube">
+        <img src="https://analytics-z21.github.io/m-legasi/assets/youtube_icon.png" alt="YouTube">
+      </a>
+      <a href="https://www.linkedin.com/company/mah-sing-group-berhad" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <img src="https://analytics-z21.github.io/m-legasi/assets/linkedin_icon.png" alt="LinkedIn">
+      </a>
+    </div>
+  </div>
+  <div class="footer-disclaimer">
+    <p>The information contained in this material is subject to change and cannot form part of an offer or contract. All renderings are artist's impressions only. All measurements are approximate. While every reasonable care has been taken in preparing this material, the developer cannot be held responsible for any inaccuracy. All the above items are subject to variations, modifications and substitutions as may be required by the Authorities or recommended by the Architect or Engineer.</p>
+    <p>Welcome to the Official M Legasi Website by Mah Sing.</p>
+  </div>
 </footer>
 
+
+<!-- THANK YOU MODAL -->
+<div class="thankyou-overlay" id="thankyouModal">
+  <div class="thankyou-modal">
+    <div class="thankyou-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+    <h3>Thank You!</h3>
+    <p>Your registration has been received.</p>
+    <p>Our team will send you the <span class="ty-highlight">complete price list</span> shortly via WhatsApp or email.</p>
+    <div class="thankyou-actions">
+      <a href="https://wa.me/601113278493?text=Hi%2C%20I%20just%20registered%20on%20the%20M%20Legasi%20website.%20Can%20I%20get%20the%20price%20list%3F" target="_blank" rel="noopener" class="ty-btn-primary">Chat with Us on WhatsApp</a>
+      <button class="ty-btn-secondary" onclick="closeThankYou()">Continue Exploring</button>
+    </div>
+  </div>
+</div>
+
+<!-- Hidden iframe for Salesforce submission -->
+<iframe name="sf-hidden-frame" id="sfHiddenFrame" style="display:none;"></iframe>
 
 <!-- MOBILE STICKY BAR -->
 <div class="mobile-sticky">
   <a href="#register" class="btn-primary" style="justify-content:center;padding:12px;font-size:14px;">Register Now</a>
-  <a href="https://wa.me/60392123355" class="btn-secondary" style="justify-content:center;padding:12px;font-size:14px;border-color:var(--green-deep);">WhatsApp Us</a>
+  <a href="https://wa.me/601113278493" target="_blank" rel="noopener" class="btn-secondary" style="justify-content:center;padding:12px;font-size:14px;border-color:var(--green-deep);">WhatsApp Us</a>
 </div>
 
 <script>
@@ -2977,6 +3412,47 @@ function toggleFaq(el) {
   const wasOpen = item.classList.contains('open');
   document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
   if (!wasOpen) item.classList.add('open');
+}
+
+// Thank You Modal
+function handleFormSubmit(form) {
+  // Validate required fields
+  var name = form.querySelector('#last_name').value.trim();
+  var email = form.querySelector('#email').value.trim();
+  var mobile = form.querySelector('#mobile').value.trim();
+  if (!name || !email || !mobile) return false;
+
+  // Show thank you modal after a short delay (let the form submit to iframe)
+  setTimeout(function() {
+    document.getElementById('thankyouModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    // Reset form
+    form.reset();
+  }, 500);
+
+  return true; // Allow form to submit to Salesforce via hidden iframe
+}
+
+function closeThankYou() {
+  document.getElementById('thankyouModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close on overlay click
+document.getElementById('thankyouModal').addEventListener('click', function(e) {
+  if (e.target === this) closeThankYou();
+});
+
+// SEO Read More / Read Less toggle
+function toggleSeo() {
+  var content = document.getElementById('seoContent');
+  var btn = document.getElementById('seoReadMore');
+  var isVisible = content.classList.contains('visible');
+  content.classList.toggle('visible');
+  if (btn) btn.style.display = isVisible ? '' : 'none';
+  if (isVisible) {
+    document.querySelector('.seo-section').scrollIntoView({ behavior: 'smooth' });
+  }
 }
 
 // ====== Floor Plan Lightbox ======
