@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>M Legasi Semenyih — Redesigned Landing Page</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
 <style>
 :root {
   --green-deep: #1B3D2F;
@@ -46,22 +49,28 @@ section, nav, footer, div {
   white-space: nowrap;
 }
 .announce-track {
-  display: flex;
-  width: fit-content;
-  min-width: 200%;
-  animation: announce-scroll 22s linear infinite;
+  display: inline-flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  max-width: none;
   will-change: transform;
   transform: translateZ(0);
 }
 .announce-group {
-  display: flex;
+  display: inline-flex;
+  flex-wrap: nowrap;
   flex-shrink: 0;
   align-items: center;
+  white-space: nowrap;
+  max-width: none;
+  padding-right: 0;
 }
 .announce-item {
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
+  white-space: nowrap;
+  max-width: none;
 }
 .announce-item::after {
   content: '•';
@@ -69,7 +78,9 @@ section, nav, footer, div {
   margin: 0 18px;
 }
 .announce-group .announce-item:last-child::after {
-  margin-right: 18px;
+  content: '•';
+  opacity: 0.65;
+  margin: 0 18px;
 }
 .announce-bar,
 .nav,
@@ -190,9 +201,9 @@ section, nav, footer, div {
 .hero-bg {
   width: 100%;
   height: 600px;
-  background-image: url('assets/M-Legasi_Pocket-Garden-optimized-1920x1258.jpg');
+  background-image: url('https://analytics-z21.github.io/m-legasi/assets/Phase_3_Type_A_2.png');
   background-size: cover;
-  background-position: center center;
+  background-position: center bottom;
   background-repeat: no-repeat;
   position: relative;
 }
@@ -200,9 +211,7 @@ section, nav, footer, div {
   content: '';
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(180deg, rgba(12,24,18,0.12) 0%, rgba(12,24,18,0.28) 100%),
-    linear-gradient(90deg, rgba(245,240,232,0.08) 0%, rgba(245,240,232,0) 45%);
+
 }
 .hero-content {
   position: absolute;
@@ -303,6 +312,7 @@ section, nav, footer, div {
   padding: 5px 12px;
   border-radius: 16px;
   font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 .hero-ctas {
   display: flex;
@@ -397,6 +407,12 @@ section, nav, footer, div {
   flex-wrap: wrap;
   font-size: 12px;
   color: var(--text-light);
+}
+
+@media (max-width: 768px) {
+  .hero-proof {
+    display: none;
+  }
 }
 .hero-proof-item {
   display: flex;
@@ -579,6 +595,37 @@ section, nav, footer, div {
   color: var(--text-light);
   margin-top: 8px;
 }
+
+/* Unit Filter Tabs */
+.unit-filters {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+.unit-filter-btn {
+  padding: 10px 24px;
+  border-radius: 24px;
+  border: 1.5px solid var(--green-deep);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green-deep);
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: all 0.25s ease;
+  letter-spacing: 0.2px;
+}
+.unit-filter-btn:hover {
+  background: rgba(27,61,47,0.06);
+}
+.unit-filter-btn.active {
+  background: var(--green-deep);
+  color: var(--white);
+  border-color: var(--green-deep);
+}
+
 .unit-grid {
   display: grid;
   gap: 24px;
@@ -594,19 +641,58 @@ section, nav, footer, div {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
 .unit-card {
   background: var(--white);
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
   border: 1px solid rgba(0,0,0,0.06);
-  transition: all 0.3s;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+  transform: translateY(0);
 }
-.unit-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+.unit-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(27,61,47,0.12); }
 .unit-card.featured { border: 2px solid var(--coral); }
+.unit-card.hidden {
+  display: none;
+}
+
+/* Floor Plan Image Area */
 .unit-img {
-  height: 220px;
-  background: linear-gradient(135deg, #c4d4bc, #9ab890);
+  height: 240px;
+  background: linear-gradient(145deg, #e8efe4 0%, #d4e0ce 40%, #c4d4bc 100%);
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.unit-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%231B3D2F' fill-opacity='0.04'%3E%3Cpath d='M20 20h20v20H20zM0 0h20v20H0z'/%3E%3C/g%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+}
+.unit-floorplan-placeholder {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--green-mid);
+  opacity: 0.7;
+}
+.unit-floorplan-placeholder svg {
+  width: 48px;
+  height: 48px;
+}
+.unit-floorplan-placeholder span {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 .unit-badge {
   position: absolute;
@@ -616,10 +702,11 @@ section, nav, footer, div {
   color: var(--white);
   font-size: 11px;
   font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 4px;
+  padding: 5px 14px;
+  border-radius: 6px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  z-index: 2;
 }
 .unit-badge.popular {
   background: var(--green-deep);
@@ -628,39 +715,107 @@ section, nav, footer, div {
   position: absolute;
   bottom: 12px;
   right: 12px;
-  background: rgba(0,0,0,0.6);
+  background: rgba(27,61,47,0.85);
   color: var(--white);
   font-size: 11px;
-  padding: 6px 12px;
-  border-radius: 4px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 6px;
   cursor: pointer;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background 0.2s;
+  border: none;
+  font-family: var(--font-body);
 }
-.unit-body { padding: 20px 24px; }
+.unit-floor-plan:hover { background: rgba(27,61,47,1); }
+.unit-storey-tag {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255,255,255,0.92);
+  color: var(--green-deep);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 6px;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+  letter-spacing: 0.2px;
+}
+
+.unit-body { padding: 22px 24px 24px; }
 .unit-name {
   font-family: var(--font-display);
-  font-size: 24px;
-  font-weight: 500;
+  font-size: 26px;
+  font-weight: 600;
   color: var(--green-deep);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 .unit-lot {
   font-size: 13px;
   color: var(--text-light);
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
-.unit-specs {
-  display: flex;
-  gap: 16px;
+
+/* Specs Grid */
+.unit-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
   margin-bottom: 16px;
   padding-bottom: 16px;
   border-bottom: 1px solid rgba(0,0,0,0.06);
 }
-.unit-spec {
-  font-size: 13px;
-  color: var(--text-mid);
+.unit-spec-item {
+  text-align: center;
+  padding: 10px 4px;
+  position: relative;
 }
-.unit-spec strong { font-weight: 600; }
+.unit-spec-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background: rgba(0,0,0,0.08);
+}
+.unit-spec-value {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--green-deep);
+  line-height: 1.1;
+}
+.unit-spec-label {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  font-weight: 500;
+}
+
+/* Lot Types */
+.unit-lot-types {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.unit-lot-tag {
+  font-size: 11px;
+  color: var(--text-mid);
+  background: var(--cream);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
 .unit-price-row {
   display: flex;
   align-items: baseline;
@@ -679,12 +834,15 @@ section, nav, footer, div {
   font-weight: 600;
 }
 .unit-cta {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   width: 100%;
   text-align: center;
   background: var(--green-deep);
   color: var(--white);
-  padding: 12px;
+  padding: 13px;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
@@ -692,9 +850,254 @@ section, nav, footer, div {
   margin-top: 16px;
   border: none;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.25s;
+  font-family: var(--font-body);
 }
-.unit-cta:hover { background: var(--green-mid); }
+.unit-cta:hover { background: var(--green-mid); transform: translateY(-1px); }
+.unit-cta svg { flex-shrink: 0; }
+
+/* Unit card featured glow */
+.unit-card.featured .unit-img {
+  background: linear-gradient(145deg, #f5ece4 0%, #eeddd0 40%, #e8d4c4 100%);
+}
+.unit-card.featured .unit-cta {
+  background: var(--coral);
+}
+.unit-card.featured .unit-cta:hover {
+  background: var(--coral-hover);
+}
+
+/* Real floor plan thumbnails */
+.unit-img img.unit-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.unit-card:hover .unit-img img.unit-thumb {
+  transform: scale(1.04);
+}
+
+/* Unit Action Buttons Row */
+.unit-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.unit-action-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 8px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  border: 1.5px solid transparent;
+  letter-spacing: 0.15px;
+  white-space: nowrap;
+}
+.unit-action-btn svg { flex-shrink: 0; }
+.unit-action-btn.brochure {
+  background: rgba(184,147,90,0.1);
+  color: var(--gold);
+  border-color: rgba(184,147,90,0.25);
+}
+.unit-action-btn.brochure:hover {
+  background: var(--gold);
+  color: var(--white);
+  border-color: var(--gold);
+}
+.unit-action-btn.walkthrough {
+  background: rgba(224,123,94,0.08);
+  color: var(--coral);
+  border-color: rgba(224,123,94,0.2);
+}
+.unit-action-btn.walkthrough:hover {
+  background: var(--coral);
+  color: var(--white);
+  border-color: var(--coral);
+}
+
+/* ============ FLOOR PLAN LIGHTBOX ============ */
+.fp-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+.fp-lightbox.open {
+  opacity: 1;
+  visibility: visible;
+}
+.fp-lightbox-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 20, 15, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.fp-lightbox-container {
+  position: relative;
+  z-index: 2;
+  width: 92vw;
+  max-width: 900px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  transform: scale(0.92) translateY(16px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fp-lightbox.open .fp-lightbox-container {
+  transform: scale(1) translateY(0);
+}
+
+/* Lightbox header */
+.fp-lightbox-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: var(--green-deep);
+  border-radius: 14px 14px 0 0;
+  flex-shrink: 0;
+}
+.fp-lightbox-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--white);
+}
+.fp-lightbox-subtitle {
+  font-size: 13px;
+  color: var(--gold-light);
+  margin-top: 1px;
+}
+.fp-lightbox-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.fp-ctrl-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.08);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-body);
+}
+.fp-ctrl-btn:hover {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.3);
+}
+.fp-ctrl-btn.close-btn {
+  background: rgba(224,123,94,0.2);
+  border-color: rgba(224,123,94,0.35);
+}
+.fp-ctrl-btn.close-btn:hover {
+  background: var(--coral);
+  border-color: var(--coral);
+}
+
+/* Lightbox image area */
+.fp-lightbox-body {
+  background: var(--white);
+  border-radius: 0 0 14px 14px;
+  overflow: hidden;
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+.fp-lightbox-imgwrap {
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  max-height: 70vh;
+  overflow: auto;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  background:
+    linear-gradient(45deg, #f8f8f6 25%, transparent 25%),
+    linear-gradient(-45deg, #f8f8f6 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #f8f8f6 75%),
+    linear-gradient(-45deg, transparent 75%, #f8f8f6 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+  background-color: #f2f1ed;
+}
+.fp-lightbox-imgwrap:active { cursor: grabbing; }
+.fp-lightbox-imginner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100%;
+  min-height: 100%;
+}
+.fp-lightbox-imgwrap img {
+  display: block;
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-user-drag: none;
+  touch-action: none;
+}
+.fp-zoom-hint {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(27,61,47,0.85);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+  opacity: 0.85;
+  backdrop-filter: blur(4px);
+  transition: opacity 0.3s;
+}
+.fp-lightbox-imgwrap.zoomed .fp-zoom-hint {
+  opacity: 0;
+}
+
+@media (max-width: 640px) {
+  .fp-lightbox-container {
+    width: 97vw;
+    max-height: 94vh;
+  }
+  .fp-lightbox-header {
+    padding: 14px 16px;
+    border-radius: 12px 12px 0 0;
+  }
+  .fp-lightbox-title { font-size: 19px; }
+  .fp-lightbox-body { border-radius: 0 0 12px 12px; }
+  .fp-lightbox-imgwrap { min-height: 260px; max-height: 65vh; }
+  .fp-ctrl-btn { width: 34px; height: 34px; }
+  .unit-actions { gap: 6px; }
+  .unit-action-btn { font-size: 11px; padding: 8px 6px; gap: 4px; }
+}
 
 /* ============ WHY SECTION ============ */
 .why-section {
@@ -777,18 +1180,27 @@ section, nav, footer, div {
   overflow: hidden;
   position: relative;
   height: 280px;
-  background: linear-gradient(135deg, rgba(61,122,95,0.6), rgba(27,61,47,0.8));
+  background: var(--green-deep);
   cursor: pointer;
   transition: transform 0.3s;
 }
 .facility-card:hover { transform: scale(1.02); }
+.facility-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .facility-card-body {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   padding: 20px;
-  background: linear-gradient(transparent, rgba(0,0,0,0.6));
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  z-index: 1;
 }
 .facility-card h3 {
   font-family: var(--font-display);
@@ -958,18 +1370,15 @@ section, nav, footer, div {
   margin-top: 48px;
 }
 .location-map {
-  background: var(--cream);
   border-radius: 12px;
-  height: 420px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-light);
-  font-size: 14px;
+  overflow: hidden;
   border: 1px solid rgba(0,0,0,0.06);
-  text-align: center;
-  padding: 40px;
-  line-height: 1.7;
+}
+.location-map img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .location-details {}
 .highway-tags {
@@ -1006,7 +1415,20 @@ section, nav, footer, div {
   background: var(--green-deep);
   color: var(--white);
 }
-.amenity-list {}
+.amenity-list {
+  max-height: 420px;
+  overflow-y: auto;
+}
+.amenity-subhead {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--green-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 14px 0 6px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+.amenity-subhead:first-child { padding-top: 0; }
 .amenity-item {
   display: flex;
   justify-content: space-between;
@@ -1363,14 +1785,43 @@ section, nav, footer, div {
 @media (max-width: 900px) {
   .nav { padding: 12px 20px; }
   .nav-links { display: none; }
-  .mah-sing-badge { display: none; }
+  
   .hero-bg { height: 737px; clip-path: none; }
+  /* Cream gradient scrim — warm wash over top half for text readability */
+  .hero-bg::before {
+    background:
+      linear-gradient(180deg,
+        rgba(245,240,232,0.92) 0%,
+        rgba(245,240,232,0.85) 28%,
+        rgba(245,240,232,0.55) 46%,
+        rgba(245,240,232,0.15) 58%,
+        transparent 68%
+      ) !important;
+  }
   .hero-content { padding: 24px 20px 40px; margin-top: -28px; top:20px; }
-  .hero-content-inner { padding: 20px; border-radius: 18px; background: transparent !important; box-shadow: none !important; box-shadow: none !important; -webkit-backdrop-filter: none !important; border: none !important; border: none !important; backdrop-filter: none !important;}
+  .hero-content-inner {
+    padding: 20px;
+    border-radius: 18px;
+    background: transparent !important;
+    box-shadow: none !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    border: none !important;
+  }
+  /* Frosted pill behind specs row */
+  .hero-specs {
+    background: rgba(255,255,255,0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.5);
+    display: inline-flex;
+  }
   .hero-price-block { background: none !important; border-radius: none !important; padding: none !important; border: none !important; margin-bottom: none !important; padding: 0px 0px !important;}
   .hero-price-row { flex-wrap: wrap; font-weight: 600;}
-  .hero-ctas {margin-top: 300px;}
-  .hero-sub {margin: 0 !important;font-weight: 600;}
+  .hero-ctas {margin-top: 260px; margin-bottom: 0;}
+  .hero-sub {margin: 0 !important; font-weight: 600; text-shadow: 0 1px 3px rgba(245,240,232,0.6);}
   .hero-ctas > a { width: 100%; justify-content: center; }
   .trust-bar { grid-template-columns: repeat(3, 1fr); padding: 20px; }
   .intro-section, .roi-inner, .form-inner {
@@ -1383,16 +1834,20 @@ section, nav, footer, div {
   .location-grid { gap: 28px; margin-top: 32px; }
   .location-map {
     width: 100%;
-    height: 360px;
     margin: 0 auto;
-    padding: 24px;
   }
   .highway-tags,
   .amenity-tabs {
     justify-content: center;
   }
-  .stat-grid, .unit-grid, .why-grid, .facilities-grid, .receive-items { grid-template-columns: 1fr 1fr; }
+  .stat-grid { grid-template-columns: 1fr 1fr; gap: 12px; max-width: 100%; overflow: hidden; }
+  .stat-card { padding: 16px; }
+  .stat-value { font-size: 30px; }
+  .unit-grid, .why-grid, .facilities-grid, .receive-items { grid-template-columns: 1fr 1fr; }
   .unit-grid { grid-template-columns: 1fr; }
+  .unit-filters { gap: 6px; }
+  .unit-filter-btn { padding: 8px 16px; font-size: 13px; }
+  .units-section { padding: 64px 20px; }
   .wa-fab {
     bottom: 72px;
     right: 16px;
@@ -1405,21 +1860,55 @@ section, nav, footer, div {
     max-width: 100%;
   }
   .section-header h2 { font-size: 30px; }
+
+  /* Intro text breathing room */
+  .intro-section {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .intro-text h2 { font-size: 30px; }
+  .intro-text p { font-size: 14px; }
+
+  /* Facilities & Why grids */
+  .facilities-section { padding: 64px 20px; }
+  .why-section { padding: 64px 20px; }
+  .why-grid { gap: 12px; }
+
+  /* ROI section */
+  .roi-section { padding: 64px 20px; }
+  .roi-left h2 { font-size: 28px; }
+  .compare-table { font-size: 13px; }
+  .compare-table th, .compare-table td { padding: 10px 8px; }
+
+  /* Developer Trust — stack on mobile */
+  .dev-trust { padding: 32px 20px; }
+  .dev-trust-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+  .dev-trust-text h3 { font-size: 18px; }
+  .dev-trust-stats {
+    gap: 24px;
+    justify-content: center;
+  }
+
+  /* Form section */
+  .form-section { padding: 64px 20px; }
+  .form-left h2 { font-size: 28px; }
+
+  /* FAQ */
+  .faq-section { padding: 64px 20px; }
+  .faq-q { font-size: 15px; }
+
+  /* Footer */
+  .footer { padding: 32px 20px; }
 }
 </style>
-</head>
-<body>
-
 <!-- ANNOUNCEMENT BAR -->
 <div class="announce-bar" aria-label="Project highlights">
-  <div class="announce-track">
-    <div class="announce-group" aria-hidden="false">
-      <div class="announce-item">Phase 3 Now Open</div>
-      <div class="announce-item">Show Unit Ready</div>
-      <div class="announce-item">Phase 1A: 90% Taken Up</div>
-      <div class="announce-item">Limited Lots Remaining</div>
-    </div>
-    <div class="announce-group" aria-hidden="true">
+  <div class="announce-track" id="announceTrack">
+    <div class="announce-group">
       <div class="announce-item">Phase 3 Now Open</div>
       <div class="announce-item">Show Unit Ready</div>
       <div class="announce-item">Phase 1A: 90% Taken Up</div>
@@ -1552,24 +2041,28 @@ section, nav, footer, div {
     </div>
     <div class="facilities-grid">
       <div class="facility-card">
+        <img src="https://analytics-z21.github.io/m-legasi/assets/M-Legasi_Lake-Eye-Level_FA-optimized-1920x1356.jpg" alt="13-Acre Central Park" loading="lazy">
         <div class="facility-card-body">
           <h3>13-Acre Central Park</h3>
           <p>Lakes, green corridors connecting every precinct</p>
         </div>
       </div>
       <div class="facility-card">
+        <img src="https://analytics-z21.github.io/m-legasi/assets/Phase-3-Type-A-_-eye-level-court-1920x1081.jpg" alt="Multipurpose Courts" loading="lazy">
         <div class="facility-card-body">
           <h3>Multipurpose Courts</h3>
           <p>Pickleball, badminton, and futsal under one roof</p>
         </div>
       </div>
       <div class="facility-card">
+        <img src="https://analytics-z21.github.io/m-legasi/assets/Mah-Sing-M-Legasi_Pocket-Garden_FA-optimized-1920x1580.jpg" alt="Legacy Walk" loading="lazy">
         <div class="facility-card-body">
           <h3>Legacy Walk</h3>
           <p>Shops, dining, community — your neighbourhood retail hub</p>
         </div>
       </div>
       <div class="facility-card">
+        <img src="https://analytics-z21.github.io/m-legasi/assets/Phase-3-_overall-pocket-garden-1920x1068.jpg" alt="Nature Trails" loading="lazy">
         <div class="facility-card-body">
           <h3>Nature Trails</h3>
           <p>Cycling, jogging, and garden links throughout the township</p>
@@ -1649,98 +2142,272 @@ section, nav, footer, div {
   <div class="section-header">
     <div class="eyebrow">Impira Collection</div>
     <h2>Select Your Home</h2>
-    <p>Three distinct layouts designed for families at every stage</p>
+    <p>Four distinct layouts designed for families at every stage — all 2-storey freehold terrace homes</p>
+  </div>
+
+  <!-- Filter Tabs -->
+  <div class="unit-filters" role="tablist" aria-label="Filter unit types">
+    <button class="unit-filter-btn active" role="tab" aria-selected="true" data-filter="all" onclick="filterUnits(this, 'all')">All Units</button>
+    <button class="unit-filter-btn" role="tab" aria-selected="false" data-filter="phase2" onclick="filterUnits(this, 'phase2')">Phase 2</button>
+    <button class="unit-filter-btn" role="tab" aria-selected="false" data-filter="phase3" onclick="filterUnits(this, 'phase3')">Phase 3</button>
   </div>
 
   <div class="unit-grid">
-    <!-- UNIT 1 -->
-    <div class="unit-card">
+    <!-- UNIT 1: ASTRADIA -->
+    <div class="unit-card" data-unit="phase2">
       <div class="unit-img">
+        <img class="unit-thumb" src="https://analytics-z21.github.io/m-legasi/assets/Astradia.jpg" alt="Astradia floor plan" loading="lazy">
         <div class="unit-badge">Open for Sale</div>
-        <div class="unit-floor-plan">View Floor Plan</div>
+        <span class="unit-storey-tag">2 Storey</span>
+        <button class="unit-floor-plan" onclick="openFloorPlan('Astradia','20\u2032 \u00d7 60\u2032 &amp; 20\u2032 \u00d7 65\u2032','https://m-legasi.com.my/wp-content/uploads/Astradia-Intermediate-Lot-20x60-1.png')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+          View Floor Plan
+        </button>
       </div>
       <div class="unit-body">
         <div class="unit-name">Astradia</div>
-        <div class="unit-lot">Lot size: 20' × 60' & 20'x 65'</div>
-        <div class="unit-specs">
-          <span class="unit-spec"><strong>1,555</strong> sq.ft</span>
-          <span class="unit-spec"><strong>4</strong> Bed</span>
-          <span class="unit-spec"><strong>3</strong> Bath</span>
+        <div class="unit-lot">Land: 20' × 60' & 20' × 65'</div>
+        <div class="unit-specs-grid">
+          <div class="unit-spec-item">
+            <div class="unit-spec-value">1,555</div>
+            <div class="unit-spec-label">Sq. Ft</div>
+          </div>
+          <div class="unit-spec-item">
+            <div class="unit-spec-value">4</div>
+            <div class="unit-spec-label">Bedrooms</div>
+          </div>
+          <div class="unit-spec-item">
+            <div class="unit-spec-value">3</div>
+            <div class="unit-spec-label">Bathrooms</div>
+          </div>
+        </div>
+        <div class="unit-lot-types">
+          <span class="unit-lot-tag">Intermediate</span>
+          <span class="unit-lot-tag">End Lot</span>
+          <span class="unit-lot-tag">Corner</span>
         </div>
         <div class="unit-price-row">
           <span class="unit-price">RM635k</span>
           <span class="unit-monthly">~RM1,950/mo</span>
         </div>
-        <button class="unit-cta">Get Price List →</button>
+        <a href="#register" class="unit-cta">
+          Get Price List
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <div class="unit-actions">
+          <a href="#register" class="unit-action-btn brochure">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            E-Brochure
+          </a>
+          <a href="#register" class="unit-action-btn walkthrough">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            Walkthrough
+          </a>
+        </div>
       </div>
     </div>
 
-    <!-- UNIT 2 -->
-    <div class="unit-card featured">
+    <!-- UNIT 2: HARMONIA -->
+    <div class="unit-card featured" data-unit="phase2">
       <div class="unit-img">
+        <img class="unit-thumb" src="https://analytics-z21.github.io/m-legasi/assets/Harmonia.jpg" alt="Harmonia floor plan" loading="lazy">
         <div class="unit-badge popular">Most Popular</div>
-        <div class="unit-floor-plan">View Floor Plan</div>
+        <span class="unit-storey-tag">2 Storey</span>
+        <button class="unit-floor-plan" onclick="openFloorPlan('Harmonia','20\u2032 \u00d7 70\u2032','https://m-legasi.com.my/wp-content/uploads/Harmonia-Intermediate-Lot.png')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+          View Floor Plan
+        </button>
       </div>
       <div class="unit-body">
         <div class="unit-name">Harmonia</div>
-        <div class="unit-lot">Lot size: 20' × 70'</div>
-        <div class="unit-specs">
-          <span class="unit-spec"><strong>1,686</strong> sq.ft</span>
-          <span class="unit-spec"><strong>4</strong> Bed</span>
-          <span class="unit-spec"><strong>3</strong> Bath</span>
+        <div class="unit-lot">Land: 20' × 70'</div>
+        <div class="unit-specs-grid">
+          <div class="unit-spec-item">
+            <div class="unit-spec-value">1,686</div>
+            <div class="unit-spec-label">Sq. Ft</div>
+          </div>
+          <div class="unit-spec-item">
+            <div class="unit-spec-value">4</div>
+            <div class="unit-spec-label">Bedrooms</div>
+          </div>
+          <div class="unit-spec-item">
+            <div class="unit-spec-value">3</div>
+            <div class="unit-spec-label">Bathrooms</div>
+          </div>
+        </div>
+        <div class="unit-lot-types">
+          <span class="unit-lot-tag">Intermediate</span>
+          <span class="unit-lot-tag">End Lot</span>
+          <span class="unit-lot-tag">Corner</span>
         </div>
         <div class="unit-price-row">
           <span class="unit-price">RM695k</span>
           <span class="unit-monthly">~RM2,140/mo</span>
         </div>
-        <button class="unit-cta">Get Price List →</button>
+        <a href="#register" class="unit-cta">
+          Get Price List
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <div class="unit-actions">
+          <a href="#register" class="unit-action-btn brochure">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            E-Brochure
+          </a>
+          <a href="#register" class="unit-action-btn walkthrough">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            Walkthrough
+          </a>
+        </div>
       </div>
     </div>
 
-    <!-- UNIT 3 -->
-    <div class="unit-card">
+    <!-- UNIT 3: AURORIA -->
+    <div class="unit-card" data-unit="phase3">
       <div class="unit-img">
+        <img class="unit-thumb" src="https://analytics-z21.github.io/m-legasi/assets/Phase_3_Type_A.jpg" alt="Auroria floor plan" loading="lazy">
         <div class="unit-badge">Open for Sale</div>
-        <div class="unit-floor-plan">View Floor Plan</div>
+        <span class="unit-storey-tag">2 Storey</span>
+        <button class="unit-floor-plan" onclick="openFloorPlan('Auroria','20\u2032 \u00d7 60\u2032 &amp; 20\u2032 \u00d7 65\u2032','https://m-legasi.com.my/wp-content/uploads/Mah-Sing-M-Legasi_-Floorplan-Phase-3-Type-A_20x60-intermediate-color.png')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+          View Floor Plan
+        </button>
       </div>
       <div class="unit-body">
         <div class="unit-name">Auroria</div>
-        <div class="unit-lot">Lot size: 20' × 70' & 20'x 65'</div>
-        <div class="unit-specs">
-          <span class="unit-spec"><strong>1,555</strong> sq.ft</span>
-          <span class="unit-spec"><strong>4</strong> Bed</span>
-          <span class="unit-spec"><strong>3</strong> Bath</span>
+        <div class="unit-lot">Land: 20' × 60' & 20' × 65'</div>
+        <div class="unit-specs-grid">
+          <div class="unit-spec-item">
+            <div class="unit-spec-value">1,555</div>
+            <div class="unit-spec-label">Sq. Ft</div>
+          </div>
+          <div class="unit-spec-item">
+            <div class="unit-spec-value">4</div>
+            <div class="unit-spec-label">Bedrooms</div>
+          </div>
+          <div class="unit-spec-item">
+            <div class="unit-spec-value">3</div>
+            <div class="unit-spec-label">Bathrooms</div>
+          </div>
+        </div>
+        <div class="unit-lot-types">
+          <span class="unit-lot-tag">Intermediate</span>
+          <span class="unit-lot-tag">End Lot</span>
+          <span class="unit-lot-tag">Corner</span>
         </div>
         <div class="unit-price-row">
           <span class="unit-price">RM758k</span>
           <span class="unit-monthly">~RM2,330/mo</span>
         </div>
-        <button class="unit-cta">Get Price List →</button>
+        <a href="#register" class="unit-cta">
+          Get Price List
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <div class="unit-actions">
+          <a href="#register" class="unit-action-btn brochure">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            E-Brochure
+          </a>
+          <a href="#register" class="unit-action-btn walkthrough">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            Walkthrough
+          </a>
+        </div>
       </div>
     </div>
-    <!-- UNIT 4 -->
-    <div class="unit-card">
+
+    <!-- UNIT 4: ZENDIA -->
+    <div class="unit-card" data-unit="phase3">
       <div class="unit-img">
+        <img class="unit-thumb" src="https://analytics-z21.github.io/m-legasi/assets/Phase_3_Type_B.jpg" alt="Zendia floor plan" loading="lazy">
         <div class="unit-badge">Open for Sale</div>
-        <div class="unit-floor-plan">View Floor Plan</div>
+        <span class="unit-storey-tag">2 Storey</span>
+        <button class="unit-floor-plan" onclick="openFloorPlan('Zendia','20\u2032 \u00d7 70\u2032','https://m-legasi.com.my/wp-content/uploads/zendia-Type-A_20x70-intermediate-1920x1357.jpg')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+          View Floor Plan
+        </button>
       </div>
       <div class="unit-body">
         <div class="unit-name">Zendia</div>
-        <div class="unit-lot">Lot size: 20' × 70'</div>
-        <div class="unit-specs">
-          <span class="unit-spec"><strong>1,686</strong> sq.ft</span>
-          <span class="unit-spec"><strong>4</strong> Bed</span>
-          <span class="unit-spec"><strong>3</strong> Bath</span>
+        <div class="unit-lot">Land: 20' × 70'</div>
+        <div class="unit-specs-grid">
+          <div class="unit-spec-item">
+            <div class="unit-spec-value">1,686</div>
+            <div class="unit-spec-label">Sq. Ft</div>
+          </div>
+          <div class="unit-spec-item">
+            <div class="unit-spec-value">4</div>
+            <div class="unit-spec-label">Bedrooms</div>
+          </div>
+          <div class="unit-spec-item">
+            <div class="unit-spec-value">3</div>
+            <div class="unit-spec-label">Bathrooms</div>
+          </div>
+        </div>
+        <div class="unit-lot-types">
+          <span class="unit-lot-tag">Intermediate</span>
+          <span class="unit-lot-tag">End Lot</span>
+          <span class="unit-lot-tag">Corner</span>
         </div>
         <div class="unit-price-row">
           <span class="unit-price">RM758k</span>
           <span class="unit-monthly">~RM2,330/mo</span>
         </div>
-        <button class="unit-cta">Get Price List →</button>
+        <a href="#register" class="unit-cta">
+          Get Price List
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <div class="unit-actions">
+          <a href="#register" class="unit-action-btn brochure">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            E-Brochure
+          </a>
+          <a href="#register" class="unit-action-btn walkthrough">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            Walkthrough
+          </a>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- FLOOR PLAN LIGHTBOX -->
+<div class="fp-lightbox" id="fpLightbox" role="dialog" aria-modal="true" aria-label="Floor plan viewer">
+  <div class="fp-lightbox-overlay" onclick="closeFloorPlan()"></div>
+  <div class="fp-lightbox-container">
+    <div class="fp-lightbox-header">
+      <div>
+        <div class="fp-lightbox-title" id="fpTitle">Astradia</div>
+        <div class="fp-lightbox-subtitle" id="fpSubtitle">Lot: 20' × 60'</div>
+      </div>
+      <div class="fp-lightbox-controls">
+        <button class="fp-ctrl-btn" onclick="fpZoom(-1)" title="Zoom out" aria-label="Zoom out">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        </button>
+        <button class="fp-ctrl-btn" onclick="fpZoom(1)" title="Zoom in" aria-label="Zoom in">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        </button>
+        <button class="fp-ctrl-btn" onclick="fpResetZoom()" title="Reset zoom" aria-label="Reset zoom">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10M23 14l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+        </button>
+        <button class="fp-ctrl-btn close-btn" onclick="closeFloorPlan()" title="Close" aria-label="Close floor plan">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="fp-lightbox-body">
+      <div class="fp-lightbox-imgwrap" id="fpImgWrap">
+        <div class="fp-lightbox-imginner" id="fpImgInner">
+          <img id="fpImage" src="" alt="Floor plan" draggable="false">
+        </div>
+        <div class="fp-zoom-hint">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          Scroll to zoom · Drag to pan
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- AERIAL -->
 <section class="aerial">
@@ -1845,88 +2512,223 @@ section, nav, footer, div {
     </div>
 
     <div class="location-grid">
-      <div class="location-map">
-        <div>
-          <strong style="font-size:18px;color:var(--green-deep);display:block;margin-bottom:8px;">Interactive Map Area</strong>
-          Illustrated highway map or embedded Google Map showing M Legasi's position relative to KLCC, Kajang, Putrajaya, and major highway interchanges.
-          <br><br>
-          <em style="font-size:12px;">Replace with actual map asset in production</em>
-        </div>
+      <div class="location-map" onclick="openFloorPlan('M Legasi','Location Map','https://analytics-z21.github.io/m-legasi/assets/Homepage-Map-5.27.2025.png')" style="cursor:pointer;" title="Click to zoom">
+        <img src="https://analytics-z21.github.io/m-legasi/assets/Homepage-Map-5.27.2025.png" alt="M Legasi location map showing nearby highways and landmarks" loading="lazy">
       </div>
       <div class="location-details">
-        <div class="highway-tags">
-          <span class="highway-tag">LEKAS</span>
-          <span class="highway-tag">SILK</span>
-          <span class="highway-tag">SUKE</span>
-          <span class="highway-tag">EKVE</span>
-          <span class="highway-tag">PLUS</span>
+        <div style="margin-bottom:20px;">
+          <div style="font-size:12px;font-weight:600;color:var(--green-deep);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">Accessibility via Major Highways</div>
+          <div class="highway-tags" style="margin-bottom:12px;">
+            <span class="highway-tag">LEKAS · 12km</span>
+            <span class="highway-tag">SILK · 26km</span>
+            <span class="highway-tag">SUKE</span>
+            <span class="highway-tag">EKVE</span>
+            <span class="highway-tag">SKVE · 38km</span>
+            <span class="highway-tag">PLUS · 46km</span>
+          </div>
         </div>
 
         <div class="amenity-tabs">
-          <button class="amenity-tab active" onclick="showTab(this,'schools')">Schools</button>
-          <button class="amenity-tab" onclick="showTab(this,'shopping')">Shopping</button>
-          <button class="amenity-tab" onclick="showTab(this,'health')">Health</button>
-          <button class="amenity-tab" onclick="showTab(this,'parks')">Parks</button>
+          <button class="amenity-tab active" onclick="showTab(this,'shopping')">Shopping</button>
+          <button class="amenity-tab" onclick="showTab(this,'education')">Education</button>
+          <button class="amenity-tab" onclick="showTab(this,'health')">Healthcare</button>
+          <button class="amenity-tab" onclick="showTab(this,'leisure')">Leisure</button>
         </div>
 
-        <div class="amenity-list" id="tab-schools">
+        <!-- Shopping -->
+        <div class="amenity-list" id="tab-shopping">
+          <div class="amenity-subhead">Shopping Centre</div>
           <div class="amenity-item">
-            <span>Univ. of Nottingham Malaysia</span>
-            <div class="amenity-dist"><span class="amenity-km">4.0km</span></div>
+            <span>Setia EcoHill Mall</span>
+            <div class="amenity-dist"><span class="amenity-km">5km</span></div>
           </div>
           <div class="amenity-item">
-            <span>Tenby International School</span>
-            <div class="amenity-dist"><span class="amenity-km">5.0km</span></div>
+            <span>Billion Shopping Centre Semenyih</span>
+            <div class="amenity-dist"><span class="amenity-km">12km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>IOI City Mall</span>
+            <div class="amenity-dist"><span class="amenity-km">26km</span></div>
+          </div>
+          <div class="amenity-subhead">Hypermarket</div>
+          <div class="amenity-item">
+            <span>Lulu Supermarket & Department Store</span>
+            <div class="amenity-dist"><span class="amenity-km">4km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Lotus's Semenyih</span>
+            <div class="amenity-dist"><span class="amenity-km">5km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Econsave Semenyih</span>
+            <div class="amenity-dist"><span class="amenity-km">5km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Jaya Grocer</span>
+            <div class="amenity-dist"><span class="amenity-km">6km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Pasaraya Besar CLC</span>
+            <div class="amenity-dist"><span class="amenity-km">7km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Mydin Wholesale Hypermarket</span>
+            <div class="amenity-dist"><span class="amenity-km">12km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Lotus's Kajang</span>
+            <div class="amenity-dist"><span class="amenity-km">19km</span></div>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="amenity-list" id="tab-education" style="display:none;">
+          <div class="amenity-subhead">Primary</div>
+          <div class="amenity-item">
+            <span>SJK (C) Ton Fah Eco Majestic</span>
+            <div class="amenity-dist"><span class="amenity-km">3km</span></div>
           </div>
           <div class="amenity-item">
             <span>SK Semenyih</span>
-            <div class="amenity-dist"><span class="amenity-km">4.0km</span></div>
+            <div class="amenity-dist"><span class="amenity-km">4km</span></div>
           </div>
           <div class="amenity-item">
-            <span>SJK(C) Ton Fah Eco Majestic</span>
-            <div class="amenity-dist"><span class="amenity-km">3.0km</span></div>
+            <span>SK Bandar Rinching</span>
+            <div class="amenity-dist"><span class="amenity-km">5km</span></div>
           </div>
+          <div class="amenity-item">
+            <span>SJK (C) Sin Ming</span>
+            <div class="amenity-dist"><span class="amenity-km">6km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>SJK (C) Kampung Baru Semenyih</span>
+            <div class="amenity-dist"><span class="amenity-km">7km</span></div>
+          </div>
+          <div class="amenity-subhead">Secondary</div>
           <div class="amenity-item">
             <span>SMK Bandar Rinching</span>
-            <div class="amenity-dist"><span class="amenity-km">3.0km</span></div>
+            <div class="amenity-dist"><span class="amenity-km">3km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>SMK Engku Hussain</span>
+            <div class="amenity-dist"><span class="amenity-km">7km</span></div>
+          </div>
+          <div class="amenity-subhead">International</div>
+          <div class="amenity-item">
+            <span>Tenby International School @ Setia Ecohill</span>
+            <div class="amenity-dist"><span class="amenity-km">5km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Maverick International School Semenyih</span>
+            <div class="amenity-dist"><span class="amenity-km">10km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>New Era University College</span>
+            <div class="amenity-dist"><span class="amenity-km">16km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>German-Malaysian Institute (GMI)</span>
+            <div class="amenity-dist"><span class="amenity-km">28km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Nexus International School</span>
+            <div class="amenity-dist"><span class="amenity-km">30km</span></div>
+          </div>
+          <div class="amenity-subhead">Universities</div>
+          <div class="amenity-item">
+            <span>University of Nottingham, Malaysia</span>
+            <div class="amenity-dist"><span class="amenity-km">4km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Mara Japan Industrial Institution</span>
+            <div class="amenity-dist"><span class="amenity-km">8km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>University Tenaga Nasional (UNITEN)</span>
+            <div class="amenity-dist"><span class="amenity-km">24km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>University Kebangsaan Malaysia (UKM)</span>
+            <div class="amenity-dist"><span class="amenity-km">27km</span></div>
           </div>
         </div>
-        <div class="amenity-list" id="tab-shopping" style="display:none;">
-          <div class="amenity-item">
-            <span>Lotus's Semenyih</span>
-            <div class="amenity-dist"><span class="amenity-km">5.0km</span></div>
-          </div>
-          <div class="amenity-item">
-            <span>EcoHill Walk</span>
-            <div class="amenity-dist"><span class="amenity-km">3.0km</span></div>
-          </div>
-          <div class="amenity-item">
-            <span>AEON Bangi</span>
-            <div class="amenity-dist"><span class="amenity-km">12.0km</span></div>
-          </div>
-        </div>
+
+        <!-- Healthcare -->
         <div class="amenity-list" id="tab-health" style="display:none;">
           <div class="amenity-item">
-            <span>Kajang Hospital</span>
-            <div class="amenity-dist"><span class="amenity-km">15.0km</span></div>
+            <span>Kajang Hospital – GOV</span>
+            <div class="amenity-dist"><span class="amenity-km">15km</span></div>
           </div>
           <div class="amenity-item">
-            <span>KPJ Kajang</span>
-            <div class="amenity-dist"><span class="amenity-km">14.0km</span></div>
+            <span>Kajang Plaza Medical Centre</span>
+            <div class="amenity-dist"><span class="amenity-km">16km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>KPJ Kajang Specialist Hospital</span>
+            <div class="amenity-dist"><span class="amenity-km">19km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Hospital Islam Az-Zahrah</span>
+            <div class="amenity-dist"><span class="amenity-km">21km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Sungai Long Specialist Hospital</span>
+            <div class="amenity-dist"><span class="amenity-km">22km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Hospital Pakar An-Nur</span>
+            <div class="amenity-dist"><span class="amenity-km">24km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Hospital Serdang</span>
+            <div class="amenity-dist"><span class="amenity-km">25km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Columbia Hospital Cheras</span>
+            <div class="amenity-dist"><span class="amenity-km">27km</span></div>
           </div>
         </div>
-        <div class="amenity-list" id="tab-parks" style="display:none;">
+
+        <!-- Leisure -->
+        <div class="amenity-list" id="tab-leisure" style="display:none;">
+          <div class="amenity-subhead">Park</div>
           <div class="amenity-item">
             <span>Setia Ecohill Park</span>
-            <div class="amenity-dist"><span class="amenity-km">6.0km</span></div>
+            <div class="amenity-dist"><span class="amenity-km">6km</span></div>
           </div>
           <div class="amenity-item">
-            <span>Broga Hill</span>
-            <div class="amenity-dist"><span class="amenity-km">8.0km</span></div>
+            <span>Adventure Park</span>
+            <div class="amenity-dist"><span class="amenity-km">7km</span></div>
           </div>
           <div class="amenity-item">
             <span>South Creek</span>
-            <div class="amenity-dist"><span class="amenity-km">8.0km</span></div>
+            <div class="amenity-dist"><span class="amenity-km">8km</span></div>
+          </div>
+          <div class="amenity-subhead">Hiking</div>
+          <div class="amenity-item">
+            <span>Broga Hills</span>
+            <div class="amenity-dist"><span class="amenity-km">3km</span></div>
+          </div>
+          <div class="amenity-subhead">Golf</div>
+          <div class="amenity-item">
+            <span>Semenyih Lake Country Club</span>
+            <div class="amenity-dist"><span class="amenity-km">8km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Impian Golf & Country Club</span>
+            <div class="amenity-dist"><span class="amenity-km">21km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Bangi Golf Resort</span>
+            <div class="amenity-dist"><span class="amenity-km">21km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Bukit Unggul Country Club</span>
+            <div class="amenity-dist"><span class="amenity-km">22km</span></div>
+          </div>
+          <div class="amenity-item">
+            <span>Danau Golf UKM (DGUKM)</span>
+            <div class="amenity-dist"><span class="amenity-km">25km</span></div>
           </div>
         </div>
       </div>
@@ -1941,7 +2743,7 @@ section, nav, footer, div {
     <form class="form-left" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" method="POST" class="registration-form">
 
       <input type="hidden" name="oid" value="00D0o0000015t7i">
-      <input type="hidden" name="retURL" value="https://analytics-z21.github.io/m-legasi/thankyou">
+      <input type="hidden" name="retURL" value="m-legasi.com.my/thank-you">
 
       <!--  ----------------------------------------------------------------------  -->
       <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
@@ -2177,12 +2979,268 @@ function toggleFaq(el) {
   if (!wasOpen) item.classList.add('open');
 }
 
+// ====== Floor Plan Lightbox ======
+let fpCurrentZoom = 1;
+let fpBaseW = 0;
+let fpBaseH = 0;
+const FP_ZOOM_MIN = 1;
+const FP_ZOOM_MAX = 4;
+const FP_ZOOM_STEP = 0.4;
+
+function fpApplyZoom() {
+  var img = document.getElementById('fpImage');
+  var wrap = document.getElementById('fpImgWrap');
+  var inner = document.getElementById('fpImgInner');
+  if (!fpBaseW) return;
+  var newW = fpBaseW * fpCurrentZoom;
+  // Only set width — height stays auto to preserve aspect ratio
+  img.style.width = newW + 'px';
+  img.style.height = 'auto';
+  var newH = img.offsetHeight || (fpBaseH * fpCurrentZoom);
+  inner.style.minWidth = Math.max(newW, wrap.clientWidth) + 'px';
+  inner.style.minHeight = Math.max(newH, wrap.clientHeight) + 'px';
+  wrap.classList.toggle('zoomed', fpCurrentZoom > 1.08);
+}
+
+function fpFitImage() {
+  var img = document.getElementById('fpImage');
+  var wrap = document.getElementById('fpImgWrap');
+  var inner = document.getElementById('fpImgInner');
+  var natW = img.naturalWidth;
+  var natH = img.naturalHeight;
+  if (!natW || !natH) return;
+  var wrapW = wrap.clientWidth;
+  var wrapH = wrap.clientHeight;
+  var scale = Math.min(wrapW / natW, wrapH / natH, 1);
+  fpBaseW = natW * scale;
+  fpBaseH = natH * scale;
+  fpCurrentZoom = 1;
+  img.style.width = fpBaseW + 'px';
+  img.style.height = 'auto';
+  inner.style.minWidth = '100%';
+  inner.style.minHeight = '100%';
+  wrap.classList.remove('zoomed');
+  wrap.scrollLeft = 0; wrap.scrollTop = 0;
+}
+
+function openFloorPlan(name, lot, imgUrl) {
+  const lb = document.getElementById('fpLightbox');
+  document.getElementById('fpTitle').textContent = name;
+  document.getElementById('fpSubtitle').textContent = lot.toLowerCase().indexOf('lot') === -1 && lot.toLowerCase().indexOf('map') === -1 ? 'Lot: ' + lot : lot;
+  const img = document.getElementById('fpImage');
+  const wrap = document.getElementById('fpImgWrap');
+  fpBaseW = 0; fpBaseH = 0; fpCurrentZoom = 1;
+  img.style.width = ''; img.style.height = '';
+  wrap.scrollLeft = 0; wrap.scrollTop = 0;
+  wrap.classList.remove('zoomed');
+  img.onload = function() { fpFitImage(); };
+  img.src = imgUrl;
+  if (img.complete && img.naturalWidth) fpFitImage();
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeFloorPlan() {
+  document.getElementById('fpLightbox').classList.remove('open');
+  document.body.style.overflow = '';
+  setTimeout(function() {
+    var img = document.getElementById('fpImage');
+    img.src = ''; img.style.width = ''; img.style.height = '';
+  }, 350);
+}
+
+function fpZoom(dir) {
+  var wrap = document.getElementById('fpImgWrap');
+  var cx = wrap.scrollLeft + wrap.clientWidth / 2;
+  var cy = wrap.scrollTop + wrap.clientHeight / 2;
+  var oldZoom = fpCurrentZoom;
+  fpCurrentZoom = Math.min(FP_ZOOM_MAX, Math.max(FP_ZOOM_MIN, fpCurrentZoom + dir * FP_ZOOM_STEP));
+  fpApplyZoom();
+  var ratio = fpCurrentZoom / oldZoom;
+  wrap.scrollLeft = cx * ratio - wrap.clientWidth / 2;
+  wrap.scrollTop = cy * ratio - wrap.clientHeight / 2;
+}
+
+function fpResetZoom() {
+  fpCurrentZoom = 1;
+  fpApplyZoom();
+  var wrap = document.getElementById('fpImgWrap');
+  wrap.scrollLeft = 0; wrap.scrollTop = 0;
+}
+
+// Mouse wheel zoom (centered on cursor)
+document.getElementById('fpImgWrap').addEventListener('wheel', function(e) {
+  e.preventDefault();
+  var wrap = this;
+  var rect = wrap.getBoundingClientRect();
+  var mx = e.clientX - rect.left + wrap.scrollLeft;
+  var my = e.clientY - rect.top + wrap.scrollTop;
+  var oldZoom = fpCurrentZoom;
+  fpCurrentZoom = Math.min(FP_ZOOM_MAX, Math.max(FP_ZOOM_MIN, fpCurrentZoom + (e.deltaY < 0 ? 1 : -1) * FP_ZOOM_STEP));
+  fpApplyZoom();
+  var ratio = fpCurrentZoom / oldZoom;
+  wrap.scrollLeft = mx * ratio - (e.clientX - rect.left);
+  wrap.scrollTop = my * ratio - (e.clientY - rect.top);
+}, { passive: false });
+
+// Pinch-to-zoom for mobile
+(function() {
+  var wrap = document.getElementById('fpImgWrap');
+  var startDist = 0, startZoom = 1;
+  wrap.addEventListener('touchstart', function(e) {
+    if (e.touches.length === 2) {
+      startDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+      startZoom = fpCurrentZoom;
+    }
+  }, { passive: true });
+  wrap.addEventListener('touchmove', function(e) {
+    if (e.touches.length === 2) {
+      e.preventDefault();
+      var dist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+      fpCurrentZoom = Math.min(FP_ZOOM_MAX, Math.max(FP_ZOOM_MIN, startZoom * (dist / startDist)));
+      fpApplyZoom();
+    }
+  }, { passive: false });
+})();
+
+// Drag to pan
+(function() {
+  var wrap = document.getElementById('fpImgWrap');
+  var isDragging = false, startX, startY, sL, sT;
+  wrap.addEventListener('mousedown', function(e) {
+    isDragging = true;
+    wrap.style.cursor = 'grabbing';
+    startX = e.clientX; startY = e.clientY;
+    sL = wrap.scrollLeft; sT = wrap.scrollTop;
+    e.preventDefault();
+  });
+  window.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    wrap.scrollLeft = sL - (e.clientX - startX);
+    wrap.scrollTop = sT - (e.clientY - startY);
+  });
+  window.addEventListener('mouseup', function() {
+    if (isDragging) { isDragging = false; wrap.style.cursor = 'grab'; }
+  });
+  // Touch drag (single finger)
+  var tStartX, tStartY, tSL, tST, isTouchDrag = false;
+  wrap.addEventListener('touchstart', function(e) {
+    if (e.touches.length === 1 && fpCurrentZoom > 1.05) {
+      isTouchDrag = true;
+      tStartX = e.touches[0].clientX; tStartY = e.touches[0].clientY;
+      tSL = wrap.scrollLeft; tST = wrap.scrollTop;
+    }
+  }, { passive: true });
+  wrap.addEventListener('touchmove', function(e) {
+    if (isTouchDrag && e.touches.length === 1) {
+      e.preventDefault();
+      wrap.scrollLeft = tSL - (e.touches[0].clientX - tStartX);
+      wrap.scrollTop = tST - (e.touches[0].clientY - tStartY);
+    }
+  }, { passive: false });
+  wrap.addEventListener('touchend', function() { isTouchDrag = false; });
+})();
+
+// Close on Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && document.getElementById('fpLightbox').classList.contains('open')) closeFloorPlan();
+});
+
+// Double-click/tap to toggle zoom
+document.getElementById('fpImage').addEventListener('dblclick', function(e) {
+  if (fpCurrentZoom > 1.08) {
+    fpResetZoom();
+  } else {
+    var wrap = document.getElementById('fpImgWrap');
+    var rect = wrap.getBoundingClientRect();
+    var mx = e.clientX - rect.left + wrap.scrollLeft;
+    var my = e.clientY - rect.top + wrap.scrollTop;
+    fpCurrentZoom = 2.5;
+    fpApplyZoom();
+    wrap.scrollLeft = mx * 2.5 - (e.clientX - rect.left);
+    wrap.scrollTop = my * 2.5 - (e.clientY - rect.top);
+  }
+});
+
+// Unit filter tabs
+function filterUnits(btn, filter) {
+  document.querySelectorAll('.unit-filter-btn').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-selected', 'false');
+  });
+  btn.classList.add('active');
+  btn.setAttribute('aria-selected', 'true');
+
+  const cards = document.querySelectorAll('.unit-card[data-unit]');
+  const grid = document.querySelector('.unit-grid');
+
+  cards.forEach(card => {
+    if (filter === 'all' || card.dataset.unit === filter) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+
+  // Adjust grid based on visible card count
+  var visibleCards = grid.querySelectorAll('.unit-card:not(.hidden)').length;
+  if (visibleCards === 1) {
+    grid.style.gridTemplateColumns = '1fr';
+    grid.style.maxWidth = '360px';
+    grid.style.margin = '0 auto';
+  } else if (visibleCards === 2 && window.innerWidth > 900) {
+    grid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+    grid.style.maxWidth = '760px';
+    grid.style.margin = '0 auto';
+  } else {
+    grid.style.gridTemplateColumns = '';
+    grid.style.maxWidth = '';
+    grid.style.margin = '';
+  }
+}
+
 // Form option toggle
 function selectOption(btn) {
   const group = btn.parentElement;
   group.querySelectorAll('.form-option').forEach(o => o.classList.remove('active'));
   btn.classList.add('active');
 }
+
+// Announcement bar — seamless infinite scroll
+(function() {
+  var track = document.getElementById('announceTrack');
+  if (!track) return;
+  var original = track.querySelector('.announce-group');
+  if (!original) return;
+  // Clone enough groups to fill 2× the screen width, then double for the loop
+  var groupW = original.offsetWidth;
+  var screenW = window.innerWidth;
+  var clonesNeeded = Math.ceil(screenW / groupW) + 1;
+  var halfCount = Math.max(clonesNeeded, 2);
+  // Build first half
+  for (var i = 1; i < halfCount; i++) {
+    var c = original.cloneNode(true);
+    c.setAttribute('aria-hidden', 'true');
+    track.appendChild(c);
+  }
+  // Duplicate entire first half for seamless -50% loop
+  var firstHalfGroups = track.querySelectorAll('.announce-group');
+  firstHalfGroups.forEach(function(g) {
+    var c = g.cloneNode(true);
+    c.setAttribute('aria-hidden', 'true');
+    track.appendChild(c);
+  });
+  // Calculate speed: ~60px per second for comfortable reading
+  var halfWidth = 0;
+  var allGroups = track.querySelectorAll('.announce-group');
+  for (var j = 0; j < allGroups.length / 2; j++) {
+    halfWidth += allGroups[j].offsetWidth;
+  }
+  // Speed: 30px/sec on mobile, 45px/sec on desktop — relaxed reading pace
+  var speed = screenW < 640 ? 30 : 45;
+  var duration = halfWidth / speed;
+  track.style.animation = 'announce-scroll ' + duration.toFixed(1) + 's linear infinite';
+})();
 
 // Scroll animations
 const observer = new IntersectionObserver((entries) => {
@@ -2194,7 +3252,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.stat-card, .unit-card, .why-card, .facility-card, .faq-item').forEach(el => {
+document.querySelectorAll('.stat-card, .unit-card, .why-card, .facility-card, .faq-item, .unit-filter-btn').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(20px)';
   el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
