@@ -4,6 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thank You — M Legasi Semenyih</title>
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Preconnect -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://analytics-z21.github.io">
+
+<!-- Favicons -->
+<link rel="icon" type="image/svg+xml" href="https://analytics-z21.github.io/m-legasi/assets/M-Legasi-logo-Green.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://analytics-z21.github.io/m-legasi/assets/cropped-M-Legasi-icon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://analytics-z21.github.io/m-legasi/assets/cropped-M-Legasi-icon-192x192.png">
+<link rel="apple-touch-icon" href="https://analytics-z21.github.io/m-legasi/assets/cropped-M-Legasi-icon-180x180.png">
+
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -29,7 +43,7 @@ html { scroll-behavior: smooth; font-size: 16px; }
 body {
   font-family: var(--font-body);
   color: var(--text-dark);
-  background: var(--cream);
+  background: var(--green-deep);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -45,32 +59,7 @@ body {
   background: var(--white);
   border-bottom: 1px solid rgba(0,0,0,0.06);
 }
-.nav-logo {
-  font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: 600;
-  color: var(--green-deep);
-  line-height: 1;
-}
-.nav-logo small {
-  display: block;
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--text-light);
-  font-family: var(--font-body);
-  font-weight: 500;
-}
-.nav-logo img {
-  height: 32px;
-}
-
-@media (min-width: 1024px) {
-  .nav-logo img {
-    height: 40px;
-  }
-}
-
+.nav-logo img { height: 32px; }
 .mah-sing-badge {
   display: flex;
   align-items: center;
@@ -78,17 +67,7 @@ body {
   border-left: 1px solid rgba(0,0,0,0.1);
   padding-left: 16px;
 }
-
-.mah-sing-badge img {
-  height: 32px;
-}
-.mah-sing-badge strong {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 20px;
-  color: var(--coral);
-  font-weight: 600;
-}
+.mah-sing-badge img { height: 32px; }
 
 /* ── MAIN ── */
 .main {
@@ -99,9 +78,10 @@ body {
   justify-content: center;
   padding: 60px 24px;
   position: relative;
+  background: var(--green-deep);
 }
 
-/* background leaf motif */
+/* Decorative bg circles */
 .main::before {
   content: '';
   position: fixed;
@@ -110,7 +90,7 @@ body {
   width: 520px;
   height: 520px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(61,122,95,0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
   pointer-events: none;
 }
 .main::after {
@@ -121,7 +101,7 @@ body {
   width: 380px;
   height: 380px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(184,147,90,0.07) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(184,147,90,0.06) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -130,9 +110,9 @@ body {
   background: var(--white);
   border-radius: 24px;
   padding: 56px 48px;
-  max-width: 580px;
+  max-width: 540px;
   width: 100%;
-  box-shadow: 0 24px 64px rgba(27,61,47,0.10);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.25);
   text-align: center;
   position: relative;
   animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -143,62 +123,57 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* checkmark circle */
+/* Checkmark */
 .check-wrap {
-  width: 80px;
-  height: 80px;
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--green-mid), var(--green-deep));
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 28px;
-  position: relative;
+  margin: 0 auto 24px;
   animation: pop 0.5s 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 @keyframes pop {
   from { transform: scale(0); opacity: 0; }
   to   { transform: scale(1); opacity: 1; }
 }
-.check-wrap svg {
-  width: 36px;
-  height: 36px;
+.check-wrap svg { width: 34px; height: 34px; }
+
+.card h1 {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--green-deep);
+  line-height: 1.2;
+  margin-bottom: 4px;
 }
 
-/* gold divider */
+/* Gold divider */
 .gold-line {
   width: 48px;
   height: 2px;
   background: linear-gradient(90deg, var(--gold), var(--gold-light));
-  margin: 20px auto;
+  margin: 16px auto;
   border-radius: 2px;
-}
-
-.card h1 {
-  font-family: var(--font-display);
-  font-size: 38px;
-  font-weight: 600;
-  color: var(--green-deep);
-  line-height: 1.15;
-  margin-bottom: 4px;
-}
-.card h1 em {
-  font-style: italic;
-  color: var(--coral);
 }
 
 .card .subtitle {
   font-size: 15px;
   color: var(--text-mid);
-  line-height: 1.6;
-  margin-bottom: 32px;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+.card .subtitle strong {
+  color: var(--green-deep);
 }
 
-/* ── WHAT YOU GET ── */
+/* ── RECEIVE BOX ── */
 .receive-box {
   background: var(--cream);
   border-radius: 14px;
-  padding: 24px;
+  padding: 24px 28px;
   margin-bottom: 28px;
   text-align: left;
 }
@@ -207,28 +182,35 @@ body {
   font-size: 18px;
   font-weight: 600;
   color: var(--green-deep);
-  margin-bottom: 14px;
-  letter-spacing: 0.2px;
+  margin-bottom: 16px;
 }
-.receive-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+.receive-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 .receive-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
+  gap: 10px;
+  font-size: 14px;
   color: var(--text-mid);
   font-weight: 500;
 }
-.receive-item .icon {
-  font-size: 16px;
+.receive-item .bullet {
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.receive-item .bullet svg {
+  width: 20px;
+  height: 20px;
 }
 
-/* ── WHATSAPP CTA ── */
+/* ── CTAs ── */
 .btn-wa {
   display: inline-flex;
   align-items: center;
@@ -250,22 +232,29 @@ body {
 .btn-wa svg { width: 22px; height: 22px; flex-shrink: 0; }
 
 .btn-back {
-  display: inline-block;
-  font-size: 13px;
-  color: var(--text-light);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--green-deep);
   text-decoration: none;
-  transition: color 0.2s;
-  margin-top: 4px;
+  padding: 12px 28px;
+  border: 1.5px solid var(--green-deep);
+  border-radius: 10px;
+  width: 100%;
+  justify-content: center;
+  transition: all 0.2s;
 }
-.btn-back:hover { color: var(--green-deep); }
+.btn-back:hover { background: var(--green-deep); color: var(--white); }
 
-/* ── TRUST ROW ── */
+/* Trust row */
 .trust-row {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 16px;
-  margin-top: 28px;
+  margin-top: 24px;
   font-size: 12px;
   color: var(--text-light);
   font-weight: 500;
@@ -273,15 +262,51 @@ body {
 .trust-row span.dot { color: var(--gold-light); }
 
 /* ── FOOTER ── */
-footer {
-  text-align: center;
-  padding: 24px;
-  font-size: 11px;
-  color: var(--text-light);
-  border-top: 1px solid rgba(0,0,0,0.06);
+.footer {
   background: var(--white);
+  border-top: 1px solid rgba(0,0,0,0.06);
+  padding: 32px 48px;
 }
-footer a { color: var(--text-light); text-decoration: none; }
+.footer-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+.footer-logo { margin-bottom: 16px; }
+.footer-logo img { height: 28px; margin: 0 auto; }
+.footer-contact {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.footer-contact a {
+  color: var(--green-deep);
+  text-decoration: none;
+  font-weight: 500;
+}
+.footer-contact a:hover { text-decoration: underline; }
+.footer-socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.footer-socials a img {
+  width: 24px;
+  height: 24px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+.footer-socials a:hover img { opacity: 1; }
+.footer-disclaimer {
+  font-size: 10px;
+  color: var(--text-light);
+  line-height: 1.6;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  padding-top: 16px;
+}
 
 /* ── RESPONSIVE ── */
 @media (max-width: 640px) {
@@ -289,7 +314,13 @@ footer a { color: var(--text-light); text-decoration: none; }
   .mah-sing-badge { display: none; }
   .card { padding: 36px 24px; border-radius: 18px; }
   .card h1 { font-size: 30px; }
-  .receive-grid { grid-template-columns: 1fr; }
+  .main { padding: 40px 16px; }
+  .footer { padding: 24px 20px; }
+  .receive-box { padding: 20px; }
+}
+
+@media (min-width: 1024px) {
+  .nav-logo img { height: 40px; }
 }
 </style>
 </head>
@@ -298,12 +329,14 @@ footer a { color: var(--text-light); text-decoration: none; }
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-logo">
-    <img src="https://m-legasi.com.my/wp-content/uploads/M-Legasi-logo-Green.svg" alt="M Legasi Logo">
+    <a href="Homepage/index.html">
+      <img src="https://analytics-z21.github.io/m-legasi/assets/M-Legasi-logo-Green.svg" alt="M Legasi Logo">
+    </a>
   </div>
   <div class="mah-sing-badge">
-    <div>
-      <img src="https://m-legasi.com.my/wp-content/uploads/Mah-Sing-Logo-2-1536x515.png" alt="Mah Sing">
-    </div>
+    <a href="https://www.mahsing.com.my/" target="_blank" rel="noopener">
+      <img src="https://analytics-z21.github.io/m-legasi/assets/Mah-Sing-Logo-2-1536x515.png" alt="Mah Sing">
+    </a>
   </div>
 </nav>
 
@@ -311,47 +344,57 @@ footer a { color: var(--text-light); text-decoration: none; }
 <main class="main">
   <div class="card">
 
-    <!-- checkmark -->
+    <!-- Checkmark -->
     <div class="check-wrap">
       <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M8 18.5L14.5 25L28 11" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
 
-    <h1>You're <em>All Set!</em></h1>
+    <h1>Thank You!</h1>
     <div class="gold-line"></div>
     <p class="subtitle">
-      Thank you for your interest in M Legasi Semenyih.<br>
-      Our consultant will reach out to you <strong>within 24 hours</strong> with your personalised price list and floor plans.
+      Your registration has been received.<br>
+      Our team will send you the <strong>complete price list</strong> shortly via WhatsApp or email.
     </p>
 
-    <!-- what you'll receive -->
+    <!-- What you'll receive -->
     <div class="receive-box">
-      <h3>What's Coming Your Way</h3>
-      <div class="receive-grid">
-        <div class="receive-item"><span class="icon">📋</span> Full Price List</div>
-        <div class="receive-item"><span class="icon">📐</span> Floor Plans</div>
-        <div class="receive-item"><span class="icon">📊</span> RTS Brief</div>
-        <div class="receive-item"><span class="icon">🎁</span> Early-Bird Offers</div>
-        <div class="receive-item"><span class="icon">🗺️</span> Site Plan</div>
-        <div class="receive-item"><span class="icon">📈</span> Payment Schedule</div>
+      <h3>You'll Receive:</h3>
+      <div class="receive-list">
+        <div class="receive-item">
+          <span class="bullet"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#2A5E47"/><path d="M6 10.5L9 13.5L14.5 7.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Layout Plan
+        </div>
+        <div class="receive-item">
+          <span class="bullet"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#2A5E47"/><path d="M6 10.5L9 13.5L14.5 7.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Pricing
+        </div>
+        <div class="receive-item">
+          <span class="bullet"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#2A5E47"/><path d="M6 10.5L9 13.5L14.5 7.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Loan Assistant
+        </div>
+        <div class="receive-item">
+          <span class="bullet"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#2A5E47"/><path d="M6 10.5L9 13.5L14.5 7.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Partial Furnish Once Confirm Signing SPA
+        </div>
       </div>
     </div>
 
-    <!-- WhatsApp CTA -->
-    <a class="btn-wa" href="https://wa.me/60392123355" target="_blank" rel="noopener">
+    <!-- CTAs -->
+    <a class="btn-wa" href="https://wa.me/601113278493?text=Hi%2C%20I%20just%20registered%20on%20the%20M%20Legasi%20website.%20Can%20I%20get%20the%20price%20list%3F" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
       </svg>
       Chat With Us on WhatsApp
     </a>
 
-    <a class="btn-back" href="index.html">← Back to M Legasi</a>
+    <a class="btn-back" href="index.html">Continue Exploring M Legasi</a>
 
     <div class="trust-row">
       <span>No spam</span>
       <span class="dot">·</span>
-      <span>Secure & private</span>
+      <span>Instant WhatsApp reply</span>
       <span class="dot">·</span>
       <span>Unsubscribe anytime</span>
     </div>
@@ -360,9 +403,36 @@ footer a { color: var(--text-light); text-decoration: none; }
 </main>
 
 <!-- FOOTER -->
-<footer>
-  <p>M Legasi Semenyih — A development by <a href="#">Mah Sing Group Berhad</a></p>
-  <p style="margin-top:6px;">Sales Gallery: 23-1, Jalan Eco Majestic 10/1a, Eco Majestic, 43500 Semenyih · T: +603 9212 3355</p>
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <a href="https://www.mahsing.com.my/" target="_blank" rel="noopener">
+        <img src="https://analytics-z21.github.io/m-legasi/assets/mahsing_logo.png" alt="Mah Sing Group">
+      </a>
+    </div>
+    <div class="footer-contact">
+      <p>For further enquiries, please contact:</p>
+      <a href="tel:0392123355">03 9212 3355</a> &nbsp;|&nbsp;
+      <a href="mailto:m-legasi@mahsing.com.my">m-legasi@mahsing.com.my</a>
+    </div>
+    <div class="footer-socials">
+      <a href="https://web.facebook.com/mahsing" target="_blank" rel="noopener" aria-label="Facebook">
+        <img src="https://analytics-z21.github.io/m-legasi/assets/facebook_icon-2.png" alt="Facebook">
+      </a>
+      <a href="https://www.instagram.com/mahsinggroup/" target="_blank" rel="noopener" aria-label="Instagram">
+        <img src="https://analytics-z21.github.io/m-legasi/assets/instagram_icon.png" alt="Instagram">
+      </a>
+      <a href="https://www.youtube.com/mahsinggroup" target="_blank" rel="noopener" aria-label="YouTube">
+        <img src="https://analytics-z21.github.io/m-legasi/assets/youtube_icon.png" alt="YouTube">
+      </a>
+      <a href="https://www.linkedin.com/company/mah-sing-group/" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <img src="https://analytics-z21.github.io/m-legasi/assets/linkedin_icon.png" alt="LinkedIn">
+      </a>
+    </div>
+    <div class="footer-disclaimer">
+      Disclaimer: All information contained herein is for reference only and is subject to change without prior notice. Visual and images used are for illustration purposes only and may not represent the actual product. Mah Sing Group reserves the right to amend any information without prior notice.
+    </div>
+  </div>
 </footer>
 
 </body>
