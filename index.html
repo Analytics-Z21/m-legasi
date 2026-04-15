@@ -9,7 +9,7 @@
 <!-- SEO Meta -->
 <meta name="description" content="Discover M Legasi, a new freehold landed terrace house for sale in Semenyih with a stylish double storey design, spacious layouts, and a prime location. Learn more today!">
 <meta name="keywords" content="M Legasi, Mah Sing, Semenyih house for sale, freehold landed property, double storey house Semenyih, new launch property Selangor, landed home near KLCC">
-<link rel="canonical" href="https://analytics-z21.github.io/m-legasi/">
+<link rel="canonical" href="https://analytics-z21.github.io/m-legasi/Homepage/">
 
 <!-- Google Site Verification -->
 <meta name="google-site-verification" content="JPmZCqlLNx_cz-sXATPHoejzkElnxoShaM1GG8athr0">
@@ -19,15 +19,15 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Semenyih House for Sale | New Landed Double Storey Property">
 <meta property="og:description" content="Discover M Legasi, a new freehold landed terrace house for sale in Semenyih with a stylish double storey design, spacious layouts, and a prime location. Learn more today!">
-<meta property="og:image" content="https://analytics-z21.github.io/m-legasi/assets/cropped-M-Legasi-Favicon-180x180.png">
-<meta property="og:url" content="https://analytics-z21.github.io/m-legasi/">
+<meta property="og:image" content="https://analytics-z21.github.io/m-legasi/assets/og-image.png">
+<meta property="og:url" content="https://analytics-z21.github.io/m-legasi/Homepage/">
 <meta property="og:site_name" content="M Legasi">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Semenyih House for Sale | New Landed Double Storey Property">
 <meta name="twitter:description" content="Discover M Legasi, a new freehold landed terrace house for sale in Semenyih with a stylish double storey design, spacious layouts, and a prime location. Learn more today!">
-<meta name="twitter:image" content="https://analytics-z21.github.io/m-legasi/assets/Phase_3_Type_A_2_optimized.jpg">
+<meta name="twitter:image" content="https://analytics-z21.github.io/m-legasi/assets/og-image.png">
 
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-44G2M7YH3E"></script>
@@ -92,7 +92,7 @@ src="https://www.facebook.com/tr?id=1147715233456454&ev=PageView&noscript=1"
   "@context": "https://schema.org",
   "@type": ["Organization", "LocalBusiness"],
   "name": "M Legasi",
-  "url": "https://analytics-z21.github.io/m-legasi/",
+  "url": "https://analytics-z21.github.io/m-legasi/Homepage/",
   "logo": "https://analytics-z21.github.io/m-legasi/assets/M-Legasi-logo-Green.svg",
   "description": "Discover M Legasi, a new freehold landed terrace house for sale in Semenyih with a stylish double storey design, spacious layouts, and a prime location. Learn more today!",
   "telephone": "03 9212 3355",
@@ -138,7 +138,7 @@ src="https://www.facebook.com/tr?id=1147715233456454&ev=PageView&noscript=1"
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "M Legasi",
-  "url": "https://analytics-z21.github.io/m-legasi/",
+  "url": "https://analytics-z21.github.io/m-legasi/Homepage/",
   "alternateName": "Semenyih House for Sale | New Landed Double Storey Property"
 }
 </script>
@@ -411,6 +411,97 @@ section, nav, footer, div {
   transition: background 0.2s;
 }
 .nav-cta:hover { background: var(--green-mid) !important; }
+
+/* ── HAMBURGER ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: 12px;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--green-deep);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* ── MOBILE MENU OVERLAY ── */
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--white);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.mobile-menu-overlay.open {
+  display: flex;
+  opacity: 1;
+}
+.mobile-menu-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 36px;
+  color: var(--green-deep);
+  cursor: pointer;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+.mobile-menu-close:hover { color: var(--coral); }
+.mobile-menu-links {
+  list-style: none;
+  text-align: center;
+  padding: 0;
+}
+.mobile-menu-links li {
+  margin: 16px 0;
+}
+.mobile-menu-links a {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--green-deep);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.mobile-menu-links a:hover { color: var(--coral); }
+.mobile-cta {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 14px 32px;
+  background: var(--coral);
+  color: var(--white) !important;
+  border-radius: 8px;
+  font-family: var(--font-body) !important;
+  font-size: 15px !important;
+  font-weight: 600;
+}
+.mobile-cta:hover { background: var(--coral-hover); color: var(--white) !important; }
+
+@media (max-width: 1080px) {
+  .nav-links { display: none !important; }
+  .hamburger { display: flex; }
+}
+
 .nav-right {
   display: flex;
   align-items: center;
@@ -2297,7 +2388,6 @@ section, nav, footer, div {
 /* ============ RESPONSIVE ============ */
 @media (max-width: 900px) {
   .nav { padding: 12px 20px; }
-  .nav-links { display: none; }
   
   .hero-bg { height: 737px; clip-path: none; }
   /* Cream gradient scrim — warm wash over top half for text readability */
@@ -2469,14 +2559,34 @@ section, nav, footer, div {
     <li><a href="#facilities">Facilities</a></li>
     <li><a href="#location">Location</a></li>
     <li><a href="#invest">Investment</a></li>
+    <li><a href="https://m-legasi.com.my/360-walkthrough/" target="_blank" rel="noopener">Virtual Tour</a></li>
+    <li><a href="/m-legasi/blog/">Blog</a></li>
     <li><a href="#register" class="nav-cta">Register Interest →</a></li>
   </ul>
   <div class="nav-right">
     <div class="mah-sing-badge">
       <img src="https://analytics-z21.github.io/m-legasi/assets/Mah-Sing-Logo-2-1536x515.png" alt="Mah Sing">
     </div>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" id="mobileMenu">
+  <button class="mobile-menu-close" aria-label="Close menu">&times;</button>
+  <ul class="mobile-menu-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#units">Units</a></li>
+    <li><a href="#facilities">Facilities</a></li>
+    <li><a href="#location">Location</a></li>
+    <li><a href="#invest">Investment</a></li>
+    <li><a href="https://m-legasi.com.my/360-walkthrough/" target="_blank" rel="noopener">Virtual Tour</a></li>
+    <li><a href="/m-legasi/blog/">Blog</a></li>
+    <li><a href="#register" class="mobile-cta">Register Interest →</a></li>
+  </ul>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="about">
@@ -4076,6 +4186,32 @@ function declineCookies() {
 }
 </script>
 
+<!-- Hamburger Menu Script -->
+<script>
+(function() {
+  var hamburger = document.querySelector('.hamburger');
+  var overlay = document.getElementById('mobileMenu');
+  var closeBtn = document.querySelector('.mobile-menu-close');
+  if (!hamburger || !overlay) return;
+
+  function openMenu() {
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    hamburger.setAttribute('aria-expanded', 'true');
+  }
+  function closeMenu() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+
+  hamburger.addEventListener('click', openMenu);
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+  overlay.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', closeMenu);
+  });
+})();
+</script>
 
 </body>
 </html>
