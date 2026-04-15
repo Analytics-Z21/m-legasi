@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /New folder/
+
+Sitemap: https://analytics-z21.github.io/m-legasi/sitemap.xml
