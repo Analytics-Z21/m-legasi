@@ -1647,14 +1647,33 @@ section, nav, footer, div {
   color: var(--green-deep);
   font-weight: 600;
 }
+.calc-unit-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--coral);
+  background: rgba(224,123,94,0.1);
+  border: 1px solid rgba(224,123,94,0.3);
+  border-radius: 20px;
+  padding: 3px 10px;
+  margin-bottom: 10px;
+  letter-spacing: 0.3px;
+  transition: opacity 0.2s;
+  min-height: 20px;
+}
+.calc-unit-badge.hidden { opacity: 0; }
+
+.slider-wrap { position: relative; padding-bottom: 52px; }
+
 .calc-slider {
   width: 100%;
   -webkit-appearance: none;
   appearance: none;
   height: 6px;
   border-radius: 3px;
-  background: var(--cream);
+  background: linear-gradient(to right, var(--coral) 23.33%, var(--cream) 23.33%);
   outline: none;
+  transition: background 0.1s;
 }
 .calc-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -1664,6 +1683,61 @@ section, nav, footer, div {
   cursor: pointer;
   border: 3px solid var(--white);
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* ── UNIT TICK MARKS ── */
+.unit-ticks {
+  position: absolute;
+  left: 0; right: 0;
+  top: 14px;
+  height: 48px;
+  pointer-events: none;
+}
+.unit-tick {
+  position: absolute;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.2s;
+}
+.tick-line {
+  width: 2px;
+  height: 8px;
+  background: var(--cream-dark);
+  border-radius: 1px;
+  margin-bottom: 5px;
+  transition: all 0.2s;
+}
+.tick-label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--text-light);
+  text-align: center;
+  line-height: 1.4;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.tick-label span {
+  display: block;
+  font-size: 9px;
+  opacity: 0.75;
+}
+.unit-tick.active .tick-line {
+  background: var(--coral);
+  height: 12px;
+}
+.unit-tick.active .tick-label {
+  color: var(--coral);
+  font-weight: 700;
+}
+.unit-tick.active .tick-label span { opacity: 1; }
+
+@media (max-width: 640px) {
+  .tick-label { display: none; }
+  .unit-tick.active .tick-label { display: block; }
+  .unit-ticks { height: 28px; }
+  .slider-wrap { padding-bottom: 32px; }
 }
 .calc-result {
   background: var(--green-deep);
@@ -2666,12 +2740,12 @@ section, nav, footer, div {
     </div>
     <div class="stat-card">
       <div class="stat-label">Starting from</div>
-      <div class="stat-value">RM635k</div>
+      <div class="stat-value">RM535k</div>
       <div class="stat-desc">4 Bed · 3 Bath · Freehold</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Monthly instalment</div>
-      <div class="stat-value">~RM1,950</div>
+      <div class="stat-value">~RM1,800</div>
       <div class="stat-desc">Based on 90% financing*</div>
     </div>
     <div class="stat-card">
@@ -2764,8 +2838,8 @@ section, nav, footer, div {
         <div class="detail">Lower utility bills →</div>
       </div>
       <div class="why-card">
-        <div class="why-icon"><img src="https://analytics-z21.github.io/m-legasi/assets/Guarded-Community-Security-Patrol.svg" alt="Guarded 24/7"></div>
-        <h3>Guarded 24/7</h3>
+        <div class="why-icon"><img src="https://analytics-z21.github.io/m-legasi/assets/Guarded-Community-Security-Patrol.svg" alt="Guarded Community"></div>
+        <h3>Guarded Community</h3>
         <p>Round-the-clock security patrol with controlled access for total peace of mind.</p>
       </div>
       <div class="why-card">
@@ -2817,7 +2891,7 @@ section, nav, footer, div {
       </div>
       <div class="unit-body">
         <div class="unit-name">Astradia</div>
-        <div class="unit-lot">Land: 20' × 60' & 20' × 65'</div>
+        <div class="unit-lot">Land: 20' × 60'</div>
         <div class="unit-specs-grid">
           <div class="unit-spec-item">
             <div class="unit-spec-value">1,555</div>
@@ -2838,23 +2912,13 @@ section, nav, footer, div {
           <span class="unit-lot-tag">Corner</span>
         </div>
         <div class="unit-price-row">
-          <span class="unit-price">RM635k</span>
+          <span class="unit-price">RM535k</span>
           <span class="unit-monthly">~RM1,950/mo</span>
         </div>
         <a href="#register" class="unit-cta">
           Get Price List
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <div class="unit-actions">
-          <a href="https://m-legasi.com.my/e-brochure-2/#flipbook-df_1555/3/" target="_blank" rel="noopener" class="unit-action-btn brochure">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            E-Brochure
-          </a>
-          <a href="#register" class="unit-action-btn walkthrough">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
-            Walkthrough
-          </a>
-        </div>
       </div>
     </div>
 
@@ -2892,23 +2956,13 @@ section, nav, footer, div {
           <span class="unit-lot-tag">Corner</span>
         </div>
         <div class="unit-price-row">
-          <span class="unit-price">RM695k</span>
+          <span class="unit-price">RM581k</span>
           <span class="unit-monthly">~RM2,140/mo</span>
         </div>
         <a href="#register" class="unit-cta">
           Get Price List
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <div class="unit-actions">
-          <a href="https://m-legasi.com.my/e-brochure-2/#flipbook-df_1555/3/" target="_blank" rel="noopener" class="unit-action-btn brochure">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            E-Brochure
-          </a>
-          <a href="#register" class="unit-action-btn walkthrough">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
-            Walkthrough
-          </a>
-        </div>
       </div>
     </div>
 
@@ -2925,7 +2979,7 @@ section, nav, footer, div {
       </div>
       <div class="unit-body">
         <div class="unit-name">Auroria</div>
-        <div class="unit-lot">Land: 20' × 60' & 20' × 65'</div>
+        <div class="unit-lot">Land: 20' × 60'</div>
         <div class="unit-specs-grid">
           <div class="unit-spec-item">
             <div class="unit-spec-value">1,555</div>
@@ -2946,23 +3000,13 @@ section, nav, footer, div {
           <span class="unit-lot-tag">Corner</span>
         </div>
         <div class="unit-price-row">
-          <span class="unit-price">RM758k</span>
+          <span class="unit-price">RM548k</span>
           <span class="unit-monthly">~RM2,330/mo</span>
         </div>
         <a href="#register" class="unit-cta">
           Get Price List
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <div class="unit-actions">
-          <a href="https://m-legasi.com.my/e-brochure-3/" target="_blank" rel="noopener" class="unit-action-btn brochure">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            E-Brochure
-          </a>
-          <a href="#register" class="unit-action-btn walkthrough">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
-            Walkthrough
-          </a>
-        </div>
       </div>
     </div>
 
@@ -3000,23 +3044,13 @@ section, nav, footer, div {
           <span class="unit-lot-tag">Corner</span>
         </div>
         <div class="unit-price-row">
-          <span class="unit-price">RM758k</span>
+          <span class="unit-price">RM601k</span>
           <span class="unit-monthly">~RM2,330/mo</span>
         </div>
         <a href="#register" class="unit-cta">
           Get Price List
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <div class="unit-actions">
-          <a href="https://m-legasi.com.my/e-brochure-3/" target="_blank" rel="noopener" class="unit-action-btn brochure">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            E-Brochure
-          </a>
-          <a href="#register" class="unit-action-btn walkthrough">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
-            Walkthrough
-          </a>
-        </div>
       </div>
     </div>
   </div>
@@ -3065,7 +3099,7 @@ section, nav, footer, div {
   <div class="aerial-content">
     <h2>Nestled in 500 acres where Broga Hill graces the horizon</h2>
     <div class="aerial-ctas">
-      <a href="#" class="btn-primary">View 360° Walkthrough →</a>
+      <a href="https://m-legasi.com.my/360-walkthrough/" class="btn-primary">View 360° Walkthrough →</a>
     </div>
   </div>
 </section>
@@ -3113,7 +3147,7 @@ section, nav, footer, div {
           </tr>
         </tbody>
       </table>
-      <p style="font-size:11px;color:var(--text-light);margin-top:8px;">Source: iProperty.com, Feb 2024 – Mar 2025 data</p>
+      
     </div>
 
     <div class="roi-card">
@@ -3123,9 +3157,30 @@ section, nav, footer, div {
       <div class="calc-group">
         <div class="calc-label">
           <span>Property price</span>
-          <strong id="calc-price-label">RM 700,000</strong>
+          <strong id="calc-price-label">RM 535,000</strong>
         </div>
-        <input type="range" class="calc-slider" id="calc-price" min="635000" max="900000" step="5000" value="700000">
+        <div class="calc-unit-badge" id="unit-badge">Astradia · 20'×60'</div>
+        <div class="slider-wrap">
+          <input type="range" class="calc-slider" id="calc-price" min="500000" max="650000" step="1000" value="535000">
+          <div class="unit-ticks">
+            <div class="unit-tick active" id="tick-astradia" style="left:23.33%">
+              <div class="tick-line"></div>
+              <div class="tick-label">Astradia<br><span>RM 535k</span></div>
+            </div>
+            <div class="unit-tick" id="tick-auroria" style="left:32%">
+              <div class="tick-line"></div>
+              <div class="tick-label">Auroria<br><span>RM 548k</span></div>
+            </div>
+            <div class="unit-tick" id="tick-harmonia" style="left:54%">
+              <div class="tick-line"></div>
+              <div class="tick-label">Harmonia<br><span>RM 581k</span></div>
+            </div>
+            <div class="unit-tick" id="tick-zendia" style="left:67.33%">
+              <div class="tick-line"></div>
+              <div class="tick-label">Zendia<br><span>RM 601k</span></div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="calc-group">
@@ -3168,7 +3223,7 @@ section, nav, footer, div {
           <img src="https://analytics-z21.github.io/m-legasi/assets/Homepage-Map-5.27.2025.png" alt="M Legasi location map showing nearby highways and landmarks" loading="lazy">
         </div>
         <a href="https://waze.com/ul/hw282w3cd8" target="_blank" rel="noopener" class="waze-cta">
-          <img src="https://analytics-z21.github.io/m-legasi/assets/waze-icon.webp" alt="Waze" class="waze-icon">
+          <img src="https://analytics-z21.github.io/m-legasi/assets/waze-icon.svg" alt="Waze" class="waze-icon">
           Navigate with Waze
         </a>
       </div>
@@ -3471,7 +3526,6 @@ section, nav, footer, div {
           <div class="receive-item"><span class="bullet"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#52AE32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Layout Plan</div>
           <div class="receive-item"><span class="bullet"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#52AE32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Pricing</div>
           <div class="receive-item"><span class="bullet"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#52AE32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Loan Assistant</div>
-          <div class="receive-item"><span class="bullet"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#52AE32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Partial Furnish Once Confirm Signing SPA</div>
         </div>
       </div>
 
@@ -3727,6 +3781,14 @@ const priceSlider = document.getElementById('calc-price');
 const dpSlider = document.getElementById('calc-dp');
 const tenureSlider = document.getElementById('calc-tenure');
 
+const UNITS = [
+  { id: 'tick-astradia', price: 535000, label: "Astradia · 20'×60'" },
+  { id: 'tick-auroria',  price: 548000, label: "Auroria · 20'×60'"  },
+  { id: 'tick-harmonia', price: 581000, label: "Harmonia · 20'×70'" },
+  { id: 'tick-zendia',   price: 601000, label: "Zendia · 20'×70'"   },
+];
+const SNAP_THRESHOLD = 8000;
+
 function updateCalc() {
   const price = parseInt(priceSlider.value);
   const dp = parseInt(dpSlider.value);
@@ -3741,6 +3803,40 @@ function updateCalc() {
   document.getElementById('calc-dp-label').textContent = dp + '%';
   document.getElementById('calc-tenure-label').textContent = years + ' years';
   document.getElementById('calc-result').textContent = 'RM ' + Math.round(payment).toLocaleString();
+
+  // Update progress fill on all sliders
+  const min = parseInt(priceSlider.min), max = parseInt(priceSlider.max);
+  const pct = ((price - min) / (max - min)) * 100;
+  priceSlider.style.background = `linear-gradient(to right, var(--coral) ${pct}%, var(--cream-dark) ${pct}%)`;
+
+  const dpPct = ((dp - 5) / (30 - 5)) * 100;
+  dpSlider.style.background = `linear-gradient(to right, var(--coral) ${dpPct}%, var(--cream-dark) ${dpPct}%)`;
+
+  const tenurePct = ((years - 20) / (35 - 20)) * 100;
+  tenureSlider.style.background = `linear-gradient(to right, var(--coral) ${tenurePct}%, var(--cream-dark) ${tenurePct}%)`;
+
+  // Find nearest unit within threshold
+  let nearest = null, nearestDist = Infinity;
+  UNITS.forEach(u => {
+    const dist = Math.abs(price - u.price);
+    if (dist < nearestDist) { nearestDist = dist; nearest = u; }
+  });
+
+  const badge = document.getElementById('unit-badge');
+  UNITS.forEach(u => {
+    const el = document.getElementById(u.id);
+    if (el) el.classList.remove('active');
+  });
+
+  if (nearest && nearestDist <= SNAP_THRESHOLD) {
+    const el = document.getElementById(nearest.id);
+    if (el) el.classList.add('active');
+    badge.textContent = nearest.label;
+    badge.classList.remove('hidden');
+  } else {
+    badge.textContent = '';
+    badge.classList.add('hidden');
+  }
 }
 
 priceSlider.addEventListener('input', updateCalc);
