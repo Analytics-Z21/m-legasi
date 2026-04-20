@@ -2634,7 +2634,7 @@ section, nav, footer, div {
     <li><a href="#location">Location</a></li>
     <li><a href="#invest">Investment</a></li>
     <li><a href="https://m-legasi.com.my/360-walkthrough/" target="_blank" rel="noopener">Virtual Tour</a></li>
-    <li><a href="/m-legasi/blog/">Blog</a></li>
+    <li><a href="/blog/">Blog</a></li>
     <li><a href="#register" class="nav-cta">Register Interest →</a></li>
   </ul>
   <div class="nav-right">
@@ -3455,7 +3455,7 @@ section, nav, footer, div {
     <form class="form-left" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" method="POST" target="sf-hidden-frame" onsubmit="return handleFormSubmit(this)">
 
       <input type="hidden" name="oid" value="00D0o0000015t7i">
-      <input type="hidden" name="retURL" value="https://analytics-z21.github.io/m-legasi/thankyou.html">
+      <input type="hidden" name="retURL" value="https://www.ver2.m-legasi.com.my/thankyou.html">
 
       <!--  ----------------------------------------------------------------------  -->
       <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
@@ -3868,12 +3868,9 @@ function handleFormSubmit(form) {
   var mobile = form.querySelector('#mobile').value.trim();
   if (!name || !email || !mobile) return false;
 
-  // Show thank you modal after a short delay (let the form submit to iframe)
+  // Redirect to thank you page after short delay (let the form submit to Salesforce first)
   setTimeout(function() {
-    document.getElementById('thankyouModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-    // Reset form
-    form.reset();
+    window.location.href = 'https://www.ver2.m-legasi.com.my/thankyou.html';
   }, 500);
 
   return true; // Allow form to submit to Salesforce via hidden iframe
