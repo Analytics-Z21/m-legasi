@@ -22,19 +22,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-
-<!--  ----------------------------------------------------------------------  -->
-<!--  NOTE: Please add the following <META> element to your page <HEAD>.      -->
-<!--  If necessary, please modify the charset parameter to specify the        -->
-<!--  character set of your HTML page.                                        -->
-<!--  ----------------------------------------------------------------------  -->
-
-<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
-<script src="https://www.google.com/recaptcha/api.js"></script>
-<script>
- function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
-</script>
-
 <title>Semenyih House for Sale | New Landed Double Storey Property</title>
 
 <!-- SEO Meta -->
@@ -3469,9 +3456,10 @@ section, nav, footer, div {
 <section class="form-section" id="register">
   <div class="form-inner">
   
-    <form class="form-left" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" method="POST" onsubmit="return handleFormSubmit(this)">
+    <form class="form-left" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" method="POST" target="sf-hidden-frame" onsubmit="return handleFormSubmit(this)">
 
-      <input type="hidden" name="captcha_settings" value='{"keyname":"MGM2_Recaptcha","fallback":"true","orgId":"00D0o0000015t7i","ts":""}'>
+
+      
       <input type="hidden" name="oid" value="00D0o0000015t7i">
       <input type="hidden" name="retURL" value="https://ver2.m-legasi.com.my/thankyou.html">
 
@@ -3485,17 +3473,17 @@ section, nav, footer, div {
 
 
 
-      <input type=hidden  id="00N2j000000e0hv" maxlength="255" name="00N2j000000e0hv" size="20" type="text" value="M Grand Minori Website 2"/>
+      <input type="hidden" id="00N2j000000e0hv" name="00N2j000000e0hv" value="M Legasi Microsite (Copy)">
 
-      <input type=hidden  id="00N2j000000e0hw" maxlength="255" name="00N2j000000e0hw" size="20" type="text" value="M Grand Minori"/><br>
+      <input type="hidden" id="00N2j000000e0hw" maxlength="255" name="00N2j000000e0hw" size="20" value="M Legasi">
 
-      <input type=hidden  id="00N2j000000e0ho" name="00N2j000000e0ho" title="Source" value="M Grand Minori Website 2">
+      <input type="hidden" id="00N2j000000e0ho" name="00N2j000000e0ho" title="Source" value="M Legasi Website">
 
-      <input type=hidden  id="00N2j000000e0hp" name="00N2j000000e0hp" title="Super Category" value="Website">
+      <input type="hidden" id="00N2j000000e0hp" name="00N2j000000e0hp" title="Super Category" value="Website">
 
-      <input type=hidden id="00N2j000000e0hR" name="00N2j000000e0hR" type="checkbox" value="1" check="checked"/><br>
+      <input type="hidden" id="00N2j000000e0hR" name="00N2j000000e0hR" value="1" checked="checked">
 
-      <div class="g-recaptcha" data-sitekey="6Lf7Q4QsAAAAAB5s7VUkFmk5fRDOX9BC2L6gmJRi"></div>
+      
     
       <h2>Register & Get Your Price List</h2>
       <p>Fill in your details below — we'll send you everything you need to make a decision.</p>
@@ -3521,7 +3509,7 @@ section, nav, footer, div {
 
 
 
-      <button class="form-submit" type="submit">Get My Price List Now →</button>
+      <button class="form-submit">Get My Price List Now →</button>
       
       <p class="term-condition">I have read and agreed to the <a href="#">Terms &amp; Conditions</a> and <a href="#">PDPA Notice</a>.</p>
 
@@ -3781,6 +3769,9 @@ section, nav, footer, div {
   </div>
 </div>
 
+<!-- Hidden iframe for Salesforce submission -->
+<iframe name="sf-hidden-frame" id="sfHiddenFrame" style="display:none;"></iframe>  
+  
 <!-- MOBILE STICKY BAR -->
 <div class="mobile-sticky">
   <a href="#register" class="btn-primary" style="justify-content:center;padding:12px;font-size:14px;">Register Now</a>
