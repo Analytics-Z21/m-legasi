@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NJNB82JM97"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-NJNB82JM97');
-</script>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -3883,6 +3875,13 @@ function handleFormSubmit(form) {
   var mobile = form.querySelector('#mobile').value.trim();
   if (!name || !email || !mobile) return false;
 
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    'event': 'generate_lead',
+    'lead_type': 'form_submission',
+    'form_name': 'M Legasi Registration'
+  });
+  
   // Redirect to thank you page after short delay (let the form submit to Salesforce first)
   setTimeout(function() {
     window.location.href = 'https://www.ver2.m-legasi.com.my/thankyou.html';
