@@ -4577,9 +4577,9 @@ body.lead-drawer-open { overflow: hidden; }
 
       <input class="quick-form-input" type="text" name="last_name" placeholder="Full name" maxlength="80" required autocomplete="name">
       <input class="quick-form-input" type="email" name="email" placeholder="Email address" maxlength="80" required autocomplete="email">
-      <input class="quick-form-input quick-form-row-phone" type="tel" name="mobile" placeholder="Phone number" maxlength="40" required autocomplete="tel">
+      <input class="quick-form-input quick-form-row-phone" type="tel" name="mobile" placeholder="012-345 6789" maxlength="20" required autocomplete="tel" inputmode="tel" data-my-phone>
       <button class="quick-form-submit" type="submit">Send Me the Price List  →</button>
-      <div class="quick-form-error">Please fill in your name, email, and phone number.</div>
+      <div class="quick-form-error" data-form-error>Please fill in your name, email, and phone number.</div>
     </form>
     <div class="quick-form-trust">
       <span class="lock">PDPA secured</span>
@@ -5411,14 +5411,14 @@ body.lead-drawer-open { overflow: hidden; }
       </div>
       <div class="form-group">
         <label>Email</label>
-        <input id="email" maxlength="80" name="email" size="20" type="text" placeholder="Email" required="">
+        <input id="email" maxlength="80" name="email" size="20" type="email" placeholder="you@example.com" required="">
       </div>
       <div class="form-group">
         <label>Mobile Number</label>
-        <input id="mobile" maxlength="40" name="mobile" size="20" type="text" placeholder="Contact Number" required="">
+        <input id="mobile" maxlength="20" name="mobile" size="20" type="tel" placeholder="012-345 6789" inputmode="tel" autocomplete="tel" data-my-phone required="">
       </div>
 
-
+      <div class="main-form-error" data-form-error style="display:none; font-size:13px; color:#c0392b; margin:-6px 0 10px;"></div>
 
       <button class="form-submit">Get My Price List Now →</button>
       
@@ -5786,16 +5786,74 @@ function toggleFaq(el) {
   el.textContent = Math.floor(280 + r * 240); // ~280–520
 })();
 
+// =====================================================================
+// SHARED LEAD-FORM VALIDATION HELPERS
+// Goal: keep junk leads out of Salesforce (bot phones, malformed emails).
+// Rules:
+//   - Email: must match  text@text.tld  with TLD >= 2 chars
+//   - Phone: digit-only count between 9 and 13 (covers local 0XX-...
+//            and international +60... up to 11-digit mobile). Reject 14+.
+//   - Phone: if leading "60" country code present, the next digit must
+//            be "1" (Malaysian mobile prefix). Blocks gibberish like
+//            +60 followed by random non-mobile digits.
+// =====================================================================
+window.isValidLeadEmail = function (email) {
+  if (!email) return false;
+  return /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(email.trim());
+};
+
+window.isValidMyPhone = function (phone) {
+  if (!phone) return false;
+  var digits = String(phone).replace(/\D/g, '');
+  if (digits.length < 9 || digits.length > 13) return false;
+  // If user entered +60 / 60 country code, enforce Malaysian mobile prefix "1"
+  if (digits.indexOf('60') === 0 && digits.length >= 11) {
+    if (digits.charAt(2) !== '1') return false;
+  }
+  return true;
+};
+
+// Show a specific error message inside a form's [data-form-error] slot
+window.showLeadFormError = function (form, msg) {
+  form.classList.add('has-error');
+  var slot = form.querySelector('[data-form-error]');
+  if (slot) {
+    slot.textContent = msg;
+    slot.style.display = 'block';
+  }
+};
+window.clearLeadFormError = function (form) {
+  form.classList.remove('has-error');
+  var slot = form.querySelector('[data-form-error]');
+  if (slot) slot.style.display = 'none';
+};
+
+// Runs all 3 checks. Returns null if OK, or an error string.
+window.validateLeadFields = function (name, email, mobile) {
+  if (!name || !email || !mobile) {
+    return 'Please fill in your name, email, and phone number.';
+  }
+  if (!window.isValidLeadEmail(email)) {
+    return 'Please enter a valid email address (e.g. name@example.com).';
+  }
+  if (!window.isValidMyPhone(mobile)) {
+    return 'Please enter a valid Malaysian phone number (e.g. 012-345 6789).';
+  }
+  return null;
+};
+
 // Quick form (under hero) — name + email + phone
 function handleQuickFormSubmit(form) {
   var name = form.querySelector('input[name="last_name"]').value.trim();
   var email = form.querySelector('input[name="email"]').value.trim();
   var mobile = form.querySelector('input[name="mobile"]').value.trim();
-  if (!name || !email || !mobile) {
-    form.classList.add('has-error');
+
+  var err = window.validateLeadFields(name, email, mobile);
+  if (err) {
+    window.showLeadFormError(form, err);
     return false;
   }
-  form.classList.remove('has-error');
+  window.clearLeadFormError(form);
 
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
@@ -5817,7 +5875,13 @@ function handleFormSubmit(form) {
   var name = form.querySelector('#last_name').value.trim();
   var email = form.querySelector('#email').value.trim();
   var mobile = form.querySelector('#mobile').value.trim();
-  if (!name || !email || !mobile) return false;
+
+  var err = window.validateLeadFields(name, email, mobile);
+  if (err) {
+    window.showLeadFormError(form, err);
+    return false;
+  }
+  window.clearLeadFormError(form);
 
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
@@ -5825,7 +5889,7 @@ function handleFormSubmit(form) {
     'lead_type': 'form_submission',
     'form_name': 'M Legasi Registration'
   });
-  
+
   // Redirect to thank you page after short delay (let the form submit to Salesforce first)
   setTimeout(function() {
     window.location.href = 'https://www.ver2.m-legasi.com.my/thankyou.html';
@@ -6613,13 +6677,15 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
 
       <label class="lead-field">
         <span class="lead-field-label">Phone Number</span>
-        <input type="tel" name="mobile" maxlength="40" placeholder="012-345 6789" inputmode="tel" autocomplete="tel-national" required>
+        <input type="tel" name="mobile" maxlength="20" placeholder="012-345 6789" inputmode="tel" autocomplete="tel-national" data-my-phone required>
       </label>
 
       <label class="lead-field">
         <span class="lead-field-label">Email</span>
         <input type="email" name="email" maxlength="80" placeholder="you@example.com" autocomplete="email" required>
       </label>
+
+      <div class="lead-form-error" data-form-error style="display:none; font-size:13px; color:#c0392b; margin:-4px 0 8px;"></div>
 
       <p class="lead-tc">
         I have read and agreed to the
@@ -6730,11 +6796,13 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
     var name = nameInput ? nameInput.value.trim() : '';
     var email = emailInput ? emailInput.value.trim() : '';
     var mobile = mobileInput ? mobileInput.value.trim() : '';
-    if (!name || !email || !mobile) {
-      form.classList.add('has-error');
+
+    var err = window.validateLeadFields(name, email, mobile);
+    if (err) {
+      window.showLeadFormError(form, err);
       return false;
     }
-    form.classList.remove('has-error');
+    window.clearLeadFormError(form);
 
     var trigger = window._leadDrawerSource || 'unknown';
 
@@ -6878,6 +6946,92 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
       return _origOpenFloorPlan(name, lot, imgUrl);
     };
   }
+})();
+</script>
+
+<!-- ============================================================
+     LEAD FORM POLISH — phone auto-dash + live field hints
+     Runs after all 3 lead forms are in the DOM (quick form, main
+     register form, drawer form). Adds:
+       1. Live Malaysian-phone formatter (012-345 6789 style; keeps
+          a leading "+" for international entries like +60 12-345 6789)
+       2. On-blur format hint for email + phone so users see the issue
+          before they hit submit
+     The hard validation still lives in the per-form submit handlers
+     (validateLeadFields). This script is purely UX assist.
+     ============================================================ -->
+<script>
+(function () {
+  function formatMyPhone(rawInput) {
+    var raw = rawInput.value || '';
+    var hasPlus = raw.trim().charAt(0) === '+';
+    var digits = raw.replace(/\D/g, '');
+
+    // Hard cap at 13 digits — anything more is rejected at submit anyway
+    if (digits.length > 13) digits = digits.slice(0, 13);
+
+    var prefix = '';
+    var local = digits;
+
+    // Treat "60..." (with or without +) as Malaysian country code
+    if ((hasPlus || digits.indexOf('60') === 0) && digits.indexOf('60') === 0 && digits.length > 2) {
+      prefix = '+60 ';
+      local = digits.slice(2);
+    } else if (hasPlus) {
+      prefix = '+';
+      local = digits;
+    }
+
+    // Format local part with dash + space:
+    //   <=3 digits   → "012"
+    //   <=6 digits   → "012-34"
+    //   7-10 digits  → "012-345 6789"
+    //   11 digits    → "011-1234 5678"
+    var formatted;
+    if (local.length === 0) {
+      formatted = '';
+    } else if (local.length <= 3) {
+      formatted = local;
+    } else if (local.length <= 6) {
+      formatted = local.slice(0, 3) + '-' + local.slice(3);
+    } else if (local.length <= 10) {
+      formatted = local.slice(0, 3) + '-' + local.slice(3, 6) + ' ' + local.slice(6);
+    } else {
+      formatted = local.slice(0, 3) + '-' + local.slice(3, 7) + ' ' + local.slice(7);
+    }
+
+    rawInput.value = prefix + formatted;
+  }
+
+  // Attach to every phone field flagged with data-my-phone
+  document.querySelectorAll('input[data-my-phone]').forEach(function (input) {
+    input.addEventListener('input', function () {
+      formatMyPhone(input);
+    });
+    // Final tidy on blur (in case user pasted a messy string)
+    input.addEventListener('blur', function () {
+      formatMyPhone(input);
+      if (input.value && typeof window.isValidMyPhone === 'function' && !window.isValidMyPhone(input.value)) {
+        input.setCustomValidity('Please enter a valid Malaysian phone number.');
+      } else {
+        input.setCustomValidity('');
+      }
+    });
+  });
+
+  // Email blur hint — uses the same regex as the submit handler
+  document.querySelectorAll('input[type="email"], input[name="email"]').forEach(function (input) {
+    input.addEventListener('blur', function () {
+      var v = (input.value || '').trim();
+      if (v && typeof window.isValidLeadEmail === 'function' && !window.isValidLeadEmail(v)) {
+        input.setCustomValidity('Please enter a valid email address (e.g. name@example.com).');
+      } else {
+        input.setCustomValidity('');
+      }
+    });
+    // Clear the warning the moment they start fixing it
+    input.addEventListener('input', function () { input.setCustomValidity(''); });
+  });
 })();
 </script>
 
