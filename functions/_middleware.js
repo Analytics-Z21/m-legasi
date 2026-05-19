@@ -1,0 +1,8 @@
+export const onRequest = async (context) => {
+     const url = new URL(context.request.url);
+     if (url.hostname === 'ver2.m-legasi.com.my') {
+       url.hostname = 'www.ver2.m-legasi.com.my';
+       return Response.redirect(url.toString(), 301);
+     }
+     return context.next();
+   };
