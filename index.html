@@ -5964,6 +5964,75 @@ window.validateLeadFields = function (name, email, mobile) {
   return null;
 };
 
+// ─────────────────────────────────────────────────────────────
+// Diagnostic capture — parallel copy of every form submission
+// to n8n (Phase 1 safety net). Failure here MUST NOT block the
+// Salesforce submission. Returns the submission_id (UUID v4) or
+// null if anything went wrong, so the caller can stamp it into
+// the dataLayer for GA4 reconciliation in Phase 2.
+// ─────────────────────────────────────────────────────────────
+window.M_LEGASI_DIAGNOSTIC_WEBHOOK = 'https://n8n.srv1218666.hstgr.cloud/webhook/1860c633-2376-473b-8a55-cf5dbd43a421';
+
+window.captureFormDiagnostic = function (form, formId) {
+  try {
+    // 1. Generate UUID v4 (native, with fallback for older browsers)
+    var submissionId = (window.crypto && window.crypto.randomUUID)
+      ? window.crypto.randomUUID()
+      : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+          var r = Math.random() * 16 | 0;
+          var v = c === 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+        });
+
+    // 2. Stamp the UUID into a hidden input on the form so that — once
+    //    Salesforce custom field 'submission_id__c' exists in Phase 2 —
+    //    the SF lead carries the same UUID as the Sheet row.
+    var hidden = form.querySelector('input[name="submission_id"]');
+    if (!hidden) {
+      hidden = document.createElement('input');
+      hidden.type = 'hidden';
+      hidden.name = 'submission_id';
+      form.appendChild(hidden);
+    }
+    hidden.value = submissionId;
+
+    // 3. Build the diagnostic payload (everything the form has + meta)
+    var formData = new FormData(form);
+    var fields = {};
+    formData.forEach(function (value, key) { fields[key] = value; });
+
+    var payload = {
+      submission_id: submissionId,
+      timestamp: new Date().toISOString(),
+      form_id: formId,
+      page_url: window.location.href,
+      referrer: document.referrer || '',
+      user_agent: navigator.userAgent,
+      fields: fields
+    };
+
+    // 4. Fire-and-forget to n8n via sendBeacon (survives the thankyou redirect)
+    var blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(window.M_LEGASI_DIAGNOSTIC_WEBHOOK, blob);
+    } else {
+      // Fallback for browsers without sendBeacon
+      fetch(window.M_LEGASI_DIAGNOSTIC_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true
+      })['catch'](function () {});
+    }
+
+    return submissionId;
+  } catch (err) {
+    // Diagnostic must never break Salesforce submission
+    if (window.console && console.warn) console.warn('[diagnostic-capture] failed:', err);
+    return null;
+  }
+};
+
 // Quick form (under hero) — name + email + phone
 function handleQuickFormSubmit(form) {
   var name = form.querySelector('input[name="last_name"]').value.trim();
@@ -5977,11 +6046,15 @@ function handleQuickFormSubmit(form) {
   }
   window.clearLeadFormError(form);
 
+  // Parallel capture to n8n (Phase 1 safety net) — returns UUID for dataLayer
+  var submissionId = window.captureFormDiagnostic(form, 'quickRegisterForm');
+
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
     'event': 'generate_lead',
     'lead_type': 'form_submission',
-    'form_name': 'M Legasi Quick Registration'
+    'form_name': 'M Legasi Quick Registration',
+    'submission_id': submissionId
   });
 
   setTimeout(function () {
@@ -6005,11 +6078,15 @@ function handleFormSubmit(form) {
   }
   window.clearLeadFormError(form);
 
+  // Parallel capture to n8n (Phase 1 safety net) — returns UUID for dataLayer
+  var submissionId = window.captureFormDiagnostic(form, 'mainRegisterForm');
+
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
     'event': 'generate_lead',
     'lead_type': 'form_submission',
-    'form_name': 'M Legasi Registration'
+    'form_name': 'M Legasi Registration',
+    'submission_id': submissionId
   });
 
   // Redirect to thank you page after short delay (let the form submit to Salesforce first)
@@ -6928,12 +7005,16 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
 
     var trigger = window._leadDrawerSource || 'unknown';
 
+    // Parallel capture to n8n (Phase 1 safety net) — returns UUID for dataLayer
+    var submissionId = window.captureFormDiagnostic(form, 'leadFormDrawer');
+
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: 'generate_lead',
       lead_type: 'form_submission',
       form_name: 'M Legasi Drawer Form',
-      lead_source: trigger
+      lead_source: trigger,
+      submission_id: submissionId
     });
 
     var submitBtn = form.querySelector('.lead-submit');
