@@ -6011,17 +6011,21 @@ window.captureFormDiagnostic = function (form, formId) {
       fields: fields
     };
 
-    // 4. Fire-and-forget to n8n via sendBeacon (survives the thankyou redirect)
-    var blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+    // 4. Fire-and-forget to n8n via sendBeacon (survives the thankyou redirect).
+    //    Content-Type is text/plain (not application/json) so this counts as a
+    //    CORS "simple request" — no preflight, no credentials-mode mismatch.
+    //    The body is still valid JSON; the n8n Code node parses it from string.
+    var blob = new Blob([JSON.stringify(payload)], { type: 'text/plain' });
     if (navigator.sendBeacon) {
       navigator.sendBeacon(window.M_LEGASI_DIAGNOSTIC_WEBHOOK, blob);
     } else {
       // Fallback for browsers without sendBeacon
       fetch(window.M_LEGASI_DIAGNOSTIC_WEBHOOK, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(payload),
-        keepalive: true
+        keepalive: true,
+        credentials: 'omit'
       })['catch'](function () {});
     }
 
@@ -7210,24 +7214,30 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
     var prefix = '';
     var local = digits;
 
+    // Determine the prefix + the "local" digits to format.
+    // Output format target: +60XX-XXXXXXX  (no spaces anywhere)
     if (digits.indexOf('60') === 0 && digits.length > 2) {
-      prefix = '+60 ';
+      prefix = '+60';
       local = digits.slice(2);
     } else if (hasPlus) {
       prefix = '+';
       local = digits;
     } else if (options && options.normalise && digits.charAt(0) === '0' && digits.length >= 9) {
       // On blur only: promote local 0XX… to +60 form
-      prefix = '+60 ';
+      prefix = '+60';
       local = digits.slice(1);
     }
 
+    // Split logic for Malaysian mobile:
+    //   9 digits after country code  → 2-7 split  → "10-9331233"   (010 / 012 / 016 etc.)
+    //   10 digits after country code → 3-7 split  → "111-2345678"  (newer 011X prefixes)
+    // While typing (fewer digits) we still surface the hyphen progressively so the
+    // user sees the structure forming without inserting awkward extra spaces.
     var formatted;
     if (local.length === 0)       formatted = '';
-    else if (local.length <= 3)   formatted = local;
-    else if (local.length <= 6)   formatted = local.slice(0, 3) + '-' + local.slice(3);
-    else if (local.length <= 10)  formatted = local.slice(0, 3) + '-' + local.slice(3, 6) + ' ' + local.slice(6);
-    else                          formatted = local.slice(0, 3) + '-' + local.slice(3, 7) + ' ' + local.slice(7);
+    else if (local.length <= 2)   formatted = local;
+    else if (local.length <= 9)   formatted = local.slice(0, 2) + '-' + local.slice(2);
+    else                          formatted = local.slice(0, 3) + '-' + local.slice(3);
 
     rawInput.value = prefix + formatted;
   }
