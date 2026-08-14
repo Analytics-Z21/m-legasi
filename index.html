@@ -247,7 +247,7 @@ src="https://www.facebook.com/tr?id=1147715233456454&ev=PageView&noscript=1"
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PDJTGTFL"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->  
+<!-- End Google Tag Manager (noscript) -->
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5RWKMV2V"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -804,7 +804,7 @@ section, nav, footer, div {
     right: 0;
     top: 0;
     height: 100%;
-    
+
   }
   .hero-bg::after {
     content: '';
@@ -3436,7 +3436,7 @@ section, nav, footer, div {
 /* ============ RESPONSIVE ============ */
 @media (max-width: 900px) {
   .nav { padding: 12px 20px; }
-  
+
   .hero-bg { height: 737px; clip-path: none; }
   /* Cream gradient scrim — warm wash over top half for text readability */
   .hero-bg::before {
@@ -4662,7 +4662,7 @@ body.lead-drawer-open { overflow: hidden; }
       <span class="quick-form-chip">Loan calc</span>
       <span class="quick-form-chip">Availability</span>
     </div>
-    <form class="quick-form" id="quickRegisterForm" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" method="POST" target="sf-hidden-frame" onsubmit="return handleQuickFormSubmit(this)">
+    <form class="quick-form" id="quickRegisterForm" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" method="POST" onsubmit="return handleQuickFormSubmit(this)">
       <input type="hidden" name="oid" value="00D0o0000015t7i">
       <input type="hidden" name="retURL" value="https://ver2.m-legasi.com.my/thankyou.html">
       <input type="hidden" name="00N2j000000e0hv" value="M Legasi Microsite (Copy)">
@@ -5169,7 +5169,7 @@ body.lead-drawer-open { overflow: hidden; }
           </tr>
         </tbody>
       </table>
-      
+
     </div>
 
     <div class="roi-card">
@@ -5475,11 +5475,11 @@ body.lead-drawer-open { overflow: hidden; }
 <!-- REGISTRATION FORM -->
 <section class="form-section" id="register">
   <div class="form-inner">
-  
-    <form class="form-left" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" method="POST" target="sf-hidden-frame" onsubmit="return handleFormSubmit(this)">
+
+    <form class="form-left" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" method="POST" onsubmit="return handleFormSubmit(this)">
 
 
-      
+
       <input type="hidden" name="oid" value="00D0o0000015t7i">
       <input type="hidden" name="retURL" value="https://ver2.m-legasi.com.my/thankyou.html">
 
@@ -5503,8 +5503,8 @@ body.lead-drawer-open { overflow: hidden; }
 
       <input type="hidden" id="00N2j000000e0hR" name="00N2j000000e0hR" value="1" checked="checked">
 
-      
-    
+
+
       <h2>Register & Get Your Price List</h2>
       <p>Fill in your details below — we'll send you everything you need to make a decision.</p>
 
@@ -5530,7 +5530,7 @@ body.lead-drawer-open { overflow: hidden; }
       <div class="main-form-error" data-form-error style="display:none; font-size:13px; color:#c0392b; margin:-6px 0 10px;"></div>
 
       <button class="form-submit">Get My Price List Now →</button>
-      
+
       <p class="term-condition">I have read and agreed to the <a href="#">Terms &amp; Conditions</a> and <a href="#">PDPA Notice</a>.</p>
 
       <div class="form-trust">
@@ -5540,7 +5540,7 @@ body.lead-drawer-open { overflow: hidden; }
         <span>·</span>
         <span>Unsubscribe anytime</span>
       </div>
-    </form>  
+    </form>
 
     <div class="form-right">
       <div class="receive-card">
@@ -5789,9 +5789,6 @@ body.lead-drawer-open { overflow: hidden; }
   </div>
 </div>
 
-<!-- Hidden iframe for Salesforce submission -->
-<iframe name="sf-hidden-frame" id="sfHiddenFrame" style="display:none;"></iframe>  
-  
 <!-- MOBILE STICKY BAR -->
 <div class="mobile-sticky" id="mobileSticky">
   <a href="#register" class="btn-primary">Register Now</a>
@@ -6061,10 +6058,6 @@ function handleQuickFormSubmit(form) {
     'submission_id': submissionId
   });
 
-  setTimeout(function () {
-    window.location.href = 'https://www.ver2.m-legasi.com.my/thankyou.html';
-  }, 500);
-
   return true;
 }
 
@@ -6093,12 +6086,7 @@ function handleFormSubmit(form) {
     'submission_id': submissionId
   });
 
-  // Redirect to thank you page after short delay (let the form submit to Salesforce first)
-  setTimeout(function() {
-    window.location.href = 'https://www.ver2.m-legasi.com.my/thankyou.html';
-  }, 500);
-
-  return true; // Allow form to submit to Salesforce via hidden iframe
+  return true; // Allow native post to Salesforce
 }
 
 function closeThankYou() {
@@ -6861,7 +6849,6 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
     <form class="lead-form" id="leadForm"
           action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i"
           method="POST"
-          target="sf-hidden-frame"
           onsubmit="return handleDrawerFormSubmit(this)"
           novalidate>
       <!-- Salesforce Web-to-Lead hidden fields (unified across all 3 forms) -->
@@ -7026,12 +7013,6 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending...';
     }
-
-    // Form submits to hidden iframe (target="sf-hidden-frame"); redirect us
-    // to the thankyou page after a short delay so SF gets the POST first.
-    setTimeout(function () {
-      window.location.href = 'https://www.ver2.m-legasi.com.my/thankyou.html';
-    }, 500);
 
     return true; // Allow native form submission to Salesforce
   };
