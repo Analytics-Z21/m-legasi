@@ -917,7 +917,8 @@ html.cap-clean .thankyou-overlay { display: none !important; }
 @media (min-width: 1024px) { .unit { grid-template-columns: 1.02fr 0.98fr; } }
 @media (max-width: 639px) {
   .units-section { padding-left: 0; padding-right: 0; }
-  .units-section .section-header, .units-section .tabs, .units-section .calc { margin-left: 24px; margin-right: 24px; }
+  .units-section .section-header, .units-section .tabs { margin-left: 24px; margin-right: 24px; }
+  .units-section .calc { border-left: none; border-right: none; }
   .unit { border-left: none; border-right: none; }
 }
 .unit-plan {
@@ -1274,6 +1275,7 @@ html.cap-clean .thankyou-overlay { display: none !important; }
 /* ============ INTRO (cream band) ============ */
 .intro-section {
   padding: 92px 48px;
+  min-width: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
@@ -1284,7 +1286,9 @@ html.cap-clean .thankyou-overlay { display: none !important; }
 @media (max-width: 900px) {
   .intro-section { grid-template-columns: 1fr; gap: 36px; padding: 64px 24px; }
 }
+.intro-text { min-width: 0; }
 .intro-text h2 {
+  overflow-wrap: break-word;
   font-family: var(--font-display);
   font-size: clamp(30px, 4.2vw, 42px);
   font-weight: 500;
@@ -1305,8 +1309,8 @@ html.cap-clean .thankyou-overlay { display: none !important; }
   line-height: 1.7;
   margin: 18px 0 26px;
 }
-.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-@media (max-width: 480px) { .stat-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
+.stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; min-width: 0; }
+@media (max-width: 480px) { .stat-grid { gap: 10px; } }
 .stat-card {
   background: var(--white);
   border: 1px solid var(--hairline);
@@ -1335,130 +1339,79 @@ html.cap-clean .thankyou-overlay { display: none !important; }
 }
 .stat-desc { font-size: 12.5px; color: var(--text-light); margin-top: 2px; }
 
-/* ============ WHY (white band) ============ */
-.why-section { padding: 88px 48px; background: var(--white); }
-@media (max-width: 640px) { .why-section { padding: 60px 24px; } }
+/* ============ WHY (R3: visual feature mosaic, white band) ============ */
+.why-section { padding: 92px 48px; background: var(--white); }
+@media (max-width: 640px) { .why-section { padding: 64px 24px; } }
 .why-inner { max-width: 1240px; margin: 0 auto; }
-.why-tabs-wrap {
+.why-mosaic { display: grid; gap: 14px; grid-template-columns: 1fr; }
+@media (min-width: 900px) {
+  .why-mosaic { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .wm-wide { grid-column: span 2; }
+}
+.wm-tile {
   position: relative;
-  margin: 0 auto 26px;
-  max-width: 560px;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
-          mask-image: linear-gradient(90deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
-}
-.why-tabs {
-  display: flex;
-  gap: 12px;
-  align-items: flex-end;
-  overflow-x: auto;
-  padding: 28px calc(50% - 38px) 18px;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-.why-tabs::-webkit-scrollbar { display: none; }
-.why-tab {
-  flex-shrink: 0;
-  width: 76px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 0;
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-  font: inherit;
-  color: var(--text-mid);
-  scroll-snap-align: center;
-  transition: transform 0.4s cubic-bezier(.22,.61,.36,1), color 0.3s;
-}
-.why-tab-icon {
-  width: 52px; height: 52px;
-  border-radius: 0;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--cream);
-  border: 1px solid var(--hairline);
-  transition: transform 0.4s cubic-bezier(.22,.61,.36,1), background 0.3s, border-color 0.3s;
-}
-.why-tab-icon img { width: 30px; height: 30px; display: block; object-fit: contain; transition: filter 0.3s; }
-.why-tab-label {
-  font-size: 12px;
-  font-weight: 600;
-  text-align: center;
-  line-height: 1.25;
-  white-space: nowrap;
+  margin: 0;
   overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-  opacity: 0.75;
-  transition: opacity 0.3s, color 0.3s;
-}
-.why-tab.is-near { transform: translateY(-3px); }
-.why-tab.is-active { transform: translateY(-10px); color: var(--night2); }
-.why-tab.is-active .why-tab-icon {
+  border: 1px solid var(--hairline);
+  min-height: 320px;
   background: var(--night2);
-  border-color: var(--night2);
-  transform: scale(1.1);
 }
-.why-tab.is-active .why-tab-icon img { filter: brightness(0) invert(1); }
-.why-tab.is-active .why-tab-label { opacity: 1; font-weight: 700; color: var(--night2); }
-.why-tab.is-near .why-tab-icon { transform: scale(1.05); }
-.why-tab.is-cta .why-tab-icon { background: var(--coral); border-color: var(--coral); color: #fff; font-size: 20px; }
-.why-tab.is-cta .why-tab-icon img { filter: brightness(0) invert(1); }
-.why-tab.is-cta.is-active .why-tab-icon { background: var(--coral); }
-
-.why-panel {
-  position: relative;
-  max-width: 720px;
-  margin: 0 auto;
-  text-align: center;
-  min-height: 140px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
+@media (min-width: 900px) { .wm-tile { min-height: 380px; } }
+.wm-tile > img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
 }
-.why-panel .why-panel-content { flex: 1; min-width: 0; }
-.why-panel-content { transition: opacity 0.3s ease, transform 0.3s ease; }
-.why-panel.is-swapping .why-panel-content { opacity: 0; transform: translateY(6px); }
-.why-panel h3 {
-  font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: 500;
-  color: var(--night2);
+.wm-tile:hover > img { transform: scale(1.04); }
+.wm-tile::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(4,29,20,0) 34%, rgba(4,29,20,0.42) 62%, rgba(4,29,20,0.9) 100%);
+  pointer-events: none;
+}
+.wm-tile figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  z-index: 2;
+  padding: 20px 22px 20px;
+  color: var(--cream-ink);
+}
+.wm-ic {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  background: rgba(237,224,206,0.92);
+  border: 1px solid var(--hairline);
   margin-bottom: 10px;
 }
-.why-panel p {
-  font-size: 15.5px;
-  line-height: 1.6;
-  color: var(--text-mid);
-  margin-bottom: 12px;
+.wm-ic img { width: 26px; height: 26px; object-fit: contain; }
+.wm-tile h3 {
+  font: 500 24px/1.2 var(--font-display);
+  color: var(--cream-ink);
+  margin-bottom: 6px;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
 }
-.why-panel .why-panel-detail {
-  display: inline-block;
-  font-size: 13px;
-  color: var(--gold-text);
-  font-weight: 700;
-  letter-spacing: 0.02em;
+.wm-tile figcaption p {
+  font: 400 13.5px/1.6 var(--font-body);
+  color: var(--cream-ink);
+  max-width: 46ch;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.55);
 }
-.why-panel-cta { margin-top: 4px; display: none; }
-.why-panel.is-cta .why-panel-cta { display: inline-flex; margin-top: 14px; }
-.why-panel.is-cta .why-panel-detail { display: none; }
-.why-nav {
-  flex-shrink: 0;
-  width: 44px; height: 44px;
-  border-radius: 0;
+.wm-stack { display: grid; gap: 14px; align-content: stretch; }
+@media (max-width: 899px) { .wm-stack { gap: 10px; } }
+.wm-card {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: var(--cream);
   border: 1px solid var(--hairline);
-  background: var(--white);
-  color: var(--night2);
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  padding: 18px 18px;
+  flex: 1;
 }
-.why-nav:hover { background: var(--cream); border-color: rgba(35,31,32,0.3); }
-.why-nav:active { transform: scale(0.94); }
+.wm-card .wm-ic { margin-bottom: 0; background: var(--white); flex: none; }
+.wm-card h3 {
+  font: 500 19px/1.25 var(--font-display);
+  color: var(--night2);
+  margin-bottom: 4px;
+}
+.wm-card p { font: 400 13px/1.6 var(--font-body); color: var(--text-mid); }
 
 /* ============ AERIAL / VIRTUAL TOUR (dark band, masterplan bg) ============ */
 .aerial {
@@ -1593,6 +1546,59 @@ html.cap-clean .thankyou-overlay { display: none !important; }
   .aerial-tour-caption { left: 16px; right: 16px; bottom: 16px; }
   .aerial-tour-title { font-size: 17px; }
 }
+
+/* ============ GALLERY (R3: Aurora pattern — snap strip / grid) ============ */
+.gallery-section { padding: 92px 0 84px; background: var(--white); }
+@media (min-width: 1024px) { .gallery-section { padding: 100px 48px 92px; } }
+.gallery-inner { max-width: 1240px; margin: 0 auto; }
+.gallery-section .section-header { padding: 0 24px; }
+.gal {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 78%;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 0 24px;
+}
+.gal::-webkit-scrollbar { display: none; }
+@media (min-width: 1024px) {
+  .gal { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); grid-auto-columns: unset; overflow: visible; padding: 0; }
+}
+.gal figure {
+  scroll-snap-align: start;
+  margin: 0;
+  position: relative;
+  cursor: zoom-in;
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+}
+.gal img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s;
+}
+@media (min-width: 1024px) { .gal img { height: 220px; } }
+.gal figure:hover img { transform: scale(1.05); }
+.gal figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 34px 16px 13px;
+  background: linear-gradient(180deg, rgba(4,29,20,0), rgba(4,29,20,0.82));
+  font: 600 12.5px/1.4 var(--font-body);
+  color: var(--cream-ink);
+}
+.gal-hint {
+  text-align: center;
+  font: 400 12.5px/1.6 var(--font-body);
+  color: var(--text-light);
+  margin-top: 16px;
+  padding: 0 24px;
+}
+@media (min-width: 1024px) { .gal-hint { display: none; } }
 
 /* ============ GROWTH CORRIDOR (sage band, table only; calculator lives in #units) ============ */
 .roi-section { padding: 92px 48px; background: var(--sage); }
@@ -1960,41 +1966,33 @@ html.cap-clean .thankyou-overlay { display: none !important; }
 }
 .seo-toggle-btn:hover { background: var(--night2); color: var(--cream-ink); }
 
-/* ============ DEV TRUST (sage band) ============ */
-.dev-trust { background: var(--sage); padding: 56px 48px; }
-@media (max-width: 640px) { .dev-trust { padding: 44px 24px; } }
-.dev-trust-inner {
-  max-width: 1080px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 36px;
-  flex-wrap: wrap;
+/* ============ DEVELOPER (R3: Aurora/MGM pattern, white band, moved up) ============ */
+.dev-trust { background: var(--white); padding: 88px 24px; border-top: 1px solid var(--hairline); }
+.dev2 { max-width: 640px; margin: 0 auto; text-align: center; }
+.dev2 .eyebrow {
+  display: block;
+  font: 700 12px/1.6 var(--font-body);
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold-text);
+  margin-bottom: 12px;
 }
-.dev-trust-text h3 {
-  font-family: var(--font-display);
-  font-size: 27px;
-  font-weight: 500;
+.dev2 h2 {
+  font: 500 clamp(26px, 3.6vw, 38px)/1.18 var(--font-display);
   color: var(--night2);
-  margin-bottom: 6px;
+  text-wrap: balance;
 }
-.dev-trust-text p { font-size: 14.5px; color: var(--text-mid); }
-.dev-trust-stats { display: flex; gap: 40px; }
+.dev-logo { display: block; width: min(250px, 62%); height: auto; margin: 26px auto 18px; }
+.dev-copy { font: 400 15px/1.7 var(--font-body); color: var(--text-mid); margin-bottom: 26px; }
+.dev-trust-stats { display: flex; gap: 44px; justify-content: center; }
 .dev-stat { text-align: center; }
 .dev-stat-num {
-  font-family: var(--font-display);
-  font-size: 36px;
-  font-weight: 500;
+  font: 500 36px/1.1 var(--font-display);
   color: var(--night2);
   font-variant-numeric: tabular-nums;
-  line-height: 1.1;
 }
 .dev-stat-label {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font: 700 12px/1.6 var(--font-body);
+  letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--text-mid);
   margin-top: 4px;
 }
@@ -2431,6 +2429,7 @@ body.lead-drawer-open { overflow: hidden; }
     <a href="#units" data-rail>Floor Plans</a>
     <a href="#facilities" data-rail>Facilities</a>
     <a href="#why" data-rail>Why M Legasi</a>
+    <a href="#gallery" data-rail>Gallery</a>
     <a href="#location" data-rail>Location</a>
     <a href="#faq" data-rail>FAQ</a>
     <a href="https://m-legasi.com.my/360-walkthrough/" target="_blank" rel="noopener">360&deg; Tour</a>
@@ -2449,6 +2448,7 @@ body.lead-drawer-open { overflow: hidden; }
     <a href="#units" data-rail>Floor Plans</a>
     <a href="#facilities" data-rail>Facilities</a>
     <a href="#why" data-rail>Why</a>
+    <a href="#gallery" data-rail>Gallery</a>
     <a href="#location" data-rail>Location</a>
     <a href="#faq" data-rail>FAQ</a>
     <a href="#register" data-rail>Register</a>
@@ -2803,66 +2803,74 @@ body.lead-drawer-open { overflow: hidden; }
   </div>
 </div>
 
-<!-- WHY M LEGASI -->
+<!-- WHY (R3): "Built for Families. Designed for Life." rebuilt as a visual feature
+     mosaic using the original site's own renders and photography. Feature titles and
+     descriptions verbatim from the previous build's tab content. -->
 <section class="why-section" id="why">
   <div class="why-inner">
     <div class="section-header">
       <div class="eyebrow">Why M Legasi</div>
       <h2>Built for Families. Designed for Life.</h2>
     </div>
-    <div class="why-tabs-wrap">
-      <div class="why-tabs" id="whyTabs" role="tablist">
-        <button type="button" class="why-tab" role="tab" data-title="Freehold" data-desc="Permanent ownership — no renewal needed. Your legacy, forever." data-detail="">
-          <span class="why-tab-icon"><img src="assets/Freehold.svg" alt=""></span>
-          <span class="why-tab-label">Freehold</span>
-        </button>
-        <button type="button" class="why-tab" role="tab" data-title="Schools Nearby" data-desc="University of Nottingham 4km, Tenby International 5km, 3 national schools within 5km." data-detail="Strong rental demand zone →">
-          <span class="why-tab-icon"><img src="assets/Near-Schools-Universities-Hospitals.svg" alt=""></span>
-          <span class="why-tab-label">Schools</span>
-        </button>
-        <button type="button" class="why-tab" role="tab" data-title="Wide Driveway" data-desc="Resort-style entrance that fits 2 cars. Spacious, welcoming, practical." data-detail="">
-          <span class="why-tab-icon"><img src="assets/Resort-like-Wide-Driveway-Leading-into-M-Legasi.svg" alt=""></span>
-          <span class="why-tab-label">Driveway</span>
-        </button>
-        <button type="button" class="why-tab" role="tab" data-title="North-South Facing" data-desc="Save on air-con — naturally cooler with less direct sunlight throughout the day." data-detail="Lower utility bills →">
-          <span class="why-tab-icon"><img src="assets/North-South-Orientated-Homes-for-Living-Comfort.svg" alt=""></span>
-          <span class="why-tab-label">N-S Facing</span>
-        </button>
-        <button type="button" class="why-tab" role="tab" data-title="Guarded Community" data-desc="Round-the-clock security patrol with controlled access for total peace of mind." data-detail="">
-          <span class="why-tab-icon"><img src="assets/Guarded-Community-Security-Patrol.svg" alt=""></span>
-          <span class="why-tab-label">Guarded</span>
-        </button>
-        <button type="button" class="why-tab" role="tab" data-title="GreenRE Certified" data-desc="Eco-certified, energy-efficient design that reduces your carbon footprint." data-detail="">
-          <span class="why-tab-icon"><img src="assets/GreenRE-Certified.svg" alt=""></span>
-          <span class="why-tab-label">GreenRE</span>
-        </button>
-        <button type="button" class="why-tab" role="tab" data-title="EV Charging Ready" data-desc="Future-proof your home with dedicated EV charging points provided." data-detail="">
-          <span class="why-tab-icon"><img src="assets/EV-Charging-Stations.svg" alt=""></span>
-          <span class="why-tab-label">EV Ready</span>
-        </button>
-        <button type="button" class="why-tab is-cta" role="tab" data-cta="1" data-title="Ready to make it yours?" data-desc="Register now to receive the complete price list, floor plans, and early-bird offers — straight to your inbox.">
-          <span class="why-tab-icon">→</span>
-          <span class="why-tab-label">Register</span>
-        </button>
+    <div class="why-mosaic">
+      <figure class="wm-tile wm-wide">
+        <img src="assets/legasimumdaughter_HR_optimized-1920x1283.jpg" alt="Mother and daughter at home in M Legasi">
+        <figcaption>
+          <span class="wm-ic"><img src="assets/Freehold.svg" alt=""></span>
+          <h3>Freehold</h3>
+          <p>Permanent ownership &mdash; no renewal needed. Your legacy, forever.</p>
+        </figcaption>
+      </figure>
+      <figure class="wm-tile">
+        <img src="assets/Phase_3_Type_A_2_optimized.jpg" alt="Guarded streetscape at M Legasi">
+        <figcaption>
+          <span class="wm-ic"><img src="assets/Guarded-Community-Security-Patrol.svg" alt=""></span>
+          <h3>Guarded Community</h3>
+          <p>Round-the-clock security patrol with controlled access for total peace of mind.</p>
+        </figcaption>
+      </figure>
+      <figure class="wm-tile">
+        <img src="assets/why-driveway.jpg" alt="Wide driveway leading into an M Legasi home">
+        <figcaption>
+          <span class="wm-ic"><img src="assets/Resort-like-Wide-Driveway-Leading-into-M-Legasi.svg" alt=""></span>
+          <h3>Wide Driveway</h3>
+          <p>Resort-style entrance that fits 2 cars. Spacious, welcoming, practical.</p>
+        </figcaption>
+      </figure>
+      <figure class="wm-tile">
+        <img src="assets/why-ns.jpg" alt="North-south orientated M Legasi home exterior">
+        <figcaption>
+          <span class="wm-ic"><img src="assets/North-South-Orientated-Homes-for-Living-Comfort.svg" alt=""></span>
+          <h3>North-South Facing</h3>
+          <p>Save on air-con &mdash; naturally cooler with less direct sunlight throughout the day.</p>
+        </figcaption>
+      </figure>
+      <div class="wm-stack">
+        <div class="wm-card">
+          <span class="wm-ic"><img src="assets/Near-Schools-Universities-Hospitals.svg" alt=""></span>
+          <div>
+            <h3>Schools Nearby</h3>
+            <p>University of Nottingham 4km, Tenby International 5km, 3 national schools within 5km.</p>
+          </div>
+        </div>
+        <div class="wm-card">
+          <span class="wm-ic"><img src="assets/GreenRE-Certified.svg" alt=""></span>
+          <div>
+            <h3>GreenRE Certified</h3>
+            <p>Eco-certified, energy-efficient design that reduces your carbon footprint.</p>
+          </div>
+        </div>
+        <div class="wm-card">
+          <span class="wm-ic"><img src="assets/EV-Charging-Stations.svg" alt=""></span>
+          <div>
+            <h3>EV Charging Ready</h3>
+            <p>Future-proof your home with dedicated EV charging points provided.</p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="why-panel" id="whyPanel">
-      <button type="button" class="why-nav prev" id="whyPrev" aria-label="Previous">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-      </button>
-      <div class="why-panel-content">
-        <h3 id="whyPanelTitle">Freehold</h3>
-        <p id="whyPanelDesc">Permanent ownership — no renewal needed. Your legacy, forever.</p>
-        <span class="why-panel-detail" id="whyPanelDetail"></span>
-        <a href="#register" class="btn-primary why-panel-cta">Register & Get Price List →</a>
-      </div>
-      <button type="button" class="why-nav next" id="whyNext" aria-label="Next">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-      </button>
     </div>
   </div>
 </section>
-
 
 <!-- AERIAL / VIRTUAL TOUR -->
 <section class="aerial">
@@ -2885,6 +2893,29 @@ body.lead-drawer-open { overflow: hidden; }
         </div>
       </div>
     </a>
+  </div>
+</section>
+
+<!-- GALLERY (R3): renders scraped from the original m-legasi.com.my (2026-08-20/21 pulls).
+     Aurora gallery pattern: snap-scroll strip on mobile, grid on desktop, tap to enlarge
+     via the existing zoom lightbox. Captions descriptive only, no invented claims. -->
+<section class="gallery-section" id="gallery">
+  <div class="gallery-inner">
+    <div class="section-header">
+      <div class="eyebrow">The Township</div>
+      <h2>A glimpse of life at M Legasi</h2>
+    </div>
+    <div class="gal" id="gal">
+      <figure><img src="assets/gal-park-aerial.jpg" alt="Aerial view of the play lawn and multipurpose courts"><figcaption>Play Lawn &amp; Courts</figcaption></figure>
+      <figure><img src="assets/gal-masterplan.jpg" alt="Aerial masterplan of the 500-acre township"><figcaption>The 500-Acre Masterplan</figcaption></figure>
+      <figure><img src="assets/gal-lakeside.jpg" alt="Lakeside deck and trails"><figcaption>Lakeside Deck &amp; Trails</figcaption></figure>
+      <figure><img src="assets/gal-pavilion.jpg" alt="Community pavilion by the amphitheatre lawn"><figcaption>Community Pavilion</figcaption></figure>
+      <figure><img src="assets/gal-pocket-garden.jpg" alt="Pocket garden"><figcaption>Pocket Garden</figcaption></figure>
+      <figure><img src="assets/gal-street-p3.jpg" alt="Phase 3 streetscape"><figcaption>Phase 3 Streetscape</figcaption></figure>
+      <figure><img src="assets/gal-zendia.jpg" alt="Zendia home exterior"><figcaption>Zendia Exterior</figcaption></figure>
+      <figure><img src="assets/gal-harmonia.jpg" alt="Harmonia home exterior"><figcaption>Harmonia Exterior</figcaption></figure>
+    </div>
+    <p class="gal-hint">Swipe to see more &middot; tap any image to enlarge</p>
   </div>
 </section>
 
@@ -3177,6 +3208,35 @@ body.lead-drawer-open { overflow: hidden; }
   </div>
 </section>
 
+<!-- DEVELOPER (R3): moved up (after Location, before Register) and rebuilt to the
+     Aurora/MGM developer pattern with the original MahSing logo. Heading and copy
+     verbatim from the previous build. -->
+<section class="dev-trust" id="developer">
+  <div class="dev2">
+    <span class="eyebrow">The Developer</span>
+    <h2>A Development by Mah Sing Group Berhad</h2>
+    <a href="https://www.mahsing.com.my/" target="_blank" rel="noopener">
+      <img class="dev-logo" src="assets/Mah-Sing-Logo-2-768x258.png" alt="Mah Sing. Reinvent Spaces. Enhance Life.">
+    </a>
+    <p class="dev-copy">Bursa Malaysia listed. Trusted by over 100,000 homeowners across Malaysia.</p>
+    <div class="dev-trust-stats">
+      <div class="dev-stat">
+        <div class="dev-stat-num">30+</div>
+        <div class="dev-stat-label">Years</div>
+      </div>
+      <div class="dev-stat">
+        <div class="dev-stat-num">63</div>
+        <div class="dev-stat-label">Projects</div>
+      </div>
+      <div class="dev-stat">
+        <div class="dev-stat-num">5</div>
+        <div class="dev-stat-label">States</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- REGISTRATION FORM -->
 <section class="form-section" id="register">
   <div class="form-inner">
@@ -3415,30 +3475,6 @@ body.lead-drawer-open { overflow: hidden; }
       <p class="seo-citation">Citations and References:<br>The Star. More than 90% Take-Up for First Phase of Mah Sing's M Legasi Freehold Township. 15 April 2025. Available at: <a href="https://www.thestar.com.my/news/nation/2025/04/15/more-than-90-take-up-for-first-phase-of-mah-sings-m-legasi-freehold-township" target="_blank" rel="noopener">thestar.com.my</a></p>
 
       <button class="seo-toggle-btn" onclick="toggleSeo()">Read Less</button>
-    </div>
-  </div>
-</section>
-
-<!-- DEVELOPER TRUST -->
-<section class="dev-trust">
-  <div class="dev-trust-inner">
-    <div class="dev-trust-text">
-      <h3>A Development by Mah Sing Group Berhad</h3>
-      <p>Bursa Malaysia listed. Trusted by over 100,000 homeowners across Malaysia.</p>
-    </div>
-    <div class="dev-trust-stats">
-      <div class="dev-stat">
-        <div class="dev-stat-num">30+</div>
-        <div class="dev-stat-label">Years</div>
-      </div>
-      <div class="dev-stat">
-        <div class="dev-stat-num">63</div>
-        <div class="dev-stat-label">Projects</div>
-      </div>
-      <div class="dev-stat">
-        <div class="dev-stat-num">5</div>
-        <div class="dev-stat-label">States</div>
-      </div>
     </div>
   </div>
 </section>
@@ -5186,6 +5222,16 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
     });
     render();
   }
+
+  /* ── 3b. Gallery: tap to enlarge via the existing zoom lightbox ── */
+  Array.prototype.forEach.call(document.querySelectorAll('#gal figure'), function (f) {
+    f.addEventListener('click', function () {
+      var i = f.querySelector('img'), c = f.querySelector('figcaption');
+      if (window.openFloorPlan) {
+        window.openFloorPlan(c ? c.textContent : 'M Legasi', 'M Legasi, Semenyih', i.getAttribute('src'));
+      }
+    });
+  });
 
   /* ── 4. Capture-safe reveal sweep ── */
   window.addEventListener('load', function () {
