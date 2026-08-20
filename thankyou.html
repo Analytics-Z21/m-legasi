@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- M LEGASI ver2 - THANK YOU (rebuild 2026-08-21, banded night-to-day design).
+     Salesforce Web-to-Lead retURL target. Deployed to the m-legasi repo as
+     thankyou.html. GTM page_view here is the client-side conversion signal.
+     Content, links and contact details verbatim from the previous build;
+     second GTM container added to match the homepage pair. -->
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -8,327 +13,158 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-PDJTGTFL');</script>
 <!-- End Google Tag Manager -->
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RWKMV2V');</script>
+<!-- End Google Tag Manager -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thank You — M Legasi Semenyih</title>
 <meta name="robots" content="noindex, nofollow">
 
-<!-- Preconnect -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://www.ver2.m-legasi.com.my">
 
-<!-- Favicons -->
-<link rel="icon" type="image/svg+xml" href="/assets/M-Legasi-logo-Green.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="https://www.ver2.m-legasi.com.my/assets/cropped-M-Legasi-icon-32x32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="https://www.ver2.m-legasi.com.my/assets/cropped-M-Legasi-icon-192x192.png">
-<link rel="apple-touch-icon" href="https://www.ver2.m-legasi.com.my/assets/cropped-M-Legasi-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/cropped-M-Legasi-Favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/cropped-M-Legasi-Favicon-192x192.png">
+<link rel="apple-touch-icon" href="/assets/cropped-M-Legasi-Favicon-180x180.png">
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 <style>
+@font-face {
+  font-family: 'IvyOra Display';
+  src: url('/assets/ivyora-medium.ttf') format('truetype');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
 :root {
-  --green-deep: #1B3D2F;
-  --green-mid: #2A5E47;
-  --green-light: #3D7A5F;
-  --cream: #F5F0E8;
-  --cream-dark: #EDE6D8;
-  --coral: #E07B5E;
-  --coral-hover: #C96A4F;
-  --gold: #B8935A;
+  --night: #062B1D;
+  --night2: #083F2A;
+  --night3: #0C4A33;
+  --dark: #041D14;
+  --cream-ink: #F2E9DA;
+  --cream-dim: #C9BFA9;
+  --coral: #EB5A49;
+  --coral-hover: #D64B3A;
   --gold-light: #D4B07A;
-  --text-dark: #1A1A18;
-  --text-mid: #4A4A45;
-  --text-light: #7A7A72;
-  --white: #FFFFFF;
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-body: 'DM Sans', system-ui, sans-serif;
+  --mull: rgba(212,176,122,0.26);
+  --fd: 'IvyOra Display', 'Cormorant Garamond', Georgia, serif;
+  --fb: 'Lato', 'Segoe UI', sans-serif;
 }
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 16px; }
+html { font-size: 16px; }
 body {
-  font-family: var(--font-body);
-  color: var(--text-dark);
-  background: var(--green-deep);
-  min-height: 100vh;
+  font-family: var(--fb);
+  background: var(--night);
+  color: var(--cream-ink);
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
 }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; }
 
-/* ── NAV ── */
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 48px;
-  background: var(--white);
-  border-bottom: 1px solid rgba(0,0,0,0.06);
+.top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 28px;
+  border-bottom: 1px solid var(--mull);
 }
-.nav-logo img { height: 32px; }
-.mah-sing-badge {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border-left: 1px solid rgba(0,0,0,0.1);
-  padding-left: 16px;
-}
-.mah-sing-badge img { height: 32px; }
+.top .lk { height: 46px; width: auto; }
+.top .ms { height: 24px; width: auto; }
 
-/* ── MAIN ── */
-.main {
+main {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 24px;
-  position: relative;
-  background: var(--green-deep);
+  display: flex; align-items: center; justify-content: center;
+  padding: 52px 24px;
 }
-
-/* Decorative bg circles */
-.main::before {
-  content: '';
-  position: fixed;
-  top: -120px;
-  right: -120px;
-  width: 520px;
-  height: 520px;
+.card { max-width: 620px; width: 100%; text-align: center; }
+.tick {
+  width: 64px; height: 64px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
-  pointer-events: none;
-}
-.main::after {
-  content: '';
-  position: fixed;
-  bottom: -80px;
-  left: -80px;
-  width: 380px;
-  height: 380px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(184,147,90,0.06) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-/* ── CARD ── */
-.card {
-  background: var(--white);
-  border-radius: 24px;
-  padding: 56px 48px;
-  max-width: 540px;
-  width: 100%;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.25);
-  text-align: center;
-  position: relative;
-  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes rise {
-  from { opacity: 0; transform: translateY(28px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* Checkmark */
-.check-wrap {
-  width: 76px;
-  height: 76px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--green-mid), var(--green-deep));
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin: 0 auto 24px;
-  animation: pop 0.5s 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  border: 1.5px solid var(--gold-light);
+  display: flex; align-items: center; justify-content: center;
 }
-@keyframes pop {
-  from { transform: scale(0); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
+.tick svg { width: 28px; height: 28px; stroke: var(--gold-light); stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.eyebrow {
+  font: 700 12px/1.6 var(--fb);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 14px;
 }
-.check-wrap svg { width: 34px; height: 34px; }
+h1 {
+  font: 500 clamp(34px, 6vw, 54px)/1.12 var(--fd);
+  color: var(--cream-ink);
+  margin-bottom: 18px;
+}
+h1 em { font-style: normal; color: var(--gold-light); }
+.rule { width: 64px; height: 2px; background: var(--gold-light); margin: 0 auto 20px; }
+.sub { font: 400 15.5px/1.7 var(--fb); color: var(--cream-dim); margin-bottom: 26px; }
+.sub strong { color: var(--cream-ink); }
 
-.card h1 {
-  font-family: var(--font-display);
-  font-size: 36px;
-  font-weight: 600;
-  color: var(--green-deep);
-  line-height: 1.2;
-  margin-bottom: 4px;
+.receive {
+  border: 1px solid var(--mull);
+  background: var(--night3);
+  padding: 20px 22px;
+  margin-bottom: 26px;
 }
-
-/* Gold divider */
-.gold-line {
-  width: 48px;
-  height: 2px;
-  background: linear-gradient(90deg, var(--gold), var(--gold-light));
-  margin: 16px auto;
-  border-radius: 2px;
-}
-
-.card .subtitle {
-  font-size: 15px;
-  color: var(--text-mid);
-  line-height: 1.7;
-  margin-bottom: 28px;
-}
-.card .subtitle strong {
-  color: var(--green-deep);
-}
-
-/* ── RECEIVE BOX ── */
-.receive-box {
-  background: var(--cream);
-  border-radius: 14px;
-  padding: 24px 28px;
-  margin-bottom: 28px;
-  text-align: left;
-}
-.receive-box h3 {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--green-deep);
-  margin-bottom: 16px;
-}
-.receive-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.receive-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
-  color: var(--text-mid);
-  font-weight: 500;
-}
-.receive-item .bullet {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.receive-item .bullet svg {
-  width: 20px;
-  height: 20px;
-}
-
-/* ── CTAs ── */
-.btn-wa {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: #25D366;
-  color: #fff;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 15px;
-  padding: 14px 32px;
-  border-radius: 10px;
-  text-decoration: none;
-  width: 100%;
-  justify-content: center;
-  transition: background 0.2s, transform 0.15s;
+.receive h2 {
+  font: 700 12px/1.6 var(--fb);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-light);
   margin-bottom: 12px;
 }
-.btn-wa:hover { background: #1ebe5e; transform: translateY(-1px); }
-.btn-wa svg { width: 22px; height: 22px; flex-shrink: 0; }
+.r-items { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.r-item {
+  display: inline-flex; align-items: center; gap: 7px;
+  font: 700 13.5px/1.4 var(--fb);
+  color: var(--cream-ink);
+  border: 1px solid var(--mull);
+  padding: 9px 15px;
+}
+.r-item .ck { color: var(--gold-light); }
 
-.btn-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--green-deep);
-  text-decoration: none;
-  padding: 12px 28px;
-  border: 1.5px solid var(--green-deep);
-  border-radius: 10px;
-  width: 100%;
-  justify-content: center;
-  transition: all 0.2s;
+.acts { display: flex; flex-direction: column; gap: 12px; max-width: 420px; margin: 0 auto 18px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  font: 700 15px/1.3 var(--fb);
+  padding: 16px 26px;
+  border-radius: 0;
+  transition: background 0.18s, border-color 0.18s;
 }
-.btn-back:hover { background: var(--green-deep); color: var(--white); }
+.btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+.btn-p { background: var(--coral); color: #fff; }
+.btn-p:hover { background: var(--coral-hover); }
+.btn-o { border: 1.5px solid rgba(242,233,218,0.45); color: var(--cream-ink); }
+.btn-o:hover { background: rgba(242,233,218,0.12); }
+.trust {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  flex-wrap: wrap;
+  font: 400 12.5px/1.6 var(--fb);
+  color: var(--cream-dim);
+}
+.trust .dot { color: var(--mull); }
 
-/* Trust row */
-.trust-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 24px;
-  font-size: 12px;
-  color: var(--text-light);
-  font-weight: 500;
+footer { background: var(--dark); border-top: 1px solid var(--mull); }
+.f-in { max-width: 860px; margin: 0 auto; padding: 34px 28px; text-align: center; }
+.f-contact { font: 400 13.5px/1.7 var(--fb); color: var(--cream-dim); margin-bottom: 14px; }
+.f-contact a.tel { font: 500 26px/1.3 var(--fd); color: var(--cream-ink); display: block; margin: 4px 0 2px; }
+.f-contact a:hover { color: var(--gold-light); }
+.f-socials { display: flex; justify-content: center; gap: 12px; margin-bottom: 18px; }
+.f-socials a {
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px;
+  border: 1px solid rgba(212,176,122,0.3);
+  transition: border-color 0.2s;
 }
-.trust-row span.dot { color: var(--gold-light); }
-
-/* ── FOOTER ── */
-.footer {
-  background: var(--white);
-  border-top: 1px solid rgba(0,0,0,0.06);
-  padding: 32px 48px;
-}
-.footer-inner {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-}
-.footer-logo { margin-bottom: 16px; }
-.footer-logo img { height: 28px; margin: 0 auto; }
-.footer-contact {
-  font-size: 13px;
-  color: var(--text-mid);
-  line-height: 1.8;
-  margin-bottom: 16px;
-}
-.footer-contact a {
-  color: var(--green-deep);
-  text-decoration: none;
-  font-weight: 500;
-}
-.footer-contact a:hover { text-decoration: underline; }
-.footer-socials {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-.footer-socials a img {
-  width: 24px;
-  height: 24px;
-  opacity: 0.6;
-  transition: opacity 0.2s;
-}
-.footer-socials a:hover img { opacity: 1; }
-.footer-disclaimer {
-  font-size: 10px;
-  color: var(--text-light);
-  line-height: 1.6;
-  border-top: 1px solid rgba(0,0,0,0.06);
-  padding-top: 16px;
-}
-
-/* ── RESPONSIVE ── */
-@media (max-width: 640px) {
-  .nav { padding: 14px 20px; }
-  .mah-sing-badge { display: none; }
-  .card { padding: 36px 24px; border-radius: 18px; }
-  .card h1 { font-size: 30px; }
-  .main { padding: 40px 16px; }
-  .footer { padding: 24px 20px; }
-  .receive-box { padding: 20px; }
-}
-
-@media (min-width: 1024px) {
-  .nav-logo img { height: 40px; }
-}
+.f-socials a:hover { border-color: var(--gold-light); }
+.f-socials img { width: 18px; height: 18px; object-fit: contain; }
+.f-disc { font: 400 11.5px/1.7 var(--fb); color: var(--cream-dim); }
 </style>
 </head>
 <body>
@@ -336,110 +172,66 @@ body {
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PDJTGTFL"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-<!-- NAV -->
-<nav class="nav">
-  <div class="nav-logo">
-    <a href="/">
-      <img src="https://www.ver2.m-legasi.com.my/assets/M-Legasi-logo-Green.svg" alt="M Legasi Logo">
-    </a>
-  </div>
-  <div class="mah-sing-badge">
-    <a href="https://www.mahsing.com.my/" target="_blank" rel="noopener">
-      <img src="https://www.ver2.m-legasi.com.my/assets/Mah-Sing-Logo-2-1536x515.png" alt="Mah Sing">
-    </a>
-  </div>
-</nav>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5RWKMV2V"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
-<!-- MAIN -->
-<main class="main">
+<div class="top">
+  <a href="/"><img class="lk" src="/assets/M-Legasi-logo-Cream.svg" alt="M Legasi Semenyih"></a>
+  <a href="https://www.mahsing.com.my/" target="_blank" rel="noopener"><img class="ms" src="/assets/mahsing-logo-white.png" alt="Mah Sing"></a>
+</div>
+
+<main>
   <div class="card">
+    <div class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4.5 12.5 5 5L19.5 7"/></svg></div>
+    <div class="eyebrow">Registration received</div>
+    <h1>Thank you. Your <em>legacy</em> begins.</h1>
+    <div class="rule" aria-hidden="true"></div>
+    <p class="sub">Your registration has been received. Our team will send you the <strong>complete price list</strong> shortly via WhatsApp or email.</p>
 
-    <!-- Checkmark -->
-    <div class="check-wrap">
-      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 18.5L14.5 25L28 11" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-
-    <h1>Thank You!</h1>
-    <div class="gold-line"></div>
-    <p class="subtitle">
-      Your registration has been received.<br>
-      Our team will send you the <strong>complete price list</strong> shortly via WhatsApp or email.
-    </p>
-
-    <!-- What you'll receive -->
-    <div class="receive-box">
-      <h3>You'll Receive:</h3>
-      <div class="receive-list">
-        <div class="receive-item">
-          <span class="bullet"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#2A5E47"/><path d="M6 10.5L9 13.5L14.5 7.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          Layout Plan
-        </div>
-        <div class="receive-item">
-          <span class="bullet"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#2A5E47"/><path d="M6 10.5L9 13.5L14.5 7.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          Pricing
-        </div>
-        <div class="receive-item">
-          <span class="bullet"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#2A5E47"/><path d="M6 10.5L9 13.5L14.5 7.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          Loan Assistant
-        </div>
+    <div class="receive">
+      <h2>You'll receive</h2>
+      <div class="r-items">
+        <span class="r-item"><span class="ck">✓</span>Layout Plan</span>
+        <span class="r-item"><span class="ck">✓</span>Pricing</span>
+        <span class="r-item"><span class="ck">✓</span>Loan Assistant</span>
       </div>
     </div>
 
-    <!-- CTAs -->
-    <a class="btn-wa" href="https://wa.me/601113278493?text=Hi%2C%20I%20just%20registered%20on%20the%20M%20Legasi%20website.%20Can%20I%20get%20the%20price%20list%3F" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-      </svg>
-      Chat With Us on WhatsApp
-    </a>
+    <div class="acts">
+      <a class="btn btn-p" href="https://wa.me/601113278493?text=Hi%2C%20I%20just%20registered%20on%20the%20M%20Legasi%20website.%20Can%20I%20get%20the%20price%20list%3F" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Chat With Us on WhatsApp
+      </a>
+      <a class="btn btn-o" href="/">Continue Exploring M Legasi</a>
+    </div>
 
-    <a class="btn-back" href="/">Continue Exploring M Legasi</a>
-
-    <div class="trust-row">
+    <div class="trust">
       <span>No spam</span>
       <span class="dot">·</span>
       <span>Instant WhatsApp reply</span>
       <span class="dot">·</span>
       <span>Unsubscribe anytime</span>
     </div>
-
   </div>
 </main>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-logo">
-      <a href="https://www.mahsing.com.my/" target="_blank" rel="noopener">
-        <img src="https://www.ver2.m-legasi.com.my/assets/mahsing_logo.png" alt="Mah Sing Group">
-      </a>
-    </div>
-    <div class="footer-contact">
-      <p>For further enquiries, please contact:</p>
-      <a href="tel:0392123355">03 9212 3355</a> &nbsp;|&nbsp;
+<footer>
+  <div class="f-in">
+    <div class="f-contact">
+      For further enquiries, please contact:
+      <a class="tel" href="tel:0392123355">03 9212 3355</a>
       <a href="mailto:m-legasi@mahsing.com.my">m-legasi@mahsing.com.my</a>
     </div>
-    <div class="footer-socials">
-      <a href="https://web.facebook.com/mahsing" target="_blank" rel="noopener" aria-label="Facebook">
-        <img src="https://www.ver2.m-legasi.com.my/assets/facebook_icon-2.png" alt="Facebook">
-      </a>
-      <a href="https://www.instagram.com/mahsinggroup/" target="_blank" rel="noopener" aria-label="Instagram">
-        <img src="https://www.ver2.m-legasi.com.my/assets/instagram_icon.png" alt="Instagram">
-      </a>
-      <a href="https://www.youtube.com/mahsinggroup" target="_blank" rel="noopener" aria-label="YouTube">
-        <img src="https://www.ver2.m-legasi.com.my/assets/youtube_icon.png" alt="YouTube">
-      </a>
-      <a href="https://www.linkedin.com/company/mah-sing-group/" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <img src="https://www.ver2.m-legasi.com.my/assets/linkedin_icon.png" alt="LinkedIn">
-      </a>
+    <div class="f-socials">
+      <a href="https://web.facebook.com/mahsing" target="_blank" rel="noopener" aria-label="Facebook"><img src="/assets/facebook_icon-2.png" alt="Facebook"></a>
+      <a href="https://www.instagram.com/mahsinggroup/" target="_blank" rel="noopener" aria-label="Instagram"><img src="/assets/instagram_icon.png" alt="Instagram"></a>
+      <a href="https://www.youtube.com/mahsinggroup" target="_blank" rel="noopener" aria-label="YouTube"><img src="/assets/youtube_icon.png" alt="YouTube"></a>
+      <a href="https://www.linkedin.com/company/mah-sing-group/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="/assets/linkedin_icon.png" alt="LinkedIn"></a>
     </div>
-    <div class="footer-disclaimer">
-      Disclaimer: All information contained herein is for reference only and is subject to change without prior notice. Visual and images used are for illustration purposes only and may not represent the actual product. Mah Sing Group reserves the right to amend any information without prior notice.
-    </div>
+    <p class="f-disc">Disclaimer: All information contained herein is for reference only and is subject to change without prior notice. Visual and images used are for illustration purposes only and may not represent the actual product. Mah Sing Group reserves the right to amend any information without prior notice.</p>
   </div>
 </footer>
-
 </body>
 </html>
