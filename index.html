@@ -1286,11 +1286,10 @@ html.cap-clean .thankyou-overlay { display: none !important; }
 .facility-lightbox-close:hover { background: rgba(212,176,122,0.15); }
 
 /* ============ OVERVIEW (R8: MGM RTS split — media + dark panel) ============ */
-.intro-section { padding: 92px 48px; max-width: 1296px; margin: 0 auto; }
-@media (max-width: 640px) { .intro-section { padding: 64px 24px; } }
+.intro-section { padding: 0; }
 .ov-split {
   display: grid;
-  border: 1px solid var(--hairline);
+  border-block: 1px solid var(--hairline);
   background: var(--night2);
   overflow: hidden;
 }
@@ -1300,7 +1299,7 @@ html.cap-clean .thankyou-overlay { display: none !important; }
   min-width: 0;
   aspect-ratio: 4 / 3;
 }
-@media (min-width: 1024px) { .ov-media { aspect-ratio: auto; min-height: 560px; } }
+@media (min-width: 1024px) { .ov-media { aspect-ratio: auto; min-height: 620px; } }
 .ov-media img {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
@@ -1337,13 +1336,15 @@ html.cap-clean .thankyou-overlay { display: none !important; }
   text-shadow: 0 1px 10px rgba(0,0,0,0.85);
 }
 .ov-panel {
-  padding: 36px 24px 34px;
+  padding: 44px 24px 46px;
   color: var(--cream-ink);
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-@media (min-width: 1024px) { .ov-panel { padding: 56px 52px; } }
+@media (min-width: 1024px) { .ov-panel { padding: 72px 64px; } }
+@media (min-width: 1360px) { .ov-panel { padding: 88px 96px; } }
+.ov-panel > * { max-width: 640px; }
 .ov-eyebrow {
   display: block;
   font: 700 12px/1.6 var(--font-body);
@@ -3082,7 +3083,7 @@ body.lead-drawer-open { overflow: hidden; }
     </div>
 
     <div class="vr-acts">
-      <a class="btn btn-o" href="https://m-legasi.com.my/360-walkthrough/" target="_blank" rel="noopener">Open full screen</a>
+      <a class="btn btn-p" href="https://m-legasi.com.my/360-walkthrough/" target="_blank" rel="noopener">Open full screen</a>
     </div>
   </div>
 </section>
