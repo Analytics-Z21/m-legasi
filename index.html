@@ -1285,127 +1285,115 @@ html.cap-clean .thankyou-overlay { display: none !important; }
 }
 .facility-lightbox-close:hover { background: rgba(212,176,122,0.15); }
 
-/* ============ INTRO (cream band) ============ */
-.intro-section {
-  padding: 92px 48px;
-  min-width: 0;
+/* ============ OVERVIEW (R8: MGM RTS split — media + dark panel) ============ */
+.intro-section { padding: 92px 48px; max-width: 1296px; margin: 0 auto; }
+@media (max-width: 640px) { .intro-section { padding: 64px 24px; } }
+.ov-split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-  max-width: 1296px;
-  margin: 0 auto;
-}
-@media (max-width: 900px) {
-  .intro-section { grid-template-columns: 1fr; gap: 36px; padding: 64px 24px; }
-}
-.intro-text { min-width: 0; }
-.intro-text h2 {
-  overflow-wrap: break-word;
-  font-family: var(--font-display);
-  font-size: clamp(30px, 4.2vw, 42px);
-  font-weight: 500;
-  color: var(--night2);
-  line-height: 1.14;
-  margin-bottom: 16px;
-}
-.intro-text h2::after {
-  content: '';
-  display: block;
-  width: 64px; height: 2px;
-  background: var(--gold);
-  margin-top: 18px;
-}
-.intro-text p {
-  font-size: 15.5px;
-  color: var(--text-mid);
-  line-height: 1.7;
-  margin: 18px 0 26px;
-}
-.stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; min-width: 0; }
-@media (max-width: 480px) { .stat-grid { gap: 10px; } }
-.stat-card {
-  background: var(--white);
   border: 1px solid var(--hairline);
-  border-radius: 0;
-  padding: 20px 22px;
-  transition: transform 0.2s;
-}
-.stat-card:hover { transform: translateY(-2px); }
-.stat-card.highlight { background: var(--night2); border-color: var(--night2); }
-.stat-card.highlight .stat-value, .stat-card.highlight .stat-desc { color: var(--cream-ink); }
-.stat-card.highlight .stat-label { color: var(--gold-light); }
-.stat-label {
-  font-size: 11.5px;
-  color: var(--gold-text);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 4px;
-}
-.stat-value {
-  font-family: var(--font-display);
-  font-size: 34px;
-  font-weight: 500;
-  color: var(--night2);
-  font-variant-numeric: tabular-nums;
-}
-.stat-desc { font-size: 12.5px; color: var(--text-light); margin-top: 2px; }
-@media (max-width: 640px) {
-  .stat-card { padding: 13px 13px; }
-  .stat-value { font-size: 23px; }
-  .stat-label { font-size: 11px; letter-spacing: 0.05em; margin-bottom: 2px; }
-  .stat-desc { font-size: 12px; }
-}
-
-/* Overview: RTS-style visual (MGM pattern) — masterplan + big stat overlay */
-.ov-visual {
-  grid-column: 1 / -1;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid var(--hairline);
-  aspect-ratio: 4 / 5;
   background: var(--night2);
-  margin-top: 10px;
+  overflow: hidden;
 }
-@media (min-width: 768px) { .ov-visual { aspect-ratio: 16 / 10; } }
-@media (min-width: 1024px) { .ov-visual { aspect-ratio: 16 / 8; } }
-.ov-visual > img {
+@media (min-width: 1024px) { .ov-split { grid-template-columns: 1.04fr 0.96fr; } }
+.ov-media {
+  position: relative;
+  min-width: 0;
+  aspect-ratio: 4 / 3;
+}
+@media (min-width: 1024px) { .ov-media { aspect-ratio: auto; min-height: 560px; } }
+.ov-media img {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center 100%;
 }
-.ov-visual::after {
+.ov-media::after {
   content: '';
   position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(4,29,20,0.04) 30%, rgba(4,29,20,0.36) 62%, rgba(4,29,20,0.86) 100%);
+  background: linear-gradient(180deg, rgba(4,29,20,0.02) 34%, rgba(4,29,20,0.34) 62%, rgba(4,29,20,0.85) 100%);
   pointer-events: none;
 }
-.ov-overlay { position: absolute; left: 22px; right: 22px; bottom: 20px; z-index: 2; }
-@media (min-width: 1024px) { .ov-overlay { left: 44px; right: auto; bottom: 36px; } }
+.ov-overlay { position: absolute; left: 22px; right: 22px; bottom: 18px; z-index: 2; }
+@media (min-width: 1024px) { .ov-overlay { left: 36px; right: auto; bottom: 30px; } }
 .ov-big {
   display: flex; align-items: baseline; gap: 10px;
-  font: 500 64px/1 var(--font-display);
+  font: 500 56px/1 var(--font-display);
   color: var(--cream-ink);
   text-shadow: 0 3px 18px rgba(0,0,0,0.7);
   font-variant-numeric: tabular-nums;
 }
-@media (min-width: 1024px) { .ov-big { font-size: 92px; } }
+@media (min-width: 1024px) { .ov-big { font-size: 84px; } }
 .ov-big span {
-  font: 600 19px/1.3 var(--font-body);
+  font: 600 18px/1.3 var(--font-body);
   color: var(--gold-light);
   letter-spacing: 0.04em;
 }
-@media (min-width: 1024px) { .ov-big span { font-size: 22px; } }
+@media (min-width: 1024px) { .ov-big span { font-size: 21px; } }
 .ov-lab {
   font: 400 13.5px/1.55 var(--font-body);
   color: var(--cream-ink);
   margin-top: 8px;
-  max-width: 44ch;
+  max-width: 40ch;
   text-shadow: 0 1px 10px rgba(0,0,0,0.85);
 }
-@media (min-width: 1024px) { .ov-lab { font-size: 14.5px; } }
+.ov-panel {
+  padding: 36px 24px 34px;
+  color: var(--cream-ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (min-width: 1024px) { .ov-panel { padding: 56px 52px; } }
+.ov-eyebrow {
+  display: block;
+  font: 700 12px/1.6 var(--font-body);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 12px;
+}
+.ov-panel h2 {
+  font: 500 clamp(27px, 3.4vw, 38px)/1.18 var(--font-display);
+  color: var(--cream-ink);
+  margin-bottom: 16px;
+  text-wrap: balance;
+}
+.ov-copy {
+  font: 400 15px/1.75 var(--font-body);
+  color: var(--cream-dim);
+}
+.ov-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--mull);
+  margin-top: 24px;
+}
+.ov-stat { padding: 16px 6px 14px 0; }
+.ov-stat:nth-child(even) { border-left: 1px solid var(--mull); padding-left: 18px; }
+.ov-stat:nth-child(n+3) { border-top: 1px solid var(--mull); }
+.ov-stat b {
+  display: block;
+  font: 500 clamp(24px, 2.6vw, 30px)/1.15 var(--font-display);
+  color: var(--cream-ink);
+  font-variant-numeric: tabular-nums;
+}
+.ov-stat i {
+  display: block;
+  overflow-wrap: break-word;
+  font: 700 11px/1.5 var(--font-body);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  font-style: normal;
+  margin-top: 4px;
+}
+.ov-note {
+  font: 400 12px/1.6 var(--font-body);
+  color: var(--cream-dim);
+  margin-top: 10px;
+}
+.ov-cta { margin-top: 22px; align-self: flex-start; }
+@media (max-width: 560px) { .ov-cta { align-self: stretch; } }
 
 /* ============ WHY (R3: visual feature mosaic, white band) ============ */
 .why-section { padding: 92px 48px; background: var(--white); }
@@ -2841,41 +2829,30 @@ body.lead-drawer-open { overflow: hidden; }
   </div>
 </section>
 
-<!-- STATS + INTRO -->
+<!-- OVERVIEW (R8): full MGM RTS-Link composition per client reference — visual with
+     the 500-acre overlay kept, joined to a dark panel: eyebrow, serif heading (SEO
+     H2 verbatim), intro copy verbatim, MGM-style divided stat cells, CTA. -->
 <section class="intro-section" id="overview">
-  <div class="intro-text">
-    <h2>New Double-Storey Terrace Homes in Semenyih</h2>
-    <p>M Legasi is a freehold landed community surrounded by greenery, with easy access to schools, highways, and nearby amenities. Designed as a walkable 15-minute city, life here flows effortlessly between home, nature, retail, and recreation.</p>
-    <a href="#register" class="btn-primary">Register & Get Price List →</a>
-  </div>
-  <div class="stat-grid">
-    <div class="stat-card highlight">
-      <div class="stat-label">Market demand</div>
-      <div class="stat-value">90%</div>
-      <div class="stat-desc">Phase 1A sold on launch weekend</div>
+  <div class="ov-split">
+    <div class="ov-media">
+      <img src="assets/gal-masterplan.jpg" alt="Aerial view of the 500-acre M Legasi township">
+      <div class="ov-overlay">
+        <div class="ov-big num">500<span>acres</span></div>
+        <div class="ov-lab">One masterplanned freehold township, with a 13-acre Central Park at its heart</div>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="stat-label">Starting from</div>
-      <div class="stat-value">RM535k</div>
-      <div class="stat-desc">4 Bed · 3 Bath · Freehold</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Monthly instalment</div>
-      <div class="stat-value">~RM1,800</div>
-      <div class="stat-desc">Based on 90% financing*</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Connectivity</div>
-      <div class="stat-value">35km</div>
-      <div class="stat-desc">Distance to KLCC</div>
-    </div>
-  </div>
-
-  <div class="ov-visual">
-    <img src="assets/gal-masterplan.jpg" alt="Aerial masterplan of the 500-acre M Legasi township">
-    <div class="ov-overlay">
-      <div class="ov-big num">500<span>acres</span></div>
-      <div class="ov-lab">One masterplanned freehold township, with a 13-acre Central Park at its heart</div>
+    <div class="ov-panel">
+      <span class="ov-eyebrow">The Township</span>
+      <h2>New Double-Storey Terrace Homes in Semenyih</h2>
+      <p class="ov-copy">M Legasi is a freehold landed community surrounded by greenery, with easy access to schools, highways, and nearby amenities. Designed as a walkable 15-minute city, life here flows effortlessly between home, nature, retail, and recreation.</p>
+      <div class="ov-stats">
+        <div class="ov-stat"><b class="num">90%</b><i>Phase 1A launch take-up</i></div>
+        <div class="ov-stat"><b class="num">RM535k</b><i>Starting from</i></div>
+        <div class="ov-stat"><b class="num">~RM1,800</b><i>Monthly instalment*</i></div>
+        <div class="ov-stat"><b class="num">35km</b><i>To KLCC</i></div>
+      </div>
+      <p class="ov-note">*Based on 90% financing, for reference only.</p>
+      <a href="#register" class="btn btn-p ov-cta">Register &amp; Get Price List &rarr;</a>
     </div>
   </div>
 </section>
