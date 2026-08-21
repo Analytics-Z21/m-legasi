@@ -1965,34 +1965,39 @@ html.cap-clean .thankyou-overlay { display: none !important; }
 }
 .seo-toggle-btn:hover { background: var(--night2); color: var(--cream-ink); }
 
-/* ============ DEVELOPER (R3: Aurora/MGM pattern, white band, moved up) ============ */
-.dev-trust { background: var(--white); padding: 88px 24px; border-top: 1px solid var(--hairline); }
+/* ============ DEVELOPER (R5: Aurora dark treatment per client reference) ============ */
+.dev-trust {
+  background: var(--dark);
+  padding: 92px 24px;
+  border-top: 1px solid var(--mull);
+  border-bottom: 1px solid var(--mull);
+}
 .dev2 { max-width: 640px; margin: 0 auto; text-align: center; }
 .dev2 .eyebrow {
   display: block;
   font: 700 12px/1.6 var(--font-body);
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--gold-text);
-  margin-bottom: 12px;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 14px;
 }
 .dev2 h2 {
-  font: 500 clamp(26px, 3.6vw, 38px)/1.18 var(--font-display);
-  color: var(--night2);
+  font: 500 clamp(28px, 3.8vw, 40px)/1.18 var(--font-display);
+  color: var(--cream-ink);
   text-wrap: balance;
 }
-.dev-logo { display: block; width: min(250px, 62%); height: auto; margin: 26px auto 18px; }
-.dev-copy { font: 400 15px/1.7 var(--font-body); color: var(--text-mid); margin-bottom: 26px; }
+.dev-logo { display: block; width: min(280px, 68%); height: auto; margin: 30px auto 22px; }
+.dev-copy { font: 400 15px/1.75 var(--font-body); color: var(--cream-dim); margin-bottom: 28px; }
 .dev-trust-stats { display: flex; gap: 44px; justify-content: center; }
 .dev-stat { text-align: center; }
 .dev-stat-num {
   font: 500 36px/1.1 var(--font-display);
-  color: var(--night2);
+  color: var(--cream-ink);
   font-variant-numeric: tabular-nums;
 }
 .dev-stat-label {
   font: 700 12px/1.6 var(--font-body);
   letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--text-mid);
+  color: var(--gold-light);
   margin-top: 4px;
 }
 
@@ -3211,17 +3216,17 @@ body.lead-drawer-open { overflow: hidden; }
   </div>
 </section>
 
-<!-- DEVELOPER (R3): moved up (after Location, before Register) and rebuilt to the
-     Aurora/MGM developer pattern with the original MahSing logo. Heading and copy
-     verbatim from the previous build. -->
+<!-- DEVELOPER (R5): Aurora treatment per client reference image — dark band,
+     "This project is built by :", MahSing lockup with the white tagline.
+     The previous heading text lives on verbatim in the copy line. -->
 <section class="dev-trust" id="developer">
   <div class="dev2">
     <span class="eyebrow">The Developer</span>
-    <h2>A Development by Mah Sing Group Berhad</h2>
+    <h2>This project is built by :</h2>
     <a href="https://www.mahsing.com.my/" target="_blank" rel="noopener">
-      <img class="dev-logo" src="assets/Mah-Sing-Logo-2-768x258.png" alt="Mah Sing. Reinvent Spaces. Enhance Life.">
+      <img class="dev-logo" src="assets/mahsing-colour.webp" alt="Mah Sing. Reinvent Spaces. Enhance Life.">
     </a>
-    <p class="dev-copy">Bursa Malaysia listed. Trusted by over 100,000 homeowners across Malaysia.</p>
+    <p class="dev-copy">A Development by Mah Sing Group Berhad. Bursa Malaysia listed. Trusted by over 100,000 homeowners across Malaysia.</p>
     <div class="dev-trust-stats">
       <div class="dev-stat">
         <div class="dev-stat-num">30+</div>
