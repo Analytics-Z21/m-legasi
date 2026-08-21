@@ -1358,6 +1358,55 @@ html.cap-clean .thankyou-overlay { display: none !important; }
   .stat-desc { font-size: 12px; }
 }
 
+/* Overview: RTS-style visual (MGM pattern) — masterplan + big stat overlay */
+.ov-visual {
+  grid-column: 1 / -1;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  aspect-ratio: 4 / 5;
+  background: var(--night2);
+  margin-top: 10px;
+}
+@media (min-width: 768px) { .ov-visual { aspect-ratio: 16 / 10; } }
+@media (min-width: 1024px) { .ov-visual { aspect-ratio: 16 / 8; } }
+.ov-visual > img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 100%;
+}
+.ov-visual::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(4,29,20,0.04) 30%, rgba(4,29,20,0.36) 62%, rgba(4,29,20,0.86) 100%);
+  pointer-events: none;
+}
+.ov-overlay { position: absolute; left: 22px; right: 22px; bottom: 20px; z-index: 2; }
+@media (min-width: 1024px) { .ov-overlay { left: 44px; right: auto; bottom: 36px; } }
+.ov-big {
+  display: flex; align-items: baseline; gap: 10px;
+  font: 500 64px/1 var(--font-display);
+  color: var(--cream-ink);
+  text-shadow: 0 3px 18px rgba(0,0,0,0.7);
+  font-variant-numeric: tabular-nums;
+}
+@media (min-width: 1024px) { .ov-big { font-size: 92px; } }
+.ov-big span {
+  font: 600 19px/1.3 var(--font-body);
+  color: var(--gold-light);
+  letter-spacing: 0.04em;
+}
+@media (min-width: 1024px) { .ov-big span { font-size: 22px; } }
+.ov-lab {
+  font: 400 13.5px/1.55 var(--font-body);
+  color: var(--cream-ink);
+  margin-top: 8px;
+  max-width: 44ch;
+  text-shadow: 0 1px 10px rgba(0,0,0,0.85);
+}
+@media (min-width: 1024px) { .ov-lab { font-size: 14.5px; } }
+
 /* ============ WHY (R3: visual feature mosaic, white band) ============ */
 .why-section { padding: 92px 48px; background: var(--white); }
 @media (max-width: 640px) { .why-section { padding: 64px 24px; } }
@@ -1432,6 +1481,105 @@ html.cap-clean .thankyou-overlay { display: none !important; }
 }
 .wm-card p { font: 400 13px/1.6 var(--font-body); color: var(--text-mid); }
 
+/* ============ STORY (R7: EVERY NEED WITHIN REACH, MGM story cards) ============ */
+.story-section { padding: 92px 0 84px; background: var(--sage); }
+@media (min-width: 1024px) { .story-section { padding: 100px 48px 92px; } }
+.story-inner { max-width: 1240px; margin: 0 auto; }
+.story-section .section-header { padding: 0 24px; }
+.story-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 78%;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 0 24px 6px;
+}
+.story-grid::-webkit-scrollbar { display: none; }
+@media (min-width: 1024px) {
+  .story-grid { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); grid-auto-columns: unset; overflow: visible; padding: 0; gap: 16px; }
+}
+.story-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 4.4;
+  border: 1px solid var(--hairline);
+  border-radius: 0;
+  overflow: hidden;
+  isolation: isolate;
+  cursor: pointer;
+  scroll-snap-align: start;
+  background-color: var(--night2);
+  background-image: var(--img);
+  background-size: cover;
+  background-position: center;
+  text-align: left;
+  padding: 0;
+  font-family: var(--font-body);
+  transition: border-color 0.3s;
+}
+@media (min-width: 1024px) { .story-card { aspect-ratio: 3 / 4.1; } }
+.story-card:hover { border-color: var(--gold-light); }
+.story-veil {
+  position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(180deg, rgba(4,29,20,0.05) 0%, rgba(4,29,20,0.4) 45%, rgba(4,29,20,0.93) 100%);
+  transition: background 0.3s;
+  pointer-events: none;
+}
+.story-card.on .story-veil { background: rgba(4,29,20,0.82); }
+.story-body {
+  position: absolute; left: 18px; right: 18px; bottom: 16px; z-index: 2;
+  display: block;
+  color: var(--cream-ink);
+}
+.story-num {
+  display: inline-block;
+  font: 700 11px/1.4 var(--font-body);
+  letter-spacing: 0.16em;
+  color: var(--gold-light);
+  border: 1px solid rgba(212,176,122,0.5);
+  padding: 4px 10px;
+  margin-bottom: 10px;
+  background: rgba(4,29,20,0.45);
+}
+.story-card h3 {
+  font: 500 21px/1.22 var(--font-display);
+  color: var(--cream-ink);
+  margin-bottom: 6px;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  text-wrap: balance;
+}
+@media (min-width: 1024px) { .story-card h3 { font-size: 23px; } }
+.story-txt {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.4s ease, opacity 0.3s ease;
+}
+.story-txt > span {
+  display: block;
+  min-height: 0;
+  overflow: hidden;
+  font: 400 13px/1.6 var(--font-body);
+  color: var(--cream-ink);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+}
+.story-card.on .story-txt { grid-template-rows: 1fr; opacity: 1; }
+.story-card.on .story-txt > span { padding-top: 2px; padding-bottom: 4px; }
+.story-more {
+  display: inline-flex; align-items: center; gap: 6px;
+  font: 700 12px/1.4 var(--font-body);
+  color: var(--gold-light);
+  border-bottom: 1.5px solid rgba(212,176,122,0.5);
+  padding-bottom: 2px;
+  margin-top: 6px;
+  transition: opacity 0.2s;
+}
+.story-more::after { content: '+'; font-size: 14px; }
+.story-card.on .story-more { display: none; }
+
 /* ============ AERIAL / VIRTUAL TOUR (dark band, masterplan bg) ============ */
 .aerial {
   position: relative;
@@ -1479,92 +1627,86 @@ html.cap-clean .thankyou-overlay { display: none !important; }
   max-width: 56ch;
   margin: 0 auto 34px;
 }
-.aerial-tour-card {
-  display: block;
-  position: relative;
-  border-radius: 0;
-  overflow: hidden;
-  background: var(--dark);
-  border: 1px solid var(--mull);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.45);
-  text-decoration: none;
-  color: var(--cream-ink);
-  transition: transform 0.4s cubic-bezier(.22,.61,.36,1), border-color 0.3s;
+.vr-mark {
+  font: 500 56px/1 var(--font-display);
+  color: var(--gold-light);
+  margin-bottom: 10px;
 }
-.aerial-tour-card:hover { transform: translateY(-4px); border-color: var(--gold-light); }
-.aerial-tour-image { position: relative; aspect-ratio: 16 / 9; overflow: hidden; }
-.aerial-tour-image img {
+@media (min-width: 1024px) { .vr-mark { font-size: 76px; } }
+.vr-chips { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin: -14px 0 30px; }
+.vr-chips span {
+  font: 600 12.5px/1.4 var(--font-body);
+  color: var(--cream-ink);
+  border: 1px solid var(--mull);
+  padding: 7px 14px;
+}
+.vr-stage {
+  position: relative;
+  border: 1px solid var(--mull);
+  background: var(--dark);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+  overflow: hidden;
+}
+.vr-preview {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0; border: none;
+  cursor: pointer;
+  background: var(--dark);
+}
+.vr-preview img {
+  position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
-  display: block;
-  transition: transform 0.6s ease;
+  opacity: 0.6;
 }
-.aerial-tour-card:hover .aerial-tour-image img { transform: scale(1.04); }
-.aerial-tour-image::after {
+.vr-preview::after {
   content: '';
   position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.55) 100%);
+  background: radial-gradient(ellipse at center, rgba(4,29,20,0.1) 30%, rgba(4,29,20,0.62) 100%);
   pointer-events: none;
 }
-.aerial-play {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex; flex-direction: column; align-items: center; gap: 14px;
-  pointer-events: none;
-  z-index: 1;
-}
-.aerial-play-icon {
-  width: 84px; height: 84px;
-  border-radius: 50%;
-  background: var(--coral);
-  color: #fff;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 14px 36px rgba(0,0,0,0.4);
-  transition: transform 0.3s;
-  position: relative;
-}
-.aerial-play-icon::before {
-  content: '';
-  position: absolute; inset: -10px;
-  border-radius: 50%;
-  border: 2px solid rgba(242,233,218,0.5);
-  animation: aerial-pulse 2.4s ease-out infinite;
-}
-@keyframes aerial-pulse {
-  0% { transform: scale(0.85); opacity: 1; }
-  100% { transform: scale(1.4); opacity: 0; }
-}
-@media (prefers-reduced-motion: reduce) { .aerial-play-icon::before { animation: none; } }
-.aerial-tour-card:hover .aerial-play-icon { transform: scale(1.08); }
-.aerial-play-label {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--cream-ink);
-  text-shadow: 0 2px 8px rgba(0,0,0,0.55);
-}
-.aerial-tour-caption {
-  position: absolute;
-  left: 24px; right: 24px; bottom: 22px;
-  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+.vr-ring {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -62%);
   z-index: 2;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  width: 108px; height: 108px;
+  border-radius: 50%;
+  border: 2px solid var(--gold-light);
+  background: rgba(4,29,20,0.72);
+  color: var(--cream-ink);
+  backdrop-filter: blur(4px);
 }
-.aerial-tour-title {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 500;
-  line-height: 1.2;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+.vr-ring b { font: 500 22px/1.1 var(--font-display); color: var(--gold-light); }
+.vr-ring svg { color: var(--cream-ink); }
+@media (prefers-reduced-motion: no-preference) {
+  .vr-preview:hover .vr-ring { transform: translate(-50%, -62%) scale(1.06); transition: transform 0.3s; }
+}
+.vr-cta-label {
+  position: absolute; left: 20px; right: 20px; bottom: 20px;
+  z-index: 2;
+  font: 700 14.5px/1.4 var(--font-body);
+  letter-spacing: 0.04em;
+  color: var(--cream-ink);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+  text-align: center;
+}
+.vr-stage iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 340px;
+  border: none;
+  background: var(--dark);
 }
 @media (max-width: 640px) {
-  .aerial h2 { font-size: 30px; }
-  .aerial-play-icon { width: 64px; height: 64px; }
-  .aerial-play-label { font-size: 12px; }
-  .aerial-tour-caption { left: 16px; right: 16px; bottom: 16px; }
-  .aerial-tour-title { font-size: 17px; }
+  .vr-preview, .vr-stage iframe { aspect-ratio: 4 / 5; }
+  .vr-ring { width: 92px; height: 92px; }
 }
+.vr-acts { margin-top: 18px; }
 
 /* ============ GALLERY (R3: Aurora pattern — snap strip / grid) ============ */
 .gallery-section { padding: 92px 0 84px; background: var(--white); }
@@ -2728,8 +2870,67 @@ body.lead-drawer-open { overflow: hidden; }
       <div class="stat-desc">Distance to KLCC</div>
     </div>
   </div>
+
+  <div class="ov-visual">
+    <img src="assets/gal-masterplan.jpg" alt="Aerial masterplan of the 500-acre M Legasi township">
+    <div class="ov-overlay">
+      <div class="ov-big num">500<span>acres</span></div>
+      <div class="ov-lab">One masterplanned freehold township, with a 13-acre Central Park at its heart</div>
+    </div>
+  </div>
 </section>
 
+
+<!-- STORY (R7): the original site's "EVERY NEED, WITHIN REACH" brand storytelling,
+     rebuilt on the MGM image-forward story-card pattern. Titles and copy verbatim
+     from m-legasi.com.my (2026-08-21 pull); tap a card to reveal its story. -->
+<section class="story-section" id="story">
+  <div class="story-inner">
+    <div class="section-header">
+      <div class="eyebrow">The Township Story</div>
+      <h2>Every Need, Within Reach</h2>
+      <p>Four ideas shape the 500-acre masterplan. Tap each chapter to read its story.</p>
+    </div>
+    <div class="story-grid">
+      <button class="story-card" type="button" aria-expanded="false" style="--img:url('assets/story-1.jpg')">
+        <span class="story-veil" aria-hidden="true"></span>
+        <span class="story-body">
+          <span class="story-num">01</span>
+          <h3>Every Need, Within Reach</h3>
+          <span class="story-txt"><span>A walkable enclave carefully orchestrated using the "15-minute city" principle, where life flows effortlessly between home, retail, nature and more &ndash; each barely a stroll away.</span></span>
+          <span class="story-more" aria-hidden="true">Read the story</span>
+        </span>
+      </button>
+      <button class="story-card" type="button" aria-expanded="false" style="--img:url('assets/story-2.jpg')">
+        <span class="story-veil" aria-hidden="true"></span>
+        <span class="story-body">
+          <span class="story-num">02</span>
+          <h3>Union of Lifestyle &amp; Celebrations</h3>
+          <span class="story-txt"><span>A vibrant commercial, lifestyle and communal hub to shop, dine, and connect &ndash; centrally located, every precinct is thoughtfully positioned around it.</span></span>
+          <span class="story-more" aria-hidden="true">Read the story</span>
+        </span>
+      </button>
+      <button class="story-card" type="button" aria-expanded="false" style="--img:url('assets/story-3.jpg')">
+        <span class="story-veil" aria-hidden="true"></span>
+        <span class="story-body">
+          <span class="story-num">03</span>
+          <h3>Sprawling Park Brings People Together</h3>
+          <span class="story-txt"><span>At the heart of town sits a stunning 13-acre central park with lakes, connected by green corridors that extend to every precinct, tying the community together as one.</span></span>
+          <span class="story-more" aria-hidden="true">Read the story</span>
+        </span>
+      </button>
+      <button class="story-card" type="button" aria-expanded="false" style="--img:url('assets/story-4.jpg')">
+        <span class="story-veil" aria-hidden="true"></span>
+        <span class="story-body">
+          <span class="story-num">04</span>
+          <h3>Every Path Leads to Shared Moments</h3>
+          <span class="story-txt"><span>Delightful garden links, nature walks, bicycle and jogging tracks form a web of safe, leisurely connections, woven into the fabric of the community&rsquo;s shared stories.</span></span>
+          <span class="story-more" aria-hidden="true">Read the story</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</section>
 
 <!-- FACILITIES (Malay audience focus) -->
 <section class="facilities-section" id="facilities">
@@ -2878,27 +3079,34 @@ body.lead-drawer-open { overflow: hidden; }
   </div>
 </section>
 
-<!-- AERIAL / VIRTUAL TOUR -->
+<!-- 360 VR (R7): redesigned so the section unmistakably reads as the 360 experience.
+     The walkthrough is the client's own dedicated fullscreen viewer (no frame
+     restrictions), embedded inline on tap; full-screen link kept. -->
 <section class="aerial" id="vr">
   <div class="aerial-content">
+    <div class="vr-mark" aria-hidden="true">360&deg;</div>
     <h2>Step inside <em>before</em> you visit</h2>
-    <p class="aerial-sub">Walk through Phase 3 from your phone — the show unit interiors, lake views, and 13-acre central park, all in 360°.</p>
+    <p class="aerial-sub">Walk through Phase 3 from your phone &mdash; the show unit interiors, lake views, and 13-acre central park, all in 360&deg;.</p>
+    <div class="vr-chips" aria-hidden="true">
+      <span>Drag to look around</span>
+      <span>Show unit interiors</span>
+      <span>Works on any phone</span>
+    </div>
 
-    <a href="https://m-legasi.com.my/360-walkthrough/" class="aerial-tour-card" target="_blank" rel="noopener" aria-label="Open 360 virtual tour of the show unit">
-      <div class="aerial-tour-image">
-        <img src="assets/Phase_3_Type_A_2_optimized.jpg" alt="Phase 3 show unit exterior — preview of the 360° tour">
-        <div class="aerial-play">
-          <div class="aerial-play-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 6 20 20 12"></polygon></svg>
-          </div>
-          <div class="aerial-play-label">Tour the Show Unit</div>
-        </div>
-        <div class="aerial-tour-caption">
-          <div class="aerial-tour-title">Phase 3 Show Unit · 360°</div>
+    <div class="vr-stage" id="vrStage">
+      <button class="vr-preview" id="vrEnter" type="button" aria-label="Enter the 360 degree walkthrough, loads an interactive viewer">
+        <img src="assets/Phase_3_Type_A_2_optimized.jpg" alt="Phase 3 show unit exterior, preview of the 360 walkthrough">
+        <span class="vr-ring" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 4c5 0 9 1.8 9 4s-4 4-9 4-9-1.8-9-4 4-4 9-4Z"/><path d="M7.5 14.5c-2.7 1.1-4.5 2.7-4.5 4.1 0 2.2 4 3.4 9 3.4s9-1.2 9-3.4c0-1.4-1.8-3-4.5-4.1"/><path d="m14.5 19.5 2 2-2 2"/></svg>
+          <b>360&deg;</b>
+        </span>
+        <span class="vr-cta-label">Tap to enter the 360&deg; walkthrough</span>
+      </button>
+    </div>
 
-        </div>
-      </div>
-    </a>
+    <div class="vr-acts">
+      <a class="btn btn-o" href="https://m-legasi.com.my/360-walkthrough/" target="_blank" rel="noopener">Open full screen</a>
+    </div>
   </div>
 </section>
 
@@ -5180,6 +5388,39 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
       }
     });
   });
+
+  /* ── 3c. Story cards: tap toggles the overlay story (one open at a time) ── */
+  Array.prototype.forEach.call(document.querySelectorAll('.story-card'), function (card) {
+    card.addEventListener('click', function () {
+      var wasOpen = card.classList.contains('on');
+      Array.prototype.forEach.call(document.querySelectorAll('.story-card.on'), function (c) {
+        c.classList.remove('on');
+        c.setAttribute('aria-expanded', 'false');
+      });
+      if (!wasOpen) {
+        card.classList.add('on');
+        card.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  /* ── 3d. 360 VR: tap swaps the preview for the client's own walkthrough viewer ── */
+  var vrEnter = $('vrEnter');
+  if (vrEnter) {
+    vrEnter.addEventListener('click', function () {
+      var stage = $('vrStage');
+      var f = document.createElement('iframe');
+      f.src = 'https://m-legasi.com.my/360-walkthrough/';
+      f.title = 'M Legasi 360 degree walkthrough';
+      f.allow = 'fullscreen; gyroscope; accelerometer';
+      f.setAttribute('allowfullscreen', '');
+      f.setAttribute('loading', 'eager');
+      stage.innerHTML = '';
+      stage.appendChild(f);
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'tour_360_click', tour_mode: 'inline_embed' });
+    });
+  }
 
   /* ── 4. Capture-safe reveal sweep ── */
   window.addEventListener('load', function () {
