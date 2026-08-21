@@ -336,12 +336,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 16px; width: 100%; max-width: 100%; overflow-x: clip; }
+html { scroll-behavior: smooth; font-size: 16px; width: 100%; max-width: 100%; }
 body {
   font-family: var(--font-body);
   color: var(--text-dark);
   background: var(--cream);
-  overflow-x: clip;
   width: 100%; max-width: 100%;
   position: relative;
 }
@@ -668,13 +667,13 @@ html.cap-clean .thankyou-overlay { display: none !important; }
 }
 .hero-body {
   position: relative; z-index: 2;
-  min-height: min(calc(100svh - 40px), 176vw);
+  min-height: min(calc(100svh - var(--ann-h, 42px)), 240vw);
   display: flex; flex-direction: column; justify-content: flex-end;
   width: 100%; max-width: 1240px; margin: 0 auto;
   padding: 150px 24px 72px;
 }
 @media (min-width: 1024px) {
-  .hero-body { min-height: calc(100svh - 40px); justify-content: center; padding: 130px 48px 96px; }
+  .hero-body { min-height: calc(100svh - var(--ann-h, 40px)); justify-content: center; padding: 130px 48px 96px; }
 }
 .hero-inner { width: 100%; max-width: 620px; text-align: left; }
 .h-eyebrow {
@@ -2450,8 +2449,8 @@ body.lead-drawer-open { overflow: hidden; }
     <a href="#why" data-rail>Why</a>
     <a href="#gallery" data-rail>Gallery</a>
     <a href="#location" data-rail>Location</a>
-    <a href="#faq" data-rail>FAQ</a>
     <a href="#register" data-rail>Register</a>
+    <a href="#faq" data-rail>FAQ</a>
   </nav>
 </div>
 
@@ -2468,11 +2467,15 @@ body.lead-drawer-open { overflow: hidden; }
     <div class="mobile-drawer-group">
       <div class="mobile-drawer-label">Explore</div>
       <ul class="mobile-menu-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#units">Units</a></li>
+        <li><a href="#about">Home</a></li>
+        <li><a href="#units">Floor Plans</a></li>
+        <li><a href="#invest">Calculator</a></li>
         <li><a href="#facilities">Facilities</a></li>
+        <li><a href="#why">Why M Legasi</a></li>
+        <li><a href="#gallery">Gallery</a></li>
         <li><a href="#location">Location</a></li>
-        <li><a href="#invest">Investment</a></li>
+        <li><a href="#register">Register</a></li>
+        <li><a href="#faq">FAQ</a></li>
       </ul>
     </div>
     <div class="mobile-drawer-group">
@@ -5049,8 +5052,10 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
 
   /* ── 2. Nav height var, mobile rail, scroll-spy ── */
   var nav = $('siteNav');
+  var ann = document.querySelector('.announce-bar');
   function setNavH() {
     if (nav) document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+    if (ann) document.documentElement.style.setProperty('--ann-h', ann.offsetHeight + 'px');
   }
   setNavH();
   window.addEventListener('resize', setNavH);
