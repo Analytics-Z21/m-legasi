@@ -5,7 +5,9 @@
      Salesforce Web-to-Lead retURL target. Deployed to the m-legasi repo as
      thankyou.html. GTM page_view here is the client-side conversion signal.
      Content, links and contact details verbatim from the previous build;
-     second GTM container added to match the homepage pair. -->
+     second GTM container added to match the homepage pair.
+     2026-09-03: lead_confirmed added (see the GA4 block below), so the
+     conversion signal here is no longer the GTM page_view alone. -->
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -20,6 +22,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-5RWKMV2V');</script>
 <!-- End Google Tag Manager -->
+<!-- GA4 direct channel for the confirmation event, added 2026-09-03. This page
+     had NO gtag at all: page_view came from the two GTM containers above, and
+     lead_confirmed did not exist, so M Legasi was the one ver2 project with no
+     confirmation event. It is now the same event name as the other four, so the
+     five projects can be rolled up on one metric.
+     G-NJNB82JM97 is the "ver2 M Legasi" web data stream (property 457835959),
+     confirmed via the GA4 Admin API.
+     send_page_view is FALSE here, deliberately and unlike M Aria: the GTM
+     containers on this page already send page_view to THIS SAME stream, and
+     decisions/log.md records M Legasi already double-counting page_view from
+     the two containers. A third one would make it worse. This gtag instance
+     exists only to carry lead_confirmed. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NJNB82JM97"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NJNB82JM97', { send_page_view: false });
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thank You — M Legasi Semenyih</title>
@@ -233,5 +254,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="f-disc">Disclaimer: All information contained herein is for reference only and is subject to change without prior notice. Visual and images used are for illustration purposes only and may not represent the actual product. Mah Sing Group reserves the right to amend any information without prior notice.</p>
   </div>
 </footer>
+<!-- lead_confirmed: the navigation-proof counterpart to generate_lead.
+     generate_lead fires on submit, before Salesforce has confirmed anything.
+     This page is only reachable via the Salesforce retURL redirect, which
+     Salesforce performs ONLY after it has accepted the lead, so the gap
+     between the two events is the submit-to-Salesforce drop-off.
+
+     Fires via a readiness poll rather than a bare inline call: gtag.js is
+     async, so an inline call at parse time races its initialisation and was
+     observed firing only intermittently on M Aria. The poll waits for a real
+     gtag, fires exactly once, and gives up after 6s. The dataLayer push is
+     kept unconditionally so the existing GTM containers can also pick the
+     event up if a tag is ever added for it. -->
+<script>
+(function(){
+  var sent=false, tries=0;
+  var params={ lead_type:'form_submission', page_location:location.href };
+  try{
+    window.dataLayer=window.dataLayer||[];
+    window.dataLayer.push({ event:'lead_confirmed', lead_type:'form_submission' });
+  }catch(e){}
+  function fire(){
+    if(sent) return true;
+    try{
+      if(typeof window.gtag==='function'){
+        window.gtag('event','lead_confirmed',params);
+        sent=true; return true;
+      }
+    }catch(e){ sent=true; return true; }
+    return false;
+  }
+  function poll(){
+    if(fire()) return;
+    if(++tries>30) return;              /* ~6s ceiling */
+    setTimeout(poll,200);
+  }
+  if(document.readyState==='complete') poll();
+  else window.addEventListener('load',poll);
+  setTimeout(poll,400);                 /* also try early, in case load is slow */
+})();
+</script>
 </body>
 </html>
