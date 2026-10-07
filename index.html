@@ -2588,7 +2588,7 @@ body.lead-drawer-open { overflow: hidden; }
     <a href="#growth" data-rail>Investment</a>
   </div>
   <div class="nav-right">
-    <a href="#register" class="nav-reg" data-open-lead="nav" data-cta-id="nav_register">Register Now</a>
+    <a href="#register" class="nav-reg" data-open-lead="nav" data-cta-id="nav_register">Get Price List Now</a>
     <button class="hamburger" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -2640,7 +2640,7 @@ body.lead-drawer-open { overflow: hidden; }
     </div>
   </nav>
   <div class="mobile-drawer-footer">
-    <a href="#register" class="mobile-cta" data-cta-id="mobile_menu_register">Register Interest →</a>
+    <a href="#register" class="mobile-cta" data-cta-id="mobile_menu_register">Get Price List Now</a>
 
   </div>
 </aside>
@@ -2677,7 +2677,7 @@ body.lead-drawer-open { overflow: hidden; }
         </div>
       </div>
       <div class="hero-ctas">
-        <button type="button" class="btn btn-p" data-open-lead="hero" data-cta-id="hero_price_list">Get Price List</button>
+        <button type="button" class="btn btn-p" data-open-lead="hero" data-cta-id="hero_price_list">Get Price List Now</button>
         <a class="btn btn-o" href="#units" data-cta-id="hero_floor_plans">View Floor Plans</a>
       </div>
     </div>
@@ -2727,7 +2727,7 @@ body.lead-drawer-open { overflow: hidden; }
         <button class="calc-link" type="button" id="calcJump" data-cta-id="units_calc_instalment">Calc my instalment</button>
       </div>
       <div class="unit-acts">
-        <button class="btn btn-p" id="uCta" data-open-lead="unit_card" data-unit="Astradia" data-cta-id="units_price_list">Get the Astradia price list</button>
+        <button class="btn btn-p" id="uCta" data-open-lead="unit_card" data-unit="Astradia" data-cta-id="units_price_list">Get Price List Now</button>
         <a class="btn btn-o" href="https://m-legasi.com.my/360-walkthrough/" target="_blank" rel="noopener" data-tour-source="unit_card">360&deg; Walkthrough</a>
       </div>
     </div>
@@ -2837,7 +2837,7 @@ body.lead-drawer-open { overflow: hidden; }
           <div class="field"><label class="f-label" for="qf-phone">Phone number</label>
             <input class="f-input" id="qf-phone" type="tel" name="mobile" placeholder="012-345 6789" maxlength="20" required autocomplete="tel" inputmode="tel" data-my-phone></div>
           <div class="quick-form-error" data-form-error>Please fill in your name, email, and phone number.</div>
-          <button class="btn btn-p quick-form-submit" type="submit">Send Me the Price List &nbsp;&rarr;</button>
+          <button class="btn btn-p quick-form-submit" type="submit">Get Price List Now</button>
           <div class="micro">
             <span>PDPA secured</span>
             <span><span id="quickFormDailyCount">&mdash;</span> sent today</span>
@@ -2872,7 +2872,7 @@ body.lead-drawer-open { overflow: hidden; }
         <div class="ov-stat"><b class="num">35km</b><i>To KLCC</i></div>
       </div>
       <p class="ov-note">*Based on 90% financing, for reference only.</p>
-      <a href="#register" class="btn btn-p ov-cta" data-cta-id="overview_register">Register &amp; Get Price List &rarr;</a>
+      <a href="#register" class="btn btn-p ov-cta" data-cta-id="overview_register">Get Price List Now</a>
     </div>
   </div>
 </section>
@@ -3505,7 +3505,7 @@ body.lead-drawer-open { overflow: hidden; }
 
       <div class="main-form-error" data-form-error style="display:none; font-size:13px; color:#c0392b; margin:-6px 0 10px;"></div>
 
-      <button class="form-submit">Get My Price List Now →</button>
+      <button class="form-submit">Get Price List Now</button>
 
       <p class="term-condition">I have read and agreed to the <a href="#">Terms &amp; Conditions</a> and <a href="#">PDPA Notice</a>.</p>
 
@@ -3628,7 +3628,7 @@ body.lead-drawer-open { overflow: hidden; }
     </div>
 
     <div class="faq-cta">
-      <a href="#register" class="btn-secondary" style="border-color:var(--green-deep);" data-cta-id="faq_register">Still Have Questions? Register →</a>
+      <a href="#register" class="btn-secondary" style="border-color:var(--green-deep);" data-cta-id="faq_register">Get Price List Now</a>
     </div>
   </div>
 </section>
@@ -3746,7 +3746,7 @@ body.lead-drawer-open { overflow: hidden; }
 
 <!-- MOBILE STICKY BAR -->
 <div class="mobile-sticky" id="mobileSticky" data-section="sticky">
-  <a href="#register" class="btn-primary" data-cta-id="sticky_register">Register Now</a>
+  <a href="#register" class="btn-primary" data-cta-id="sticky_register">Get Price List Now</a>
 </div>
 
 <script>
@@ -4672,7 +4672,7 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
         <a href="#" class="lead-tc-link">PDPA Notice</a>.
       </p>
 
-      <button type="submit" class="lead-submit">Get My Price List Now &nbsp;→</button>
+      <button type="submit" class="lead-submit">Get Price List Now</button>
 
       <div class="lead-trust-row">
         <span>No spam</span>
@@ -5130,6 +5130,19 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
   text-decoration: underline;
 }
 .lead-field-hint .hint-apply:hover { color: #92400e; }
+
+/* ===== ATF + PRICE CTA (2026-10-07, branch atf-price-cta). Justin: the hero is full screen above the fold
+   and its CTA is on the first screen on every phone and laptop. Checked at Chrome 390x844, Android
+   360x740, iPhone 15 Safari 393x659, iPhone SE (3rd gen) Safari ~375x553, 1440x900 and 1366x657. ===== */
+/* 1366x768 laptops: the 130px top padding (room for the overlaid nav) put the hero CTA ~26px under the fold */
+@media (min-width: 1024px) and (max-height: 760px) {
+  .hero-body { padding-top: 92px; padding-bottom: 44px; }
+}
+/* phones: the banner stopped 3px short of the fold (the ticker overlaps it by 3px, so --ann-h overstates
+   the offset); the hero now reaches the bottom edge */
+@media (max-width: 1023px) {
+  .hero-body { min-height: min(calc(100svh - var(--ann-h, 42px) + 3px), 240vw); }
+}
 </style>
 <script>
 (function () {
@@ -5426,7 +5439,7 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
     img.alt = u.name + ' floor plan, ' + u.size + ' sq ft, 4 bedrooms';
     var cta = $('uCta');
     cta.setAttribute('data-unit', u.name);
-    cta.textContent = 'Get the ' + u.name + ' price list';
+    cta.textContent = 'Get Price List Now';
     Array.prototype.forEach.call(document.querySelectorAll('#tabs .tab'), function (t) {
       t.setAttribute('aria-selected', String(t.getAttribute('data-type') === cur));
     });
@@ -5597,6 +5610,24 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
       });
     }, 1200);
   });
+})();
+</script>
+<script>
+/* Preview guard (2026-10-07, the same rule as the M Aurora previews): on *.pages.dev and localhost the lead forms
+   never post. A capture-phase listener stops the submit before the form's own onsubmit handler runs, so there is
+   no Salesforce lead, no n8n capture and no generate_lead event. Inert on the live ver2 domain. */
+(function () {
+  if (!/\.pages\.dev$|^localhost$|^127\./.test(location.hostname)) return;
+  document.addEventListener('submit', function (e) {
+    var f = e.target; e.preventDefault(); e.stopImmediatePropagation();
+    var n = f.querySelector('.preview-note');
+    if (!n) {
+      n = document.createElement('p'); n.className = 'preview-note'; n.setAttribute('role', 'status');
+      n.style.cssText = 'margin:10px 0 0;padding:10px 12px;border-radius:6px;background:#FFF4D6;color:#5A4200;font:600 13px/1.45 system-ui,sans-serif;text-align:left';
+      f.appendChild(n);
+    }
+    n.textContent = 'Preview link: the form is switched off here, so nothing was sent. On the live site this sends your details to Mah Sing’s sales team.';
+  }, true);
 })();
 </script>
 </body>
