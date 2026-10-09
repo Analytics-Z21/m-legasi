@@ -118,7 +118,10 @@ src="https://www.facebook.com/tr?id=1147715233456454&ev=PageView&noscript=1"
 <meta name="msapplication-TileImage" content="assets/cropped-M-Legasi-Favicon-270x270.png">
 
 <!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/boska-500.woff2" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
 <!-- Organization/LocalBusiness Schema -->
 <script type="application/ld+json">
@@ -296,27 +299,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    M LEGASI ver2 — BANDED NIGHT-TO-DAY (rebuild 2026-08-21)
    Deep forest dark bands (nav / hero / facilities / register /
    footer) with brand cream + sage daylight body bands.
-   Display: IvyOra Display (self-hosted). Body: Lato.
+   Display: Boska (self-hosted), body: Montserrat, as on M Aurora (2026-10-09).
    Square editorial component system. Brand-true palette from the
    2026-08-20 style extract. Legacy token names kept: ported JS
    references --coral and --cream-dark directly.
    ============================================================ */
 
-@font-face {
-  font-family: 'IvyOra Display';
-  src: url('assets/ivyora-light.ttf') format('truetype');
-  font-weight: 300; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'IvyOra Display';
-  src: url('assets/ivyora-medium.ttf') format('truetype');
-  font-weight: 500; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'IvyOra Display';
-  src: url('assets/ivyora-bold.ttf') format('truetype');
-  font-weight: 700; font-style: normal; font-display: swap;
-}
+/* TYPE FOLLOWS VER2 M AURORA (2026-10-09, Justin: "for the font selection please all follow how ver2 M Aurora").
+   Display serif = Boska (Indian Type Foundry, Fontshare licence, free for commercial use), the same self-hosted
+   files as M Aurora. As on Aurora: headlines (h1, h2) in Boska Medium, every other serif in Boska Bold, all body,
+   labels, buttons and prices in Montserrat. Two family names so the role decides the cut, not the weight each old
+   rule asked for: "Boska" is Bold at every weight, "Boska Medium" is Medium at every weight (h1/h2 point --fd at it).
+   The italics register after page load (script at the end of the page), as on Aurora. */
+@font-face{font-family:"Boska";src:url("assets/boska-700.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Boska Medium";src:url("assets/boska-500.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
 
 :root {
   /* dark bands */
@@ -350,8 +346,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   --green-mid: #0F5A3E;
   --green-light: #2E7D5B;
   --cream-dark: #DFD2BA;
-  --font-display: 'IvyOra Display', 'Cormorant Garamond', Georgia, serif;
-  --font-body: 'Lato', 'Segoe UI', sans-serif;
+  --font-display: "Boska", Georgia, serif;
+  --font-body: 'Montserrat', 'Segoe UI', sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -2558,6 +2554,23 @@ body.lead-drawer-open { overflow: hidden; }
 }
 
 </style>
+<style id="aurora-type">
+/* 2026-10-09 (Justin). ONE HERO ASK: the layout button left the hero, so "Get Price List Now" is the only CTA and
+   spans the old two-button row on phones; from tablets up it takes its own width.
+   TYPE FOLLOWS VER2 M AURORA: h1/h2 point the display variable at Boska Medium; every other serif resolves to
+   Boska Bold. Buttons in Montserrat 700 as on Aurora. Boska defaults to old-style figures, so lining is forced
+   (!important because every `font:` shorthand resets font-variant-numeric); rules that asked for tabular figures
+   keep them. */
+h1,h2{--font-display:"Boska Medium","Boska",Georgia,serif}
+*{font-variant-numeric:lining-nums!important}
+.amenity-km,.cfield output,.compare-table,.cout .v,.cp-opt-p,.cp-pick b,.dev-stat-num,.footer-contact a.tel,.highway-tag,.ov-big,.ov-stat b,.price-from b,.qx-trust b,.num{font-variant-numeric:lining-nums tabular-nums!important}
+.btn{font-weight:700!important;letter-spacing:.02em}
+/* PRICES IN SANS, as on Aurora: every RM figure that sat in the display serif moves to Montserrat 700; a row that
+   mixes prices with other figures (hero tiles, price pairs, overview stats) moves whole so it reads as one row. The
+   serif stays on words and on the facts strip. Montserrat sets about 26% wider than Boska, so font-size-adjust .46
+   steps it down to about 0.85x of whatever size each breakpoint declares (Aurora stepped its prices down by hand). */
+.h-card-val,.price-from b,.cp-pick b,.cp-opt-p,.cout .v,.ov-stat b{font-family:var(--font-body)!important;font-weight:700!important;letter-spacing:-.01em!important;font-size-adjust:.46}
+</style>
 <!-- ANNOUNCEMENT BAR -->
 <div class="announce-bar" aria-label="Project highlights">
   <div class="announce-track" id="announceTrack">
@@ -2678,13 +2691,62 @@ body.lead-drawer-open { overflow: hidden; }
       </div>
       <div class="hero-ctas">
         <button type="button" class="btn btn-p" data-open-lead="hero" data-cta-id="hero_price_list">Get Price List Now</button>
-        <a class="btn btn-o" href="#units" data-cta-id="hero_floor_plans">View Floor Plans</a>
       </div>
     </div>
   </div>
   <div class="h-slides">
     <span class="h-slide-cap" id="heroCap">Phase 3 Streetscape</span>
     <div class="hero-dots" id="heroDots" role="tablist" aria-label="Hero slides"></div>
+  </div>
+</section>
+<!-- 2026-10-09 (Justin): the quick form sits right below the hero. -->
+<!-- QUICK REGISTRATION (R2): Aurora qx split layout, Legasi copy and the SAME
+     Salesforce form fields + handleQuickFormSubmit handler verbatim. -->
+<section class="quick-form-section" id="quickRegister" data-section="form">
+  <div class="wrap">
+    <div class="qx">
+      <div>
+        <span class="eyebrow">30 sec &middot; 1 step &middot; No spam</span>
+        <h2 class="quick-form-headline">Get the price list <em>now</em></h2>
+        <p class="quick-form-desc">Enter your details &mdash; we'll WhatsApp the layout, pricing &amp; availability instantly.</p>
+        <div class="qx-points">
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Layout plan</span>
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Pricing</span>
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Loan calc</span>
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Availability</span>
+        </div>
+        <div class="qx-trust">
+          <div><b>Freehold</b><i>Tenure</i></div>
+          <div><b class="num">4</b><i>Layouts</i></div>
+          <div><b class="num">1,555&ndash;1,686</b><i>Sq ft range</i></div>
+        </div>
+      </div>
+      <div class="form-card">
+        <form class="quick-form" id="quickRegisterForm" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" method="POST" onsubmit="return handleQuickFormSubmit(this)">
+          <input type="hidden" name="oid" value="00D0o0000015t7i">
+          <input type="hidden" name="retURL" value="https://www.ver2.m-legasi.com.my/thankyou">
+          <input type="hidden" name="00N2j000000e0hv" value="M Legasi Microsite (Copy)">
+          <input type="hidden" name="00N2j000000e0hw" value="M Legasi">
+          <input type="hidden" name="00N2j000000e0ho" title="Source" value="M Legasi Website">
+          <input type="hidden" name="00N2j000000e0hp" title="Super Category" value="Website">
+          <input type="hidden" name="00N2j000000e0hR" value="1">
+
+          <div class="field"><label class="f-label" for="qf-name">Full name</label>
+            <input class="f-input" id="qf-name" type="text" name="last_name" placeholder="Your full name" maxlength="80" required autocomplete="name"></div>
+          <div class="field"><label class="f-label" for="qf-email">Email</label>
+            <input class="f-input" id="qf-email" type="email" name="email" placeholder="you@example.com" maxlength="80" required autocomplete="email"></div>
+          <div class="field"><label class="f-label" for="qf-phone">Phone number</label>
+            <input class="f-input" id="qf-phone" type="tel" name="mobile" placeholder="012-345 6789" maxlength="20" required autocomplete="tel" inputmode="tel" data-my-phone></div>
+          <div class="quick-form-error" data-form-error>Please fill in your name, email, and phone number.</div>
+          <button class="btn btn-p quick-form-submit" type="submit">Get Price List Now</button>
+          <div class="micro">
+            <span>PDPA secured</span>
+            <span><span id="quickFormDailyCount">&mdash;</span> sent today</span>
+            <span>WhatsApp reply</span>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -2799,55 +2861,6 @@ body.lead-drawer-open { overflow: hidden; }
 </div>
 
 
-<!-- QUICK REGISTRATION (R2): Aurora qx split layout, Legasi copy and the SAME
-     Salesforce form fields + handleQuickFormSubmit handler verbatim. -->
-<section class="quick-form-section" id="quickRegister" data-section="form">
-  <div class="wrap">
-    <div class="qx">
-      <div>
-        <span class="eyebrow">30 sec &middot; 1 step &middot; No spam</span>
-        <h2 class="quick-form-headline">Get the price list <em>now</em></h2>
-        <p class="quick-form-desc">Enter your details &mdash; we'll WhatsApp the layout, pricing &amp; availability instantly.</p>
-        <div class="qx-points">
-          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Layout plan</span>
-          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Pricing</span>
-          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Loan calc</span>
-          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Availability</span>
-        </div>
-        <div class="qx-trust">
-          <div><b>Freehold</b><i>Tenure</i></div>
-          <div><b class="num">4</b><i>Layouts</i></div>
-          <div><b class="num">1,555&ndash;1,686</b><i>Sq ft range</i></div>
-        </div>
-      </div>
-      <div class="form-card">
-        <form class="quick-form" id="quickRegisterForm" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" method="POST" onsubmit="return handleQuickFormSubmit(this)">
-          <input type="hidden" name="oid" value="00D0o0000015t7i">
-          <input type="hidden" name="retURL" value="https://www.ver2.m-legasi.com.my/thankyou">
-          <input type="hidden" name="00N2j000000e0hv" value="M Legasi Microsite (Copy)">
-          <input type="hidden" name="00N2j000000e0hw" value="M Legasi">
-          <input type="hidden" name="00N2j000000e0ho" title="Source" value="M Legasi Website">
-          <input type="hidden" name="00N2j000000e0hp" title="Super Category" value="Website">
-          <input type="hidden" name="00N2j000000e0hR" value="1">
-
-          <div class="field"><label class="f-label" for="qf-name">Full name</label>
-            <input class="f-input" id="qf-name" type="text" name="last_name" placeholder="Your full name" maxlength="80" required autocomplete="name"></div>
-          <div class="field"><label class="f-label" for="qf-email">Email</label>
-            <input class="f-input" id="qf-email" type="email" name="email" placeholder="you@example.com" maxlength="80" required autocomplete="email"></div>
-          <div class="field"><label class="f-label" for="qf-phone">Phone number</label>
-            <input class="f-input" id="qf-phone" type="tel" name="mobile" placeholder="012-345 6789" maxlength="20" required autocomplete="tel" inputmode="tel" data-my-phone></div>
-          <div class="quick-form-error" data-form-error>Please fill in your name, email, and phone number.</div>
-          <button class="btn btn-p quick-form-submit" type="submit">Get Price List Now</button>
-          <div class="micro">
-            <span>PDPA secured</span>
-            <span><span id="quickFormDailyCount">&mdash;</span> sent today</span>
-            <span>WhatsApp reply</span>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- OVERVIEW (R8): full MGM RTS-Link composition per client reference — visual with
      the 500-acre overlay kept, joined to a dark panel: eyebrow, serif heading (SEO
@@ -5629,6 +5642,13 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
     n.textContent = 'Preview link: the form is switched off here, so nothing was sent. On the live site this sends your details to Mah Sing’s sales team.';
   }, true);
 })();
+</script>
+<script>
+/* Boska italics, registered after load so they never compete with the hero (as on M Aurora). Registered only:
+   the browser fetches a file only if some serif text on the page is italic. */
+window.addEventListener('load',function(){if(!window.FontFace||!document.fonts)return;
+  [['Boska','assets/boska-700i.woff2'],['Boska Medium','assets/boska-500i.woff2']].forEach(function(d){
+    document.fonts.add(new FontFace(d[0],'url('+d[1]+') format("woff2")',{style:'italic',weight:'100 900',display:'swap'}));});});
 </script>
 </body>
 </html>

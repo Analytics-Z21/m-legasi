@@ -35,13 +35,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="icon" type="image/png" sizes="192x192" href="assets/cropped-M-Legasi-Favicon-192x192.png">
 <link rel="apple-touch-icon" href="assets/cropped-M-Legasi-Favicon-180x180.png">
 
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-@font-face {
-  font-family: 'IvyOra Display';
-  src: url('assets/ivyora-medium.ttf') format('truetype');
-  font-weight: 500; font-style: normal; font-display: swap;
-}
+/* Type follows ver2 M Aurora (2026-10-09): Boska Medium on h1/h2, Boska Bold on other serif, Montserrat for the rest */
+@font-face{font-family:"Boska";src:url("assets/boska-700.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Boska Medium";src:url("assets/boska-500.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Boska";src:url("assets/boska-700i.woff2") format("woff2");font-weight:100 900;font-style:italic;font-display:swap}
+@font-face{font-family:"Boska Medium";src:url("assets/boska-500i.woff2") format("woff2");font-weight:100 900;font-style:italic;font-display:swap}
 :root {
   --night: #062B1D;
   --night2: #083F2A;
@@ -53,8 +53,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   --coral-hover: #D64B3A;
   --gold-light: #D4B07A;
   --mull: rgba(212,176,122,0.26);
-  --fd: 'IvyOra Display', 'Cormorant Garamond', Georgia, serif;
-  --fb: 'Lato', 'Segoe UI', sans-serif;
+  --fd: "Boska", Georgia, serif;
+  --fb: 'Montserrat', 'Segoe UI', sans-serif;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { font-size: 16px; }
@@ -168,6 +168,8 @@ footer { background: var(--dark); border-top: 1px solid var(--mull); }
 .f-socials a:hover { border-color: var(--gold-light); }
 .f-socials img { width: 18px; height: 18px; object-fit: contain; }
 .f-disc { font: 400 11.5px/1.7 var(--fb); color: var(--cream-dim); }
+h1,h2{--fd:"Boska Medium","Boska",Georgia,serif}
+*{font-variant-numeric:lining-nums!important}
 </style>
 </head>
 <body>
