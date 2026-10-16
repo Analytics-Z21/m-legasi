@@ -2744,6 +2744,14 @@ html.hero-more #quickRegister{background:linear-gradient(180deg,rgba(4,29,20,.94
 #units .calc-link{color:var(--ink-d);border-bottom-color:rgba(16,36,27,.35)}
 #units .calc-link:hover{color:var(--night2);border-bottom-color:var(--night2)}
 #units .unit-acts{grid-template-columns:1fr;gap:4px}
+/* Round 3 (16 Oct 2026, item 3): on phones the unit info comes before the plan box, as on the M Aurora live #layouts:
+   tabs, then the home name, specs, the from-price with "Calc my instalment", the one ask and the 360 link, then the
+   plan. Order only (the same elements, grid order), so setType(), the swipe and the zoom are untouched; desktop keeps
+   the two-column card, plan left and info right. The hairline between the two moves to the top of the plan box. */
+@media(max-width:1023px){
+  #units .unit-info{order:-1}
+  #units .unit-plan{border-bottom:none;border-top:1px solid rgba(16,36,27,.08)}
+}
 #units .u-link{display:inline-flex;justify-content:center;align-items:center;gap:6px;font:600 13px/1.4 var(--font-body);color:var(--ink-d);
   text-decoration:underline;text-underline-offset:3px;padding:4px 0;min-height:44px;opacity:.85}
 #units .u-link:hover{opacity:1}
