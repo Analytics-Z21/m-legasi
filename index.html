@@ -2765,35 +2765,37 @@ html.hero-more #quickRegister{background:linear-gradient(180deg,rgba(4,29,20,.94
 @media(max-width:640px){.fp-lightbox-imgwrap{max-height:56vh}}
 
 /* ===== OVERVIEW: the township as a full-bleed image, the copy on a glass card over it ===== */
-/* flat night0 above and below the image, and both fades run into that same colour, so there is no seam at either edge
-   (16 Oct review: the foot faded to night0 over a night2 ground, which drew a hard line under the card) */
-#overview{padding:clamp(64px,8vw,120px) 0 clamp(48px,6vw,96px);background:var(--night0)}
-.ov-wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+/* OVERVIEW (16 Oct review, Justin): the township aerial IS the section's background, on phones and desktop, with the
+   heading, the 500-acre fact and the glass card over it. No green wash: only a light neutral darkening at the top and
+   foot so the cream text reads over the sky. The aerial is portrait (1200x1625) with the township at its foot, so the
+   crop sits low (object-position 78%) and the parallax sweeps 62% to 94%, keeping the houses in view. */
+#overview{position:relative;overflow:hidden;background:var(--night0);padding:clamp(40px,6vh,72px) 0 clamp(120px,18vh,180px);min-height:100svh}
+.ov-wrap{max-width:1240px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
 @media(min-width:1024px){.ov-wrap{padding:0 48px}}
-#overview .ov-split{display:block;position:relative;border:0;background:transparent;overflow:visible}
-#overview .ov-media{aspect-ratio:auto;min-height:min(82vh,760px);background:var(--night0)}
-#overview .ov-media img{object-position:center 45%}
-/* the second gradient moment: forest at the top of the image, night at its foot */
-#overview .ov-media::after{background:linear-gradient(180deg,var(--night0) 0%,rgba(4,29,20,.82) 16%,rgba(4,29,20,0) 44%),linear-gradient(0deg,var(--night0) 0%,var(--night0) 6%,rgba(4,29,20,.86) 20%,rgba(4,29,20,0) 52%)}
-#overview .ov-overlay{top:clamp(28px,5vw,56px);bottom:auto;left:24px;right:24px}
-@media(min-width:1024px){#overview .ov-overlay{left:max(48px,calc((100vw - 1240px) / 2 + 48px));right:auto}}
-#overview .ov-panel{position:relative;z-index:2;max-width:620px;margin:-18vh 16px 0;padding:clamp(28px,4vw,52px);
-  background:rgba(4,29,20,.95);border:1px solid rgba(255,255,255,.1)}
-@media(min-width:1024px){#overview .ov-panel{margin:-30vh max(48px,calc((100vw - 1240px) / 2 + 48px)) 0 auto;background:rgba(4,29,20,.86);
-  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}}
+#overview .ov-media{position:absolute;inset:0;z-index:0;aspect-ratio:auto;min-height:0;height:auto;background:var(--night0)}
+#overview .ov-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 78%}
+@media(max-width:1023px){#overview .ov-media img{height:100%;object-position:center 72%;animation:none}
+  #overview .ov-media::after{background:linear-gradient(180deg,rgba(0,0,0,.62) 0%,rgba(0,0,0,.34) 30%,rgba(0,0,0,.06) 48%,rgba(0,0,0,.18) 100%)}}
+#overview .ov-media::after{background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,.18) 34%,rgba(0,0,0,0) 52%,rgba(0,0,0,.22) 100%)}
+#overview .section-header h2,#overview .section-header .eyebrow{text-shadow:0 2px 14px rgba(0,0,0,.5)}
+#overview .section-header{margin-bottom:clamp(20px,3vh,36px)}
+#overview .ov-split{display:flex;flex-direction:column;justify-content:flex-end;gap:clamp(72px,12vh,130px);position:relative;z-index:1;
+  border:0;background:transparent;overflow:visible;padding:0 24px;max-width:1336px;margin:0 auto;flex:1 1 auto}
+#overview .ov-overlay{position:static;max-width:520px}
+#overview .ov-big,#overview .ov-lab{text-shadow:0 2px 14px rgba(0,0,0,.55)}
+#overview .ov-panel{position:relative;z-index:1;margin:0;max-width:none;width:100%;padding:clamp(24px,4vw,40px);
+  background:rgba(4,29,20,.8);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1)}
+#overview .ov-panel>*{max-width:none}
 #overview .ov-copy{font-size:16px}
-/* Desktop: the whole section (heading, aerial, card) fits one screen (16 Oct review). A shorter aerial sized to the
-   viewport, the glass card over its right half with the four stats in one row, the heading on one line. Phones keep
-   the stacked layout. */
+/* Desktop: fact left, card right, both at the foot of the image; the whole section inside one screen */
 @media(min-width:1024px){
-  #overview{padding:clamp(28px,4.5vh,56px) 0 clamp(24px,4vh,48px)}
+  #overview{padding:clamp(28px,4.5vh,56px) 0 clamp(24px,4vh,48px);min-height:clamp(520px,calc(100vh - 75px),760px)}
+  #overview{display:flex;flex-direction:column}
   #overview .section-header{margin-bottom:clamp(16px,2.5vh,28px)}
   #overview .section-header h2{font-size:clamp(28px,2.7vw,40px);line-height:1.08}
-  #overview .ov-media{min-height:0;height:clamp(380px,56vh,560px)}
-  #overview .ov-overlay{top:clamp(20px,4vh,40px)}
-  #overview .ov-split>.ov-panel{position:absolute;top:50%;right:max(48px,calc((100vw - 1240px) / 2 + 48px));transform:translateY(-50%);
-    margin:0;width:min(760px,58vw);max-width:none;padding:clamp(22px,3vh,34px) clamp(26px,2.4vw,38px)}
-  #overview .ov-panel>*{max-width:none}
+  #overview .ov-split{flex-direction:row;align-items:flex-end;justify-content:space-between;gap:48px;padding:0 48px}
+  #overview .ov-overlay{flex:0 1 420px;padding-bottom:8px}
+  #overview .ov-panel{flex:0 1 760px;width:min(760px,58vw);padding:clamp(22px,3vh,34px) clamp(26px,2.4vw,38px)}
   #overview .ov-copy{font-size:15px;line-height:1.5;margin:0}
   #overview .ov-stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:16px}
   #overview .ov-stat{padding:12px 10px 10px 0;border-top:0}
@@ -2808,7 +2810,7 @@ html.hero-more #quickRegister{background:linear-gradient(180deg,rgba(4,29,20,.94
     #quickRegister{animation:lg-par-bg linear both;animation-timeline:view()}
   }
 }
-@keyframes lg-par{from{object-position:center 25%}to{object-position:center 70%}}
+@keyframes lg-par{from{object-position:center 62%}to{object-position:center 94%}}
 @keyframes lg-par-bg{from{background-position:center 0%,center 20%}to{background-position:center 0%,center 70%}}
 
 /* ===== STORY cards on flat night; card art loads after the page ===== */
@@ -3310,6 +3312,9 @@ html.hero-more #vr{background-image:url(assets/Masterplan_FA-Extend-optimzied-14
      Aurora story pattern). The SEO H2 moves above the image, verbatim. The 90% and 35km stats moved up into
      the facts band; the card's stats are now the home facts already on the page. -->
 <section class="intro-section" id="overview" data-section="overview">
+  <div class="ov-media" aria-hidden="true">
+    <img src="assets/gal-masterplan.jpg" alt="" loading="lazy" decoding="async">
+  </div>
   <div class="ov-wrap">
     <div class="section-header rv">
       <div class="eyebrow">The Township</div>
@@ -3317,12 +3322,9 @@ html.hero-more #vr{background-image:url(assets/Masterplan_FA-Extend-optimzied-14
     </div>
   </div>
   <div class="ov-split rv">
-    <div class="ov-media">
-      <img src="assets/gal-masterplan.jpg" alt="Aerial view of the 500-acre M Legasi township" loading="lazy" decoding="async">
-      <div class="ov-overlay">
-        <div class="ov-big num">500<span>acres</span></div>
-        <div class="ov-lab">One masterplanned freehold township, with a 13-acre Central Park at its heart</div>
-      </div>
+    <div class="ov-overlay">
+      <div class="ov-big num">500<span>acres</span></div>
+      <div class="ov-lab">One masterplanned freehold township, with a 13-acre Central Park at its heart</div>
     </div>
     <div class="ov-panel">
       <p class="ov-copy">M Legasi is a freehold landed community surrounded by greenery, with easy access to schools, highways, and nearby amenities. Designed as a walkable 15-minute city, life here flows effortlessly between home, nature, retail, and recreation.</p>
