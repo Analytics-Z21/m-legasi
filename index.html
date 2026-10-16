@@ -2765,14 +2765,16 @@ html.hero-more #quickRegister{background:linear-gradient(180deg,rgba(4,29,20,.94
 @media(max-width:640px){.fp-lightbox-imgwrap{max-height:56vh}}
 
 /* ===== OVERVIEW: the township as a full-bleed image, the copy on a glass card over it ===== */
-#overview{padding:clamp(64px,8vw,120px) 0 clamp(48px,6vw,96px);background:linear-gradient(180deg,var(--night0) 0%,var(--night2) 100%)}
+/* flat night0 above and below the image, and both fades run into that same colour, so there is no seam at either edge
+   (16 Oct review: the foot faded to night0 over a night2 ground, which drew a hard line under the card) */
+#overview{padding:clamp(64px,8vw,120px) 0 clamp(48px,6vw,96px);background:var(--night0)}
 .ov-wrap{max-width:1240px;margin:0 auto;padding:0 24px}
 @media(min-width:1024px){.ov-wrap{padding:0 48px}}
 #overview .ov-split{display:block;position:relative;border:0;background:transparent;overflow:visible}
 #overview .ov-media{aspect-ratio:auto;min-height:min(82vh,760px);background:var(--night0)}
 #overview .ov-media img{object-position:center 45%}
 /* the second gradient moment: forest at the top of the image, night at its foot */
-#overview .ov-media::after{background:linear-gradient(180deg,var(--night2) 0%,rgba(8,63,42,.78) 14%,rgba(8,63,42,0) 38%),linear-gradient(0deg,var(--night0) 0%,rgba(4,29,20,0) 42%)}
+#overview .ov-media::after{background:linear-gradient(180deg,var(--night0) 0%,rgba(4,29,20,.82) 16%,rgba(4,29,20,0) 44%),linear-gradient(0deg,var(--night0) 0%,var(--night0) 6%,rgba(4,29,20,.86) 20%,rgba(4,29,20,0) 52%)}
 #overview .ov-overlay{top:clamp(28px,5vw,56px);bottom:auto;left:24px;right:24px}
 @media(min-width:1024px){#overview .ov-overlay{left:max(48px,calc((100vw - 1240px) / 2 + 48px));right:auto}}
 #overview .ov-panel{position:relative;z-index:2;max-width:620px;margin:-18vh 16px 0;padding:clamp(28px,4vw,52px);
