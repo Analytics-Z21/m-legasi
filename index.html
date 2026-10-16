@@ -40,6 +40,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Premium port (16 Oct 2026, spec R6): the first hero slide is WebP and preloaded; phones get a centre cut
+     because the phone hero paints the image at 130% of its height, centred, so the outer thirds never show.
+     Slides 2 to 4 stay JPEG (their sources are compressed harder than WebP can beat) and load after the page. -->
+<link rel="preload" as="image" type="image/webp" href="assets/hero-1-streetscape-m.webp" media="(max-width:639px)" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" href="assets/hero-1-streetscape.webp" media="(min-width:640px)" fetchpriority="high">
 <!-- Varify A/B testing. Install ID 6319 is DELIBERATELY the same as m-legasi.com.my,
      the paired original site: a split URL test is one experiment spanning both URLs,
      so this page must load the same Varify project to recognise the va-red exposure
@@ -2581,6 +2586,391 @@ h1,h2{--font-display:"Boska Medium","Boska",Georgia,serif}
    number "04 2024 269" had started to wrap at 390px */
 a[href^="tel:"]{white-space:nowrap}
 </style>
+<style id="premium-port">
+/* =====================================================================================
+   PREMIUM PORT (16 Oct 2026, branch premium-aurora-port). Justin: "When we redesigned ver2 M Aurora we applied
+   a more premium and aesthetic look. Apply that to the rest of the four projects and match each project's theme
+   colour." Spec: projects/mahsing/context/2026-10-16_premium-port-spec.md. Reference: M Aurora live main.
+   Theme roles in Legasi's own tokens: night = --dark / --night2 (nav scrim, hero, quick form, facts, overview,
+   story, reasons, 360, gallery, location); paper = --cream2 with --sage as the second tint (layouts, facilities,
+   investment, developer, FAQ, SEO, closing-form card); the brand gradient is a forest-to-cream fade at three
+   moments (hero scrim edge, overview image fade, behind the closing form card). One ask colour: coral, the
+   live CTA, on asks and nowhere else; on paper surfaces it steps to the hover shade for 3:1 against the ground.
+   Restyle in place: every id, data attribute, form field, Salesforce value, webhook and heading text is kept.
+   ===================================================================================== */
+:root{--night0:var(--dark);--paper:var(--cream2);--paper2:var(--sage);
+  --ink-d:#10241B;--ink-m:#46554C;--ink-hair:rgba(16,36,27,.12);
+  --ask:var(--coral);--ask-hover:var(--coral-hover);--ask-deep:#D2452F;--ask-deep-hover:#C23A26;
+  --ease-out:cubic-bezier(.16,1,.3,1)}
+body{background:var(--night0)}
+
+/* type: display scale, italic accent words, the hairline eyebrow, label-left section heads on desktop */
+h2{letter-spacing:-.012em}
+.em,h2 em,.quick-form-headline em,.aerial h2 em{font-style:italic;color:var(--gold-light)}
+/* accent words on paper take the contrast-safe gold (gold-light reads 1.6:1 on cream) */
+#units .em,#facilities .em,#growth .em,#faq .em,#developer .em,#register .em,.seo-section .em{color:var(--gold-text)}
+.section-header{text-align:left;margin-bottom:clamp(32px,4vw,56px);display:flex;flex-direction:column;gap:16px}
+.section-header .eyebrow{position:relative;padding-left:46px;font-size:11.5px;letter-spacing:.26em;margin-bottom:0;color:var(--gold-text)}
+.section-header .eyebrow::before{content:'';position:absolute;left:0;top:50%;width:32px;height:1px;background:var(--gold)}
+.section-header h2{font-size:clamp(34px,4.8vw,64px);line-height:1.03;color:var(--ink-d)}
+.section-header h2::after{display:none}
+.section-header p{margin:0;max-width:46ch;font-size:17px;line-height:1.65;color:var(--ink-m)}
+@media(min-width:1024px){
+  .section-header{display:grid;grid-template-columns:minmax(200px,3fr) 9fr;column-gap:56px;align-items:start}
+  .section-header>*{grid-column:2}
+  .section-header>.eyebrow{grid-column:1;grid-row:1/span 6;margin-top:1.1em}
+}
+/* long headings one step down, so a three-line heading never fills the first screen of its section */
+#overview .section-header h2,#location .section-header h2,#faq .section-header h2,#story .section-header h2{font-size:clamp(30px,3.9vw,52px);line-height:1.06}
+/* heads on night */
+#story .section-header h2,#why .section-header h2,#gallery .section-header h2,#location .section-header h2{color:var(--cream-ink)}
+#story .section-header .eyebrow,#why .section-header .eyebrow,#gallery .section-header .eyebrow,#location .section-header .eyebrow,#overview .section-header .eyebrow{color:var(--gold-light)}
+#story .section-header .eyebrow::before,#why .section-header .eyebrow::before,#gallery .section-header .eyebrow::before,#location .section-header .eyebrow::before,#overview .section-header .eyebrow::before{background:var(--gold-light)}
+#story .section-header p,#why .section-header p,#gallery .section-header p,#location .section-header p{color:var(--cream-dim)}
+#overview .section-header h2{color:var(--cream-ink)}
+
+/* motion: reveals ease out as you scroll, groups stagger, the eyebrow hairline draws in; all off under reduced motion */
+html.js .rv{opacity:0;transform:translate3d(0,32px,0);transition:opacity .9s var(--ease-out),transform 1s var(--ease-out)}
+html.js .rv.in{opacity:1;transform:none}
+html.js [data-stagger].rv{opacity:1;transform:none}
+html.js [data-stagger].rv>*{opacity:0;transform:translate3d(0,24px,0);transition:opacity .8s var(--ease-out),transform .9s var(--ease-out);transition-delay:calc(var(--i,0) * 70ms)}
+html.js [data-stagger].rv.in>*{opacity:1;transform:none}
+@media(prefers-reduced-motion:no-preference){
+  html.js .rv .eyebrow::before{transform:scaleX(0);transform-origin:left center;transition:transform 1.1s var(--ease-out) .25s}
+  html.js .rv.in .eyebrow::before{transform:scaleX(1)}
+}
+@media(prefers-reduced-motion:reduce){html.js .rv,html.js [data-stagger].rv>*{opacity:1;transform:none;transition:none}}
+/* the closed menu and drawer sit just past the right edge; their shadows spilled into the page on paper */
+.mobile-menu-overlay:not(.open),.lead-drawer:not(.open){box-shadow:none}
+
+/* ask buttons: coral on night, the deeper shade on paper and white surfaces (3:1 against the ground) */
+.nav-reg{background:var(--ask-deep)}
+.nav-reg:hover{background:var(--ask-deep-hover)}
+#units .btn-p,#register .form-submit,#faq .btn-p,.lead-submit,#quickRegister .form-card .btn-p,.fp-lightbox-foot .btn-p{background:var(--ask-deep)}
+#units .btn-p:hover,#register .form-submit:hover,#faq .btn-p:hover,.lead-submit:hover,#quickRegister .form-card .btn-p:hover,.fp-lightbox-foot .btn-p:hover{background:var(--ask-deep-hover)}
+
+/* ===== HERO: price-led, home-type chips, one ask, trust line (Aurora R3 pattern) ===== */
+.hs{background-image:none}
+.hs-1{background-image:url('assets/hero-1-streetscape-m.webp')}
+@media(min-width:640px){.hs-1{background-image:url('assets/hero-1-streetscape.webp')}}
+html.hero-more .hs-2{background-image:url('assets/M-Legasi_Lake-Eye-Level_FA-optimized-1920x1356.jpg')}
+html.hero-more .hs-3{background-image:url('assets/Phase-3-Type-A-_-eye-level-court-1920x1081.jpg')}
+html.hero-more .hs-4{background-image:url('assets/Mah-Sing-M-Legasi_Pocket-Garden_FA-optimized-1920x1580.jpg')}
+/* the scrim's lower edge is the first gradient moment: forest lifting into the night ground */
+/* phones: the copy block starts higher than before (price line, chips and trust line were added), so the scrim
+   deepens from 36% down instead of 52%; the top stays clear for the logo wash */
+.hero-scrim{background:linear-gradient(180deg,rgba(4,29,20,0) 16%,rgba(4,29,20,.5) 36%,rgba(4,29,20,.8) 58%,rgba(4,29,20,.94) 86%,var(--night0) 100%)}
+@media(min-width:1024px){.hero-scrim{background:linear-gradient(90deg,rgba(4,29,20,.88) 0%,rgba(8,63,42,.58) 38%,rgba(4,29,20,.1) 66%,rgba(4,29,20,.02) 100%),linear-gradient(180deg,transparent 80%,var(--night0) 100%)}}
+.hero h1{font-size:clamp(36px,9vw,44px);margin-bottom:10px}
+@media(min-width:1024px){.hero h1{font-size:clamp(44px,5vw,64px);line-height:1.04}}
+.h-eyebrow{margin-bottom:14px}
+/* phones: the eyebrow sits over the photo where the scrim is still light; cream holds 4.5:1 there, gold-light 3.7:1 */
+@media(max-width:1023px){.h-eyebrow{color:var(--cream-ink)}}
+/* the logo wash is a touch stronger so the desktop nav links hold contrast over the sky and the tree */
+.hero-wash{background:linear-gradient(180deg,rgba(237,224,206,.74) 0%,rgba(237,224,206,.34) 90px,rgba(237,224,206,0) 180px)}
+.h-price{font:500 clamp(30px,8vw,44px)/1.1 var(--font-display);color:var(--cream-ink);margin:0 0 10px;text-shadow:0 2px 14px rgba(0,0,0,.55);text-wrap:balance}
+.h-price b{font-family:var(--font-body);font-weight:700;font-size:.82em;letter-spacing:-.02em;white-space:nowrap}
+.h-fact{font:500 14.5px/1.5 var(--font-body);color:var(--cream-ink);margin:0 0 14px;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+@media(min-width:1024px){.h-fact{font-size:16px}}
+.h-beds{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 20px}
+.h-bed{min-height:44px;padding:0 12px;border:1.5px solid rgba(242,233,218,.45);background:rgba(4,29,20,.42);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--cream-ink);font:600 13px/1.2 var(--font-body);
+  cursor:pointer;touch-action:manipulation;transition:background .15s,border-color .15s,transform .1s}
+@media(hover:hover) and (pointer:fine){.h-bed:hover{border-color:var(--cream-ink);background:rgba(242,233,218,.12)}}
+.h-bed:active{transform:scale(.97)}
+@media(max-width:379px){.h-bed{padding:0 9px;font-size:12px}.h-beds{gap:5px}}
+.h-fact{text-wrap:balance}
+@media(max-width:1023px){.h-fact{font-size:13.5px}}
+.hero-ctas{align-items:flex-start}
+@media(max-width:559px){.hero-ctas .btn{width:100%}}
+.h-trust{font:500 12.5px/1.5 var(--font-body);color:var(--cream-ink);opacity:.92;margin-top:12px;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+@media(min-width:1024px) and (max-height:760px){.hero h1{font-size:40px;margin-bottom:8px}.h-price{font-size:34px}.h-beds{margin-bottom:14px}}
+
+/* ===== QUICK FORM on night, over the central-park render once the page has loaded; form card on paper ===== */
+#quickRegister{background:linear-gradient(180deg,rgba(4,29,20,.94) 0%,rgba(4,29,20,.78) 45%,rgba(4,29,20,.94) 100%),var(--night0)}
+html.hero-more #quickRegister{background:linear-gradient(180deg,rgba(4,29,20,.94) 0%,rgba(4,29,20,.74) 45%,rgba(4,29,20,.94) 100%),url('assets/M-Legasi_Lake-Eye-Level_FA-optimized-1920x1356.jpg') center 40%/cover no-repeat}
+#quickRegister .qx .eyebrow{position:relative;padding-left:46px;font-size:11.5px;letter-spacing:.26em}
+#quickRegister .qx .eyebrow::before{content:'';position:absolute;left:0;top:50%;width:32px;height:1px;background:var(--gold-light)}
+.quick-form-headline{font-size:clamp(34px,4.8vw,60px);line-height:1.03;letter-spacing:-.012em}
+.quick-form-desc{font-size:17px}
+#quickRegister .qx-points span{border-color:rgba(242,233,218,.28)}
+#quickRegister .form-card{background:var(--paper);box-shadow:0 40px 90px -40px rgba(0,0,0,.6)}
+#quickRegister .f-input:focus{outline-color:var(--night2)}
+
+/* ===== FACTS BAND: the page's own figures, set large; counters run once in view ===== */
+.facts{background:var(--night0);border-top:1px solid rgba(212,176,122,.14);border-bottom:1px solid rgba(212,176,122,.14);padding:clamp(44px,6vw,80px) 24px}
+@media(min-width:1024px){.facts{padding-left:48px;padding-right:48px}}
+.facts-row{display:grid;grid-template-columns:repeat(2,1fr);gap:34px 18px}
+@media(min-width:900px){.facts-row{grid-template-columns:repeat(4,1fr);gap:24px}}
+.fact{position:relative;padding-left:18px}
+.fact::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:1px;background:var(--gold-light)}
+.fact b{display:block;font:700 clamp(42px,6.2vw,80px)/1 var(--font-display);color:var(--cream-ink);letter-spacing:-.02em;white-space:nowrap}
+.fact b small{font-size:.5em;font-weight:700;letter-spacing:0}
+.fact>span{display:block;margin-top:12px;font:600 11.5px/1.4 var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:var(--cream-dim)}
+
+/* ===== LAYOUTS on paper: the unit card and calculator go white, tabs and chips take ink, never the ask colour ===== */
+#units{max-width:none;padding:clamp(64px,8vw,120px) 24px;background:var(--paper);color:var(--ink-d)}
+@media(min-width:1024px){#units{padding-left:48px;padding-right:48px}}
+#units>*{max-width:1200px;margin-left:auto;margin-right:auto}
+@media(max-width:639px){#units{padding-left:0;padding-right:0}#units .section-header,#units .tabs{margin-left:24px;margin-right:24px}}
+#units .tabs{justify-content:flex-start}
+#units .tab{color:var(--ink-d);border-color:rgba(16,36,27,.22)}
+#units .tab:hover{background:rgba(16,36,27,.06)}
+#units .tab[aria-selected="true"]{background:var(--night2);border-color:var(--night2);color:var(--cream-ink)}
+#units .tab-new{background:var(--gold-text)}
+#units .unit{background:#fff;border:1px solid rgba(16,36,27,.1);box-shadow:0 40px 80px -40px rgba(16,36,27,.3)}
+#units .unit-plan{border-color:rgba(16,36,27,.08)}
+#units .unit-badge{background:var(--night2);color:var(--cream-ink)}
+#units .unit-badge.popular{background:var(--gold-text);color:#fff}
+#units .unit-info,#units .unit-info h3{color:var(--ink-d)}
+#units .unit-cfg{color:var(--ink-m)}
+#units .specs{border-color:rgba(16,36,27,.12)}
+#units .specs>div+div{border-left-color:rgba(16,36,27,.12)}
+#units .specs .n{color:var(--ink-d)}
+#units .specs .l{color:var(--ink-m)}
+#units .price-from{color:var(--ink-m)}
+#units .price-from b{color:var(--ink-d)}
+#units .calc-link{color:var(--ink-d);border-bottom-color:rgba(16,36,27,.35)}
+#units .calc-link:hover{color:var(--night2);border-bottom-color:var(--night2)}
+#units .unit-acts{grid-template-columns:1fr;gap:4px}
+#units .u-link{display:inline-flex;justify-content:center;align-items:center;gap:6px;font:600 13px/1.4 var(--font-body);color:var(--ink-d);
+  text-decoration:underline;text-underline-offset:3px;padding:4px 0;min-height:44px;opacity:.85}
+#units .u-link:hover{opacity:1}
+#units .calc{background:#fff;border:1px solid rgba(16,36,27,.1);border-top:none;color:var(--ink-d);box-shadow:0 40px 80px -40px rgba(16,36,27,.3)}
+#units .calc h3{color:var(--ink-d)}
+#units .cprice .l,#units .cfield label,#units .cp-pick-t,#units .cp-pick-c{color:var(--ink-m)}
+#units .cp-pick{background:rgba(16,36,27,.04);border-color:rgba(16,36,27,.18)}
+#units .cp-pick:hover{background:rgba(16,36,27,.08);border-color:var(--night2)}
+#units .cp-pick b,#units .cfield output{color:var(--ink-d)}
+#units .cp-menu{background:#fff;border-color:rgba(16,36,27,.14);box-shadow:0 24px 48px -24px rgba(16,36,27,.35)}
+#units .cp-opt{border-bottom-color:rgba(16,36,27,.1)}
+#units .cp-opt:hover,#units .cp-opt[aria-selected="true"]{background:rgba(16,36,27,.05)}
+#units .cp-opt-k,#units .cp-opt-p{color:var(--ink-d)}
+#units .cp-opt-d{color:var(--ink-m)}
+#units .calc input[type=range]::-webkit-slider-runnable-track{background:rgba(16,36,27,.16)}
+#units .calc input[type=range]::-moz-range-track{background:rgba(16,36,27,.16)}
+#units .calc input[type=range]::-webkit-slider-thumb{border-color:var(--night2)}
+#units .calc input[type=range]::-moz-range-thumb{border-color:var(--night2)}
+/* calculator result: a read-out with its ask inside, not a coral panel above a button */
+#units .cout{display:block;background:var(--paper);border:1px solid rgba(16,36,27,.12);color:var(--ink-d);padding:20px 22px;text-align:left}
+#units .cout .l{color:var(--ink-m)}
+#units .cout .v{color:var(--ink-d);margin-top:2px}
+#units .cout .d{color:var(--ink-m);margin:4px 0 0;text-align:left;max-width:none}
+#units .calc-cta{width:100%;margin-top:16px}
+
+/* ===== PLAN LIGHTBOX: the ask under the enlarged plan ===== */
+.fp-lightbox-foot{flex:0 0 auto;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:var(--night2);border:1px solid var(--mull);border-top:none}
+.fp-lightbox-foot .btn{width:100%}
+.fp-lightbox-imgwrap{max-height:60vh}
+@media(max-width:640px){.fp-lightbox-imgwrap{max-height:56vh}}
+
+/* ===== OVERVIEW: the township as a full-bleed image, the copy on a glass card over it ===== */
+#overview{padding:clamp(64px,8vw,120px) 0 clamp(48px,6vw,96px);background:linear-gradient(180deg,var(--night0) 0%,var(--night2) 100%)}
+.ov-wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+@media(min-width:1024px){.ov-wrap{padding:0 48px}}
+#overview .ov-split{display:block;position:relative;border:0;background:transparent;overflow:visible}
+#overview .ov-media{aspect-ratio:auto;min-height:min(82vh,760px);background:var(--night0)}
+#overview .ov-media img{object-position:center 45%}
+/* the second gradient moment: forest at the top of the image, night at its foot */
+#overview .ov-media::after{background:linear-gradient(180deg,var(--night2) 0%,rgba(8,63,42,.78) 14%,rgba(8,63,42,0) 38%),linear-gradient(0deg,var(--night0) 0%,rgba(4,29,20,0) 42%)}
+#overview .ov-overlay{top:clamp(28px,5vw,56px);bottom:auto;left:24px;right:24px}
+@media(min-width:1024px){#overview .ov-overlay{left:max(48px,calc((100vw - 1240px) / 2 + 48px));right:auto}}
+#overview .ov-panel{position:relative;z-index:2;max-width:620px;margin:-18vh 16px 0;padding:clamp(28px,4vw,52px);
+  background:rgba(4,29,20,.95);border:1px solid rgba(255,255,255,.1)}
+@media(min-width:1024px){#overview .ov-panel{margin:-30vh max(48px,calc((100vw - 1240px) / 2 + 48px)) 0 auto;background:rgba(4,29,20,.86);
+  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}}
+#overview .ov-copy{font-size:16px}
+@supports (animation-timeline: view()){
+  @media(prefers-reduced-motion:no-preference){
+    #overview .ov-media img{animation:lg-par linear both;animation-timeline:view();animation-range:entry 0% exit 100%}
+    #quickRegister{animation:lg-par-bg linear both;animation-timeline:view()}
+  }
+}
+@keyframes lg-par{from{object-position:center 25%}to{object-position:center 70%}}
+@keyframes lg-par-bg{from{background-position:center 0%,center 20%}to{background-position:center 0%,center 70%}}
+
+/* ===== STORY cards on flat night; card art loads after the page ===== */
+#story{background:var(--night0);padding:clamp(64px,8vw,120px) 0}
+@media(min-width:1024px){#story{padding-left:48px;padding-right:48px}}
+.story-card{background-image:none}
+html.hero-more .story-card{background-image:var(--img)}
+#story .story-card{border-color:rgba(212,176,122,.2)}
+
+/* ===== FACILITIES on paper: white card frames, ink type ===== */
+#facilities{background:var(--paper);color:var(--ink-d);padding:clamp(64px,8vw,120px) 48px}
+@media(max-width:640px){#facilities{padding-left:24px;padding-right:24px}}
+#facilities .section-header h2{color:var(--ink-d)}
+#facilities .section-header .eyebrow{color:var(--gold-text)}
+#facilities .section-header .eyebrow::before{background:var(--gold)}
+#facilities .section-header p{color:var(--ink-m)}
+#facilities .facility-card-frame{background:#fff;border-color:rgba(16,36,27,.1);box-shadow:0 30px 60px -40px rgba(16,36,27,.35)}
+#facilities .facility-card:hover .facility-card-frame{border-color:var(--gold)}
+#facilities .facility-card-body h3{color:var(--ink-d)}
+#facilities .facility-card-body p{color:var(--ink-m)}
+#facilities .facility-tag{color:var(--ink-d);border-color:rgba(16,36,27,.2)}
+
+/* ===== WHY: an editorial numbered list on night (replaces the image mosaic) ===== */
+#why{background:var(--night0);padding:clamp(64px,8vw,120px) 48px}
+@media(max-width:640px){#why{padding-left:24px;padding-right:24px}}
+.usp-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;border-top:1px solid rgba(255,255,255,.14)}
+@media(min-width:900px){.usp-list{grid-template-columns:1fr 1fr;column-gap:64px}}
+.usp-list li{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:18px;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+.usp-ic{width:40px;height:40px;object-fit:contain;filter:brightness(0) invert(1);opacity:.94}
+.usp-list h3{font:600 clamp(19px,1.9vw,25px)/1.25 var(--font-display);color:var(--cream-ink);margin:0}
+.usp-list p{font:400 13.5px/1.6 var(--font-body);color:var(--cream-dim);margin:4px 0 0;max-width:46ch}
+.usp-list .n{font:italic 600 17px/1 var(--font-display);color:rgba(242,233,218,.55);justify-self:end;padding:0 3px 0 8px}
+@media(max-width:599px){.usp-list li{grid-template-columns:36px 1fr auto;gap:14px}.usp-ic{width:34px;height:34px}}
+
+/* ===== 360 on night: the masterplan behind it loads after the page; the ask sits under the embed ===== */
+#vr{background-image:none}
+html.hero-more #vr{background-image:url(assets/Masterplan_FA-Extend-optimzied-1418x1920.jpg)}
+.aerial h2{font-size:clamp(34px,4.8vw,60px);line-height:1.03;letter-spacing:-.012em}
+.vr-acts{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:18px}
+.vr-acts .btn{min-width:min(100%,300px)}
+.vr-acts .u-link{display:inline-flex;align-items:center;gap:6px;min-height:44px;font:600 13px/1.4 var(--font-body);color:var(--cream-ink);
+  text-decoration:underline;text-underline-offset:3px;opacity:.85}
+.vr-acts .u-link:hover{opacity:1}
+
+/* ===== GALLERY: full-bleed, taller, captions in the serif italic, drag on desktop ===== */
+#gallery{background:var(--night0);padding:clamp(64px,8vw,120px) 0}
+#gallery .gallery-inner{max-width:none}
+#gallery .section-header{max-width:1240px;margin-left:auto;margin-right:auto;padding:0 24px}
+@media(min-width:1024px){#gallery .section-header{padding:0 48px}}
+.gal-wrap{position:relative}
+#gallery .gal{display:grid;grid-auto-flow:column;grid-auto-columns:80vw;grid-template-columns:none;gap:14px;overflow-x:auto;
+  scroll-snap-type:x mandatory;padding:0 24px 8px;scroll-padding:0 24px;cursor:grab;scrollbar-width:none}
+#gallery .gal.dragging{cursor:grabbing;scroll-snap-type:none}
+#gallery .gal figure{border-color:rgba(212,176,122,.2)}
+#gallery .gal img{height:min(64vh,600px)}
+#gallery .gal figcaption{font:italic 600 clamp(20px,2vw,26px)/1.2 var(--font-display);padding:44px 18px 16px;
+  background:linear-gradient(180deg,rgba(4,29,20,0),rgba(4,29,20,.86))}
+@media(hover:hover) and (pointer:fine){#gallery .gal figure img{transition:transform 1.2s var(--ease-out)}#gallery .gal figure:hover img{transform:scale(1.04)}}
+.gal-nav{display:none}
+@media(min-width:1024px){
+  #gallery .gal{grid-auto-columns:38vw;gap:22px;padding:0 max(48px,calc((100vw - 1240px) / 2 + 48px)) 16px;overflow-x:auto;
+    scrollbar-width:thin;scrollbar-color:rgba(242,233,218,.38) rgba(242,233,218,.08)}
+  #gallery .gal::-webkit-scrollbar{display:block;height:8px}
+  #gallery .gal::-webkit-scrollbar-track{background:rgba(242,233,218,.08)}
+  #gallery .gal::-webkit-scrollbar-thumb{background:rgba(242,233,218,.38)}
+  .gal-nav{position:absolute;top:calc(50% - 12px);transform:translateY(-50%);z-index:3;display:inline-flex;align-items:center;justify-content:center;
+    width:48px;height:48px;border:1px solid rgba(242,233,218,.35);background:rgba(4,29,20,.62);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+    color:var(--cream-ink);cursor:pointer;transition:background .2s,border-color .2s,opacity .2s}
+  .gal-nav:hover{background:rgba(242,233,218,.16);border-color:var(--cream-ink)}
+  .gal-nav svg{width:20px;height:20px}
+  .gal-prev{left:24px}
+  .gal-next{right:24px}
+  .gal-nav[disabled]{opacity:0;pointer-events:none}
+  #gallery .gal-hint{display:block}
+}
+#gallery .gal-hint{color:var(--cream-dim);opacity:.8}
+#gallery .section-header .em{white-space:nowrap}
+
+/* ===== INVESTMENT on the second paper tint (sage): copy left, table right on desktop ===== */
+#growth{background:var(--paper2);padding:clamp(64px,8vw,120px) 48px}
+@media(max-width:640px){#growth{padding-left:24px;padding-right:24px}}
+#growth .roi-inner{max-width:1240px}
+#growth .roi-left .eyebrow{position:relative;padding-left:46px;letter-spacing:.26em!important;font-size:11.5px!important;margin-bottom:16px!important}
+#growth .roi-left .eyebrow::before{content:'';position:absolute;left:0;top:50%;width:32px;height:1px;background:var(--gold)}
+#growth .roi-left h2{font-size:clamp(34px,4.8vw,64px);line-height:1.03;letter-spacing:-.012em;color:var(--ink-d)}
+#growth .roi-left>p{font-size:17px;color:var(--ink-m)}
+#growth .compare-table{border-color:rgba(16,36,27,.12)}
+@media(min-width:1024px){
+  #growth .roi-left{display:grid;grid-template-columns:5fr 6fr;column-gap:64px;align-items:center}
+  #growth .roi-left>.eyebrow,#growth .roi-left>h2,#growth .roi-left>p{grid-column:1}
+  #growth .roi-left>p{margin-bottom:0}
+  #growth .compare-table{grid-column:2;grid-row:1/span 3}
+}
+
+/* ===== LOCATION on night: the map in a white frame, lists on hairlines, selected tab in cream ===== */
+#location{background:linear-gradient(180deg,var(--night0) 0%,#06301F 100%);color:var(--cream-ink);border-top:1px solid rgba(255,255,255,.07);padding:clamp(64px,8vw,120px) 48px}
+@media(max-width:640px){#location{padding-left:24px;padding-right:24px}}
+#location .location-map{border-color:rgba(212,176,122,.26)}
+#location .waze-cta{background:transparent;border:1.5px solid rgba(242,233,218,.45);color:var(--cream-ink)}
+#location .waze-cta:hover{background:rgba(242,233,218,.12)}
+#location .highway-tag{color:var(--cream-ink);background:transparent;border-color:rgba(242,233,218,.3)}
+#location .amenity-tab{color:var(--cream-ink);border-color:rgba(242,233,218,.3)}
+#location .amenity-tab:hover{background:rgba(242,233,218,.1)}
+#location .amenity-tab.active{background:var(--cream-ink);color:var(--night);border-color:var(--cream-ink)}
+#location .amenity-list{background:transparent;border:0;border-top:1px solid rgba(255,255,255,.14);padding:0 4px 0 0;scrollbar-width:thin;scrollbar-color:rgba(242,233,218,.38) transparent}
+#location .amenity-subhead{color:var(--gold-light)}
+#location .amenity-item{border-bottom-color:rgba(255,255,255,.12);color:var(--cream-ink)}
+#location .amenity-km{color:var(--gold-light)}
+
+/* ===== DEVELOPER on paper: a statement with the red lockup and its dark tagline ===== */
+#developer{background:var(--paper);border:0;padding:clamp(64px,8vw,120px) 24px}
+#developer .dev2{max-width:900px}
+#developer .eyebrow{color:var(--gold-text)}
+#developer h2{color:var(--ink-d);font-size:clamp(26px,3.4vw,42px)}
+#developer .dev-copy{color:var(--ink-m)}
+#developer .dev-stat-num{color:var(--ink-d)}
+#developer .dev-stat-label{color:var(--gold-text)}
+
+/* ===== CLOSING FORM: the third gradient moment (forest to sage) behind a card on paper ===== */
+#register{background:linear-gradient(160deg,var(--night0) 0%,var(--night2) 44%,#5E7A68 76%,var(--paper2) 100%);padding:clamp(64px,8vw,120px) 24px}
+@media(min-width:1024px){#register{padding-left:48px;padding-right:48px}}
+#register .form-inner{background:var(--paper);color:var(--ink-d);box-shadow:0 50px 100px -40px rgba(4,29,20,.6);padding:clamp(28px,4vw,52px);gap:clamp(28px,4vw,48px)}
+#register .form-left h2{color:var(--ink-d);font-size:clamp(30px,3.9vw,46px);line-height:1.06;letter-spacing:-.012em}
+#register .form-left>p{color:var(--ink-m)}
+#register .step-dot{background:rgba(16,36,27,.15)}
+#register .step-dot.active{background:var(--night2)}
+#register .form-group label{color:var(--night2)}
+#register .form-group input{background:#fff;border-color:rgba(8,63,42,.3);color:var(--ink-d)}
+#register .form-group input::placeholder{color:#9A917F}
+#register .form-group input:focus{border-color:var(--night2);background:#fff;outline:2px solid var(--night2);outline-offset:1px}
+#register .main-form-error{color:#B4372A!important}
+#register .term-condition{color:var(--ink-m)}
+#register .term-condition a{color:var(--night2)}
+#register .form-trust{color:var(--ink-m)}
+#register .receive-card,#register .social-proof-card{background:#fff;border-color:rgba(16,36,27,.12)}
+#register .receive-card h3,#register .receive-item{color:var(--ink-d)}
+#register .social-proof-card .source{color:var(--gold-text)}
+#register .social-proof-card .quote{color:var(--ink-d)}
+#register .social-proof-card .date{color:var(--ink-m)}
+
+/* ===== FAQ on sage; the question in the display face ===== */
+#faq{background:var(--paper2);padding:clamp(64px,8vw,120px) 48px}
+@media(max-width:640px){#faq{padding-left:24px;padding-right:24px}}
+#faq .faq-inner{max-width:1240px}
+#faq .faq-list{max-width:820px}
+@media(min-width:1024px){#faq .faq-list{margin-left:calc(25% + 14px)}}
+#faq .faq-item{border-color:rgba(16,36,27,.12)}
+#faq .faq-q{font:600 clamp(17px,1.6vw,21px)/1.35 var(--font-display);color:var(--ink-d)}
+#faq .faq-toggle{color:var(--ink-m)}
+#faq .faq-a{color:var(--ink-m)}
+#faq .faq-cta{text-align:left;margin-top:30px}
+@media(min-width:1024px){#faq .faq-cta{margin-left:calc(25% + 14px)}}
+
+/* ===== SEO content on paper (text untouched) ===== */
+.seo-section{background:var(--paper)}
+.seo-inner h2,.seo-inner h3{color:var(--ink-d)}
+.seo-inner p,.seo-inner li{color:var(--ink-m)}
+.seo-inner a{color:var(--night2)}
+
+/* ===== LEAD DRAWER on paper, titled with the chosen unit, one line of ticked text ===== */
+.lead-drawer{background:var(--paper);color:var(--ink-d);border-left-color:rgba(16,36,27,.12)}
+@media(max-width:640px){.lead-drawer{border-top-color:rgba(16,36,27,.12)}}
+.lead-drawer-handle{background:rgba(16,36,27,.2)}
+.lead-drawer-close{border-color:rgba(16,36,27,.2);color:var(--ink-d)}
+.lead-drawer-close:hover{background:rgba(16,36,27,.06)}
+.lead-drawer-title{color:var(--ink-d)}
+.lead-drawer-sub{color:var(--ink-m);margin-bottom:10px}
+.ld-trust{font:600 12.5px/1.5 var(--font-body);color:var(--night2);margin:0 0 16px}
+.lead-drawer-receive-label{font:700 15px/1.4 var(--font-body);letter-spacing:0;text-transform:none;color:var(--ink-d)}
+.lead-drawer-benefits{gap:4px 16px}
+.lead-drawer-benefit{color:var(--ink-d);border:0;padding:0}
+.lead-drawer-benefit .ck{color:var(--night2)}
+.lead-drawer-bar{background:rgba(16,36,27,.15)}
+.lead-drawer-bar.is-active{background:var(--night2)}
+.lead-drawer-divider{border-top-color:rgba(16,36,27,.12)}
+.lead-field-label{color:var(--night2)}
+.lead-field input{background:#fff;border-color:rgba(8,63,42,.3);color:var(--ink-d)}
+.lead-field input::placeholder{color:#9A917F}
+.lead-field input:focus{border-color:var(--night2);outline:2px solid var(--night2);outline-offset:1px}
+.lead-form-error{color:#B4372A!important}
+.lead-tc{color:var(--ink-m)}
+.lead-tc-link{color:var(--night2)}
+.lead-trust-row{color:var(--ink-m)}
+</style>
 <!-- ANNOUNCEMENT BAR -->
 <div class="announce-bar" aria-label="Project highlights">
   <div class="announce-track" id="announceTrack">
@@ -2673,35 +3063,34 @@ a[href^="tel:"]{white-space:nowrap}
      original green logo over the bright sky (light top wash); content sits over the
      dark forest scrim, bottom-left on mobile. Location line = live fact. -->
 <section class="hero" id="about" data-section="hero">
+  <!-- Premium port (16 Oct 2026): slide art moves to CSS so slide 1 can be WebP and preloaded while slides 2 to 4
+       wait for page load (html.hero-more). The hero reads in the Aurora R3 order: eyebrow with the place, the h1
+       (verbatim), the price line, one fact line, a chip per home type that opens its floor plan, one ask, the trust
+       line. The price and tenure tiles, the place line and the desktop sub were moved into those lines, not dropped. -->
   <div class="hero-slides" aria-hidden="true">
-    <div class="hs on" style="background-image:url('assets/Phase_3_Type_A_2_optimized.jpg')" data-cap="Phase 3 Streetscape"></div>
-    <div class="hs" style="background-image:url('assets/M-Legasi_Lake-Eye-Level_FA-optimized-1920x1356.jpg')" data-cap="13-Acre Central Park"></div>
-    <div class="hs" style="background-image:url('assets/Phase-3-Type-A-_-eye-level-court-1920x1081.jpg')" data-cap="Multipurpose Courts"></div>
-    <div class="hs" style="background-image:url('assets/Mah-Sing-M-Legasi_Pocket-Garden_FA-optimized-1920x1580.jpg')" data-cap="Pocket Gardens"></div>
+    <div class="hs hs-1 on" data-cap="Phase 3 Streetscape"></div>
+    <div class="hs hs-2" data-cap="13-Acre Central Park"></div>
+    <div class="hs hs-3" data-cap="Multipurpose Courts"></div>
+    <div class="hs hs-4" data-cap="Pocket Gardens"></div>
   </div>
   <div class="hero-wash" aria-hidden="true"></div>
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="hero-body">
     <div class="hero-inner">
-      <span class="h-eyebrow"><span class="dot" aria-hidden="true"></span>Phase 3 Now Open</span>
+      <span class="h-eyebrow">Phase 3 Now Open &middot; Semenyih</span>
       <h1>Your <em>Legacy</em><br>Starts Here</h1>
-      <p class="h-place"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>Semenyih, Selangor &middot; a 500-acre freehold township</p>
-      <p class="h-sub">Freehold 2-storey terrace homes in Semenyih, nestled in 500 acres of greenery with Broga Hill on the horizon.</p>
-      <div class="h-cards">
-        <div class="h-card">
-          <div class="h-card-lab">Starting from</div>
-          <div class="h-card-val num">RM 535K</div>
-          <div class="h-card-sub">Astradia &middot; 20&prime; &times; 60&prime;</div>
-        </div>
-        <div class="h-card">
-          <div class="h-card-lab">Tenure</div>
-          <div class="h-card-val">Freehold</div>
-          <div class="h-card-sub">4 Bed &middot; 3 Bath</div>
-        </div>
+      <p class="h-price">Freehold from <b class="num">RM535K</b></p>
+      <p class="h-fact">Double-storey terrace, 4 bed 3 bath, 1,555 to 1,686 sq ft</p>
+      <div class="h-beds" role="group" aria-label="See the floor plan for each home type">
+        <button type="button" class="h-bed" data-bed-type="astradia">Astradia</button>
+        <button type="button" class="h-bed" data-bed-type="harmonia">Harmonia</button>
+        <button type="button" class="h-bed" data-bed-type="auroria">Auroria</button>
+        <button type="button" class="h-bed" data-bed-type="zendia">Zendia</button>
       </div>
       <div class="hero-ctas">
         <button type="button" class="btn btn-p" data-open-lead="hero" data-cta-id="hero_price_list">Get Price List Now</button>
       </div>
+      <p class="h-trust">Sold directly by Mah Sing Group, trusted by over 100,000 homeowners across Malaysia</p>
     </div>
   </div>
   <div class="h-slides">
@@ -2714,7 +3103,7 @@ a[href^="tel:"]{white-space:nowrap}
      Salesforce form fields + handleQuickFormSubmit handler verbatim. -->
 <section class="quick-form-section" id="quickRegister" data-section="form">
   <div class="wrap">
-    <div class="qx">
+    <div class="qx rv">
       <div>
         <span class="eyebrow">30 sec &middot; 1 step &middot; No spam</span>
         <h2 class="quick-form-headline">Get the price list <em>now</em></h2>
@@ -2745,7 +3134,7 @@ a[href^="tel:"]{white-space:nowrap}
             <input class="f-input" id="qf-name" type="text" name="last_name" placeholder="Your full name" maxlength="80" required autocomplete="name"></div>
           <div class="field"><label class="f-label" for="qf-email">Email</label>
             <input class="f-input" id="qf-email" type="email" name="email" placeholder="you@example.com" maxlength="80" required autocomplete="email"></div>
-          <div class="field"><label class="f-label" for="qf-phone">Phone number</label>
+          <div class="field"><label class="f-label" for="qf-phone">WhatsApp number</label>
             <input class="f-input" id="qf-phone" type="tel" name="mobile" placeholder="012-345 6789" maxlength="20" required autocomplete="tel" inputmode="tel" data-my-phone></div>
           <div class="quick-form-error" data-form-error>Please fill in your name, email, and phone number.</div>
           <button class="btn btn-p quick-form-submit" type="submit">Get Price List Now</button>
@@ -2762,28 +3151,40 @@ a[href^="tel:"]{white-space:nowrap}
 
 
 
+<!-- FACTS (premium port, 16 Oct 2026): four of the page's own figures set large, counters run once in view.
+     Sources on this page: the overview overlay (500 acres, 13-acre Central Park), the overview stats
+     (90% Phase 1A take-up, 35km to KLCC). -->
+<section class="facts" id="facts" aria-label="M Legasi at a glance">
+  <div class="wrap facts-row rv" data-stagger>
+    <div class="fact"><b><span class="num" data-count="500">500</span></b><span>Acre freehold township</span></div>
+    <div class="fact"><b><span class="num" data-count="13">13</span></b><span>Acre Central Park</span></div>
+    <div class="fact"><b><span class="num" data-count="90">90</span><small>%</small></b><span>Phase 1A take-up</span></div>
+    <div class="fact"><b><span class="num" data-count="35">35</span><small>km</small></b><span>To KLCC</span></div>
+  </div>
+</section>
+
 <!-- UNITS (R2): Aurora tabs + unit card + attached calculator, Legasi's four types with
      PUBLISHED per-type prices. Plan panel taps into the existing zoom lightbox.
      The calculator block carries id="invest" so legacy anchors land on it. -->
 <section class="units-section" id="units" data-section="units">
-  <div class="section-header">
+  <div class="section-header rv">
     <div class="eyebrow">Impira Collection</div>
-    <h2>Select Your Home</h2>
+    <h2>Select Your <span class="em">Home</span></h2>
     <p>Four distinct layouts designed for families at every stage &mdash; all 2-storey freehold terrace homes</p>
   </div>
 
-  <div class="tabs" id="tabs" role="tablist" aria-label="Unit types">
+  <div class="tabs rv" id="tabs" role="tablist" aria-label="Unit types">
     <button class="tab" role="tab" data-type="astradia" aria-selected="true">Astradia<em>20&prime; &times; 60&prime;</em></button>
     <button class="tab" role="tab" data-type="harmonia" aria-selected="false">Harmonia<em>20&prime; &times; 70&prime;</em></button>
     <button class="tab" role="tab" data-type="auroria" aria-selected="false">Auroria<span class="tab-new">New</span><em>20&prime; &times; 60&prime;</em></button>
     <button class="tab" role="tab" data-type="zendia" aria-selected="false">Zendia<span class="tab-new">New</span><em>20&prime; &times; 70&prime;</em></button>
   </div>
 
-  <div class="unit">
+  <div class="unit rv">
     <div class="unit-plan" id="planWrap">
       <span class="unit-badge" id="uBadge">Open for Sale</span>
       <span class="unit-zoom"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</span>
-      <img id="planImg" src="assets/Astradia-Intermediate-Lot-20x60-1.png" alt="Astradia floor plan, 1,555 sq ft, 4 bedrooms" width="900" height="900">
+      <img id="planImg" decoding="async" src="assets/Astradia-Intermediate-Lot-20x60-1.png" alt="Astradia floor plan, 1,555 sq ft, 4 bedrooms" width="900" height="900">
     </div>
     <div class="unit-info">
       <h3 id="uName">Astradia</h3>
@@ -2800,12 +3201,13 @@ a[href^="tel:"]{white-space:nowrap}
       </div>
       <div class="unit-acts">
         <button class="btn btn-p" id="uCta" data-open-lead="unit_card" data-unit="Astradia" data-cta-id="units_price_list">Get Price List Now</button>
-        <a class="btn btn-o" href="https://m-legasi.com.my/360-walkthrough/" target="_blank" rel="noopener" data-tour-source="unit_card">360&deg; Walkthrough</a>
+        <!-- R2 (premium port): one filled ask on the card; the tour is a text link under it, same href and tracking -->
+        <a class="u-link" id="uVt" href="https://m-legasi.com.my/360-walkthrough/" target="_blank" rel="noopener" data-tour-source="unit_card">Take the 360&deg; Walkthrough</a>
       </div>
     </div>
   </div>
 
-  <div class="calc" id="invest" data-section="calculator">
+  <div class="calc rv" id="invest" data-section="calculator">
     <h3>Monthly Instalment Calculator</h3>
     <div class="cprice">
       <span class="l">Property price</span>
@@ -2825,15 +3227,17 @@ a[href^="tel:"]{white-space:nowrap}
       <input type="range" id="cTen" min="10" max="35" step="1" value="35">
     </div>
     <div class="cout">
-      <div><div class="l">Estimated monthly from</div>
-      <div class="v num" id="cMy">RM 2,132</div></div>
+      <div class="l">Estimated monthly from</div>
+      <div class="v num" id="cMy">RM 2,132</div>
       <div class="d">At 4% p.a. over the selected tenure. For reference only; kindly refer to our sales staff for accurate pricing.</div>
+      <!-- R4 (premium port): the price ask after the calculator; data-unit follows the calculator's unit -->
+      <button type="button" class="btn btn-p calc-cta" id="cCta" data-open-lead="calc" data-unit="Astradia" data-cta-id="calc_get_price">Send me the Astradia price list</button>
     </div>
   </div>
 </section>
 
 <!-- FLOOR PLAN LIGHTBOX -->
-<div class="fp-lightbox" id="fpLightbox" role="dialog" aria-modal="true" aria-label="Floor plan viewer">
+<div class="fp-lightbox" id="fpLightbox" role="dialog" aria-modal="true" aria-label="Floor plan viewer" data-section="floorplan">
   <div class="fp-lightbox-overlay" onclick="closeFloorPlan()"></div>
   <div class="fp-lightbox-container">
     <div class="fp-lightbox-header">
@@ -2867,6 +3271,11 @@ a[href^="tel:"]{white-space:nowrap}
         </div>
       </div>
     </div>
+    <!-- R1 (premium port): the price ask inside the enlarged plan. openFloorPlan() names the unit in view;
+         for a gallery image or the map it becomes the general ask (data-open-lead "zoom", cta_id "zoom_get_price"). -->
+    <div class="fp-lightbox-foot">
+      <button type="button" class="btn btn-p lb-ask" id="lbAsk" data-open-lead="floorplan_zoom" data-unit="Astradia" data-cta-id="floorplan_zoom_get_price">Get the Astradia price list</button>
+    </div>
   </div>
 </div>
 
@@ -2875,24 +3284,31 @@ a[href^="tel:"]{white-space:nowrap}
 <!-- OVERVIEW (R8): full MGM RTS-Link composition per client reference — visual with
      the 500-acre overlay kept, joined to a dark panel: eyebrow, serif heading (SEO
      H2 verbatim), intro copy verbatim, MGM-style divided stat cells, CTA. -->
+<!-- Premium port (16 Oct 2026): the township as a full-bleed image with the copy on a glass card over it (the
+     Aurora story pattern). The SEO H2 moves above the image, verbatim. The 90% and 35km stats moved up into
+     the facts band; the card's stats are now the home facts already on the page. -->
 <section class="intro-section" id="overview" data-section="overview">
-  <div class="ov-split">
+  <div class="ov-wrap">
+    <div class="section-header rv">
+      <div class="eyebrow">The Township</div>
+      <h2>New Double-Storey Terrace Homes in Semenyih</h2>
+    </div>
+  </div>
+  <div class="ov-split rv">
     <div class="ov-media">
-      <img src="assets/gal-masterplan.jpg" alt="Aerial view of the 500-acre M Legasi township">
+      <img src="assets/gal-masterplan.jpg" alt="Aerial view of the 500-acre M Legasi township" loading="lazy" decoding="async">
       <div class="ov-overlay">
         <div class="ov-big num">500<span>acres</span></div>
         <div class="ov-lab">One masterplanned freehold township, with a 13-acre Central Park at its heart</div>
       </div>
     </div>
     <div class="ov-panel">
-      <span class="ov-eyebrow">The Township</span>
-      <h2>New Double-Storey Terrace Homes in Semenyih</h2>
       <p class="ov-copy">M Legasi is a freehold landed community surrounded by greenery, with easy access to schools, highways, and nearby amenities. Designed as a walkable 15-minute city, life here flows effortlessly between home, nature, retail, and recreation.</p>
       <div class="ov-stats">
-        <div class="ov-stat"><b class="num">90%</b><i>Phase 1A launch take-up</i></div>
+        <div class="ov-stat"><b class="num">4</b><i>Home types</i></div>
         <div class="ov-stat"><b class="num">RM535k</b><i>Starting from</i></div>
         <div class="ov-stat"><b class="num">~RM1,800</b><i>Monthly instalment*</i></div>
-        <div class="ov-stat"><b class="num">35km</b><i>To KLCC</i></div>
+        <div class="ov-stat"><b class="num">20&prime; &times; 70&prime;</b><i>Largest lot</i></div>
       </div>
       <p class="ov-note">*Based on 90% financing, for reference only.</p>
       <a href="#register" class="btn btn-p ov-cta" data-cta-id="overview_register">Get Price List Now</a>
@@ -2906,12 +3322,12 @@ a[href^="tel:"]{white-space:nowrap}
      from m-legasi.com.my (2026-08-21 pull); tap a card to reveal its story. -->
 <section class="story-section" id="story">
   <div class="story-inner">
-    <div class="section-header">
+    <div class="section-header rv">
       <div class="eyebrow">The Township Story</div>
-      <h2>Every Need, Within Reach</h2>
+      <h2>Every Need, <span class="em">Within Reach</span></h2>
       <p>Four ideas shape the 500-acre masterplan. Tap each chapter to read its story.</p>
     </div>
-    <div class="story-grid">
+    <div class="story-grid rv" data-stagger>
       <button class="story-card" type="button" aria-expanded="false" style="--img:url('assets/story-1.jpg')">
         <span class="story-veil" aria-hidden="true"></span>
         <span class="story-body">
@@ -2955,16 +3371,16 @@ a[href^="tel:"]{white-space:nowrap}
 <!-- FACILITIES (Malay audience focus) -->
 <section class="facilities-section" id="facilities" data-section="facilities">
   <div class="facilities-inner">
-    <div class="section-header">
+    <div class="section-header rv">
       <div class="eyebrow">Life at M Legasi</div>
-      <h2>Your Everyday Resort</h2>
+      <h2>Your Everyday <span class="em">Resort</span></h2>
       <p>13-acre Central Park, sports courts, nature trails, and a full lifestyle hub — all within a stroll.</p>
     </div>
     <div class="facilities-carousel" id="facilitiesCarousel">
-      <div class="facilities-stage">
+      <div class="facilities-stage rv" data-stagger>
         <button type="button" class="facility-card" data-img="assets/M-Legasi_Lake-Eye-Level_FA-optimized-1920x1356.jpg" data-title="13-Acre Central Park" data-desc="Lakes, green corridors connecting every precinct">
           <div class="facility-card-frame">
-            <img src="assets/M-Legasi_Lake-Eye-Level_FA-optimized-1920x1356.jpg" alt="13-Acre Central Park">
+            <img src="assets/M-Legasi_Lake-Eye-Level_FA-optimized-1920x1356.jpg" alt="13-Acre Central Park" loading="lazy" decoding="async">
             <div class="facility-card-body">
               <h3>13-Acre Central Park</h3>
               <p>Lakes, green corridors connecting every precinct</p>
@@ -2973,7 +3389,7 @@ a[href^="tel:"]{white-space:nowrap}
         </button>
         <button type="button" class="facility-card" data-img="assets/Phase-3-Type-A-_-eye-level-court-1920x1081.jpg" data-title="Multipurpose Courts" data-desc="Pickleball, badminton, and futsal under one roof">
           <div class="facility-card-frame">
-            <img src="assets/Phase-3-Type-A-_-eye-level-court-1920x1081.jpg" alt="Multipurpose Courts">
+            <img src="assets/Phase-3-Type-A-_-eye-level-court-1920x1081.jpg" alt="Multipurpose Courts" loading="lazy" decoding="async">
             <div class="facility-card-body">
               <h3>Multipurpose Courts</h3>
               <p>Pickleball, badminton, and futsal under one roof</p>
@@ -2982,7 +3398,7 @@ a[href^="tel:"]{white-space:nowrap}
         </button>
         <button type="button" class="facility-card" data-img="assets/Mah-Sing-M-Legasi_Pocket-Garden_FA-optimized-1920x1580.jpg" data-title="Legacy Walk" data-desc="Shops, dining, community — your neighbourhood retail hub">
           <div class="facility-card-frame">
-            <img src="assets/Mah-Sing-M-Legasi_Pocket-Garden_FA-optimized-1920x1580.jpg" alt="Legacy Walk">
+            <img src="assets/Mah-Sing-M-Legasi_Pocket-Garden_FA-optimized-1920x1580.jpg" alt="Legacy Walk" loading="lazy" decoding="async">
             <div class="facility-card-body">
               <h3>Legacy Walk</h3>
               <p>Shops, dining, community — your neighbourhood retail hub</p>
@@ -2991,7 +3407,7 @@ a[href^="tel:"]{white-space:nowrap}
         </button>
         <button type="button" class="facility-card" data-img="assets/Phase-3-_overall-pocket-garden-1920x1068.jpg" data-title="Nature Trails" data-desc="Cycling, jogging, and garden links throughout the township">
           <div class="facility-card-frame">
-            <img src="assets/Phase-3-_overall-pocket-garden-1920x1068.jpg" alt="Nature Trails">
+            <img src="assets/Phase-3-_overall-pocket-garden-1920x1068.jpg" alt="Nature Trails" loading="lazy" decoding="async">
             <div class="facility-card-body">
               <h3>Nature Trails</h3>
               <p>Cycling, jogging, and garden links throughout the township</p>
@@ -3033,69 +3449,23 @@ a[href^="tel:"]{white-space:nowrap}
 <!-- WHY (R3): "Built for Families. Designed for Life." rebuilt as a visual feature
      mosaic using the original site's own renders and photography. Feature titles and
      descriptions verbatim from the previous build's tab content. -->
+<!-- Premium port (16 Oct 2026): the seven reasons as an editorial numbered list (Aurora R4), the client's own
+     line icons turned white by a filter. Titles and descriptions verbatim from the mosaic. -->
 <section class="why-section" id="why">
   <div class="why-inner">
-    <div class="section-header">
+    <div class="section-header rv">
       <div class="eyebrow">Why M Legasi</div>
-      <h2>Built for Families. Designed for Life.</h2>
+      <h2>Built for Families. <span class="em">Designed for Life.</span></h2>
     </div>
-    <div class="why-mosaic">
-      <figure class="wm-tile wm-wide">
-        <img src="assets/legasimumdaughter_HR_optimized-1920x1283.jpg" alt="Mother and daughter at home in M Legasi">
-        <figcaption>
-          <span class="wm-ic"><img src="assets/Freehold.svg" alt=""></span>
-          <h3>Freehold</h3>
-          <p>Permanent ownership &mdash; no renewal needed. Your legacy, forever.</p>
-        </figcaption>
-      </figure>
-      <figure class="wm-tile">
-        <img src="assets/Phase_3_Type_A_2_optimized.jpg" alt="Guarded streetscape at M Legasi">
-        <figcaption>
-          <span class="wm-ic"><img src="assets/Guarded-Community-Security-Patrol.svg" alt=""></span>
-          <h3>Guarded Community</h3>
-          <p>Round-the-clock security patrol with controlled access for total peace of mind.</p>
-        </figcaption>
-      </figure>
-      <figure class="wm-tile">
-        <img src="assets/why-driveway.jpg" alt="Wide driveway leading into an M Legasi home">
-        <figcaption>
-          <span class="wm-ic"><img src="assets/Resort-like-Wide-Driveway-Leading-into-M-Legasi.svg" alt=""></span>
-          <h3>Wide Driveway</h3>
-          <p>Resort-style entrance that fits 2 cars. Spacious, welcoming, practical.</p>
-        </figcaption>
-      </figure>
-      <figure class="wm-tile">
-        <img src="assets/why-ns.jpg" alt="North-south orientated M Legasi home exterior">
-        <figcaption>
-          <span class="wm-ic"><img src="assets/North-South-Orientated-Homes-for-Living-Comfort.svg" alt=""></span>
-          <h3>North-South Facing</h3>
-          <p>Save on air-con &mdash; naturally cooler with less direct sunlight throughout the day.</p>
-        </figcaption>
-      </figure>
-      <div class="wm-stack">
-        <div class="wm-card">
-          <span class="wm-ic"><img src="assets/Near-Schools-Universities-Hospitals.svg" alt=""></span>
-          <div>
-            <h3>Schools Nearby</h3>
-            <p>University of Nottingham 4km, Tenby International 5km, 3 national schools within 5km.</p>
-          </div>
-        </div>
-        <div class="wm-card">
-          <span class="wm-ic"><img src="assets/GreenRE-Certified.svg" alt=""></span>
-          <div>
-            <h3>GreenRE Certified</h3>
-            <p>Eco-certified, energy-efficient design that reduces your carbon footprint.</p>
-          </div>
-        </div>
-        <div class="wm-card">
-          <span class="wm-ic"><img src="assets/EV-Charging-Stations.svg" alt=""></span>
-          <div>
-            <h3>EV Charging Ready</h3>
-            <p>Future-proof your home with dedicated EV charging points provided.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ol class="usp-list rv" data-stagger>
+      <li><img class="usp-ic" src="assets/Freehold.svg" alt="" loading="lazy" decoding="async"><div><h3>Freehold</h3><p>Permanent ownership &mdash; no renewal needed. Your legacy, forever.</p></div><span class="n">01</span></li>
+      <li><img class="usp-ic" src="assets/Guarded-Community-Security-Patrol.svg" alt="" loading="lazy" decoding="async"><div><h3>Guarded Community</h3><p>Round-the-clock security patrol with controlled access for total peace of mind.</p></div><span class="n">02</span></li>
+      <li><img class="usp-ic" src="assets/Resort-like-Wide-Driveway-Leading-into-M-Legasi.svg" alt="" loading="lazy" decoding="async"><div><h3>Wide Driveway</h3><p>Resort-style entrance that fits 2 cars. Spacious, welcoming, practical.</p></div><span class="n">03</span></li>
+      <li><img class="usp-ic" src="assets/North-South-Orientated-Homes-for-Living-Comfort.svg" alt="" loading="lazy" decoding="async"><div><h3>North-South Facing</h3><p>Save on air-con &mdash; naturally cooler with less direct sunlight throughout the day.</p></div><span class="n">04</span></li>
+      <li><img class="usp-ic" src="assets/Near-Schools-Universities-Hospitals.svg" alt="" loading="lazy" decoding="async"><div><h3>Schools Nearby</h3><p>University of Nottingham 4km, Tenby International 5km, 3 national schools within 5km.</p></div><span class="n">05</span></li>
+      <li><img class="usp-ic" src="assets/GreenRE-Certified.svg" alt="" loading="lazy" decoding="async"><div><h3>GreenRE Certified</h3><p>Eco-certified, energy-efficient design that reduces your carbon footprint.</p></div><span class="n">06</span></li>
+      <li><img class="usp-ic" src="assets/EV-Charging-Stations.svg" alt="" loading="lazy" decoding="async"><div><h3>EV Charging Ready</h3><p>Future-proof your home with dedicated EV charging points provided.</p></div><span class="n">07</span></li>
+    </ol>
   </div>
 </section>
 
@@ -3115,7 +3485,7 @@ a[href^="tel:"]{white-space:nowrap}
 
     <div class="vr-stage" id="vrStage">
       <button class="vr-preview" id="vrEnter" type="button" aria-label="Enter the 360 degree walkthrough, loads an interactive viewer" data-tour-source="inline">
-        <img src="assets/Phase_3_Type_A_2_optimized.jpg" alt="Phase 3 show unit exterior, preview of the 360 walkthrough">
+        <img src="assets/hero-1-streetscape.webp" alt="Phase 3 show unit exterior, preview of the 360 walkthrough" loading="lazy" decoding="async">
         <span class="vr-ring" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 4c5 0 9 1.8 9 4s-4 4-9 4-9-1.8-9-4 4-4 9-4Z"/><path d="M7.5 14.5c-2.7 1.1-4.5 2.7-4.5 4.1 0 2.2 4 3.4 9 3.4s9-1.2 9-3.4c0-1.4-1.8-3-4.5-4.1"/><path d="m14.5 19.5 2 2-2 2"/></svg>
           <b>360&deg;</b>
@@ -3124,8 +3494,10 @@ a[href^="tel:"]{white-space:nowrap}
       </button>
     </div>
 
+    <!-- VR (premium port): the ask under the inline tour; "Open full screen" becomes a text link, same href and tracking -->
     <div class="vr-acts">
-      <a class="btn btn-p" href="https://m-legasi.com.my/360-walkthrough/" target="_blank" rel="noopener" data-tour-source="inline">Open full screen</a>
+      <button type="button" class="btn btn-p" id="vrCta" data-open-lead="vr_tour" data-cta-id="tour_get_price">Get Price List Now</button>
+      <a class="u-link" href="https://m-legasi.com.my/360-walkthrough/" target="_blank" rel="noopener" data-tour-source="inline">Open full screen</a>
     </div>
   </div>
 </section>
@@ -3135,30 +3507,38 @@ a[href^="tel:"]{white-space:nowrap}
      via the existing zoom lightbox. Captions descriptive only, no invented claims. -->
 <section class="gallery-section" id="gallery" data-section="gallery">
   <div class="gallery-inner">
-    <div class="section-header">
+    <div class="section-header rv">
       <div class="eyebrow">The Township</div>
-      <h2>A glimpse of life at M Legasi</h2>
+      <h2>A glimpse of life at <span class="em">M Legasi</span></h2>
     </div>
-    <div class="gal" id="gal">
-      <figure><img src="assets/gal-park-aerial.jpg" alt="Aerial view of the play lawn and multipurpose courts"><figcaption>Play Lawn &amp; Courts</figcaption></figure>
-      <figure><img src="assets/gal-masterplan.jpg" alt="Aerial masterplan of the 500-acre township"><figcaption>The 500-Acre Masterplan</figcaption></figure>
-      <figure><img src="assets/gal-lakeside.jpg" alt="Lakeside deck and trails"><figcaption>Lakeside Deck &amp; Trails</figcaption></figure>
-      <figure><img src="assets/gal-pavilion.jpg" alt="Community pavilion by the amphitheatre lawn"><figcaption>Community Pavilion</figcaption></figure>
-      <figure><img src="assets/gal-pocket-garden.jpg" alt="Pocket garden"><figcaption>Pocket Garden</figcaption></figure>
-      <figure><img src="assets/gal-street-p3.jpg" alt="Phase 3 streetscape"><figcaption>Phase 3 Streetscape</figcaption></figure>
-      <figure><img src="assets/gal-zendia.jpg" alt="Zendia home exterior"><figcaption>Zendia Exterior</figcaption></figure>
-      <figure><img src="assets/gal-harmonia.jpg" alt="Harmonia home exterior"><figcaption>Harmonia Exterior</figcaption></figure>
+    <div class="gal-wrap">
+    <div class="gal rv" id="gal" data-stagger>
+      <figure><img src="assets/gal-park-aerial.jpg" alt="Aerial view of the play lawn and multipurpose courts" loading="lazy" decoding="async"><figcaption>Play Lawn &amp; Courts</figcaption></figure>
+      <figure><img src="assets/gal-masterplan.jpg" alt="Aerial masterplan of the 500-acre township" loading="lazy" decoding="async"><figcaption>The 500-Acre Masterplan</figcaption></figure>
+      <figure><img src="assets/gal-lakeside.jpg" alt="Lakeside deck and trails" loading="lazy" decoding="async"><figcaption>Lakeside Deck &amp; Trails</figcaption></figure>
+      <figure><img src="assets/gal-pavilion.jpg" alt="Community pavilion by the amphitheatre lawn" loading="lazy" decoding="async"><figcaption>Community Pavilion</figcaption></figure>
+      <figure><img src="assets/gal-pocket-garden.jpg" alt="Pocket garden" loading="lazy" decoding="async"><figcaption>Pocket Garden</figcaption></figure>
+      <figure><img src="assets/gal-street-p3.jpg" alt="Phase 3 streetscape" loading="lazy" decoding="async"><figcaption>Phase 3 Streetscape</figcaption></figure>
+      <figure><img src="assets/gal-zendia.jpg" alt="Zendia home exterior" loading="lazy" decoding="async"><figcaption>Zendia Exterior</figcaption></figure>
+      <figure><img src="assets/gal-harmonia.jpg" alt="Harmonia home exterior" loading="lazy" decoding="async"><figcaption>Harmonia Exterior</figcaption></figure>
     </div>
-    <p class="gal-hint">Swipe to see more &middot; tap any image to enlarge</p>
+      <button class="gal-nav gal-prev" type="button" id="galPrev" aria-controls="gal" aria-label="Previous images">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <button class="gal-nav gal-next" type="button" id="galNext" aria-controls="gal" aria-label="Next images">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+      </button>
+    </div>
+    <p class="gal-hint">Swipe or use the arrows &middot; tap any image to enlarge</p>
   </div>
 </section>
 
 <!-- INVESTMENT / ROI (Chinese audience focus) -->
 <section class="roi-section" id="growth">
   <div class="roi-inner">
-    <div class="roi-left">
-      <div class="eyebrow" style="font-size:12px;font-weight:600;color:var(--coral);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;">Investment Potential</div>
-      <h2>Semenyih: The Next Growth Corridor</h2>
+    <div class="roi-left rv">
+      <div class="eyebrow" style="font-size:12px;font-weight:600;color:var(--gold-text);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;">Investment Potential</div>
+      <h2>Semenyih: The Next <span class="em">Growth Corridor</span></h2>
       <p>With University of Nottingham just 4km away and freehold status, M Legasi offers strong rental yield and capital appreciation potential.</p>
 
       <table class="compare-table">
@@ -3192,7 +3572,7 @@ a[href^="tel:"]{white-space:nowrap}
           </tr>
           <tr>
             <td>Price advantage</td>
-            <td colspan="2" style="color:var(--coral);font-weight:600;text-align:center;">Up to 42% more affordable</td>
+            <td colspan="2" style="color:var(--night2);font-weight:600;text-align:center;">Up to 42% more affordable</td>
           </tr>
         </tbody>
       </table>
@@ -3205,16 +3585,16 @@ a[href^="tel:"]{white-space:nowrap}
 <!-- LOCATION -->
 <section class="location-section" id="location" data-section="location">
   <div class="location-inner">
-    <div class="section-header">
+    <div class="section-header rv">
       <div class="eyebrow">Strategic Location</div>
       <h2>35km from KLCC · Freehold Landed</h2>
       <p>Connected via 5 major highways. 7km from Semenyih Town.</p>
     </div>
 
-    <div class="location-grid">
+    <div class="location-grid rv">
       <div class="location-map-wrap">
         <div class="location-map" onclick="openFloorPlan('M Legasi','Location Map','assets/Homepage-Map-5.27.2025.png')" style="cursor:pointer;" title="Click to zoom">
-          <img src="assets/Homepage-Map-5.27.2025.png" alt="M Legasi location map showing nearby highways and landmarks">
+          <img src="assets/Homepage-Map-5.27.2025.png" alt="M Legasi location map showing nearby highways and landmarks" width="1023" height="986" loading="lazy" decoding="async">
         </div>
         <a href="https://waze.com/ul/hw282w3cd8" target="_blank" rel="noopener" class="waze-cta">
           <img src="assets/waze-icon.svg" alt="Waze" class="waze-icon">
@@ -3223,7 +3603,7 @@ a[href^="tel:"]{white-space:nowrap}
       </div>
       <div class="location-details">
         <div style="margin-bottom:20px;">
-          <div style="font-size:13px;font-weight:700;color:var(--night2);margin-bottom:10px;">Accessibility via major highways</div>
+          <div style="font-size:13px;font-weight:700;color:var(--cream-dim);margin-bottom:10px;">Accessibility via major highways</div>
           <div class="highway-tags" style="margin-bottom:12px;">
             <span class="highway-tag">LEKAS · 12km</span>
             <span class="highway-tag">SILK · 26km</span>
@@ -3446,11 +3826,12 @@ a[href^="tel:"]{white-space:nowrap}
      "This project is built by :", MahSing lockup with the white tagline.
      The previous heading text lives on verbatim in the copy line. -->
 <section class="dev-trust" id="developer">
-  <div class="dev2">
+  <div class="dev2 rv">
     <span class="eyebrow">The Developer</span>
     <h2>This project is built by :</h2>
     <a href="https://www.mahsing.com.my/" target="_blank" rel="noopener">
-      <img class="dev-logo" src="assets/mahsing-colour.webp" alt="Mah Sing. Reinvent Spaces. Enhance Life.">
+      <!-- premium port: the band is on paper now, so the lockup with the dark tagline (the footer file) replaces the white-tagline cut -->
+      <img class="dev-logo" src="assets/mahsing_logo.png" alt="Mah Sing. Reinvent Spaces. Enhance Life." width="816" height="247" loading="lazy" decoding="async">
     </a>
     <p class="dev-copy">A Development by Mah Sing Group Berhad. Bursa Malaysia listed. Trusted by over 100,000 homeowners across Malaysia.</p>
     <div class="dev-trust-stats">
@@ -3473,7 +3854,7 @@ a[href^="tel:"]{white-space:nowrap}
 
 <!-- REGISTRATION FORM -->
 <section class="form-section" id="register" data-section="form">
-  <div class="form-inner">
+  <div class="form-inner rv">
 
     <form class="form-left" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" method="POST" onsubmit="return handleFormSubmit(this)" novalidate>
 
@@ -3522,7 +3903,7 @@ a[href^="tel:"]{white-space:nowrap}
         <input id="email" maxlength="80" name="email" size="20" type="email" placeholder="you@example.com" required="">
       </div>
       <div class="form-group">
-        <label>Mobile Number</label>
+        <label>WhatsApp number</label>
         <input id="mobile" maxlength="20" name="mobile" size="20" type="tel" placeholder="012-345 6789" inputmode="tel" autocomplete="tel" data-my-phone required="">
       </div>
 
@@ -3563,11 +3944,12 @@ a[href^="tel:"]{white-space:nowrap}
 <!-- FAQ -->
 <section class="faq-section" id="faq" data-section="faq">
   <div class="faq-inner">
-    <div class="section-header">
+    <div class="section-header rv">
       <div class="eyebrow">Got Questions?</div>
       <h2>FAQs About Landed House in Semenyih</h2>
     </div>
 
+    <div class="faq-list rv">
     <div class="faq-item open">
       <div class="faq-q" onclick="toggleFaq(this)">
         What is the starting price for a new double storey house for sale in Semenyih?
@@ -3650,8 +4032,9 @@ a[href^="tel:"]{white-space:nowrap}
       </div>
     </div>
 
+    </div>
     <div class="faq-cta">
-      <a href="#register" class="btn-secondary" style="border-color:var(--green-deep);" data-cta-id="faq_register">Get Price List Now</a>
+      <a href="#register" class="btn btn-p" data-cta-id="faq_register">Get Price List Now</a>
     </div>
   </div>
 </section>
@@ -3721,7 +4104,7 @@ a[href^="tel:"]{white-space:nowrap}
   <div class="footer-top">
     <div class="footer-logo">
       <a href="https://www.mahsing.com.my/" target="_blank" rel="noopener">
-        <img src="assets/mahsing_logo.png" alt="MahSing. Reinvent Spaces. Enhance Life.">
+        <img src="assets/mahsing_logo.png" alt="MahSing. Reinvent Spaces. Enhance Life." loading="lazy" decoding="async">
       </a>
     </div>
     <div class="footer-contact">
@@ -3731,16 +4114,16 @@ a[href^="tel:"]{white-space:nowrap}
     </div>
     <div class="footer-socials">
       <a href="https://web.facebook.com/mahsing" target="_blank" rel="noopener" aria-label="Facebook">
-        <img src="assets/facebook_icon-2.png" alt="Facebook">
+        <img src="assets/facebook_icon-2.png" alt="Facebook" loading="lazy" decoding="async">
       </a>
       <a href="https://www.instagram.com/mahsinggroup/" target="_blank" rel="noopener" aria-label="Instagram">
-        <img src="assets/instagram_icon.png" alt="Instagram">
+        <img src="assets/instagram_icon.png" alt="Instagram" loading="lazy" decoding="async">
       </a>
       <a href="https://www.youtube.com/user/MahSingGroup" target="_blank" rel="noopener" aria-label="YouTube">
-        <img src="assets/youtube_icon.png" alt="YouTube">
+        <img src="assets/youtube_icon.png" alt="YouTube" loading="lazy" decoding="async">
       </a>
       <a href="https://www.linkedin.com/company/mah-sing-group-berhad" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <img src="assets/linkedin_icon.png" alt="LinkedIn">
+        <img src="assets/linkedin_icon.png" alt="LinkedIn" loading="lazy" decoding="async">
       </a>
     </div>
   </div>
@@ -4119,6 +4502,23 @@ function openFloorPlan(name, lot, imgUrl) {
   const lb = document.getElementById('fpLightbox');
   document.getElementById('fpTitle').textContent = name;
   document.getElementById('fpSubtitle').textContent = lot.toLowerCase().indexOf('lot') === -1 && lot.toLowerCase().indexOf('map') === -1 ? 'Lot: ' + lot : lot;
+  /* R1 (premium port, 16 Oct 2026): the ask under the enlarged plan names the unit in view; a gallery image or the
+     map (which reuse this viewer) get the general ask, tagged zoom / zoom_get_price as on M Aurora. */
+  var ask = document.getElementById('lbAsk');
+  if (ask) {
+    var isUnit = /^lot:/i.test(String(lot || '')) && window.z21UnitNames && window.z21UnitNames.indexOf(name) > -1;
+    if (isUnit) {
+      ask.textContent = 'Get the ' + name + ' price list';
+      ask.setAttribute('data-unit', name);
+      ask.setAttribute('data-open-lead', 'floorplan_zoom');
+      ask.setAttribute('data-cta-id', 'floorplan_zoom_get_price');
+    } else {
+      ask.textContent = 'Get Price List Now';
+      ask.removeAttribute('data-unit');
+      ask.setAttribute('data-open-lead', 'zoom');
+      ask.setAttribute('data-cta-id', 'zoom_get_price');
+    }
+  }
   const img = document.getElementById('fpImage');
   const wrap = document.getElementById('fpImgWrap');
   fpBaseW = 0; fpBaseH = 0; fpCurrentZoom = 1;
@@ -4140,6 +4540,11 @@ function closeFloorPlan() {
     img.src = ''; img.style.width = ''; img.style.height = '';
   }, 350);
 }
+/* the plan-viewer ask closes the viewer first; the [data-open-lead] binder (registered later) then opens the drawer */
+(function () {
+  var a = document.getElementById('lbAsk');
+  if (a) a.addEventListener('click', function () { closeFloorPlan(); });
+})();
 
 function fpZoom(dir) {
   var wrap = document.getElementById('fpImgWrap');
@@ -4508,10 +4913,21 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
   var quickForm = document.getElementById('quickRegister');
   var pastQuickForm = false;
   var formInView = false;
+  /* premium port (Aurora item 12): the bar also steps aside while the unit-card or calculator ask is on screen,
+     so a view never carries two identical asks */
+  var secAskInView = {};
 
   function update() {
-    if (pastQuickForm && !formInView) sticky.classList.add('is-visible');
+    var secOn = !!(secAskInView.uCta || secAskInView.cCta);
+    if (pastQuickForm && !formInView && !secOn) sticky.classList.add('is-visible');
     else sticky.classList.remove('is-visible');
+  }
+  if ('IntersectionObserver' in window) {
+    var sio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { secAskInView[e.target.id] = e.isIntersecting; });
+      update();
+    }, { threshold: 0.6 });
+    ['uCta', 'cCta'].forEach(function (id) { var el = document.getElementById(id); if (el) sio.observe(el); });
   }
 
   function quickFormThreshold() {
@@ -4703,6 +5119,8 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
   <div class="lead-drawer-inner">
     <h2 id="leadDrawerTitle" class="lead-drawer-title">Register &amp; Get Your Price List</h2>
     <p class="lead-drawer-sub">Fill in your details — we'll send you everything to make a decision.</p>
+    <!-- R5 (premium port): the trust line as the drawer's intro line; wording needs Mah Sing's OK -->
+    <p class="ld-trust">Sold directly by Mah Sing Group, trusted by over 100,000 homeowners across Malaysia</p>
 
     <div class="lead-drawer-receive">
       <div class="lead-drawer-receive-label">You'll Receive:</div>
@@ -4741,7 +5159,7 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
       </label>
 
       <label class="lead-field">
-        <span class="lead-field-label">Phone Number</span>
+        <span class="lead-field-label">WhatsApp number</span>
         <input type="tel" name="mobile" maxlength="20" placeholder="012-345 6789" inputmode="tel" autocomplete="tel-national" data-my-phone required>
       </label>
 
@@ -4810,6 +5228,14 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
       }
     }
     window._leadDrawerSource = trigger;
+    var unitAttr = (e && e.currentTarget && e.currentTarget.getAttribute) ? e.currentTarget.getAttribute('data-unit') : null;
+    /* premium port (16 Oct 2026, spec Form row): the drawer is titled with the chosen unit when the ask named one;
+       the markup title is restored for every other ask. */
+    var ttl = document.getElementById('leadDrawerTitle');
+    if (ttl) {
+      if (!ttl._z21Default) ttl._z21Default = ttl.textContent;
+      ttl.textContent = unitAttr ? 'Get the ' + unitAttr + ' price list' : ttl._z21Default;
+    }
 
     drawer.classList.add('open');
     drawer.setAttribute('aria-hidden', 'false');
@@ -4822,7 +5248,6 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
       // `source` keeps the existing GA4 series; trigger_source is the five-site name
       // (spec 2026-10-06). unit_interest is always pushed (undefined when the CTA is
       // not unit-specific) so GTM's persistent data model cannot carry a stale unit.
-      var unitAttr = (e && e.currentTarget && e.currentTarget.getAttribute) ? e.currentTarget.getAttribute('data-unit') : null;
       window.dataLayer.push({ event: 'lead_drawer_open', source: trigger, trigger_source: trigger, unit_interest: unitAttr || undefined });
     }
   }
@@ -5423,6 +5848,7 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
     var dots = Array.prototype.slice.call(dotsWrap.children);
 
     function show(i) {
+      document.documentElement.classList.add('hero-more'); /* slides 2 to 4 load on first use, or after page load */
       idx = (i + slides.length) % slides.length;
       slides.forEach(function (s, j) { s.classList.toggle('on', j === idx); });
       dots.forEach(function (d, j) { d.classList.toggle('on', j === idx); });
@@ -5502,6 +5928,7 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
       plan: 'assets/zendia-Type-A_20x70-intermediate-1920x1357.jpg' }
   };
   var ORDER = ['astradia', 'harmonia', 'auroria', 'zendia'];
+  window.z21UnitNames = ORDER.map(function (k) { return UNITS[k].name; }); /* read by openFloorPlan() for the plan-viewer ask */
   var cur = 'astradia';
   var RATE = 0.04;
   var fmt = function (n) { return Math.round(n).toLocaleString('en-MY'); };
@@ -5526,6 +5953,11 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
     var cta = $('uCta');
     cta.setAttribute('data-unit', u.name);
     cta.textContent = 'Get Price List Now';
+    /* premium port: the calculator ask and the plan-viewer ask follow the unit too */
+    var cc = $('cCta');
+    if (cc) { cc.setAttribute('data-unit', u.name); cc.textContent = 'Send me the ' + u.name + ' price list'; }
+    var la = $('lbAsk');
+    if (la && la.getAttribute('data-open-lead') === 'floorplan_zoom') { la.setAttribute('data-unit', u.name); la.textContent = 'Get the ' + u.name + ' price list'; }
     Array.prototype.forEach.call(document.querySelectorAll('#tabs .tab'), function (t) {
       t.setAttribute('aria-selected', String(t.getAttribute('data-type') === cur));
     });
@@ -5619,6 +6051,86 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
     });
     render();
   }
+
+  /* ── 3e. Hero home-type chips (R3, premium port): open the matching floor-plan tab and scroll to it.
+     Reported as unit_select with select_source hero_pill, through the site's own setType. ── */
+  Array.prototype.forEach.call(document.querySelectorAll('.h-bed'), function (b) {
+    b.addEventListener('click', function () {
+      var key = b.getAttribute('data-bed-type');
+      var t = document.querySelector('#tabs .tab[data-type="' + key + '"]');
+      var tabs = $('tabs'), navEl = $('siteNav'), railEl = $('rail');
+      if (window.setType) window.setType(key, 'hero_pill'); else if (t) t.click();
+      if (tabs) {
+        var off = (navEl ? navEl.offsetHeight : 0) + (railEl && window.innerWidth < 1024 ? railEl.offsetHeight : 0) + 24;
+        var y = tabs.getBoundingClientRect().top + window.scrollY - off;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      }
+    });
+  });
+
+  /* ── 3f. Deferred art: slides 2 to 4, the quick-form and 360 backgrounds and the story-card art wait for load ── */
+  window.addEventListener('load', function () {
+    setTimeout(function () { document.documentElement.classList.add('hero-more'); }, 300);
+  });
+
+  /* ── 3g. Reveals (Aurora R4): IO as you scroll; the force sweep runs only for automated browsers and ?clean=1
+     captures, so real visitors get the reveals as they scroll. Children of [data-stagger] reveal one after another. ── */
+  var rvs = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+  if ('IntersectionObserver' in window) {
+    var rio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); rio.unobserve(e.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+    rvs.forEach(function (el) { rio.observe(el); });
+  } else {
+    rvs.forEach(function (el) { el.classList.add('in'); });
+  }
+  if (navigator.webdriver || q.get('clean')) {
+    window.addEventListener('load', function () {
+      setTimeout(function () { rvs.forEach(function (el) { el.classList.add('in'); }); }, 900);
+    });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('[data-stagger]'), function (g) {
+    Array.prototype.forEach.call(g.children, function (c, i) { c.style.setProperty('--i', Math.min(i, 11)); });
+  });
+
+  /* ── 3h. Counters: the final value is already in the markup; animate only in a real viewport ── */
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var cio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        cio.unobserve(e.target);
+        var el = e.target, end = +el.getAttribute('data-count'), dec = +(el.getAttribute('data-dec') || 0), t0 = null;
+        requestAnimationFrame(function step(ts) {
+          if (!t0) t0 = ts;
+          var p = Math.min((ts - t0) / 1400, 1), v = end * (1 - Math.pow(1 - p, 3));
+          el.textContent = v.toLocaleString('en-MY', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+          if (p < 1) requestAnimationFrame(step);
+        });
+      });
+    }, { threshold: 0.6 });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-count]'), function (el) { cio.observe(el); });
+  }
+
+  /* ── 3i. Gallery: arrows on desktop (no swipe gesture there) and mouse drag; a drag never opens the viewer ── */
+  (function () {
+    var g = $('gal'), p = $('galPrev'), n = $('galNext');
+    if (!g) return;
+    if (p && n) {
+      function stepW() { var f = g.querySelector('figure'); return f ? f.getBoundingClientRect().width + 22 : Math.round(g.clientWidth * 0.8); }
+      function sync() { var max = g.scrollWidth - g.clientWidth; p.disabled = g.scrollLeft <= 2; n.disabled = g.scrollLeft >= max - 2; }
+      p.addEventListener('click', function () { g.scrollBy({ left: -stepW(), behavior: 'smooth' }); });
+      n.addEventListener('click', function () { g.scrollBy({ left: stepW(), behavior: 'smooth' }); });
+      g.addEventListener('scroll', sync, { passive: true });
+      window.addEventListener('resize', sync);
+      sync();
+    }
+    if (!window.matchMedia('(pointer:fine)').matches) return;
+    var down = false, x0 = 0, s0 = 0, moved = 0;
+    g.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') return; down = true; moved = 0; x0 = e.clientX; s0 = g.scrollLeft; g.classList.add('dragging'); });
+    window.addEventListener('pointermove', function (e) { if (!down) return; var dx = e.clientX - x0; moved = Math.max(moved, Math.abs(dx)); g.scrollLeft = s0 - dx; });
+    window.addEventListener('pointerup', function () { if (!down) return; down = false; g.classList.remove('dragging'); });
+    g.addEventListener('click', function (e) { if (moved > 6) { e.stopPropagation(); e.preventDefault(); moved = 0; } }, true);
+  })();
 
   /* ── 3a. Facilities: every card opens the facility lightbox (replaces the
      old show-one carousel JS, which gated taps on an is-active card) ── */
