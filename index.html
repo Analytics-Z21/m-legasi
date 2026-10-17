@@ -3027,6 +3027,28 @@ html.hero-more #vr{background-image:url(assets/Masterplan_FA-Extend-optimzied-14
 @media(min-width:1024px){.hero .h-place{font-size:16.5px;margin-bottom:16px}}
 @media(max-width:1023px) and (max-height:700px){.hero .h-place{margin-bottom:10px}}
 .hero .h-eyebrow{margin-bottom:8px}
+/* Round 5 (17 Oct 2026, Justin): the hero ask at the foot of the first screen, as on M Grand Minori. Phones (767 px and
+   under): the status line, place, h1, price, fact line and chips sit at the top under the nav on a forest wash tied to
+   the copy block (.h-top::before), dark enough that every line holds over the sky of all four slides; the hero's own
+   ask (full width) and the trust line under it sit at the foot of the hero over the scrim's dark foot; the streetscape
+   shows between them. The light logo wash ends above the copy, so the green nav logo keeps its ground. The slide dots
+   stay under the trust line. Short phones close the stack up (no gap). Tablet and desktop unchanged. */
+@media(max-width:767px){
+  .hero-body{justify-content:flex-start;padding:96px 24px 56px}
+  .hero-inner,.hero .hero-inner{display:flex;flex-direction:column;align-items:stretch;flex:1 1 auto}
+  .h-top{position:relative}
+  .h-top::before{content:'';position:absolute;z-index:-1;pointer-events:none;left:-50vw;right:-50vw;top:-34px;bottom:-84px;
+    background:linear-gradient(180deg,rgba(4,29,20,0) 0,rgba(4,29,20,.45) 14px,rgba(4,29,20,.7) 26px,rgba(4,29,20,.74) 32px,rgba(4,29,20,.76) calc(100% - 84px),rgba(4,29,20,.4) calc(100% - 46px),rgba(4,29,20,0) 100%)}
+  .h-beds{margin-bottom:16px}
+  .hero-ctas,.hero .hero-ctas{margin-top:auto;width:100%;flex-direction:column;align-items:stretch}
+  .hero-ctas .btn{width:100%;min-width:0}
+  .h-trust{margin-top:12px}
+  .hero-wash{background:linear-gradient(180deg,rgba(237,224,206,.74) 0%,rgba(237,224,206,.4) 64px,rgba(237,224,206,0) 100px)}
+  .hero-scrim{background:linear-gradient(180deg,rgba(4,29,20,0) 0,rgba(4,29,20,.06) 50%,rgba(4,29,20,.12) calc(100% - 210px),rgba(4,29,20,.84) calc(100% - 120px),rgba(4,29,20,.92) calc(100% - 92px),var(--night0) 100%)}
+}
+/* Round 5: the bottom bar fades as it slides (the M Grand Minori bar does both), so it is off the screen the moment a
+   price ask arrives; the slide alone left it half on screen for a beat over the ask */
+@media(max-width:900px){.mobile-sticky{opacity:0;transition:transform .3s ease,opacity .2s ease}.mobile-sticky.is-visible{opacity:1}}
 </style>
 <!-- ANNOUNCEMENT BAR -->
 <div class="announce-bar" aria-label="Project highlights">
@@ -3134,6 +3156,9 @@ html.hero-more #vr{background-image:url(assets/Masterplan_FA-Extend-optimzied-14
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="hero-body">
     <div class="hero-inner">
+      <!-- Round 5 (17 Oct 2026, Justin): the copy block is one wrapper (.h-top) so phones can hold it at the top of the
+           hero on its own wash; the ask and the trust line below it sit at the foot of the first screen -->
+      <div class="h-top">
       <span class="h-eyebrow">Phase 3 Now Open</span>
       <!-- Round 4 (16 Oct 2026, Justin): the place sits directly under the status line, larger so it reads at a glance -->
       <div class="h-place">
@@ -3148,6 +3173,7 @@ html.hero-more #vr{background-image:url(assets/Masterplan_FA-Extend-optimzied-14
         <button type="button" class="h-bed" data-bed-type="harmonia">Harmonia</button>
         <button type="button" class="h-bed" data-bed-type="auroria">Auroria</button>
         <button type="button" class="h-bed" data-bed-type="zendia">Zendia</button>
+      </div>
       </div>
       <div class="hero-ctas">
         <button type="button" class="btn btn-p" data-open-lead="hero" data-cta-id="hero_price_list">Get Price List Now</button>
@@ -4976,21 +5002,48 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
   var quickForm = document.getElementById('quickRegister');
   var pastQuickForm = false;
   var formInView = false;
-  /* premium port (Aurora item 12): the bar also steps aside while the unit-card or calculator ask is on screen,
-     so a view never carries two identical asks */
-  var secAskInView = {};
+  /* Round 5 (17 Oct 2026, Justin: "when there is CTA for price hide the sticky"): the bar steps aside whenever any
+     in-page price ask is on screen, not only the unit-card and calculator asks (premium port, Aurora item 12): every
+     [data-open-lead] and every price or registration [data-cta-id] outside the nav, the rail, the mobile menu, this
+     bar, the lead drawer and the footer (hero, unit card, calculator, overview, 360 tour, FAQ, the plan zoom). The strip
+     the bar covers (bottom 72 px) does not count, so an ask still under the bar keeps it until it clears. An ask inside
+     a closed overlay (the plan lightbox at opacity 0) never counts: the observer ignores opacity, so each update checks
+     what actually paints. The bar's own names and every ask's names are unchanged. */
+  var askSeen = [];
+  var asks = Array.prototype.filter.call(document.querySelectorAll('[data-open-lead],[data-cta-id]'), function (el) {
+    var id = el.getAttribute('data-cta-id') || '';
+    if (!el.hasAttribute('data-open-lead') && !/price|register/.test(id)) return false;
+    return !el.closest('#siteNav,#rail,#mobileMenu,#mobileSticky,#leadDrawer,footer');
+  });
+  function paints(el) {
+    if (el.checkVisibility) return el.checkVisibility({ opacityProperty: true, visibilityProperty: true });
+    return el.offsetParent !== null && getComputedStyle(el).visibility !== 'hidden';
+  }
+  function askOn() {
+    for (var i = 0; i < asks.length; i++) { if (askSeen[i] && paints(asks[i])) return true; }
+    return false;
+  }
+  /* the main form section steps the bar aside once 15% of it is on screen; for a section taller than the screen that
+     is 15% of the screen, measured on every update (the observer's ratio is of the whole section, which let the bar
+     sit over the first or last 200 px of the form on phones) */
+  function formOn() {
+    if (!form) return false;
+    var r = form.getBoundingClientRect(), vh = window.innerHeight;
+    var vis = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+    return vis > 0 && vis >= 0.15 * Math.min(r.height, vh);
+  }
 
   function update() {
-    var secOn = !!(secAskInView.uCta || secAskInView.cCta);
-    if (pastQuickForm && !formInView && !secOn) sticky.classList.add('is-visible');
+    formInView = formOn();
+    if (pastQuickForm && !formInView && !askOn()) sticky.classList.add('is-visible');
     else sticky.classList.remove('is-visible');
   }
-  if ('IntersectionObserver' in window) {
-    var sio = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { secAskInView[e.target.id] = e.isIntersecting; });
+  if ('IntersectionObserver' in window && asks.length) {
+    var aio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { askSeen[asks.indexOf(e.target)] = e.isIntersecting; });
       update();
-    }, { threshold: 0.6 });
-    ['uCta', 'cCta'].forEach(function (id) { var el = document.getElementById(id); if (el) sio.observe(el); });
+    }, { rootMargin: '0px 0px -72px 0px', threshold: 0 });
+    asks.forEach(function (a) { aio.observe(a); });
   }
 
   function quickFormThreshold() {
@@ -4998,16 +5051,14 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
     return quickForm.offsetTop + quickForm.offsetHeight - 80;
   }
 
+  var ticking = false;
   window.addEventListener('scroll', function () {
-    var next = window.scrollY > quickFormThreshold();
-    if (next !== pastQuickForm) { pastQuickForm = next; update(); }
+    pastQuickForm = window.scrollY > quickFormThreshold();
+    if (!ticking) { ticking = true; window.requestAnimationFrame(function () { ticking = false; update(); }); }
   }, { passive: true });
 
   if (form && 'IntersectionObserver' in window) {
-    new IntersectionObserver(function (entries) {
-      formInView = entries[0].isIntersecting;
-      update();
-    }, { threshold: 0.15 }).observe(form);
+    new IntersectionObserver(function () { update(); }, { threshold: [0, 0.05, 0.1, 0.15, 0.2, 0.3, 0.5] }).observe(form);
   }
 })();
 </script>
