@@ -3049,6 +3049,45 @@ html.hero-more #vr{background-image:url(assets/Masterplan_FA-Extend-optimzied-14
 /* Round 5: the bottom bar fades as it slides (the M Grand Minori bar does both), so it is off the screen the moment a
    price ask arrives; the slide alone left it half on screen for a beat over the ask */
 @media(max-width:900px){.mobile-sticky{opacity:0;transition:transform .3s ease,opacity .2s ease}.mobile-sticky.is-visible{opacity:1}}
+/* Round 6 (18 Oct 2026, Justin, from an iPhone 16 Pro Max at about 440 x 760: "the hero banner got squeezed to very
+   short"; "the view port has to fix on all projects"; reference M Grand Minori c3b1ae0). Phones (767 px and under): the
+   hero is no longer held to one screen. The status line, place, h1, price, fact line and chips, then the hero's own ask
+   and the trust line, sit at the top over the sky on one forest wash (round 5's wash, moved from the copy block to the
+   copy block plus the ask and the trust line, which now sit directly under the chips). Below them the subject band
+   (--band, the hero's lower part, clear apart from a soft fade at the foot behind the slide dots) holds each slide's
+   subject whole and runs on past the first screen. The band is sized for slide 1: the Phase 3 streetscape drawn 140vw
+   wide (a 1116 x 1325 cut), whose roofs start 55% down the image and whose street ends 85% down, so the last 48% of the
+   image is the band (79.8vw, capped at 440 px from 551 px wide). Every slide is drawn from the hero's foot at the
+   width that puts its own top line --t at the band's top (--r is the image's height over its width): the terrace row,
+   the park's treeline over the lake, the homes behind the courts, the homes and the pocket garden. Above the band each
+   image fades into its own top colour, which also fills the space above it. Tablet and desktop unchanged. */
+@media(max-width:767px){
+  .hero{--band:min(calc(140vw * 1.1873 * .48),440px);--gap:28px}
+  .hero .hero-body{min-height:0;padding:96px 24px calc(var(--band) + var(--gap))}
+  .hero .hero-inner{position:relative;flex:0 0 auto}
+  .hero .hero-ctas{margin-top:4px}
+  .hero .h-top::before{content:none}
+  .hero .hero-inner::before{content:'';position:absolute;z-index:-1;pointer-events:none;left:-50vw;right:-50vw;top:-34px;bottom:calc(0px - var(--gap));
+    background:linear-gradient(180deg,rgba(4,29,20,0) 0,rgba(4,29,20,.45) 14px,rgba(4,29,20,.7) 26px,rgba(4,29,20,.74) 32px,rgba(4,29,20,.76) calc(100% - var(--gap)),rgba(4,29,20,0) 100%)}
+  .hs{--h:calc(var(--band) / (1 - var(--t)));--w:calc(var(--h) / var(--r));background-repeat:no-repeat;
+    background-size:var(--w) calc(var(--h) * var(--t)),var(--w) auto;background-position:center bottom var(--band),center bottom}
+  .hs-1{--r:1.1873;--t:.52;background-color:#5E7DA6;background-image:linear-gradient(180deg,#5E7DA6,rgba(94,125,166,0)),url('assets/hero-1-streetscape-m.webp')}
+  .hs-2{--r:.7063;--t:.19;background-color:#A29EA2}
+  .hs-3{--r:.563;--t:.3;background-color:#9CACC6}
+  .hs-4{--r:.8229;--t:.42;background-color:#6387A9}
+  html.hero-more .hs-2{background-image:linear-gradient(180deg,#A29EA2,rgba(162,158,162,0)),url('assets/M-Legasi_Lake-Eye-Level_FA-optimized-1920x1356.jpg')}
+  html.hero-more .hs-3{background-image:linear-gradient(180deg,#9CACC6,rgba(156,172,198,0)),url('assets/Phase-3-Type-A-_-eye-level-court-1920x1081.jpg')}
+  html.hero-more .hs-4{background-image:linear-gradient(180deg,#6387A9,rgba(99,135,169,0)),url('assets/Mah-Sing-M-Legasi_Pocket-Garden_FA-optimized-1920x1580.jpg')}
+  .hero-scrim{background:linear-gradient(0deg,var(--night0) 0,rgba(4,29,20,.55) 34px,rgba(4,29,20,0) 100px)}
+}
+/* 640 to 767 px paint the full streetscape (1800 x 1325): the same rows at the same heights, so the same framing */
+@media(min-width:640px) and (max-width:767px){
+  .hs-1{--r:.7361;background-image:linear-gradient(180deg,#5E7DA6,rgba(94,125,166,0)),url('assets/hero-1-streetscape.webp')}
+}
+/* 641 to 767 px also show the slide caption beside the dots: the foot fade is deeper there so the caption holds 4.5:1 */
+@media(min-width:641px) and (max-width:767px){
+  .hero-scrim{background:linear-gradient(0deg,var(--night0) 0,rgba(4,29,20,.9) 46px,rgba(4,29,20,.5) 80px,rgba(4,29,20,0) 130px)}
+}
 </style>
 <!-- ANNOUNCEMENT BAR -->
 <div class="announce-bar" aria-label="Project highlights">
