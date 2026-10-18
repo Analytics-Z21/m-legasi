@@ -3088,6 +3088,64 @@ html.hero-more #vr{background-image:url(assets/Masterplan_FA-Extend-optimzied-14
 @media(min-width:641px) and (max-width:767px){
   .hero-scrim{background:linear-gradient(0deg,var(--night0) 0,rgba(4,29,20,.9) 46px,rgba(4,29,20,.5) 80px,rgba(4,29,20,0) 130px)}
 }
+/* Round 7 (19 Oct 2026, Justin: "I still prefer https://hero-clean.m-aurora-6we.pages.dev/ ... apply to the rest 4
+   projects for preview"; reference M Aurora hero-clean d227c97). Phones (767 px and under), the clean hero: no photo
+   behind the copy. The copy block is centred on a plain ground: the night tone at the top, a deep teal behind the ask,
+   then the streetscape's own sky colour (--sky) exactly where the picture band starts, so there is no seam. Order: the
+   M Legasi lockup (the cream logo file already in assets/; the lead, 112 px tall, 93 px at 700 px tall or less, 65 px at
+   600 or less), the status line, the place line, the h1, the price line, the fact line, the chips, the hero's own ask
+   full width and the trust line in two balanced lines. No wash behind the copy any more. Below it the picture band:
+   each slide whole, with only a short fade from the ground at its top and round 6's fade at its foot behind the dots
+   (now centred). Slide 1's band now starts a little higher (--t .5, the sky just above the roofs), so the fade sits on
+   sky and the roofs stay clear. The load zoom is off on phones: it lifted the picture's top edge above the fade. The
+   nav logo's light wash is stronger, so the green logo keeps the light ground it had over the sky. Tablet and desktop
+   unchanged. */
+.hero .h-lk{display:none}
+@media(max-width:767px){
+  .hero{--band:min(calc(140vw * 1.1873 * .5),440px);--gap:40px;--fade:28px;--sky:#98B2C4;--sky0:rgba(152,178,196,0)}
+  .hero-slides{background:linear-gradient(180deg,var(--night0) 0,#0D3431 calc(100% - var(--band) - 72px),#2C5258 calc(100% - var(--band) - 36px),var(--sky) calc(100% - var(--band)),var(--night0) 100%)}
+  .hs{top:auto;height:var(--band);background-size:100% var(--fade),var(--w) auto;background-position:center top,center bottom;background-repeat:no-repeat}
+  html.js .hs.on{animation:none;transform:none}
+  .hs-1{--t:.5;background-image:linear-gradient(180deg,var(--sky),var(--sky0)),url('assets/hero-1-streetscape-m.webp')}
+  .hs-2,.hs-3,.hs-4{background-image:linear-gradient(180deg,var(--sky),var(--sky0))}
+  html.hero-more .hs-2{background-image:linear-gradient(180deg,var(--sky),var(--sky0)),url('assets/M-Legasi_Lake-Eye-Level_FA-optimized-1920x1356.jpg')}
+  html.hero-more .hs-3{background-image:linear-gradient(180deg,var(--sky),var(--sky0)),url('assets/Phase-3-Type-A-_-eye-level-court-1920x1081.jpg')}
+  html.hero-more .hs-4{background-image:linear-gradient(180deg,var(--sky),var(--sky0)),url('assets/Mah-Sing-M-Legasi_Pocket-Garden_FA-optimized-1920x1580.jpg')}
+  .hero .hero-body{padding:96px 24px calc(var(--band) + var(--gap))}
+  .hero .hero-inner::before{content:none}
+  .hero .h-top{text-align:center}
+  .hero .h-lk{display:block;height:112px;width:auto;margin:0 auto 16px}
+  /* the status line's tracking leaves .28em of space after its last letter; the same before its first centres it */
+  .hero .h-eyebrow{padding-left:.28em}
+  .hero .h-place{justify-content:center}
+  .hero h1,.hero .h-price,.hero .h-fact{text-align:center}
+  .hero .h-beds{justify-content:center;margin-bottom:16px}
+  .hero .hero-ctas{margin-top:0}
+  .hero .h-trust{text-align:center;text-wrap:balance;margin-top:10px}
+  .hero-wash{background:linear-gradient(180deg,rgba(237,224,206,.84) 0%,rgba(237,224,206,.72) 60px,rgba(237,224,206,0) 100px)}
+  .h-slides{left:0;right:0;justify-content:center}
+}
+/* the band's top row averages #98B2C4 from 360 to 599 px wide; wider, the image's side trees come in (#8BA3AE, 600 to 767) */
+@media(min-width:600px) and (max-width:767px){.hero{--sky:#8BA3AE;--sky0:rgba(139,163,174,0)}}
+@media(min-width:640px) and (max-width:767px){
+  .hs-1{background-image:linear-gradient(180deg,var(--sky),var(--sky0)),url('assets/hero-1-streetscape.webp')}
+}
+@media(max-width:767px) and (max-height:700px){
+  .hero .hero-body{padding-top:90px}
+  .hero .h-lk{height:93px;margin-bottom:12px}
+}
+/* iPhone SE-size screens (600 px tall or less): with the lockup in, the ask and the trust line only stay on the first
+   screen if the status line steps aside (the ticker above the nav opens with the same words, "Phase 3 Now Open") and
+   the stack closes up a little */
+@media(max-width:767px) and (max-height:600px){
+  .hero .hero-body{padding-top:82px}
+  .hero .h-lk{height:65px;margin-bottom:12px}
+  .hero .h-eyebrow{display:none}
+  .hero .h-place{margin-bottom:8px}
+  .hero h1{font-size:33px;margin-bottom:6px}
+  .hero .h-price{font-size:28px;margin-bottom:6px}
+  .hero .h-beds{margin-bottom:12px}
+}
 </style>
 <!-- ANNOUNCEMENT BAR -->
 <div class="announce-bar" aria-label="Project highlights">
@@ -3198,6 +3256,9 @@ html.hero-more #vr{background-image:url(assets/Masterplan_FA-Extend-optimzied-14
       <!-- Round 5 (17 Oct 2026, Justin): the copy block is one wrapper (.h-top) so phones can hold it at the top of the
            hero on its own wash; the ask and the trust line below it sit at the foot of the first screen -->
       <div class="h-top">
+      <!-- Round 7 (19 Oct 2026, Justin): the clean phone hero leads with the M Legasi lockup, centred (the cream logo
+           file already in assets/); phones only, hidden from 768 px up -->
+      <img class="h-lk" src="assets/M-Legasi-logo-Cream.svg" alt="M Legasi" width="91" height="68">
       <span class="h-eyebrow">Phase 3 Now Open</span>
       <!-- Round 4 (16 Oct 2026, Justin): the place sits directly under the status line, larger so it reads at a glance -->
       <div class="h-place">
