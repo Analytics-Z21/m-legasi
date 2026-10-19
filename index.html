@@ -43,8 +43,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- Premium port (16 Oct 2026, spec R6): the first hero slide is WebP and preloaded; phones get a centre cut
      because the phone hero paints the image at 130% of its height, centred, so the outer thirds never show.
      Slides 2 to 4 stay JPEG (their sources are compressed harder than WebP can beat) and load after the page. -->
-<link rel="preload" as="image" type="image/webp" href="assets/hero-1-streetscape-m.webp" media="(max-width:639px)" fetchpriority="high">
-<link rel="preload" as="image" type="image/webp" href="assets/hero-1-streetscape.webp" media="(min-width:640px)" fetchpriority="high">
+<link rel="preload" as="image" type="image/jpeg" href="assets/Phase-3-Type-A-_-eye-level-court-1920x1081.jpg" fetchpriority="high">
 <!-- Varify A/B testing. Install ID 6319 is DELIBERATELY the same as m-legasi.com.my,
      the paired original site: a split URL test is one experiment spanning both URLs,
      so this page must load the same Varify project to recognise the va-red exposure
@@ -315,6 +314,32 @@ form input.f-invalid{border-color:#b3261e!important;box-shadow:0 0 0 1px #b3261e
 @media(max-width:767px) and (max-height:700px){
   .hero .hero-inner .h-price{font-size:clamp(32px,9.4vw,40px)!important}
   .hero .hero-inner .h-fact,.hero .hero-inner .h-beds{margin-bottom:12px!important}
+}
+</style>
+<style>
+/* 20 Oct 2026 (Justin): the first slide is now the Phase 3 homes at the court (it paints without waiting for the page
+   load, as the streetscape did), and the hero pill is Phase 3 only: one segmented pill, a gold PHASE 3 label then
+   Auroria and Zendia, with a NEW badge on its corner. */
+.hs-3{background-image:url('assets/Phase-3-Type-A-_-eye-level-court-1920x1081.jpg')}
+@media(max-width:767px){.hero .hs-3{background-image:url('assets/Phase-3-Type-A-_-eye-level-court-1920x1081.jpg')!important}}
+.hero .h-phase{display:inline-flex!important;flex-wrap:nowrap!important;align-items:stretch;gap:0!important;position:relative;
+  border:1.5px solid rgba(242,233,218,.5);background:rgba(4,29,20,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.hero .h-phase .h-phase-lab{display:flex;align-items:center;padding:0 14px;font:700 11.5px/1 var(--font-body);letter-spacing:.16em;
+  text-transform:uppercase;color:#D4B07A;white-space:nowrap}
+.hero .h-phase .h-bed{border:0!important;border-left:1px solid rgba(242,233,218,.32)!important;background:transparent!important;
+  -webkit-backdrop-filter:none;backdrop-filter:none;min-height:44px;padding:0 18px;font-weight:600}
+@media(hover:hover) and (pointer:fine){.hero .h-phase .h-bed:hover{background:rgba(242,233,218,.12)!important}}
+.hero .h-phase .h-new{position:absolute;top:-10px;right:-10px;padding:3px 8px;border-radius:999px;background:#D4B07A;color:#041D14;
+  font:800 10px/1.2 var(--font-body);letter-spacing:.12em;text-transform:uppercase;box-shadow:0 2px 10px rgba(0,0,0,.35);pointer-events:none}
+</style>
+<style>
+/* 20 Oct 2026 (Justin: "I want all projects the same size, big and clear to see the project logo, and all projects to have
+   the Mah Sing logo"). Phones: the project mark is 56 px tall in the menu bar on every Clone (M Aria's size) and the
+   Mah Sing logo sits beside it at 26 px; the same at the top and in the scrolled bar. */
+@media(max-width:767px){
+  .nav-logo{display:flex!important;align-items:center;gap:12px}
+  .nav-logo img.lk{height:56px!important;width:auto!important;max-width:none!important}
+  .nav-logo img.ms{height:26px!important;width:auto!important;max-width:none!important}
 }
 </style>
 </head>
@@ -3267,9 +3292,9 @@ html.hero-more #vr{background-image:url(assets/Masterplan_FA-Extend-optimzied-14
        (verbatim), the price line, one fact line, a chip per home type that opens its floor plan, one ask, the trust
        line. The price and tenure tiles, the place line and the desktop sub were moved into those lines, not dropped. -->
   <div class="hero-slides" aria-hidden="true">
-    <div class="hs hs-1 on" data-cap="Phase 3 Streetscape"></div>
+    <!-- 20 Oct 2026 (Justin): the first slide (the streetscape) removed; the 3rd (Phase 3 homes at the court) leads -->
+    <div class="hs hs-3 on" data-cap="Multipurpose Courts"></div>
     <div class="hs hs-2" data-cap="13-Acre Central Park"></div>
-    <div class="hs hs-3" data-cap="Multipurpose Courts"></div>
     <div class="hs hs-4" data-cap="Pocket Gardens"></div>
   </div>
   <div class="hero-wash" aria-hidden="true"></div>
@@ -3291,9 +3316,11 @@ html.hero-more #vr{background-image:url(assets/Masterplan_FA-Extend-optimzied-14
       <h1>Your <em>Legacy</em><br>Starts Here</h1>
       <p class="h-price">Freehold from <b class="num">RM535K</b></p>
       <p class="h-fact">Double-storey terrace, 4 bed 3 bath<span class="h-x">, 1,555 to 1,686 sq ft</span></p>
-      <div class="h-beds" role="group" aria-label="See the floor plan for each home type">
-        <button type="button" class="h-bed" data-bed-type="astradia">Astradia</button>
-        <button type="button" class="h-bed" data-bed-type="harmonia">Harmonia</button>
+      <!-- 20 Oct 2026 (Justin): the hero pill is Phase 3 only (Auroria, Zendia), one segmented pill with a NEW badge;
+           the buttons keep data-bed-type and their text, so the floor-plan jump and its tracking are unchanged -->
+      <div class="h-beds h-phase" role="group" aria-label="Phase 3 home types, newly opened: see the floor plan">
+        <span class="h-new" aria-hidden="true">New</span>
+        <span class="h-phase-lab">Phase 3</span>
         <button type="button" class="h-bed" data-bed-type="auroria">Auroria</button>
         <button type="button" class="h-bed" data-bed-type="zendia">Zendia</button>
       </div>
@@ -3301,11 +3328,11 @@ html.hero-more #vr{background-image:url(assets/Masterplan_FA-Extend-optimzied-14
       <div class="hero-ctas">
         <button type="button" class="btn btn-p" data-open-lead="hero" data-cta-id="hero_price_list">Get Price List Now</button>
       </div>
-      <p class="h-trust">Sold directly by Mah Sing Group<span class="h-x">, trusted by over 100,000 homeowners across Malaysia</span></p>
+        <!-- 20 Oct 2026 (Justin): the hero trust line removed -->
     </div>
   </div>
   <div class="h-slides">
-    <span class="h-slide-cap" id="heroCap">Phase 3 Streetscape</span>
+    <span class="h-slide-cap" id="heroCap">Multipurpose Courts</span>
     <div class="hero-dots" id="heroDots" role="tablist" aria-label="Hero slides"></div>
   </div>
 </section>
