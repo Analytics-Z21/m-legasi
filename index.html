@@ -6491,5 +6491,42 @@ window.addEventListener('load',function(){if(!window.FontFace||!document.fonts)r
   .nav:not(.is-scrolled) .hamburger span{background:#F2E9DA}
 }
 </style>
+<style>
+/* Round 10 (19 Oct 2026, Justin, comparing the clean preview with the live Clone: the live hero "looks much nicer, a
+   clear background, can see the tower and text"; then "reduce the shade to same as live site, and apply this to all
+   projects"; reference M Amaya d88983f). Phones (767 px and under) go back to the live hero's construction with the
+   round-8 content: the hero is one screen (the live rule, the ticker's 3 px overlap included); each slide fills it at
+   the live phone crop (auto 130%, centre 88%, the live drift on load); the shade is the live phone scrim and nothing
+   else; the menu over the photo's bright sky goes back to the live light wash and the green logo (the round-9 cream
+   lockup, white Mah Sing logo and cream bars only read over the dark clean ground). The copy is centred and stacked
+   at the foot: lockup, place, price lead, project line, chips, the ask full width, the one-line trust line, the dots
+   centred under it. Tablet and desktop unchanged. */
+@media(max-width:767px){
+  .hero .hero-body{min-height:min(calc(100svh - var(--ann-h,42px) + 3px),240vw)!important;justify-content:flex-end!important;padding:96px 24px 52px!important}
+  .hero-slides{background:none!important}
+  .hero .hs{top:0!important;bottom:0!important;height:auto!important;background-color:transparent!important;background-image:none!important;
+    background-size:auto 130%!important;background-position:center 88%!important;background-repeat:no-repeat!important;transform-origin:50% 60%}
+  .hero .hs::after{content:none!important}
+  .hero .hs-1{background-image:url('assets/hero-1-streetscape-m.webp')!important}
+  html.hero-more .hero .hs-2{background-image:url('assets/M-Legasi_Lake-Eye-Level_FA-optimized-1920x1356.jpg')!important}
+  html.hero-more .hero .hs-3{background-image:url('assets/Phase-3-Type-A-_-eye-level-court-1920x1081.jpg')!important}
+  html.hero-more .hero .hs-4{background-image:url('assets/Mah-Sing-M-Legasi_Pocket-Garden_FA-optimized-1920x1580.jpg')!important}
+  .hero .hero-scrim{background:linear-gradient(180deg,rgba(6,43,29,0) 30%,rgba(6,43,29,.34) 55%,rgba(6,43,29,.86) 100%)!important}
+  .hero .hero-wash{background:linear-gradient(180deg,rgba(237,224,206,.62) 0%,rgba(237,224,206,.22) 90px,rgba(237,224,206,0) 170px)!important}
+  .nav:not(.is-scrolled) .nav-logo img.lk,.nav:not(.is-scrolled) .nav-logo img.ms{content:normal}
+  .nav:not(.is-scrolled) .hamburger:not([aria-expanded="true"]) span{background:var(--night2)}
+  .hero .hero-ctas{margin-top:0}
+  .h-slides{left:0;right:0;justify-content:center}
+  /* the lockup now sits over the sky and the roofline: it carries a soft shadow like every hero line (the value on
+     the live M Amaya logo), not a veil */
+  .hero .h-lk{filter:drop-shadow(0 2px 12px rgba(0,0,0,.4))}
+}
+@media(max-width:767px) and (prefers-reduced-motion:no-preference){html.js .hero .hs.on{animation:heroDrift 7.5s ease-out both}}
+/* 640 to 767 px, and a phone-width window wider than it is tall, paint the full streetscape (the phone cut is the
+   centre 62% of it, enough for any portrait phone) */
+@media(min-width:640px) and (max-width:767px),(max-width:639px) and (min-aspect-ratio:1/1){
+  .hero .hs-1{background-image:url('assets/hero-1-streetscape.webp')!important}
+}
+</style>
 </body>
 </html>
