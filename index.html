@@ -6474,5 +6474,22 @@ window.addEventListener('load',function(){if(!window.FontFace||!document.fonts)r
   [['Boska','assets/boska-700i.woff2'],['Boska Medium','assets/boska-500i.woff2']].forEach(function(d){
     document.fonts.add(new FontFace(d[0],'url('+d[1]+') format("woff2")',{style:'italic',weight:'100 900',display:'swap'}));});});
 </script>
+<style>
+/* Round 9 (19 Oct 2026, Justin: "the background feels disconnected, not smooth as the others"). The ground lightened to
+   the streetscape's pale sky in the 40 to 70 px under the trust line, which read as a light stripe and a seam. Phones:
+   the ground stays the forest all the way to the picture; the picture's top fades in from that forest over 132 px with
+   an eased curve, so the pale sky emerges from the dark as the darker skies do on the other Clones; the band is 72 px
+   taller, so the fade lies on sky and the roofs stay clear. The menu over the dark hero: the cream lockup, the white Mah
+   Sing logo and cream bars, no beige wash; the solid cream bar on scroll keeps the green logo. */
+@media(max-width:767px){
+  .hero{--band:calc(min(calc(140vw * 1.1873 * .5),440px) + 72px)}
+  .hero-slides{background:linear-gradient(180deg,#041D14 0,#0D3431 calc(100% - var(--band)),#0D3431 100%)!important}
+  .hero .hs::after{content:'';position:absolute;left:0;right:0;top:0;height:132px;pointer-events:none;z-index:1;background:linear-gradient(180deg,rgb(13,52,49) 0,rgba(13,52,49,.86) 14%,rgba(13,52,49,.62) 34%,rgba(13,52,49,.36) 56%,rgba(13,52,49,.14) 78%,rgba(13,52,49,0) 100%)}
+  .hero-wash{background:none!important}
+  .nav:not(.is-scrolled) .nav-logo img.lk{content:url('assets/M-Legasi-logo-Cream.svg')}
+  .nav:not(.is-scrolled) .nav-logo img.ms{content:url('assets/mahsing-logo-white.png')}
+  .nav:not(.is-scrolled) .hamburger span{background:#F2E9DA}
+}
+</style>
 </body>
 </html>
