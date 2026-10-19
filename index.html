@@ -342,6 +342,13 @@ form input.f-invalid{border-color:#b3261e!important;box-shadow:0 0 0 1px #b3261e
   .nav-logo img.ms{height:26px!important;width:auto!important;max-width:none!important}
 }
 </style>
+<style>
+/* Gap fix (19 Oct 2026, Justin: "fix the same announcement-bar gap and scroll jump"). Round 12 made the phone menu bar
+   84 px tall at the top (the 56 px project mark plus 14 px padding a side) and 77 px once scrolled, and its pull-up stayed at -74 px, so the hero started 10 px under the 38 px announcement bar and the page shifted 7 px when the bar slimmed.
+   Phones and small tablets (767 px and under, where the 56 px mark applies): the pull-up equals the bar's own height in
+   both states, so the hero starts right under the announcement bar and the page does not shift when the bar slims. */
+@media(max-width:767px){.nav{margin-bottom:-84px!important}.nav.is-scrolled{margin-bottom:-77px!important}}
+</style>
 </head>
 
 <body>
