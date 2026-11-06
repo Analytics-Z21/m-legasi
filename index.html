@@ -3319,6 +3319,244 @@ html:not(.hero-more) .hs-3{background-image:url('assets/Phase-3-Type-A-_-eye-lev
   html:not(.hero-more) .hero .hs-3{background-image:url('assets/Phase-3-Type-A-_-eye-level-court-1920x1081.jpg')!important}
 }
 </style>
+<style id="option9">
+/* =====================================================================================
+   OPTION 9 (6 Nov 2026, branch option9-layouts): the floor-plan section as M Aurora's live build, in Legasi's own tokens.
+   Plan panel beside the inline price form, tabs without prices, Compare all 4 with lot-size filter tabs (replaces the
+   instalment calculator). Forest night (--night2) for the form panel and bars, paper for the rest, coral on asks only.
+   Spec: projects/mahsing/html/2026-11-06_option9-port/port-spec.md. Mobile first, 393 px reference.
+   ===================================================================================== */
+
+/* section: a 24 px gutter on phones (the old card ran full bleed), the tabs bleed to the edge as a scrolling row */
+@media(max-width:639px){#units{padding-left:24px;padding-right:24px}}
+#units .tabs{display:flex;flex-wrap:nowrap;justify-content:flex-start;gap:8px;padding:2px 24px 16px;margin:0 -24px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-padding:0 24px}
+#units .tabs::-webkit-scrollbar{display:none}
+#units .tab{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:52px;padding:10px 14px;text-align:left;border:1px solid rgba(16,36,27,.22);font:700 14px/1.2 var(--font-body);color:var(--ink-d);background:#fff;touch-action:manipulation}
+#units .tab em{display:block;font:500 11px/1.3 var(--font-body);font-style:normal;color:var(--ink-m);margin:0}
+#units .tab[aria-selected="true"] em{color:var(--cream-dim)}
+.tab-k{display:inline-flex;align-items:center;gap:6px}
+#units .tab-new{position:static;pointer-events:none;font:700 11px/1 var(--font-body);letter-spacing:.06em;padding:3px 5px;background:var(--gold-text);color:#fff}
+@media(min-width:1024px){
+  #units .tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 auto;padding:0 0 22px;overflow:visible}
+  #units .tab{min-height:44px;padding:14px 18px;gap:4px;font-size:16px}
+  #units .tab-k{width:100%;justify-content:space-between}
+  #units .tab em{font-size:13px}
+}
+
+/* plan panel + form panel */
+.o9-grid{display:grid;gap:16px}
+@media(min-width:1024px){.o9-grid{grid-template-columns:7fr 5fr;gap:24px;align-items:stretch}}
+.o9-plan{background:#fff;border:1px solid rgba(16,36,27,.1);box-shadow:0 40px 80px -40px rgba(16,36,27,.3);padding:16px;display:flex;flex-direction:column;gap:12px}
+@media(min-width:1024px){.o9-plan{padding:28px;gap:18px}}
+.o9p-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.o9p-ttl{min-width:0}
+#units .o9p-ttl h3{font:500 28px/1 var(--font-display);color:var(--ink-d);margin:0}
+@media(min-width:1024px){#units .o9p-ttl h3{font-size:36px}}
+.o9p-line{font:400 12px/1.5 var(--font-body);color:var(--ink-m);margin-top:6px}
+@media(min-width:1024px){.o9p-line{font-size:14px;margin-top:4px}}
+.o9-badge{display:inline-block;white-space:nowrap;margin-top:8px;background:var(--night2);color:var(--cream-ink);font:700 11px/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase;padding:7px 10px}
+.o9-badge.popular{background:var(--gold-text);color:#fff}
+.o9p-acts{display:flex;gap:8px;flex:none}
+/* phone header: title | 360 pill, the spec line across, then the status badge | the price link */
+.o9-plink{display:none}
+@media(max-width:1023px){
+  .o9p-head{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;align-items:center}
+  .o9p-ttl{display:contents}
+  #units .o9p-ttl h3{grid-column:1;grid-row:1}
+  .o9p-acts{grid-column:2;grid-row:1;justify-self:end}
+  .o9p-line{grid-column:1/-1;grid-row:2;margin-top:4px}
+  .o9p-ttl .o9-badge{grid-column:1;grid-row:3;justify-self:start;margin-top:6px}
+  .o9-plink{grid-column:2;grid-row:3;justify-self:end;display:inline-flex;align-items:center;gap:6px;min-height:44px;margin-top:6px;
+    padding:4px 2px;border:0;background:none;color:var(--ask-deep-hover);font:700 14px/1 var(--font-body);text-decoration:underline;
+    text-underline-offset:3px;cursor:pointer;touch-action:manipulation;white-space:nowrap}
+}
+@media(max-width:389px){.o9-badge{font-size:11px;padding:7px 7px;letter-spacing:.04em}.o9-plink{font-size:13px;gap:4px}}
+.o9-pill{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;padding:4px 16px;border-radius:999px;border:1px solid rgba(16,36,27,.22);background:#fff;color:var(--ink-d);font:600 13px/1 var(--font-body);text-decoration:none;white-space:nowrap;cursor:pointer;touch-action:manipulation}
+.o9-pill-dark{background:var(--night2);border-color:var(--night2);color:var(--cream-ink)}
+.o9-pill svg{flex:none}
+@media(hover:hover) and (pointer:fine){.o9-pill:hover{border-color:var(--ink-d)}.o9-pill-dark:hover{background:var(--night)}}
+/* desktop: the Enlarge pill in the header is the one enlarge affordance; phones keep an icon-only zoom hint in the box */
+@media(min-width:1024px){#units .o9-plan .unit-zoom{display:none}}
+@media(max-width:1023px){.o9p-acts .o9-pill-enl{display:none}
+  #units .o9-plan .unit-zoom{top:10px;right:10px;font-size:0;gap:0;padding:9px;background:rgba(6,43,29,.9)}
+  #units .o9-plan .unit-zoom svg{width:16px;height:16px}}
+#units .o9-plan .unit-plan{border:0;margin:0 -16px;padding:46px 12px 8px;min-height:320px;background:#fff}
+@media(min-width:1024px){#units .o9-plan .unit-plan{margin:0;min-height:480px;padding:12px 16px 14px}}
+#units .o9-plan .unit-plan img{max-height:56vh}
+@media(min-width:1024px){#units .o9-plan .unit-plan img{max-height:460px}}
+
+.o9-form{background:var(--night2);color:var(--cream-ink);padding:22px 18px;display:flex;flex-direction:column;gap:14px;box-shadow:0 24px 60px rgba(4,29,20,.28)}
+@media(min-width:1024px){.o9-form{padding:36px;gap:18px}}
+#units .o9-form .o9-ft{font:700 26px/1.15 var(--font-display);color:var(--cream-ink);margin:0}  /* outranks any #units h3 colour */
+@media(min-width:1024px){#units .o9-form .o9-ft{font-size:30px}}
+.o9-specs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--mull);border-bottom:1px solid var(--mull);padding:12px 0;text-align:center}
+.o9-specs>div{min-width:0;padding:0 4px}
+.o9-specs>div+div{border-left:1px solid var(--mull)}
+.o9-specs b{display:block;font:500 22px/1.1 var(--font-display);color:var(--cream-ink);white-space:nowrap}
+.o9-specs span{display:block;margin-top:4px;font:700 11px/1.3 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--cream-dim)}
+@media(min-width:1024px){.o9-specs b{font-size:26px}}
+.o9-ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font:400 13px/1.5 var(--font-body);color:var(--cream-ink)}
+.o9-ticks li{position:relative;padding-left:22px}
+.o9-ticks li::before{content:'\2713';position:absolute;left:0;top:0;color:var(--gold-light);font-weight:700}
+@media(min-width:1024px){.o9-ticks{font-size:14px;gap:8px}}
+.o9-lf .field{margin-bottom:10px}
+.o9-lf .f-label{color:var(--cream-ink);font-size:11px;margin-bottom:5px}
+.o9-lf .f-input{border:0;min-height:48px;padding:12px 14px}
+.o9-lf .f-input:focus{outline:2px solid var(--gold-light);outline-offset:1px}
+.o9-lf .btn{width:100%;min-height:52px;margin-top:2px}
+.o9-consent{font:400 12px/1.5 var(--font-body);color:var(--cream-dim);margin:10px 0 0}
+.o9-consent a{color:#fff;text-decoration:underline;text-underline-offset:2px}
+.o9-err{color:#FFB4A8;font:600 13px/1.5 var(--font-body);margin:2px 0 10px}
+.o9-lf .lead-field-hint{margin:6px 0 10px}
+
+/* ===== Compare all 4 ===== */
+#compare-all{max-width:none;background:var(--paper2);color:var(--ink-d);padding:clamp(56px,7vw,96px) 24px;border-top:1px solid var(--ink-hair)}
+@media(min-width:1024px){#compare-all{padding-left:48px;padding-right:48px}}
+#compare-all>*{max-width:1200px;margin-left:auto;margin-right:auto}
+#compare-all .em{color:var(--gold-text)}
+#compare-all .section-header{margin-bottom:clamp(20px,3vw,32px)}
+#compare-all .section-header h2{font-size:clamp(30px,4vw,52px)}
+@media(min-width:1024px){#compare-all .section-header>.eyebrow{grid-row:1/span 2}}
+#compare-all .btn-p,.cs .btn-p,.ct .btn-p{background:var(--ask-deep);color:#fff}
+#compare-all .btn-p:hover,.cs .btn-p:hover,.ct .btn-p:hover{background:var(--ask-deep-hover)}
+.o9-budget{background:var(--night2);color:var(--cream-ink);padding:14px;display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.o9b-top{display:flex;justify-content:space-between;align-items:center;gap:10px;font:600 13px/1.4 var(--font-body)}
+.o9b-fit{color:var(--gold-light);font-weight:600;text-align:right}
+.o9b-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.o9b-t{min-height:44px;padding:4px 12px;border:1px solid rgba(242,233,218,.45);background:transparent;color:#fff;font:600 13px/1 var(--font-body);transition:background .15s}
+.o9b-t[aria-pressed="true"]{background:#fff;color:var(--ink-d);border-color:#fff}
+@media(hover:hover){.o9b-t:not([aria-pressed="true"]):hover{background:rgba(242,233,218,.12)}}
+@media(min-width:1024px){
+  .o9-budget{flex-direction:row;align-items:center;flex-wrap:wrap;gap:12px;padding:14px 20px;margin-bottom:22px}
+  .o9b-top{display:contents}
+  .o9b-l{order:1;font:600 14px/1 var(--font-body)}
+  .o9b-tabs{order:2}
+  .o9b-fit{order:3;margin-left:auto;font-size:13px}
+  .o9b-t{padding:0 16px}
+}
+.o9-hint{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--ink-hair);padding:12px 14px;margin-bottom:12px;font:400 13px/1.45 var(--font-body)}
+.o9h-ico{display:flex;gap:4px;flex:none}
+.o9h-ico i{display:block;width:22px;height:28px;border:1.5px solid var(--ink-d);background:var(--paper2)}
+.o9h-ico i+i{border-style:dashed;background:none}
+.o9-pb{display:inline-block;font:700 11px/1.3 var(--font-body);padding:4px 7px;max-width:100%}
+.o9-pb.ph{padding-left:0;font-weight:600;color:var(--ink-m);font-size:12px}
+.o9-pb.tag{background:var(--gold-text);color:#fff;letter-spacing:.06em;text-transform:uppercase;font-size:11px}
+.o9-view{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:4px 12px;font:700 13px/1 var(--font-body);border:1.5px solid var(--ink-d);background:#fff;color:var(--ink-d);transition:background .15s;touch-action:manipulation}
+@media(hover:hover){.o9-view:hover{background:rgba(16,36,27,.06)}}
+/* phone cards */
+.o9-cards{display:flex;flex-direction:column;gap:12px}
+.o9c{background:#fff;border:1px solid var(--ink-hair);padding:14px;display:flex;flex-direction:column;gap:10px}
+.o9c.is-on{border:1.5px solid var(--ink-d)}
+.o9c-top{display:flex;gap:12px;align-items:flex-start}
+.o9c-top img{width:72px;height:76px;object-fit:contain;background:#FBF9F4;flex:none}
+.o9c-ty{flex:1;min-width:0}
+.o9c-ty b{display:block;font:500 22px/1.1 var(--font-display);color:var(--ink-d)}
+.o9c-ty span{display:block;font:400 12px/1.4 var(--font-body);color:var(--ink-m);margin-top:3px}
+.o9c-add{flex:none;min-height:44px;padding:4px 12px;border:1.5px solid var(--ink-d);background:#fff;color:var(--ink-d);font:700 12px/1 var(--font-body);white-space:nowrap;touch-action:manipulation}
+.o9c-add[aria-pressed="true"]{background:var(--ink-d);color:#fff}
+.o9c-nums{display:grid;grid-template-columns:1fr 1fr;gap:8px;border-top:1px solid var(--ink-hair);padding-top:10px}
+.o9c-nums span{display:block;font:700 11px/1.3 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-m)}
+.o9c-nums b{display:block;font:700 14px/1.3 var(--font-body);color:var(--ink-d)}
+.o9c-pills{display:flex;flex-wrap:wrap;gap:6px}
+.o9c-pills:empty{display:none}
+.o9c .o9-view{width:100%}
+/* desktop table */
+.o9-table{display:none}
+@media(min-width:1024px){
+  .o9-hint,.o9-cards{display:none}
+  .o9-table{display:block;background:#fff;border:1px solid var(--ink-hair)}
+  .o9t-h,.o9t-r{display:grid;grid-template-columns:76px 92px 1.5fr 1fr 1fr 1fr 150px;gap:16px;align-items:center;padding:12px 20px}
+  .o9t-h{font:700 11px/1.4 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-m);border-bottom:1px solid var(--ink-hair)}
+  .o9t-r{border-bottom:1px solid var(--ink-hair)}
+  .o9t-r:last-child{border-bottom:0}
+  .o9t-r.is-on{background:#FBF8F1}
+  .o9t-chk{display:flex;align-items:center;justify-content:center;min-height:44px;cursor:pointer}
+  .o9t-chk input{width:20px;height:20px;accent-color:var(--night2);margin:0;cursor:pointer}
+  .o9t-r img{width:92px;height:76px;object-fit:contain;background:#FBF9F4}
+  .o9t-ty b{display:block;font:500 24px/1.1 var(--font-display);color:var(--ink-d)}
+  .o9t-ty span{display:block;font:400 13px/1.4 var(--font-body);color:var(--ink-m);margin-top:3px}
+  .o9t-ph{display:flex;flex-direction:column;gap:6px;align-items:flex-start;font:600 14px/1.3 var(--font-body)}
+  .o9t-from{font:600 16px/1.3 var(--font-body)}
+  .o9t-mo{font:700 17px/1.3 var(--font-body)}
+}
+/* desktop compare panel */
+.o9-cpanel{display:none;background:#fff;border:2px solid var(--ink-d);margin-top:22px}
+.o9-dash{display:none;border:1.5px dashed rgba(16,36,27,.3);padding:18px 20px;font:400 14px/1.4 var(--font-body);color:var(--ink-m);margin-top:22px}
+@media(min-width:1024px){
+  .o9-cpanel:not([hidden]){display:block}
+  .o9-dash:not([hidden]){display:block}
+  .o9cp-head{display:grid;grid-template-columns:220px repeat(2,minmax(0,1fr))}
+  .o9cp-lab{padding:20px 24px;border-right:1px solid var(--ink-hair);display:flex;align-items:flex-end;font:400 13px/1.4 var(--font-body);color:var(--ink-m)}
+  .o9cp-col{padding:18px 24px;display:flex;flex-direction:column;gap:10px;border-right:1px solid var(--ink-hair)}
+  .o9cp-col:last-child{border-right:0}
+  .o9cp-col.first{background:#F4F1E8}
+  .o9cp-col .t{display:flex;justify-content:space-between;align-items:center;font:500 30px/1 var(--font-display);color:var(--ink-d)}
+  .o9cp-col img{height:180px;width:100%;object-fit:contain}
+  .o9cp-r{display:grid;grid-template-columns:220px repeat(2,minmax(0,1fr));border-top:1px solid var(--ink-hair)}
+  .o9cp-r.diff{background:#FBF8F1}
+  .o9cp-r .l{padding:12px 24px;border-right:1px solid var(--ink-hair);font:700 13px/1.4 var(--font-body);color:var(--ink-m);display:flex;align-items:center}
+  .o9cp-r .c{padding:12px 24px;border-right:1px solid var(--ink-hair);font:400 15px/1.4 var(--font-body);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .o9cp-r .c.first{background:#F4F1E8}
+  .o9cp-r .c:last-child{border-right:0}
+  .o9cp-r.diff .c{font-weight:700}
+  .o9cp-foot{display:flex;justify-content:space-between;align-items:center;gap:24px;background:var(--night2);color:var(--cream-ink);padding:20px 24px}
+  .o9cp-foot b{display:block;font:700 18px/1.3 var(--font-body)}
+  .o9cp-foot span{display:block;font:400 13px/1.4 var(--font-body);color:var(--cream-dim);margin-top:4px}
+  .o9cp-foot .btn{flex:none;min-height:54px;padding:0 28px;font-size:16px}
+}
+.o9-delta{display:inline-block;font:700 12px/1.3 var(--font-body);color:#14573A;background:#E1EEE3;padding:3px 8px}
+.o9-foot{font:400 12px/1.5 var(--font-body);color:var(--ink-m);margin-top:16px;max-width:76ch}
+
+/* ===== compare sheet (phone) ===== */
+.cs{position:fixed;inset:0;z-index:1000;background:var(--paper);color:var(--ink-d);display:none;flex-direction:column}
+.cs.on{display:flex}
+.cs-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top,0px));background:#fff;border-bottom:1px solid var(--ink-hair);flex:none}
+.cs-head>div{display:flex;flex-direction:column;gap:2px;min-width:0}
+.o9k{font:700 11px/1.4 var(--font-body);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-m)}
+.cs-ttl{font:500 24px/1.1 var(--font-display);color:var(--ink-d)}
+.o9-x{flex:none;width:44px;height:44px;border:1px solid rgba(16,36,27,.22);background:#fff;color:var(--ink-d);font:600 16px/1 var(--font-body);display:flex;align-items:center;justify-content:center;touch-action:manipulation}
+.cs-body{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:14px 16px 20px;display:flex;flex-direction:column;gap:10px}
+.cs-note{font:400 12px/1.4 var(--font-body);color:var(--ink-m);margin:0}
+.cs-grid{background:#fff;border:2px solid var(--ink-d)}
+.cs-cols{display:grid;grid-template-columns:1fr 1fr}
+.cs-col{padding:12px;display:flex;flex-direction:column;gap:6px;align-items:flex-start;min-width:0}
+.cs-col.first{background:#F4F1E8;border-right:1px solid var(--ink-hair)}
+.cs-col b{font:500 24px/1.1 var(--font-display);color:var(--ink-d)}
+.cs-col img{width:100%;height:110px;object-fit:contain}
+.cs-r{border-top:1px solid var(--ink-hair)}
+.cs-r.diff{background:#FBF8F1}
+.cs-r .l{font:700 11px/1.4 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-m);padding:8px 12px 0}
+.cs-r .cc{display:grid;grid-template-columns:1fr 1fr}
+.cs-r .c{padding:4px 12px 10px;font:400 14px/1.4 var(--font-body);min-width:0;overflow-wrap:anywhere}
+.cs-r .c.first{border-right:1px solid var(--ink-hair)}
+.cs-r.diff .c{font-weight:700}
+.cs-r .o9-delta{display:table;font-size:11px;padding:2px 5px;margin-top:3px}
+.o9-tlink{background:none;border:0;padding:0;min-height:44px;font:600 13px/1.4 var(--font-body);color:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer;text-align:left}
+.cs-back{align-self:center;min-height:48px;font-size:14px}
+.cs-foot{flex:none;background:var(--night2);color:#fff;padding:12px 16px calc(16px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px}
+.cs-foot p{font:400 13px/1.4 var(--font-body);margin:0;color:#fff}
+.cs-foot p span{color:var(--cream-dim)}
+.cs-foot .btn{width:100%;min-height:52px}
+/* compare tray (phone) */
+.ct{position:fixed;left:0;right:0;bottom:0;z-index:905;display:none;align-items:center;gap:8px;background:#fff;border-top:1px solid var(--ink-hair);box-shadow:0 -8px 24px rgba(16,36,27,.16);padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px))}
+.ct.on{display:flex}
+@media(min-width:1024px){.ct{display:none!important}}
+.ct-slots{flex:1;display:flex;gap:8px;min-width:0}
+.ct-s{flex:1;min-height:52px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;padding:0 10px;text-align:left;background:var(--paper2);color:var(--ink-d);border:1.5px solid var(--ink-d);font-family:var(--font-body);min-width:0;touch-action:manipulation}
+.ct-s b{font:700 13px/1.2 var(--font-body)}
+.ct-s span{font:400 11px/1.2 var(--font-body)}
+.ct-s.empty{background:#fff;color:var(--ink-m);border:1.5px dashed #7C8A82}
+.ct-go{flex:none;min-height:52px;padding:4px 14px;font-size:14px;touch-action:manipulation}
+.ct-go[disabled]{background:#E4E1D8!important;color:#5E6A63!important;cursor:default}
+/* one bottom bar at a time: the tray holds the sticky bar off while it shows; the sheet and the drawer lock the page */
+.mobile-sticky.hold{opacity:0!important;pointer-events:none!important;transform:translateY(110%)!important}
+html.o9-lock .mobile-sticky,html.o9-lock .ct{display:none!important}
+html.cap-clean .cs,html.cap-clean .ct{display:none!important}
+/* drawer: plan tags when two units are asked for */
+.ld-pair{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.ld-pair span{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid rgba(16,36,27,.14);padding:6px 10px 6px 6px;font:700 14px/1 var(--font-body);color:var(--ink-d)}
+.ld-pair img{width:36px;height:40px;object-fit:contain}
+</style>
 <noscript><style>.story-card:not(.in){background-image:var(--img)!important}.aerial:not(.in){background-image:url('assets/Masterplan_FA-Extend-optimzied-1418x1920.jpg')!important}</style></noscript>
 </head>
 
@@ -3538,9 +3776,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- UNITS (R2): Aurora tabs + unit card + attached calculator, Legasi's four types with
-     PUBLISHED per-type prices. Plan panel taps into the existing zoom lightbox.
-     The calculator block carries id="invest" so legacy anchors land on it. -->
+<!-- UNITS (Option 9, 6 Nov 2026): tabs without prices, the plan panel beside the inline price form (phones: plan, then
+     form), Legasi's four types. Spec: projects/mahsing/html/2026-11-06_option9-port/port-spec.md. The per-type From price
+     moved into Compare all 4 below (Mah Sing reg 6(1)(h): prices stay on the page, ungated). The instalment calculator
+     is gone: Compare's instalment column uses its defaults (90% loan, 35 years, 4% p.a.). -->
 <section class="units-section" id="units" data-section="units">
   <div class="section-header rv">
     <div class="eyebrow">Impira Collection</div>
@@ -3549,65 +3788,90 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <div class="tabs rv" id="tabs" role="tablist" aria-label="Unit types">
-    <button class="tab" role="tab" data-type="astradia" aria-selected="true">Astradia<em>20&prime; &times; 60&prime;</em></button>
-    <button class="tab" role="tab" data-type="harmonia" aria-selected="false">Harmonia<em>20&prime; &times; 70&prime;</em></button>
-    <button class="tab" role="tab" data-type="auroria" aria-selected="false">Auroria<span class="tab-new">New</span><em>20&prime; &times; 60&prime;</em></button>
-    <button class="tab" role="tab" data-type="zendia" aria-selected="false">Zendia<span class="tab-new">New</span><em>20&prime; &times; 70&prime;</em></button>
+    <button class="tab" role="tab" data-type="astradia" aria-selected="true"><span class="tab-k">Astradia</span><em>20&prime; &times; 60&prime; &middot; 1,555 sq ft</em></button>
+    <button class="tab" role="tab" data-type="harmonia" aria-selected="false"><span class="tab-k">Harmonia</span><em>20&prime; &times; 70&prime; &middot; 1,686 sq ft</em></button>
+    <button class="tab" role="tab" data-type="auroria" aria-selected="false"><span class="tab-k">Auroria<span class="tab-new">New</span></span><em>20&prime; &times; 60&prime; &middot; 1,555 sq ft</em></button>
+    <button class="tab" role="tab" data-type="zendia" aria-selected="false"><span class="tab-k">Zendia<span class="tab-new">New</span></span><em>20&prime; &times; 70&prime; &middot; 1,686 sq ft</em></button>
   </div>
 
-  <div class="unit rv">
-    <div class="unit-plan" id="planWrap">
-      <span class="unit-badge" id="uBadge">Open for Sale</span>
-      <span class="unit-zoom"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</span>
-      <img id="planImg" decoding="async" src="assets/Astradia-Intermediate-Lot-20x60-1.png" alt="Astradia floor plan, 1,555 sq ft, 4 bedrooms" width="900" height="900">
+  <div class="o9-grid rv">
+    <div class="o9-plan">
+      <div class="o9p-head">
+        <div class="o9p-ttl">
+          <h3 id="uName">Astradia</h3>
+          <p class="o9p-line" id="uCfg">Phase 2 &middot; intermediate, end and corner lots</p>
+          <span class="o9-badge" id="uBadge">Open for Sale</span>
+          <!-- phones see the plan before the form, so the header carries a price link to the inline form under the plan
+               (the bottom bar steps aside here); desktop shows the form beside the plan -->
+          <button type="button" class="o9-plink" data-cta-id="layout_price_link"><span>Get <span class="uNameX">Astradia</span> pricing</span><span aria-hidden="true">&darr;</span></button>
+        </div>
+        <div class="o9p-acts">
+          <button type="button" class="o9-pill o9-pill-enl" id="uEnlarge" aria-label="Enlarge the floor plan"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v6M8 11h6"/></svg>Enlarge</button>
+          <!-- the page's one 360 walkthrough (every type opens the same viewer): same href, data-tour-source and tracking as the old text link -->
+          <a class="o9-pill o9-pill-dark" id="uVt" href="https://m-legasi.com.my/360-walkthrough/" target="_blank" rel="noopener" data-tour-source="unit_card" aria-label="Take the 360&deg; walkthrough"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>360&deg; tour</a>
+        </div>
+      </div>
+      <div class="unit-plan" id="planWrap">
+        <span class="unit-zoom"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</span>
+        <img id="planImg" decoding="async" src="assets/Astradia-Intermediate-Lot-20x60-1.png" alt="Astradia floor plan, 1,555 sq ft, 4 bedrooms" width="900" height="900">
+      </div>
     </div>
-    <div class="unit-info">
-      <h3 id="uName">Astradia</h3>
-      <p class="unit-cfg" id="uCfg">Phase 2 &middot; intermediate, end and corner lots</p>
-      <div class="specs">
-        <div><div class="n num" id="uSize">1,555</div><div class="l">Sq Ft</div></div>
-        <div><div class="n">4</div><div class="l">Bedrooms</div></div>
-        <div><div class="n">3</div><div class="l">Bathrooms</div></div>
-        <div><div class="n num" id="uLot">20&prime;&times;60&prime;</div><div class="l">Land</div></div>
+
+    <!-- the form panel: the ask sits beside the plan, prefilled with the type on view. Same fields, action, oid, retURL and
+         Salesforce hidden fields as the lead drawer; the lead details (unit, CTA) go to the n8n capture only. -->
+    <div class="o9-form" id="layoutPanel">
+      <h3 class="o9-ft">Get <span class="uNameX">Astradia</span> pricing on WhatsApp</h3>
+      <div class="o9-specs">
+        <div><b class="num" id="uLot">20&prime;&times;60&prime;</b><span>Lot</span></div>
+        <div><b class="num" id="uSize">1,555</b><span>Built-up</span></div>
+        <div><b class="num" id="uBB">4 / 3</b><span>Bed / Bath</span></div>
       </div>
-      <div class="price-row">
-        <div class="price-from">Priced from<b class="num" id="uPrice">RM 535,000</b></div>
-        <button class="calc-link" type="button" id="calcJump" data-cta-id="units_calc_instalment">Calc my instalment</button>
-      </div>
-      <div class="unit-acts">
-        <button class="btn btn-p" id="uCta" data-open-lead="unit_card" data-unit="Astradia" data-cta-id="units_price_list">Get Price List Now</button>
-        <!-- R2 (premium port): one filled ask on the card; the tour is a text link under it, same href and tracking -->
-        <a class="u-link" id="uVt" href="https://m-legasi.com.my/360-walkthrough/" target="_blank" rel="noopener" data-tour-source="unit_card">Take the 360&deg; Walkthrough</a>
-      </div>
+      <ul class="o9-ticks">
+        <li>Current pricing and the layout plan</li>
+        <li>Which lots are still open</li>
+        <li>Loan assistance from our team</li>
+      </ul>
+      <form class="o9-lf" data-form="layout" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" method="POST" onsubmit="return handleLayoutFormSubmit(this)" novalidate>
+        <input type="hidden" name="oid" value="00D0o0000015t7i">
+        <input type="hidden" name="retURL" value="https://www.ver2.m-legasi.com.my/thankyou">
+        <input type="hidden" name="00N2j000000e0hv" value="M Legasi Microsite (Copy)">
+        <input type="hidden" name="00N2j000000e0hw" value="M Legasi">
+        <input type="hidden" name="00N2j000000e0ho" title="Source" value="M Legasi Website">
+        <input type="hidden" name="00N2j000000e0hp" title="Super Category" value="Website">
+        <input type="hidden" name="00N2j000000e0hR" value="1">
+        <div class="field"><label class="f-label" for="l-name">Full Name</label>
+          <input class="f-input" id="l-name" type="text" name="last_name" maxlength="80" placeholder="Your name" required autocomplete="name"></div>
+        <div class="field"><label class="f-label" for="l-phone">WhatsApp number</label>
+          <input class="f-input" id="l-phone" type="tel" name="mobile" maxlength="20" placeholder="012-345 6789" required autocomplete="tel-national" inputmode="tel" data-my-phone></div>
+        <div class="field"><label class="f-label" for="l-email">Email</label>
+          <input class="f-input" id="l-email" type="email" name="email" maxlength="80" placeholder="you@example.com" required autocomplete="email"></div>
+        <div class="o9-err" data-form-error style="display:none"></div>
+        <button class="btn btn-p" type="submit"><span>Send me <span class="uNameX">Astradia</span> pricing</span></button>
+        <p class="o9-consent">I have read and agreed to the <a href="#">Terms &amp; Conditions</a> and <a href="#">PDPA Notice</a>.</p>
+      </form>
     </div>
   </div>
+</section>
 
-  <div class="calc rv" id="invest" data-section="calculator">
-    <h3>Monthly Instalment Calculator</h3>
-    <div class="cprice">
-      <span class="l">Property price</span>
-      <button class="cp-pick" id="cpPick" type="button" aria-haspopup="listbox" aria-expanded="false">
-        <b class="num" id="cPrice">RM 535,000</b>
-        <span class="cp-pick-t" id="cType">Astradia</span>
-        <svg class="cp-pick-c" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-      <div class="cp-menu" id="cpMenu" role="listbox" aria-label="Unit type" hidden></div>
+<!-- COMPARE ALL 4 (Option 9, 6 Nov 2026), in place of the instalment calculator. Rows, tags and the compare panel are
+     rendered by the units controller from its one UNITS table, so prices and instalments live in one place. -->
+<section class="compare-section" id="compare-all" data-section="compare" aria-label="Compare all four layouts">
+  <div class="section-header rv">
+    <div class="eyebrow">Compare all 4</div>
+    <h2>Four layouts, <span class="em">side by side.</span></h2>
+    <p>Starting prices and indicative instalments. For accurate pricing, our sales team will send you the price list.</p>
+  </div>
+  <div class="o9-cmp rv">
+    <div class="o9-budget" id="lotBar">
+      <div class="o9b-top"><span class="o9b-l">Lot size:</span><span class="o9b-fit" id="lotFit">Showing all 4</span></div>
+      <div class="o9b-tabs" id="lotTabs" role="group" aria-label="Lot size"></div>
     </div>
-    <div class="cfield">
-      <label for="cLoan">Loan amount <output id="cLoanOut" for="cLoan" class="num">RM 481,500 &middot; 90%</output></label>
-      <input type="range" id="cLoan" min="50" max="90" step="1" value="90">
-    </div>
-    <div class="cfield">
-      <label for="cTen">Loan tenure <output id="cTenOut" for="cTen">35 years</output></label>
-      <input type="range" id="cTen" min="10" max="35" step="1" value="35">
-    </div>
-    <div class="cout">
-      <div class="l">Estimated monthly from</div>
-      <div class="v num" id="cMy">RM 2,132</div>
-      <div class="d">At 4% p.a. over the selected tenure. For reference only; kindly refer to our sales staff for accurate pricing.</div>
-      <!-- R4 (premium port): the price ask after the calculator; data-unit follows the calculator's unit -->
-      <button type="button" class="btn btn-p calc-cta" id="cCta" data-open-lead="calc" data-unit="Astradia" data-cta-id="calc_get_price">Send me the Astradia price list</button>
-    </div>
+    <div class="o9-hint" id="cmpHint"><span class="o9h-ico" aria-hidden="true"><i></i><i></i></span><span>Tap <b>+ Compare</b> on any 2 layouts to see them side by side.</span></div>
+    <div class="o9-table" id="cmpTable" role="table" aria-label="The four layouts"></div>
+    <div class="o9-cards" id="cmpCards"></div>
+    <div class="o9-cpanel" id="cmpPanel" hidden></div>
+    <p class="o9-dash" id="cmpEmpty">Tick any two layouts to compare them side by side.</p>
+    <p class="o9-foot">*Starting prices. Instalments are estimates at 90% loan, 35 years, 4% p.a.; not a loan offer, financing subject to bank approval.</p>
   </div>
 </section>
 
@@ -4529,6 +4793,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a href="#register" class="btn-primary" data-cta-id="sticky_register">Get Price List Now</a>
 </div>
 
+<!-- Option 9 (6 Nov 2026): the phone compare sheet (two ticked layouts, full screen) and the compare tray -->
+<div class="cs" id="cmpSheet" data-section="compare" role="dialog" aria-modal="true" aria-label="Compare layouts" aria-hidden="true">
+  <div class="cs-head"><div><span class="o9k">Compare</span><b class="cs-ttl" id="csTitle">Astradia vs Harmonia</b></div><button type="button" class="o9-x" data-cs-close aria-label="Close compare">&#10005;</button></div>
+  <div class="cs-body">
+    <p class="cs-note">Differences are highlighted.</p>
+    <div class="cs-grid" id="csGrid"></div>
+    <button type="button" class="o9-tlink cs-back" data-cs-close>&larr; Back to all 4 layouts</button>
+  </div>
+  <div class="cs-foot">
+    <p id="csFootT">Still weighing Astradia &amp; Harmonia? <span>Let our team help.</span></p>
+    <button type="button" class="btn btn-p" id="csCta" data-open-lead="compare" data-unit="Astradia,Harmonia" data-cta-id="compare_sheet_get_price">Get Astradia &amp; Harmonia pricing</button>
+  </div>
+</div>
+<div class="ct" id="cmpTray" data-section="compare" role="region" aria-label="Compare tray" aria-hidden="true">
+  <div class="ct-slots" id="ctSlots"></div>
+  <button type="button" class="btn btn-p ct-go" id="ctGo" disabled>Compare 1/2</button>
+</div>
+
+
 <script>
 function showTab(btn, tabId) {
   document.querySelectorAll('.amenity-tab').forEach(t => t.classList.remove('active'));
@@ -4724,6 +5007,10 @@ window.captureFormDiagnostic = function (form, formId) {
     var formData = new FormData(form);
     var fields = {};
     formData.forEach(function (value, key) { fields[key] = value; });
+    // Option 9: what the lead asked for goes to the n8n capture only; the Salesforce POST keeps the live field set
+    var ds = form.dataset || {};
+    if (ds.leadUnit) fields.unit_interest = ds.leadUnit;
+    if (ds.leadCta) fields.lead_cta = ds.leadCta;
 
     var payload = {
       submission_id: submissionId,
@@ -4761,6 +5048,23 @@ window.captureFormDiagnostic = function (form, formId) {
   }
 };
 
+// Option 9 (6 Nov 2026): lead source tracking. The unit asked about and the CTA ride on the form element (data-lead-*), go to
+// the n8n payload (captureFormDiagnostic) and to GA4 generate_lead; the Salesforce POST is untouched.
+window.z21SetLeadFields = function (form, units, cta) {
+  if (!form) return;
+  if (units != null) form.dataset.leadUnit = units;
+  if (cta != null) form.dataset.leadCta = cta;
+};
+// hand the source to thankyou.html (same tab, same origin after the Salesforce retURL): lead_confirmed carries it too
+window.z21StoreLead = function (form, formName, source, submissionId) {
+  try {
+    sessionStorage.setItem('z21_lead', JSON.stringify({
+      lead_source: source, form_name: formName, unit_interest: (form.dataset && form.dataset.leadUnit) || 'not specified',
+      submission_id: submissionId || '', t: Date.now()
+    }));
+  } catch (e) { /* storage blocked: the thank-you page reads 'unknown' */ }
+};
+
 // Quick form (under hero) — name + email + phone
 function handleQuickFormSubmit(form) {
   var name = form.querySelector('input[name="last_name"]').value.trim();
@@ -4768,6 +5072,8 @@ function handleQuickFormSubmit(form) {
   var mobile = form.querySelector('input[name="mobile"]').value.trim();
 
   if (!window.checkLeadForm(form, 'M Legasi Quick Form')) return false;
+
+  window.z21SetLeadFields(form, null, 'quick');
 
   // Parallel capture to n8n (Phase 1 safety net) — returns UUID for dataLayer
   var submissionId = window.captureFormDiagnostic(form, 'quickRegisterForm');
@@ -4777,10 +5083,41 @@ function handleQuickFormSubmit(form) {
     'event': 'generate_lead',
     'lead_type': 'form_submission',
     'form_name': 'M Legasi Quick Registration',
+    'lead_source': 'quick',
+    'unit_interest': 'not specified',
     'submission_id': submissionId
   });
+  window.z21StoreLead(form, 'M Legasi Quick Registration', 'quick', submissionId);
 
   return true;
+}
+
+// Option 9 inline price form (beside the floor plan): same checks, same Salesforce path as the drawer form
+function handleLayoutFormSubmit(form) {
+  if (!window.checkLeadForm(form, 'M Legasi Layout Panel Form')) return false;
+
+  window.z21SetLeadFields(form, null, 'layout_panel');
+
+  var submissionId = window.captureFormDiagnostic(form, 'layoutPanelForm');
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'generate_lead',
+    lead_type: 'form_submission',
+    form_name: 'M Legasi Layout Panel Form',
+    lead_source: 'layout_panel',
+    unit_interest: form.dataset.leadUnit || 'not specified',
+    submission_id: submissionId
+  });
+  window.z21StoreLead(form, 'M Legasi Layout Panel Form', 'layout_panel', submissionId);
+
+  var submitBtn = form.querySelector('button[type="submit"]');
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+  }
+
+  return true; // Allow native post to Salesforce
 }
 
 // Thank You Modal
@@ -4792,6 +5129,8 @@ function handleFormSubmit(form) {
 
   if (!window.checkLeadForm(form, 'M Legasi Registration')) return false;
 
+  window.z21SetLeadFields(form, null, 'main');
+
   // Parallel capture to n8n (Phase 1 safety net) — returns UUID for dataLayer
   var submissionId = window.captureFormDiagnostic(form, 'mainRegisterForm');
 
@@ -4800,8 +5139,11 @@ function handleFormSubmit(form) {
     'event': 'generate_lead',
     'lead_type': 'form_submission',
     'form_name': 'M Legasi Registration',
+    'lead_source': 'main',
+    'unit_interest': 'not specified',
     'submission_id': submissionId
   });
+  window.z21StoreLead(form, 'M Legasi Registration', 'main', submissionId);
 
   return true; // Allow native post to Salesforce
 }
@@ -5284,6 +5626,8 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
   var sticky = document.getElementById('mobileSticky');
   if (!sticky) return;
   var form = document.getElementById('register');
+  var layoutForm = document.getElementById('layoutPanel');
+  var planBox = document.querySelector('#units .o9-grid');
   var quickForm = document.getElementById('quickRegister');
   var pastQuickForm = false;
   var formInView = false;
@@ -5312,15 +5656,25 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
      is 15% of the screen, measured on every update (the observer's ratio is of the whole section, which let the bar
      sit over the first or last 200 px of the form on phones) */
   function formOn() {
-    if (!form) return false;
-    var r = form.getBoundingClientRect(), vh = window.innerHeight;
-    var vis = Math.min(r.bottom, vh) - Math.max(r.top, 0);
-    return vis > 0 && vis >= 0.15 * Math.min(r.height, vh);
+    var vh = window.innerHeight;
+    return [form, layoutForm].some(function (el) {
+      if (!el) return false;
+      var r = el.getBoundingClientRect();
+      var vis = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+      return vis > 0 && vis >= 0.15 * Math.min(r.height, vh);
+    });
+  }
+  /* Option 9: the bar also steps aside while the plan + inline form block fills a quarter of the screen or more: the inline
+     form under the plan (phones) or beside it (desktop) is the ask there. It returns once the block has scrolled past. */
+  function planOnScreen() {
+    if (!planBox) return false;
+    var vh = window.innerHeight, r = planBox.getBoundingClientRect(), v = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+    return v >= 0.25 * vh;
   }
 
   function update() {
     formInView = formOn();
-    if (pastQuickForm && !formInView && !askOn()) sticky.classList.add('is-visible');
+    if (pastQuickForm && !formInView && !askOn() && !planOnScreen()) sticky.classList.add('is-visible');
     else sticky.classList.remove('is-visible');
   }
   if ('IntersectionObserver' in window && asks.length) {
@@ -5342,8 +5696,9 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
     if (!ticking) { ticking = true; window.requestAnimationFrame(function () { ticking = false; update(); }); }
   }, { passive: true });
 
-  if (form && 'IntersectionObserver' in window) {
-    new IntersectionObserver(function () { update(); }, { threshold: [0, 0.05, 0.1, 0.15, 0.2, 0.3, 0.5] }).observe(form);
+  if ('IntersectionObserver' in window) {
+    var fio = new IntersectionObserver(function () { update(); }, { threshold: [0, 0.05, 0.1, 0.15, 0.2, 0.3, 0.5] });
+    [form, layoutForm, planBox].forEach(function (el) { if (el) fio.observe(el); });
   }
 })();
 </script>
@@ -5516,8 +5871,9 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
     </svg>
   </button>
   <div class="lead-drawer-inner">
+    <div class="ld-pair" id="ldPair" hidden></div>
     <h2 id="leadDrawerTitle" class="lead-drawer-title">Register &amp; Get Your Price List</h2>
-    <p class="lead-drawer-sub">Fill in your details — we'll send you everything to make a decision.</p>
+    <p class="lead-drawer-sub" id="leadDrawerSub">Fill in your details — we'll send you everything to make a decision.</p>
     <!-- R5 (premium port): the trust line as the drawer's intro line; wording needs Mah Sing's OK -->
     <p class="ld-trust">Sold directly by Mah Sing Group, trusted by over 100,000 homeowners across Malaysia</p>
 
@@ -5576,7 +5932,7 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
         <a href="#" class="lead-tc-link">PDPA Notice</a>.
       </p>
 
-      <button type="submit" class="lead-submit">Get Price List Now</button>
+      <button type="submit" class="lead-submit" id="leadSubmit">Get Price List Now</button>
 
       <div class="lead-trust-row">
         <span>No spam</span>
@@ -5628,13 +5984,37 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
     }
     window._leadDrawerSource = trigger;
     var unitAttr = (e && e.currentTarget && e.currentTarget.getAttribute) ? e.currentTarget.getAttribute('data-unit') : null;
+    /* Option 9 (6 Nov 2026): data-unit may carry two names ("Astradia,Harmonia") for Compare's pair ask; the drawer then
+       takes the pair heading, a plan tag per house and the pair button label. data-open-lead stays the CTA source. */
+    var units = (unitAttr || '').split(',').map(function (x) { return x.trim(); }).filter(Boolean);
+    unitAttr = units[0] || null;
+    var pairEl = document.getElementById('ldPair'), subEl = document.getElementById('leadDrawerSub'), subBtn = document.getElementById('leadSubmit');
+    if (pairEl) {
+      var plans = window.z21UnitPlans || {};
+      pairEl.innerHTML = units.length === 2 ? units.map(function (n) {
+        return '<span>' + (plans[n] ? '<img src="' + plans[n] + '" alt="" width="36" height="40">' : '') + n + '</span>';
+      }).join('') : '';
+      pairEl.hidden = units.length !== 2;
+    }
     /* premium port (16 Oct 2026, spec Form row): the drawer is titled with the chosen unit when the ask named one;
        the markup title is restored for every other ask. */
     var ttl = document.getElementById('leadDrawerTitle');
     if (ttl) {
       if (!ttl._z21Default) ttl._z21Default = ttl.textContent;
-      ttl.textContent = unitAttr ? 'Get the ' + unitAttr + ' price list' : ttl._z21Default;
+      ttl.textContent = units.length === 2 ? 'Comparing ' + units[0] + ' and ' + units[1] + '? Let us help.'
+        : (unitAttr ? 'Get the ' + unitAttr + ' price list' : ttl._z21Default);
     }
+    if (subEl) {
+      if (!subEl._z21Default) subEl._z21Default = subEl.textContent;
+      subEl.textContent = units.length === 2 ? 'We will WhatsApp you both price lists, which lots are still open, and help you decide.' : subEl._z21Default;
+    }
+    if (subBtn) {
+      if (!subBtn._z21Default) subBtn._z21Default = subBtn.textContent;
+      subBtn.disabled = false;
+      subBtn.textContent = units.length === 2 ? 'Get ' + units[0] + ' & ' + units[1] + ' pricing' : subBtn._z21Default;
+    }
+    /* what the lead asked for rides on the form element and goes to the n8n capture only */
+    if (typeof window.z21SetLeadFields === 'function') window.z21SetLeadFields(form, units.join('; '), trigger);
 
     drawer.classList.add('open');
     drawer.setAttribute('aria-hidden', 'false');
@@ -5647,7 +6027,7 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
       // `source` keeps the existing GA4 series; trigger_source is the five-site name
       // (spec 2026-10-06). unit_interest is always pushed (undefined when the CTA is
       // not unit-specific) so GTM's persistent data model cannot carry a stale unit.
-      window.dataLayer.push({ event: 'lead_drawer_open', source: trigger, trigger_source: trigger, unit_interest: unitAttr || undefined });
+      window.dataLayer.push({ event: 'lead_drawer_open', source: trigger, trigger_source: trigger, unit_interest: units.length ? units.join('; ') : undefined });
     }
   }
 
@@ -5666,6 +6046,7 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
   document.querySelectorAll('[data-open-lead]').forEach(function (el) {
     el.addEventListener('click', openDrawer);
   });
+  window.z21OpenLead = openDrawer; // Compare's pair button is rendered after this script runs
 
   // Hijack legacy #register anchors so they open the drawer
   document.querySelectorAll('a[href="#register"]').forEach(function (el) {
@@ -5693,6 +6074,7 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
     if (!window.checkLeadForm(form, 'M Legasi Drawer Form')) return false;
 
     var trigger = window._leadDrawerSource || 'unknown';
+    window.z21SetLeadFields(form, null, trigger);
 
     // Parallel capture to n8n (Phase 1 safety net) — returns UUID for dataLayer
     var submissionId = window.captureFormDiagnostic(form, 'leadFormDrawer');
@@ -5703,8 +6085,10 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
       lead_type: 'form_submission',
       form_name: 'M Legasi Drawer Form',
       lead_source: trigger,
+      unit_interest: form.dataset.leadUnit || 'not specified',
       submission_id: submissionId
     });
+    window.z21StoreLead(form, 'M Legasi Drawer Form', trigger, submissionId);
 
     var submitBtn = form.querySelector('.lead-submit');
     if (submitBtn) {
@@ -5726,7 +6110,7 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
        - tour_360_click         (360 walkthrough link clicked)
        - floorplan_view         (floor plan lightbox opened from the unit plan ONLY)
        - cta_click, nav_click, contact_click, gallery_open, virtual_tour_open,
-         faq_open, calculator_interact  (spec 2026-10-06, section 6 below)
+         faq_open  (spec 2026-10-06, section 6 below); calculator_interact retired 6 Nov 2026 with the calculator
      unit_select is pushed by window.setType (units controller further down).
      The form-submission events (generate_lead, lead_drawer_open) are
      already pushed by the form/drawer handlers above — not duplicated here.
@@ -5975,22 +6359,6 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
         }
         return;
       }
-
-      // Calculator unit/price picker (its own handler stops propagation; capture still sees it)
-      if (t.closest('#cpPick') && firstTime('calc_unit')) {
-        z21Track('calculator_interact', { calc_input: 'unit' });
-      }
-    } catch (err) {}
-  }, true);
-
-  // Calculator sliders: first trusted input per page view, per slider
-  document.addEventListener('input', function (e) {
-    try {
-      if (!e.isTrusted || !e.target) return;
-      var id = e.target.id;
-      // cLoan is the financing margin (50-90%), the inverse of the downpayment
-      var k = id === 'cLoan' ? 'downpayment' : (id === 'cTen' ? 'tenure' : null);
-      if (k && firstTime('calc_' + k)) z21Track('calculator_interact', { calc_input: k });
     } catch (err) {}
   }, true);
 })();
@@ -6267,31 +6635,37 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
     });
   }
 
-  /* ── 3. Units + calculator (Aurora controller, Legasi data) ──
-     Prices, sizes, lots from the previous build (live-published values). */
+  /* ── 3. Units + Compare all 4 (Option 9, 6 Nov 2026) ──
+     One table for the four types: prices, sizes and lots from the previous build (live-published values), plus the
+     phase and tag the old card and tabs showed. The instalment maths uses the retired calculator's defaults (90% loan,
+     35 years, 4% p.a.), so Compare's figures equal what the calculator showed at its defaults. */
   var UNITS = {
-    astradia: { name: 'Astradia', lot: "20′×60′", size: '1,555', price: 535000, badge: 'Open for Sale', popular: false,
-      cfg: 'Phase 2 · intermediate, end and corner lots',
+    astradia: { name: 'Astradia', lot: "20′×60′", lotKey: '60', size: '1,555', sqft: 1555, beds: 4, baths: 3, price: 535000, badge: 'Open for Sale', popular: false,
+      phase: 'Phase 2', tag: '', cfg: 'Phase 2 · intermediate, end and corner lots',
       plan: 'assets/Astradia-Intermediate-Lot-20x60-1.png' },
-    harmonia: { name: 'Harmonia', lot: "20′×70′", size: '1,686', price: 581000, badge: 'Most Popular', popular: true,
-      cfg: 'Phase 2 · the family favourite',
+    harmonia: { name: 'Harmonia', lot: "20′×70′", lotKey: '70', size: '1,686', sqft: 1686, beds: 4, baths: 3, price: 581000, badge: 'Most Popular', popular: true,
+      phase: 'Phase 2', tag: 'Most Popular', cfg: 'Phase 2 · the family favourite',
       plan: 'assets/Harmonia-Intermediate-Lot.png' },
-    auroria: { name: 'Auroria', lot: "20′×60′", size: '1,555', price: 548000, badge: 'Open for Sale', popular: false,
-      cfg: 'Phase 3 · newly opened',
+    auroria: { name: 'Auroria', lot: "20′×60′", lotKey: '60', size: '1,555', sqft: 1555, beds: 4, baths: 3, price: 548000, badge: 'Open for Sale', popular: false,
+      phase: 'Phase 3', tag: 'New', cfg: 'Phase 3 · newly opened',
       plan: 'assets/Mah-Sing-M-Legasi_-Floorplan-Phase-3-Type-A_20x60-intermediate-color.png' },
-    zendia: { name: 'Zendia', lot: "20′×70′", size: '1,686', price: 601000, badge: 'Open for Sale', popular: false,
-      cfg: 'Phase 3 · newly opened',
+    zendia: { name: 'Zendia', lot: "20′×70′", lotKey: '70', size: '1,686', sqft: 1686, beds: 4, baths: 3, price: 601000, badge: 'Open for Sale', popular: false,
+      phase: 'Phase 3', tag: 'New', cfg: 'Phase 3 · newly opened',
       plan: 'assets/zendia-Type-A_20x70-intermediate-1920x1357.jpg' }
   };
   var ORDER = ['astradia', 'harmonia', 'auroria', 'zendia'];
   window.z21UnitNames = ORDER.map(function (k) { return UNITS[k].name; }); /* read by openFloorPlan() for the plan-viewer ask */
+  window.z21UnitPlans = {}; ORDER.forEach(function (k) { window.z21UnitPlans[UNITS[k].name] = UNITS[k].plan; }); /* the drawer's pair tags */
   var cur = 'astradia';
-  var RATE = 0.04;
+  var LOAN = { margin: 0.9, years: 35, rate: 0.04 };
   var fmt = function (n) { return Math.round(n).toLocaleString('en-MY'); };
-  function monthly(p, pct, y) {
-    var L = p * (pct / 100), r = RATE / 12, n = y * 12;
+  function monthly(price) {
+    var L = price * LOAN.margin, r = LOAN.rate / 12, n = LOAN.years * 12;
     return L * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
   }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function lotSp(u) { return u.lot.replace('×', ' × '); }
+  var layoutForm = document.querySelector('#layoutPanel form[data-form="layout"]');
   function render() {
     var u = UNITS[cur];
     if (!$('uName')) return;
@@ -6299,36 +6673,22 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
     $('uCfg').textContent = u.cfg;
     $('uSize').textContent = u.size;
     $('uLot').textContent = u.lot;
-    $('uPrice').textContent = 'RM ' + fmt(u.price);
+    $('uBB').textContent = u.beds + ' / ' + u.baths;
     var badge = $('uBadge');
     badge.textContent = u.badge;
     badge.classList.toggle('popular', u.popular);
+    Array.prototype.forEach.call(document.querySelectorAll('#units .uNameX'), function (n) { n.textContent = u.name; });
     var img = $('planImg');
     img.src = u.plan;
-    img.alt = u.name + ' floor plan, ' + u.size + ' sq ft, 4 bedrooms';
-    var cta = $('uCta');
-    cta.setAttribute('data-unit', u.name);
-    cta.textContent = 'Get Price List Now';
-    /* premium port: the calculator ask and the plan-viewer ask follow the unit too */
-    var cc = $('cCta');
-    if (cc) { cc.setAttribute('data-unit', u.name); cc.textContent = 'Send me the ' + u.name + ' price list'; }
+    img.alt = u.name + ' floor plan, ' + u.size + ' sq ft, ' + u.beds + ' bedrooms';
+    /* the plan-viewer ask follows the unit too */
     var la = $('lbAsk');
     if (la && la.getAttribute('data-open-lead') === 'floorplan_zoom') { la.setAttribute('data-unit', u.name); la.textContent = 'Get the ' + u.name + ' price list'; }
     Array.prototype.forEach.call(document.querySelectorAll('#tabs .tab'), function (t) {
       t.setAttribute('aria-selected', String(t.getAttribute('data-type') === cur));
     });
-    Array.prototype.forEach.call(document.querySelectorAll('#cpMenu .cp-opt'), function (o) {
-      o.setAttribute('aria-selected', String(o.getAttribute('data-type') === cur));
-    });
-    calc();
-  }
-  function calc() {
-    var u = UNITS[cur], pct = +$('cLoan').value, yrs = +$('cTen').value, m = monthly(u.price, pct, yrs);
-    $('cPrice').textContent = 'RM ' + fmt(u.price);
-    $('cType').textContent = u.name;
-    $('cLoanOut').innerHTML = 'RM ' + fmt(u.price * pct / 100) + ' &middot; ' + pct + '%';
-    $('cTenOut').textContent = yrs + ' years';
-    $('cMy').textContent = 'RM ' + fmt(m);
+    /* what the lead asked for rides on the form element and goes to the n8n capture only */
+    if (layoutForm && window.z21SetLeadFields) window.z21SetLeadFields(layoutForm, u.name, 'layout_panel');
   }
   window.setType = function (t, src) {
     if (!UNITS[t]) return;
@@ -6341,39 +6701,17 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
       window.dataLayer.push({ event: 'unit_select', unit_interest: UNITS[t].name, select_source: src || 'tab' });
     }
   };
+  function navH() { var n = $('siteNav'); return n ? n.offsetHeight : 0; }
+  function railH() { var r = $('rail'); return (r && r.classList.contains('on') && getComputedStyle(r).display !== 'none') ? r.offsetHeight : 0; }
+  function scrollToEl(el, extra) {
+    if (!el) return;
+    var y = el.getBoundingClientRect().top + window.scrollY - navH() - railH() - (extra == null ? 24 : extra);
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  }
   if ($('tabs')) {
     Array.prototype.forEach.call(document.querySelectorAll('#tabs .tab'), function (tab) {
       tab.addEventListener('click', function () { window.setType(tab.getAttribute('data-type'), 'tab'); });
     });
-    ['cLoan', 'cTen'].forEach(function (id) { $(id).addEventListener('input', calc); });
-    /* price picker: selecting a type drives the card and the calculator together */
-    var cpPick = $('cpPick'), cpMenu = $('cpMenu');
-    if (cpPick && cpMenu) {
-      cpMenu.innerHTML = ORDER.map(function (k) {
-        var u = UNITS[k];
-        return '<button type="button" role="option" class="cp-opt" data-type="' + k + '" aria-selected="' + (k === cur) + '">' +
-          '<span class="cp-opt-k">' + u.name + '</span>' +
-          '<span class="cp-opt-d">' + u.lot + ' &middot; ' + u.size + ' sq ft</span>' +
-          '<b class="cp-opt-p num">RM ' + fmt(u.price) + '</b></button>';
-      }).join('');
-      var cpClose = function () { cpMenu.hidden = true; cpPick.setAttribute('aria-expanded', 'false'); };
-      cpPick.addEventListener('click', function (e) {
-        e.stopPropagation();
-        var open = cpMenu.hidden;
-        cpMenu.hidden = !open;
-        cpPick.setAttribute('aria-expanded', String(open));
-      });
-      cpMenu.addEventListener('click', function (e) {
-        var o = e.target.closest('.cp-opt');
-        if (!o) return;
-        window.setType(o.getAttribute('data-type'), 'calc_dropdown');
-        cpClose();
-      });
-      document.addEventListener('click', function (e) {
-        if (!cpMenu.hidden && !cpMenu.contains(e.target) && e.target !== cpPick) cpClose();
-      });
-      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !cpMenu.hidden) cpClose(); });
-    }
     var tabsEl = $('tabs');
     tabsEl.addEventListener('keydown', function (e) {
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
@@ -6402,11 +6740,182 @@ document.querySelectorAll('.stat-card, .unit-card, .why-card, .faq-item, .unit-f
       var u = UNITS[cur];
       if (window.openFloorPlan) window.openFloorPlan(u.name, 'Lot: ' + u.lot, u.plan);
     });
-    $('calcJump').addEventListener('click', function () {
-      $('invest').scrollIntoView({ behavior: 'smooth' });
+    /* desktop: the Enlarge pill opens the same viewer; it reports the same two events a plan tap does */
+    var enl = $('uEnlarge');
+    if (enl) enl.addEventListener('click', function (e) {
+      var u = UNITS[cur], img = $('planImg');
+      if (e.isTrusted) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'floorplan_view', unit_name: u.name, unit_lot: 'Lot: ' + u.lot, image_url: img ? img.getAttribute('src') : '' });
+        if (window.z21Track) window.z21Track('gallery_open', { gallery: 'floorplan', item_index: ORDER.indexOf(cur) + 1, item_label: (img && img.getAttribute('alt') || '').slice(0, 60) });
+      }
+      if (window.openFloorPlan) window.openFloorPlan(u.name, 'Lot: ' + u.lot, u.plan);
+    });
+    /* phone price link: lands the inline form under the nav and rail, focus on its title (no keyboard) */
+    var plink = document.querySelector('#units .o9-plink');
+    if (plink) plink.addEventListener('click', function () {
+      var lp = $('layoutPanel');
+      if (!lp) return;
+      window.scrollTo({ top: Math.max(0, lp.getBoundingClientRect().top + window.scrollY - navH() - railH() - 12), behavior: 'smooth' });
+      var h = lp.querySelector('.o9-ft');
+      if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+    });
+    /* the consent links are placeholders on the live drawer too (href="#"): in the panel they must not jump to the top */
+    Array.prototype.forEach.call(document.querySelectorAll('#layoutPanel .o9-consent a[href="#"]'), function (a) {
+      a.addEventListener('click', function (e) { e.preventDefault(); });
     });
     render();
   }
+
+  /* ── 3b. Compare all 4: lot-size filter tabs, desktop table or phone cards, two ticked = compare panel (desktop) or
+     tray + full-screen sheet (phone). The pair CTA opens the lead drawer for both units. ── */
+  (function () {
+    var ca = $('compare-all'), cs = $('cmpSheet'), ct = $('cmpTray');
+    if (!ca || !cs || !ct) return;
+    var CMP = { sel: [], lot: 'all', open: false, pushed: false };
+    var LOTS = [{ key: 'all', label: 'All 4' }, { key: '60', label: '20′ × 60′' }, { key: '70', label: '20′ × 70′' }];
+    function phone() { return window.innerWidth < 1024; }
+    function lock(on) { document.documentElement.classList.toggle('o9-lock', on); document.body.style.overflow = on ? 'hidden' : ''; }
+    window.__o9Open = function () { return CMP.open; };
+    function keys() { return ORDER.filter(function (k) { return CMP.lot === 'all' || UNITS[k].lotKey === CMP.lot; }); }
+    function sortSel() { CMP.sel.sort(function (a, b) { return ORDER.indexOf(a) - ORDER.indexOf(b); }); }
+    function pairLabel(a, b) { return UNITS[a].name + ' & ' + UNITS[b].name; }
+    function specLine(u) { return lotSp(u) + ' · ' + u.size + ' sq ft · ' + u.beds + ' bed · ' + u.baths + ' bath'; }
+    function tagHtml(u) { return u.tag ? '<span class="o9-pb tag">' + esc(u.tag) + '</span>' : ''; }
+    function renderCompare() {
+      var ks = keys();
+      CMP.sel = CMP.sel.filter(function (k) { return ks.indexOf(k) >= 0; });
+      sortSel();
+      $('lotTabs').innerHTML = LOTS.map(function (l) { return '<button type="button" class="o9b-t" data-lot="' + l.key + '" aria-pressed="' + (CMP.lot === l.key) + '">' + esc(l.label) + '</button>'; }).join('');
+      $('lotFit').textContent = CMP.lot === 'all' ? 'Showing all 4' : 'Showing ' + ks.length + ' of 4';
+      $('cmpTable').innerHTML = '<div class="o9t-h" role="row"><div role="columnheader">Compare</div><div role="columnheader">Plan</div><div role="columnheader">Layout</div><div role="columnheader">Phase</div><div role="columnheader">From*</div><div role="columnheader">≈ Monthly</div><div role="columnheader"></div></div>' + ks.map(function (k) {
+        var u = UNITS[k], on = CMP.sel.indexOf(k) >= 0;
+        return '<div class="o9t-r' + (on ? ' is-on' : '') + '" role="row">' +
+          '<label class="o9t-chk" role="cell"><input type="checkbox" data-cmp="' + k + '"' + (on ? ' checked' : '') + ' aria-label="Compare ' + u.name + '"></label>' +
+          '<img role="cell" src="' + u.plan + '" alt="' + u.name + ' floor plan" loading="lazy" decoding="async" width="92" height="76">' +
+          '<div class="o9t-ty" role="cell"><b>' + u.name + '</b><span>' + esc(specLine(u)) + '</span></div>' +
+          '<div class="o9t-ph" role="cell"><span>' + u.phase + '</span>' + tagHtml(u) + '</div>' +
+          '<div class="o9t-from num" role="cell">RM ' + fmt(u.price) + '</div><div class="o9t-mo num" role="cell">≈ RM ' + fmt(monthly(u.price)) + '</div>' +
+          '<div role="cell"><button type="button" class="o9-view" data-view-type="' + k + '" data-cta-id="compare_view_layout">View layout ↑</button></div></div>';
+      }).join('');
+      $('cmpCards').innerHTML = ks.map(function (k) {
+        var u = UNITS[k], on = CMP.sel.indexOf(k) >= 0;
+        return '<div class="o9c' + (on ? ' is-on' : '') + '">' +
+          '<div class="o9c-top"><img src="' + u.plan + '" alt="' + u.name + ' floor plan" loading="lazy" decoding="async" width="72" height="76"><div class="o9c-ty"><b>' + u.name + '</b><span>' + esc(specLine(u)) + '</span></div>' +
+          '<button type="button" class="o9c-add" data-cmp="' + k + '" aria-pressed="' + on + '">' + (on ? '✓ Added' : '+ Compare') + '</button></div>' +
+          '<div class="o9c-pills"><span class="o9-pb ph">' + u.phase + '</span>' + tagHtml(u) + '</div>' +
+          '<div class="o9c-nums"><div><span>From*</span><b class="num">RM ' + fmt(u.price) + '</b></div><div><span>Monthly</span><b class="num">≈ RM ' + fmt(monthly(u.price)) + '</b></div></div>' +
+          '<button type="button" class="o9-view" data-view-type="' + k + '" data-cta-id="compare_view_layout">View ' + u.name + ' layout ↑</button></div>';
+      }).join('');
+      renderPanel(); renderTray();
+    }
+    function cmpRows(a, b) {
+      var A = UNITS[a], B = UNITS[b], ma = Math.round(monthly(A.price)), mb = Math.round(monthly(B.price));
+      function more(x, y, u) { return x > y ? '+' + fmt(x - y) + u : ''; }
+      function less(x, y, u) { return x < y ? 'RM ' + fmt(y - x) + u + ' less' : ''; }
+      return [
+        ['Lot size', lotSp(A), lotSp(B), '', ''],
+        ['Built-up', A.size + ' sq ft', B.size + ' sq ft', more(A.sqft, B.sqft, ' sq ft'), more(B.sqft, A.sqft, ' sq ft')],
+        ['Bedrooms', String(A.beds), String(B.beds), more(A.beds, B.beds, ''), more(B.beds, A.beds, '')],
+        ['Bathrooms', String(A.baths), String(B.baths), more(A.baths, B.baths, ''), more(B.baths, A.baths, '')],
+        ['Phase', A.phase, B.phase, '', ''],
+        ['From*', 'RM ' + fmt(A.price), 'RM ' + fmt(B.price), less(A.price, B.price, ''), less(B.price, A.price, '')],
+        ['Est. monthly', '≈ RM ' + fmt(ma), '≈ RM ' + fmt(mb), less(ma, mb, '/mo'), less(mb, ma, '/mo')]
+      ];
+    }
+    function renderPanel() {
+      var p = $('cmpPanel'), empty = $('cmpEmpty'), two = CMP.sel.length === 2;
+      if (!two) { p.hidden = true; p.innerHTML = ''; empty.hidden = false; empty.textContent = CMP.sel.length === 1 ? 'Tick one more layout to compare side by side.' : 'Tick any two layouts to compare them side by side.'; return; }
+      empty.hidden = true;
+      var a = CMP.sel[0], b = CMP.sel[1], pl = pairLabel(a, b);
+      var cols = [a, b].map(function (k, i) { var u = UNITS[k]; return '<div class="o9cp-col' + (i === 0 ? ' first' : '') + '"><div class="t"><span>' + u.name + '</span></div><img src="' + u.plan + '" alt="' + u.name + ' floor plan" loading="lazy" decoding="async"></div>'; }).join('');
+      var rws = cmpRows(a, b).map(function (r) {
+        var d = r[1] !== r[2];
+        return '<div class="o9cp-r' + (d ? ' diff' : '') + '"><div class="l">' + esc(r[0]) + '</div><div class="c first"><span>' + esc(r[1]) + '</span>' + (r[3] ? '<span class="o9-delta">' + esc(r[3]) + '</span>' : '') + '</div><div class="c"><span>' + esc(r[2]) + '</span>' + (r[4] ? '<span class="o9-delta">' + esc(r[4]) + '</span>' : '') + '</div></div>';
+      }).join('');
+      p.innerHTML = '<div class="o9cp-head"><div class="o9cp-lab">Differences highlighted</div>' + cols + '</div>' + rws +
+        '<div class="o9cp-foot"><div><b>Still weighing ' + esc(pl) + '? Let our team help.</b><span>One form: we will WhatsApp you both price lists, plus which lots are still open.</span></div>' +
+        '<button type="button" class="btn btn-p o9-pair" data-open-lead="compare" data-unit="' + UNITS[a].name + ',' + UNITS[b].name + '" data-cta-id="compare_get_price">Get ' + esc(pl) + ' pricing</button></div>';
+      p.hidden = false;
+    }
+    function renderSheet() {
+      if (CMP.sel.length !== 2) return;
+      var a = CMP.sel[0], b = CMP.sel[1], pl = pairLabel(a, b);
+      $('csTitle').textContent = UNITS[a].name + ' vs ' + UNITS[b].name;
+      var cols = [a, b].map(function (k, i) { var u = UNITS[k]; return '<div class="cs-col' + (i === 0 ? ' first' : '') + '"><b>' + u.name + '</b><img src="' + u.plan + '" alt="' + u.name + ' floor plan"></div>'; }).join('');
+      var rws = cmpRows(a, b).map(function (r) {
+        var d = r[1] !== r[2];
+        return '<div class="cs-r' + (d ? ' diff' : '') + '"><div class="l">' + esc(r[0]) + '</div><div class="cc"><div class="c first">' + esc(r[1]) + (r[3] ? '<span class="o9-delta">' + esc(r[3]) + '</span>' : '') + '</div><div class="c">' + esc(r[2]) + (r[4] ? '<span class="o9-delta">' + esc(r[4]) + '</span>' : '') + '</div></div></div>';
+      }).join('');
+      $('csGrid').innerHTML = '<div class="cs-cols">' + cols + '</div>' + rws;
+      $('csFootT').innerHTML = 'Still weighing ' + esc(pl) + '? <span>Let our team help.</span>';
+      var cta = $('csCta');
+      cta.textContent = 'Get ' + pl + ' pricing';
+      cta.setAttribute('data-unit', UNITS[a].name + ',' + UNITS[b].name);
+    }
+    function csOpen() {
+      if (CMP.sel.length !== 2 || CMP.open) return;
+      renderSheet(); CMP.open = true;
+      try { history.pushState({ o9: 'cs' }, ''); CMP.pushed = true; } catch (e) { CMP.pushed = false; }
+      cs.classList.add('on'); cs.setAttribute('aria-hidden', 'false'); lock(true); cs.querySelector('.cs-body').scrollTop = 0;
+      renderTray();
+      window.z21Track('compare_open', { pair: UNITS[CMP.sel[0]].name + ' & ' + UNITS[CMP.sel[1]].name });
+    }
+    function csClose(fromPop) {
+      if (!CMP.open) return;
+      if (!fromPop && CMP.pushed) { history.back(); return; }
+      CMP.open = false; CMP.pushed = false;
+      cs.classList.remove('on'); cs.setAttribute('aria-hidden', 'true'); lock(false); renderTray();
+    }
+    /* the tray shows only while the Compare section fills the middle of the screen, judged on each scroll frame */
+    function compareInView() { var r = ca.getBoundingClientRect(), vh = window.innerHeight; return r.top < vh * 0.8 && r.bottom > vh * 0.2; }
+    function renderTray() {
+      var show = phone() && CMP.sel.length >= 1 && compareInView() && !CMP.open;
+      ct.classList.toggle('on', show); ct.setAttribute('aria-hidden', String(!show));
+      var sb = $('mobileSticky');
+      if (sb) sb.classList.toggle('hold', show);
+      var go = $('ctGo'), two = CMP.sel.length === 2;
+      go.disabled = !two; go.textContent = two ? 'Compare →' : 'Compare 1/2';
+      if (!show) return;
+      $('ctSlots').innerHTML = [0, 1].map(function (i) {
+        var k = CMP.sel[i];
+        return k ? '<button type="button" class="ct-s" data-cmp="' + k + '" aria-label="Remove ' + UNITS[k].name + ' from the comparison"><b>' + UNITS[k].name + '</b><span>✕ remove</span></button>'
+          : '<button type="button" class="ct-s empty" data-ct-add><b>+ Add 1 more</b><span>tap + Compare</span></button>';
+      }).join('');
+    }
+    function cmpToggle(k) {
+      var i = CMP.sel.indexOf(k);
+      if (i >= 0) CMP.sel.splice(i, 1); else { CMP.sel.push(k); if (CMP.sel.length > 2) CMP.sel.shift(); }
+      window.z21Track('compare_toggle', { unit: UNITS[k].name, selected_count: CMP.sel.length });
+      renderCompare();
+    }
+    ca.addEventListener('click', function (e) {
+      var t = e.target; if (!t.closest) return;
+      var b = t.closest('.o9b-t'); if (b) { CMP.lot = b.getAttribute('data-lot') || 'all'; renderCompare(); return; }
+      var add = t.closest('.o9c-add'); if (add) { cmpToggle(add.getAttribute('data-cmp')); return; }
+      var v = t.closest('[data-view-type]'); if (v) { window.setType(v.getAttribute('data-view-type'), 'compare'); scrollToEl($('tabs'), 64); return; }
+      var pair = t.closest('.o9-pair'); if (pair && window.z21OpenLead) { window.z21OpenLead({ preventDefault: function () {}, currentTarget: pair }); return; }
+    });
+    ca.addEventListener('change', function (e) { var c = e.target.closest && e.target.closest('input[data-cmp]'); if (c) cmpToggle(c.getAttribute('data-cmp')); });
+    ct.addEventListener('click', function (e) {
+      var t = e.target; if (!t.closest) return;
+      var s = t.closest('.ct-s[data-cmp]'); if (s) { cmpToggle(s.getAttribute('data-cmp')); return; }
+      if (t.closest('[data-ct-add]')) { scrollToEl($('cmpCards'), 12); return; }
+      if (t.closest('#ctGo') && !$('ctGo').disabled) csOpen();
+    });
+    Array.prototype.forEach.call(cs.querySelectorAll('[data-cs-close]'), function (el) { el.addEventListener('click', function () { csClose(); }); });
+    var trayTick = false;
+    window.addEventListener('scroll', function () { if (trayTick) return; trayTick = true; requestAnimationFrame(function () { trayTick = false; renderTray(); }); }, { passive: true });
+    window.addEventListener('popstate', function () { if (CMP.open) csClose(true); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape' || !CMP.open) return;
+      var d = $('leadDrawer'); if (d && d.classList.contains('open')) return;
+      csClose();
+    });
+    window.addEventListener('resize', renderTray);
+    renderCompare();
+    window.__o9 = function () { return { CMP: CMP, csOpen: csOpen, cmpToggle: cmpToggle, UNITS: UNITS, monthly: monthly }; };
+  })();
 
   /* ── 3e. Hero home-type chips (R3, premium port): open the matching floor-plan tab and scroll to it.
      Reported as unit_select with select_source hero_pill, through the site's own setType. ── */

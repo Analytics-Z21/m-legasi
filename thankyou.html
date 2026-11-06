@@ -262,11 +262,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
 (function(){
   try{
+    /* Option 9 (6 Nov 2026): the form that sent the lead stored its source in sessionStorage (z21_lead) just before the
+       Salesforce POST. Read it once, clear it, ignore it after 30 minutes; 'unknown' when it is absent. The keys are
+       always pushed so GTM's data model never carries a stale value into this event. */
+    var lead={lead_source:'unknown',form_name:'unknown',unit_interest:'unknown',submission_id:''};
+    try{
+      var raw=sessionStorage.getItem('z21_lead');
+      if(raw){
+        sessionStorage.removeItem('z21_lead');
+        var o=JSON.parse(raw);
+        if(o&&o.t&&Date.now()-o.t<=30*60*1000){
+          lead.lead_source=o.lead_source||'unknown';lead.form_name=o.form_name||'unknown';
+          lead.unit_interest=o.unit_interest||'unknown';lead.submission_id=o.submission_id||'';
+        }
+      }
+    }catch(e2){}
     window.dataLayer=window.dataLayer||[];
     window.dataLayer.push({
       event:'lead_confirmed',
       lead_type:'form_submission',
-      page_location:location.href
+      page_location:location.href,
+      lead_source:lead.lead_source,
+      form_name:lead.form_name,
+      unit_interest:lead.unit_interest,
+      submission_id:lead.submission_id
     });
   }catch(e){}
 })();
